@@ -18,7 +18,7 @@ export function createDaylightScene() {
     const scale = Math.max(canvas.width / image.naturalWidth, canvas.height / image.naturalHeight);
     const width = image.naturalWidth * scale;
     const height = image.naturalHeight * scale;
-    const horizontalPosition = innerWidth < 768 ? .58 : .5;
+    const horizontalPosition = innerWidth < 768 ? .68 : .5;
     context.globalAlpha = alpha;
     context.drawImage(image, (canvas.width - width) * horizontalPosition, (canvas.height - height) / 2, width, height);
   }

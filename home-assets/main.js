@@ -64,7 +64,7 @@
     motionToggle.hidden = reduced.matches;
     if (simple || reduced.matches) return;
     try {
-      const module = await import('./motion.bundle.js?v=single-photo-11');
+      const module = await import('./motion.bundle.js?v=creators-nature-12');
       if (request !== motionRequest) return;
       motion = module.startMotion();
       if (location.hash) {

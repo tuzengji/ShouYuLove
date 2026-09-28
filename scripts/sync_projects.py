@@ -25,6 +25,8 @@ for project in catalog:
     if project['id'] in ids:
         raise ValueError(f'Duplicate project id: {project["id"]}')
     ids.add(project['id'])
+    if 'creator' in project and (not isinstance(project['creator'], str) or not project['creator'].strip()):
+        raise ValueError('Project creator must be a nonempty string when provided')
     url = urlparse(project['url'])
     if url.scheme not in {'https', 'http'} or not url.netloc:
         raise ValueError(f'Project URL must be an HTTP(S) address: {project["url"]}')
@@ -32,15 +34,17 @@ for project in catalog:
     if symbol not in icons:
         raise ValueError(f'Unknown icon: {symbol}')
     p = {key: escape(str(value), quote=True) for key, value in project.items()}
+    row_creator = f'<span class="project-creator">创作者：{p["creator"]}</span>' if 'creator' in p else ''
+    slide_creator = f'<p class="slide-creator">创作者：{p["creator"]}</p>' if 'creator' in p else ''
     rows.append(f'''          <a class="project-item" data-project="{p['id']}" data-category="{p['category']}" href="{p['url']}" target="_blank" rel="noopener">
             <span class="project-icon">{icon(symbol)}</span>
-            <span class="project-copy"><span class="project-name">{p['name']}</span><span class="project-summary">{p['description']}</span></span>
+            <span class="project-copy"><span class="project-name">{p['name']}</span><span class="project-summary">{p['description']}</span>{row_creator}</span>
             <span class="project-go">{icon('arrow-up-right')}</span>
           </a>''')
     if len(shortcuts) < 3:
         shortcuts.append(f'''            <a class="quick-link" href="{p['url']}" target="_blank" rel="noopener">{icon(symbol)}<span>{p['name']}</span>{icon('arrow-up-right', 'quick-arrow')}</a>''')
     slides.append(f'''        <article id="work-{p['id']}" class="project-slide journey-panel" data-label="{p['name']}" aria-labelledby="slide-{p['id']}">
-          <div class="slide-copy"><h2 class="slide-title" id="slide-{p['id']}"><a class="slide-link" href="{p['url']}" target="_blank" rel="noopener">{p['name']}{icon('arrow-up-right')}</a></h2><p class="slide-description">{p['description']}</p></div>
+          <div class="slide-copy"><h2 class="slide-title" id="slide-{p['id']}"><a class="slide-link" href="{p['url']}" target="_blank" rel="noopener">{p['name']}{icon('arrow-up-right')}</a></h2><p class="slide-description">{p['description']}</p>{slide_creator}</div>
           <div class="project-art" aria-hidden="true">{icon(symbol)}</div>
         </article>''')
 

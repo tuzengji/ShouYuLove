@@ -1,17 +1,20 @@
 # 首页摄影素材记录
 
-首页仅保留首屏的一张真实摄影素材，展示两位朋友在户外用手语表达爱意；湖景展陈、纸面转场中的照片和湖景背景均已移除。人物不表示北京大学真实成员，也不代表项目参与者。
+首页仅保留首屏的一张真实摄影素材：两名孩子牵手走过大树下的草地，人物占比较小，画面主要为树影与天空。这是陪伴与自然主题照片，不是手语示范。人物不表示北京大学真实成员，也不代表项目参与者。
 
-封面来源：Leah Newhouse 在 Pexels 发布的 [Two Women Making Love Hand Signs](https://www.pexels.com/photo/two-women-making-love-hand-signs-1449671/)，原图 5616×3744；[Pexels 许可](https://www.pexels.com/license/)允许免费用于网站并可修改，无需署名。项目只保留等比压缩的 WebP 派生文件。
+封面来源：Anastasia Leyko 在 Pexels 发布的 [Children Walking on a Grass Field](https://www.pexels.com/photo/children-walking-on-a-grass-field-9173951/)，原图 3024×4032；[Pexels 许可](https://www.pexels.com/license/)允许免费用于网站并可修改，无需署名。未进行生成、扩图或人物合成。
 
 首屏不再生成或合成多张封面图。Canvas 使用同一张真实照片，按滚动进度叠加轻微的暖光和蓝调色场，保留晨光—夕照—夜色的交互节奏。
 
 ## 文件
 
-- 封面：`home-assets/images/hero-sign-language-2048.webp`、`hero-sign-language-960.webp`。
+- 桌面封面：`home-assets/images/hero-tree-field-2048.webp`，2048×1444；从原图裁取 `(0,1900,3024,4032)` 后等比缩放。
+- 手机封面：`home-assets/images/hero-tree-field-960.webp`，960×1711；从同一原图裁取 `(1400,2250,2400,4032)` 后等比缩放，页面横向裁切定位为 68%。
+- 高清原图保留于本地 `output/photo-selection-20260928/9173951-original.jpg`。
+- 上一版人物近景来自 Leah Newhouse 的 [Two Women Making Love Hand Signs](https://www.pexels.com/photo/two-women-making-love-hand-signs-1449671/)，派生图已移至本地 `主站版本归档/20260928-近景封面停用/`，不再用于页面或当前部署。
 - 已停用的六张湖景 WebP 位于本地 `主站版本归档/20260928-湖景素材停用/`，不进入仓库或部署包。
 - 湖景历史原始图片位于本地 `output/daylight-study/nature-lake/{morning,sunset,night}-original.png`，不进入仓库或部署包。
-- 只进行等比缩放与 WebP 编码。网页不依赖生成工具目录。
+- 仅进行裁切、等比缩放与 WebP 编码。网页不依赖生成工具目录。
 - 旧草地配图与素材记录封存在 `主站版本归档/20260927-184148-Daylight草地版/`，不再打包进部署文件。
 
 ## 历史生成提示词（已停用）

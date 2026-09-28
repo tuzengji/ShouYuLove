@@ -20,6 +20,7 @@ with tempfile.TemporaryDirectory(prefix='catalog-check-', dir=ROOT / 'output') a
     for i in range(12):
         expanded.append({'id': f'example-{i}', 'name': f'测试项目 {i}', 'category': '活动协作', 'description': '仅用于本地扩展验证', 'url': f'https://example.com/project/{i}'})
     expanded[-1]['name'] = '<script> & "文字"'
+    expanded[-1]['creator'] = '<em>甲 & 乙</em>'
     (case / 'projects.json').write_text(json.dumps(expanded, ensure_ascii=False))
     result = subprocess.run([sys.executable, 'scripts/sync_projects.py'], cwd=case, capture_output=True, text=True)
     assert result.returncode == 0, result.stderr
@@ -29,6 +30,11 @@ with tempfile.TemporaryDirectory(prefix='catalog-check-', dir=ROOT / 'output') a
     assert generated.count('class="quick-link"') == 3
     assert '<script> & "文字"' not in generated
     assert '&lt;script&gt; &amp; &quot;文字&quot;' in generated
+    assert generated.count('创作者：&lt;em&gt;甲 &amp; 乙&lt;/em&gt;') == 2
+    assert '<em>甲 & 乙</em>' not in generated
+    creator_count = sum('creator' in project for project in expanded)
+    assert generated.count('class="project-creator"') == creator_count
+    assert generated.count('class="slide-creator"') == creator_count
     fixture = generated.replace('./home-assets/', '../home-assets/')
     (ROOT / 'output/qa-daylight-expanded.html').write_text(fixture)
     for broken in (
@@ -36,9 +42,11 @@ with tempfile.TemporaryDirectory(prefix='catalog-check-', dir=ROOT / 'output') a
         [{**original[0], 'url': 'javascript:alert(1)'}],
         [{**original[0], 'icon': 'missing-icon'}],
         [{**original[0], 'id': '../bad-path'}],
+        [{**original[0], 'creator': 123}],
+        [{**original[0], 'creator': '   '}],
     ):
         (case / 'projects.json').write_text(json.dumps(broken, ensure_ascii=False))
         result = subprocess.run([sys.executable, 'scripts/sync_projects.py'], cwd=case, capture_output=True, text=True)
         assert result.returncode != 0
         assert (case / 'index.html').read_text() == generated, 'Invalid input overwrote the last valid page'
-print('PASS: 15 projects, new category, escaped text, three shortcuts; invalid records leave HTML intact.')
+print('PASS: 15 projects, escaped text and optional creators on both surfaces, three shortcuts; invalid records leave HTML intact.')

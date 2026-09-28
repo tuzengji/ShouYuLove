@@ -1,6 +1,6 @@
 # 以手予爱 ShouYuLove 主站
 
-主站入口为 https://shouyulove.cn/，使用真实手语摄影封面与滚动叙事，视觉参考 [Daylight](https://daylightcomputer.com/)。首页介绍北京大学爱心社手语分社心创组的工作与协作方式，并提供作品入口。右上角保留「关于心创组」和橙色强调的「作品集」两个导航入口。
+主站入口为 https://shouyulove.cn/，使用人物占比较小的自然实拍封面与滚动叙事，视觉参考 [Daylight](https://daylightcomputer.com/)。首页介绍北京大学爱心社手语分社心创组的工作与协作方式，并提供作品入口。右上角保留「关于心创组」和橙色强调的「作品集」两个导航入口。
 
 公开源码仓库：[tuzengji/ShouYuLove](https://github.com/tuzengji/ShouYuLove)。本仓库仅包含主站，三个子站分别维护。
 
@@ -29,7 +29,7 @@ python3 -m http.server 8028 --bind 127.0.0.1
 
 使用 GSAP ScrollTrigger 和 Lenis，依据原站公开浏览器实现与实际截图进行测量：
 
-- 200svh 首屏停驻，同一张真实手语照片通过轻微暖光与蓝调过渡呈现晨光、夕照与夜色。桌面与手机均支持，向上滚动可逆向还原。
+- 200svh 首屏停驻，同一张树下牵手远景照片通过轻微暖光与蓝调过渡呈现晨光、夕照与夜色。桌面与手机均支持，向上滚动可逆向还原。
 - 500svh 介绍，先显露「我们是心创组」标题，再显示归属与职责、作品系列名称与愿景两段正文，随后整体擦除。
 - 桌面纵向滚动驱动横向项目展陈，间距 20vw；总长度随项目配置增长。
 - 400svh 整屏纸面转场，暖色出现、缩小、透视倾斜、侧移；同一句介绍随之移动。纸面不再展示照片，鼠标可轻微改变纸面角度。
@@ -52,7 +52,7 @@ python3 scripts/sync_projects.py
 
 必填字段：`id`、`name`、`category`、`description`、`url`。`id` 使用小写英文、数字及连字符，不能重复；链接只接受 HTTP(S)。
 
-可选字段只有 `icon`，ID 来自 `home-assets/icons.svg`，省略时使用箭头。`name` 作为标题，`description` 作为一段用途介绍；不添加 subtitle、headline、detail 或 glyph 等第三层文案。分类只供需要时筛选，不重复显示在每条内容上。
+可选字段为 `icon` 和 `creator`。`icon` 的 ID 来自 `home-assets/icons.svg`，省略时使用箭头；`creator` 是创作者姓名，填写时必须为非空字符串，会同时显示在横向展陈和作品集列表，未填写时不显示该行。`name` 作为标题，`description` 作为一段用途介绍；不另加 subtitle、headline 或 detail 等文案字段。分类只供需要时筛选，不重复显示在每条内容上。
 
 生成器同步三处：首屏前三个快捷入口、所有横向展示面板、完整目录。项目大于 6 个时，搜索和分类自动出现。新增项目不需要修改动画数量、滚动距离或 HTML 模板。所有项目均渲染为普通链接，关闭 JavaScript 仍然可用。
 
@@ -122,5 +122,5 @@ python3 scripts/package_site.py
 - 本地结构研究稿：`output/daylight-study/index.html`，仅复刻选定页面结构，并非完整电商网站。
 - 动效研究及参数：`docs/research/daylight/`。
 - 当前导航与介绍截图前缀为 `output/playwright/portfolio-nav-*` 和 `heart-group-vision-*`，窗口适配检查为 `viewport-*`；此前两层文案为 `two-level-*`，单句版为 `plain-*`，湖光版为 `lake-*`，早期动效研究为 `daylight-*`。
-- 页面仅在首屏保留一张照片：Leah Newhouse 在 Pexels 发布的真实摄影，原图 5616×3744，页面使用压缩后的 WebP。湖景展陈、转场图片与湖景背景均已移除；旧素材仅保留于本地归档，不进入仓库和部署包。素材来源、历史提示词、字体和依赖许可见 `docs/research/daylight/ASSETS.md`。
+- 页面仅在首屏保留一张照片：Anastasia Leyko 在 Pexels 发布的树下牵手远景，原图 3024×4032。桌面与手机采用同一原图的不同裁切，保留小比例人物和大面积树影、天空；这是一张陪伴与自然主题照片，不是手语示范。旧素材保留于本地归档，不进入当前部署包。素材来源、裁切参数、历史提示词、字体和依赖许可见 `docs/research/daylight/ASSETS.md`。
 - 项目展示不使用网站截图，不包含之前的双手捧心主图。

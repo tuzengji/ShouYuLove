@@ -1,13 +1,16 @@
 # 当前版本验证（2026-09-28）
 
 - 已上线：https://shouyulove.cn/，公开源码：https://github.com/tuzengji/ShouYuLove。
-- 页面主体只保留首屏真实摄影一张；湖景展示、转场照片及背景均已移除。桌面和手机检查无湖景资源请求。
+- 封面改为 Anastasia Leyko 的树下牵手远景，使用同一高清原图的桌面与手机裁切；页面主体仍只保留一张照片。湖景展示、转场照片及背景均已移除。桌面和手机检查无湖景资源请求。
 - 顶部仅有「关于心创组」「作品集」两个入口，作品集背景为 `#ff9d00`。
 - 心创组介绍下方原样新增：「以手予爱 ShouYuLove 是我们心创组推出的作品系列名称，也是我们的愿景。」
 - `npm run build`、`python3 scripts/check_catalog.py` 和部署包白名单校验通过。三个作品的横向展陈与深链接定位正常。
 - 桌面 1440×900、手机 390×844 与减少动态效果模式已检查；浏览器无错误或警告、无横向溢出。
 - 18 个线上公开文件与本地部署包 SHA-256 一致，HTTP/HTTPS 主页与三个子站均返回 200。发布目录和配置备份见 `deploy/README.md`。
-- 当前证据：本地 `output/deployment/singlephoto11-{release,online-checks}.json`，截图 `output/playwright/singlephoto-live-*.png` 与 `single-photo-local-*.png`。
+- 当前证据：本地 `output/deployment/naturecreators12-{release,online-checks}.json`，截图 `output/playwright/nature-creators-live-*.png` 与 `nature-creators-*.png`。
+
+- 作品集列表和横向展陈显示已填写的创作者；传情绘意为「涂增基」。其他两项未获提供姓名，暂不显示作者行。
+- 创作者可选字段的 HTML 转义、缺省隐藏和非法输入不覆盖页面检查通过。
 
 # 历史验证（2026-09-27）
 
