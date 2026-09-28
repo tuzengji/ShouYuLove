@@ -1,6 +1,6 @@
 # 以手予爱 ShouYuLove 主站
 
-主站入口为 https://shouyulove.cn/，使用人物占比较小的自然实拍封面与滚动叙事，视觉参考 [Daylight](https://daylightcomputer.com/)。首页介绍北京大学爱心社手语分社心创组的工作与协作方式，并提供作品入口。右上角保留「关于心创组」和橙色强调的「作品集」两个导航入口。
+主站入口为 https://shouyulove.cn/，使用没有人物的北京大学未名湖畔高清实拍封面与滚动叙事，视觉参考 [Daylight](https://daylightcomputer.com/)。首页介绍北京大学爱心社手语分社心创组的工作与协作方式，并提供作品入口。右上角为「关于心创组」「手语作品」「燕园服务」三个入口；首页的两个作品分类使用橙色背景，各分类页面突出当前入口。
 
 公开源码仓库：[tuzengji/ShouYuLove](https://github.com/tuzengji/ShouYuLove)。本仓库仅包含主站，三个子站分别维护。
 
@@ -17,11 +17,10 @@ python3 -m http.server 8028 --bind 127.0.0.1
 
 ## 当前内容
 
-- **以手寻语 · SignTrace**：https://shouyulove.cn/signtrace/
-- **手语查询 · 分社内部学习**：https://shouyulove.cn/dict
-- **传情绘意 · 手语版**：https://shouyulove.cn/chuanqinghuiyi/
+- **手语作品**（`/sign-projects/`）：以手寻语、手语查询、传情绘意，保持原有顺序；传情绘意显示「创作者：涂增基」。
+- **燕园服务**（`/campus/`）：拼好课，入口 https://www.pinhaoke.love/ ，提供北大课程检索、筛选、收藏与课表整理、导出，创作者依据其 README 署名为 Zengji Tu。
 
-三处入口均按以上顺序显示，所有项目链接均在新标签页打开，保留当前主页。组织介绍仅聚焦心创组：归属与方向、工具开发与技术支持、项目小组协作；不介绍分社架构，不展示个人姓名、联系方式或报名入口。
+首页的快捷入口、横向展陈和目录均引导到这两个独立页面。分类链接在当前标签页打开，各作品在新标签页打开并保留目录。项目名称、用途介绍和已知创作者同时显示；未知作者不猜填。组织介绍只聚焦心创组及其工作与协作方式，不展示报名入口、负责人联系方式或分社架构。
 
 心创组的工作与项目制协作依据本地 2026 秋季心创组介绍整理。未读取或发布骨干联络表、问卷答卷等个人资料，也未将规划中的项目标记为已经上线。介绍位于 `index.html` 的 `#about`，工作方式位于 `#teamwork`。介绍下方补充：「以手予爱 ShouYuLove 是我们心创组推出的作品系列名称，也是我们的愿景。」两段正文沿用同一层级的样式和滚动显现效果。
 
@@ -29,11 +28,11 @@ python3 -m http.server 8028 --bind 127.0.0.1
 
 使用 GSAP ScrollTrigger 和 Lenis，依据原站公开浏览器实现与实际截图进行测量：
 
-- 200svh 首屏停驻，同一张树下牵手远景照片通过轻微暖光与蓝调过渡呈现晨光、夕照与夜色。桌面与手机均支持，向上滚动可逆向还原。
+- 200svh 首屏停驻，同一张未名湖畔黄昏照片通过轻微暖光与蓝调过渡呈现晨光、夕照与夜色。桌面与手机均支持，向上滚动可逆向还原。
 - 500svh 介绍，先显露「我们是心创组」标题，再显示归属与职责、作品系列名称与愿景两段正文，随后整体擦除。
-- 桌面纵向滚动驱动横向项目展陈，间距 20vw；总长度随项目配置增长。
+- 桌面纵向滚动驱动横向项目展陈，间距 20vw；展示两个作品分类。
 - 400svh 整屏纸面转场，暖色出现、缩小、透视倾斜、侧移；同一句介绍随之移动。纸面不再展示照片，鼠标可轻微改变纸面角度。
-- 1024px 以下，项目展陈改为纵向。首屏三个项目直达、顶部导航和完整项目目录始终可直接使用。
+- 1024px 以下，项目展陈改为纵向。首屏两个分类入口、顶部导航和完整项目目录始终可直接使用。
 - 首屏按实际视窗高度排版，不设超出小屏的固定最小高度；矮窗口缩紧标题与留白，手机横屏将首屏文字和入口并排显示。
 - 系统减少动态效果、页尾「简洁浏览」、关闭 JavaScript 或动画加载失败时，显示完整的普通文档布局。
 - 全站明暗主题、原生键盘链接、浏览器前进后退、项目深链接、目录搜索与分类。
@@ -50,11 +49,11 @@ python3 -m http.server 8028 --bind 127.0.0.1
 python3 scripts/sync_projects.py
 ```
 
-必填字段：`id`、`name`、`category`、`description`、`url`。`id` 使用小写英文、数字及连字符，不能重复；链接只接受 HTTP(S)。
+必填字段：`id`、`name`、`collection`、`category`、`description`、`url`。`collection` 只能为 `sign`（手语作品）或 `campus`（燕园服务）。`id` 使用小写英文、数字及连字符，不能重复；链接只接受 HTTP(S)。
 
-可选字段为 `icon` 和 `creator`。`icon` 的 ID 来自 `home-assets/icons.svg`，省略时使用箭头；`creator` 是创作者姓名，填写时必须为非空字符串，会同时显示在横向展陈和作品集列表，未填写时不显示该行。`name` 作为标题，`description` 作为一段用途介绍；不另加 subtitle、headline 或 detail 等文案字段。分类只供需要时筛选，不重复显示在每条内容上。
+可选字段为 `icon` 和 `creator`。`icon` 的 ID 来自 `home-assets/icons.svg`，省略时使用箭头；`creator` 是创作者姓名，填写时必须为非空字符串，会显示在所属分类的作品列表，未填写时不显示该行。`name` 作为标题，`description` 作为一段用途介绍；不另加 subtitle、headline 或 detail 等文案字段。分类只供需要时筛选，不重复显示在每条内容上。
 
-生成器同步三处：首屏前三个快捷入口、所有横向展示面板、完整目录。项目大于 6 个时，搜索和分类自动出现。新增项目不需要修改动画数量、滚动距离或 HTML 模板。所有项目均渲染为普通链接，关闭 JavaScript 仍然可用。
+生成器同步首页的分类快捷入口、分类展陈和分类目录，并从 `templates/collection.html` 生成 `sign-projects/index.html` 与 `campus/index.html`。单个分类项目大于 6 个时，搜索和用途筛选自动出现。新增项目不需要修改动画数量、滚动距离或 HTML 模板。所有项目均渲染为普通链接，关闭 JavaScript 仍然可用。
 
 运行扩展与输入校验：
 
@@ -62,7 +61,7 @@ python3 scripts/sync_projects.py
 python3 scripts/check_catalog.py
 ```
 
-测试在临时副本中生成 15 个项目，验证新分类、HTML 转义与错误输入不会覆盖已生成页面。仅测试用页面位于 `output/qa-daylight-expanded.html`。
+测试在临时副本中增加 12 个项目，检查两个页面严格分流、创作者显示、HTML 转义、空目录与错误输入不覆盖三个已生成页面。
 
 ## 修改动画
 
@@ -106,7 +105,7 @@ python3 -m http.server 8029 --bind 127.0.0.1 --directory 主站版本归档/2026
 
 ## 部署
 
-线上仅需要 `index.html` 和 `home-assets/`。不要上传归档、output、docs、node_modules、源项目问卷或研究素材。
+线上仅需要 `index.html`、`sign-projects/index.html`、`campus/index.html` 和 `home-assets/`。不要上传归档、output、docs、node_modules、源项目问卷或研究素材。
 
 可以创建仅包含上述白名单文件的部署包：
 
@@ -121,6 +120,6 @@ python3 scripts/package_site.py
 - 用户提供的 [ai-website-cloner-template](https://github.com/JCodesMore/ai-website-cloner-template) 用作浏览器测量、样式提取、交互检查与复刻迭代的方法参考，未安装为本机技能。
 - 本地结构研究稿：`output/daylight-study/index.html`，仅复刻选定页面结构，并非完整电商网站。
 - 动效研究及参数：`docs/research/daylight/`。
-- 当前导航与介绍截图前缀为 `output/playwright/portfolio-nav-*` 和 `heart-group-vision-*`，窗口适配检查为 `viewport-*`；此前两层文案为 `two-level-*`，单句版为 `plain-*`，湖光版为 `lake-*`，早期动效研究为 `daylight-*`。
-- 页面仅在首屏保留一张照片：Anastasia Leyko 在 Pexels 发布的树下牵手远景，原图 3024×4032。桌面与手机采用同一原图的不同裁切，保留小比例人物和大面积树影、天空；这是一张陪伴与自然主题照片，不是手语示范。旧素材保留于本地归档，不进入当前部署包。素材来源、裁切参数、历史提示词、字体和依赖许可见 `docs/research/daylight/ASSETS.md`。
+- 当前三页截图前缀为 `output/playwright/collections-*`；此前导航与介绍截图前缀为 `output/playwright/portfolio-nav-*` 和 `heart-group-vision-*`，窗口适配检查为 `viewport-*`；此前两层文案为 `two-level-*`，单句版为 `plain-*`，湖光版为 `lake-*`，早期动效研究为 `daylight-*`。
+- 页面仅在首屏保留一张照片：星外之神拍摄的北京大学未名湖畔黄昏，原图 **4080×3060**；桌面资源 3840×2880，手机裁切资源 1280×2277。没有人物，未使用生成图或扩图。图片采用 CC BY-SA 4.0，页尾与公开许可文件保留署名、来源和修改说明。旧人物素材保留于本地归档，不进入部署包。详见 `docs/research/daylight/ASSETS.md`。
 - 项目展示不使用网站截图，不包含之前的双手捧心主图。

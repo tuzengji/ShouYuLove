@@ -1,4 +1,4 @@
-"""Integration check: expansion, escaping, and fail-before-write validation."""
+"""Integration checks for partitioned pages, escaping, and fail-before-write validation."""
 import copy
 import json
 import shutil
@@ -11,32 +11,37 @@ ROOT = Path(__file__).resolve().parent.parent
 (ROOT / 'output').mkdir(exist_ok=True)
 with tempfile.TemporaryDirectory(prefix='catalog-check-', dir=ROOT / 'output') as temporary:
     case = Path(temporary)
-    (case / 'scripts').mkdir()
-    (case / 'home-assets').mkdir()
-    for name in ('index.html', 'projects.json', 'scripts/sync_projects.py', 'home-assets/icons.svg'):
-        shutil.copy2(ROOT / name, case / name)
+    for name in ('index.html', 'projects.json', 'scripts/sync_projects.py', 'home-assets/icons.svg', 'templates/collection.html'):
+        destination = case / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(ROOT / name, destination)
     original = json.loads((case / 'projects.json').read_text())
     expanded = copy.deepcopy(original)
     for i in range(12):
-        expanded.append({'id': f'example-{i}', 'name': f'测试项目 {i}', 'category': '活动协作', 'description': '仅用于本地扩展验证', 'url': f'https://example.com/project/{i}'})
+        expanded.append({'id': f'example-{i}', 'name': f'测试项目 {i}', 'collection': 'sign' if i % 2 == 0 else 'campus', 'category': '活动协作', 'description': '仅用于本地扩展验证', 'url': f'https://example.com/project/{i}'})
     expanded[-1]['name'] = '<script> & "文字"'
     expanded[-1]['creator'] = '<em>甲 & 乙</em>'
-    (case / 'projects.json').write_text(json.dumps(expanded, ensure_ascii=False))
-    result = subprocess.run([sys.executable, 'scripts/sync_projects.py'], cwd=case, capture_output=True, text=True)
+    def run(records):
+        (case / 'projects.json').write_text(json.dumps(records, ensure_ascii=False))
+        return subprocess.run([sys.executable, 'scripts/sync_projects.py'], cwd=case, capture_output=True, text=True)
+    result = run(expanded)
     assert result.returncode == 0, result.stderr
-    generated = (case / 'index.html').read_text()
-    assert generated.count('class="project-item"') == 15
-    assert generated.count('class="project-slide journey-panel"') == 15
-    assert generated.count('class="quick-link"') == 3
-    assert '<script> & "文字"' not in generated
-    assert '&lt;script&gt; &amp; &quot;文字&quot;' in generated
-    assert generated.count('创作者：&lt;em&gt;甲 &amp; 乙&lt;/em&gt;') == 2
-    assert '<em>甲 & 乙</em>' not in generated
-    creator_count = sum('creator' in project for project in expanded)
-    assert generated.count('class="project-creator"') == creator_count
-    assert generated.count('class="slide-creator"') == creator_count
-    fixture = generated.replace('./home-assets/', '../home-assets/')
-    (ROOT / 'output/qa-daylight-expanded.html').write_text(fixture)
+    paths = ['index.html', 'sign-projects/index.html', 'campus/index.html']
+    generated = {name: (case / name).read_text() for name in paths}
+    assert generated['index.html'].count('class="quick-link"') == 2
+    assert generated['index.html'].count('class="project-slide journey-panel"') == 2
+    for collection, path in [('sign', paths[1]), ('campus', paths[2])]:
+        html = generated[path]
+        expected = [p for p in expanded if p['collection'] == collection]
+        assert html.count('class="project-item"') == len(expected)
+        assert html.count('class="project-creator"') == sum('creator' in p for p in expected)
+        for project in expanded:
+            assert (f'data-project="{project["id"]}"' in html) == (project['collection'] == collection)
+        assert '@@' not in html
+    campus = generated[paths[2]]
+    assert '&lt;script&gt; &amp; &quot;文字&quot;' in campus
+    assert '创作者：&lt;em&gt;甲 &amp; 乙&lt;/em&gt;' in campus
+    assert '<script> & "文字"' not in campus and '<em>甲 & 乙</em>' not in campus
     for broken in (
         original + [original[0]],
         [{**original[0], 'url': 'javascript:alert(1)'}],
@@ -44,9 +49,11 @@ with tempfile.TemporaryDirectory(prefix='catalog-check-', dir=ROOT / 'output') a
         [{**original[0], 'id': '../bad-path'}],
         [{**original[0], 'creator': 123}],
         [{**original[0], 'creator': '   '}],
+        [{**original[0], 'collection': '../wrong'}],
     ):
-        (case / 'projects.json').write_text(json.dumps(broken, ensure_ascii=False))
-        result = subprocess.run([sys.executable, 'scripts/sync_projects.py'], cwd=case, capture_output=True, text=True)
-        assert result.returncode != 0
-        assert (case / 'index.html').read_text() == generated, 'Invalid input overwrote the last valid page'
-print('PASS: 15 projects, escaped text and optional creators on both surfaces, three shortcuts; invalid records leave HTML intact.')
+        assert run(broken).returncode != 0
+        assert {name: (case / name).read_text() for name in paths} == generated
+    # An empty collection gets an explicit empty state; no projects leak across pages.
+    assert run([p for p in original if p['collection'] == 'sign']).returncode == 0
+    assert '这里暂时没有作品。' in (case / paths[2]).read_text()
+print('PASS: collection partitioning, expansion, escaped creators, empty state and invalid-input protection across three pages.')

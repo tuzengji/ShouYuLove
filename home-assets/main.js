@@ -57,6 +57,7 @@
   filterProjects();
 
   async function applyMotion() {
+    if (!document.querySelector('.hero')) { motionToggle.hidden = true; return; }
     const request = ++motionRequest;
     motion?.destroy(); motion = undefined;
     motionToggle.setAttribute('aria-pressed', String(simple));
@@ -64,7 +65,7 @@
     motionToggle.hidden = reduced.matches;
     if (simple || reduced.matches) return;
     try {
-      const module = await import('./motion.bundle.js?v=creators-nature-12');
+      const module = await import('./motion.bundle.js?v=collections-13');
       if (request !== motionRequest) return;
       motion = module.startMotion();
       if (location.hash) {

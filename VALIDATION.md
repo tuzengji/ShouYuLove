@@ -1,16 +1,16 @@
 # 当前版本验证（2026-09-28）
 
-- 已上线：https://shouyulove.cn/，公开源码：https://github.com/tuzengji/ShouYuLove。
-- 封面改为 Anastasia Leyko 的树下牵手远景，使用同一高清原图的桌面与手机裁切；页面主体仍只保留一张照片。湖景展示、转场照片及背景均已移除。桌面和手机检查无湖景资源请求。
-- 顶部仅有「关于心创组」「作品集」两个入口，作品集背景为 `#ff9d00`。
-- 心创组介绍下方原样新增：「以手予爱 ShouYuLove 是我们心创组推出的作品系列名称，也是我们的愿景。」
-- `npm run build`、`python3 scripts/check_catalog.py` 和部署包白名单校验通过。三个作品的横向展陈与深链接定位正常。
-- 桌面 1440×900、手机 390×844 与减少动态效果模式已检查；浏览器无错误或警告、无横向溢出。
-- 18 个线上公开文件与本地部署包 SHA-256 一致，HTTP/HTTPS 主页与三个子站均返回 200。发布目录和配置备份见 `deploy/README.md`。
-- 当前证据：本地 `output/deployment/naturecreators12-{release,online-checks}.json`，截图 `output/playwright/nature-creators-live-*.png` 与 `nature-creators-*.png`。
-
-- 作品集列表和横向展陈显示已填写的创作者；传情绘意为「涂增基」。其他两项未获提供姓名，暂不显示作者行。
-- 创作者可选字段的 HTML 转义、缺省隐藏和非法输入不覆盖页面检查通过。
+- 已上线：https://shouyulove.cn/；手语作品：https://shouyulove.cn/sign-projects/；燕园服务：https://shouyulove.cn/campus/。
+- 唯一封面为星外之神拍摄的无人北大未名湖畔黄昏，原图 4080×3060，桌面 3840×2880，手机 1280×2277。网页脚注和公开文件保留 CC BY-SA 4.0 署名、来源及修改说明。
+- 顶部为「关于心创组」「手语作品」「燕园服务」。首页突出两个分类，各分类页突出当前页，具有 `aria-current="page"`。
+- 手语作品显示以手寻语、手语查询、传情绘意；燕园服务显示拼好课。名称、简介与已知创作者均在列表内，传情绘意为涂增基，拼好课按源项目署名为 Zengji Tu。
+- `npm run build`、`scripts/check_catalog.py`、部署包白名单校验通过。检查涵盖两个分类严格分流、增加 12 条记录、HTML 转义、创作者、空目录和非法输入不覆盖已有三页。
+- 桌面 1440×900、手机 320×568、横屏 568×320 检查通过。浅色、深色与减少动态效果模式可用。修复首页静态模式树影越出视窗的问题，检查无横向溢出，横屏标题与入口不重叠。
+- 两个分类页保持普通文档布局，不加载首页动画。关闭 JavaScript 时项目仍是可点击的原生链接。
+- 线上从首页点击进入两个分类页，并实际点击拼好课验证新标签页与原目录保留；无页面错误。
+- 21 个公开文件与本地部署包 SHA-256 一致。HTTP 主页、两条分类路由的尾斜杠跳转、原有三个子站及拼好课均通过 GET 检查。
+- 先检查最新配置并备份，再新增两个静态目录路由，通过 `nginx -t` 后 reload。父站点配置和三个子站代理不变，未重启后端服务。
+- 当前证据：`output/deployment/collections13-{release,request,online-checks}.json`；截图 `output/playwright/collections-*.png`。发布与回退位置见 `deploy/README.md`。
 
 # 历史验证（2026-09-27）
 

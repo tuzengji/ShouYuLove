@@ -5,7 +5,8 @@
     "category": "手语学习",
     "description": "用自然语言描述你看到的手语动作，寻找对应词义；也可以输入词语，查询手语表达。",
     "url": "https://shouyulove.cn/signtrace/",
-    "icon": "magnifying-glass"
+    "icon": "magnifying-glass",
+    "collection": "sign"
   },
   {
     "id": "dictionary",
@@ -13,7 +14,8 @@
     "category": "手语学习",
     "description": "按词语或动作检索国家通用手语词典，支持正向和反向查询，供分社内部学习。",
     "url": "https://shouyulove.cn/dict",
-    "icon": "book-open-text"
+    "icon": "book-open-text",
+    "collection": "sign"
   },
   {
     "id": "chuanqinghuiyi",
@@ -22,6 +24,17 @@
     "category": "互动游戏",
     "description": "和伙伴轮流比划、猜词，在手语版你比划我猜中练习表达。",
     "url": "https://shouyulove.cn/chuanqinghuiyi/",
-    "icon": "game-controller"
+    "icon": "game-controller",
+    "collection": "sign"
+  },
+  {
+    "id": "pinhaoke",
+    "name": "拼好课",
+    "collection": "campus",
+    "category": "课程工具",
+    "description": "搜索和筛选北大课程，查看课程详情，收藏感兴趣的课程，并整理、导出自己的课表。",
+    "creator": "Zengji Tu",
+    "url": "https://www.pinhaoke.love/",
+    "icon": "book-open-text"
   }
 ]

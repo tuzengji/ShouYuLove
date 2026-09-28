@@ -1,21 +1,17 @@
 # 首页摄影素材记录
 
-首页仅保留首屏的一张真实摄影素材：两名孩子牵手走过大树下的草地，人物占比较小，画面主要为树影与天空。这是陪伴与自然主题照片，不是手语示范。人物不表示北京大学真实成员，也不代表项目参与者。
+首页仅保留一张没有人物的真实照片：北京大学未名湖畔的灯笼、树影与黄昏天空。没有生成、扩图或人物合成。
 
-封面来源：Anastasia Leyko 在 Pexels 发布的 [Children Walking on a Grass Field](https://www.pexels.com/photo/children-walking-on-a-grass-field-9173951/)，原图 3024×4032；[Pexels 许可](https://www.pexels.com/license/)允许免费用于网站并可修改，无需署名。未进行生成、扩图或人物合成。
-
-首屏不再生成或合成多张封面图。Canvas 使用同一张真实照片，按滚动进度叠加轻微的暖光和蓝调色场，保留晨光—夕照—夜色的交互节奏。
+摄影：星外之神，2024-03-11。[Wikimedia Commons 原始页面](https://commons.wikimedia.org/wiki/File:Weiming_Lake_Spring_Dusk.jpg)，[4080×3060 原图](https://upload.wikimedia.org/wikipedia/commons/7/7e/Weiming_Lake_Spring_Dusk.jpg)。适用 [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)，页面脚注保留署名、许可与修改说明，公开许可文件为 `home-assets/licenses/WEIMING-PHOTO.txt`。摄影派生资源沿用相同许可。
 
 ## 文件
 
-- 桌面封面：`home-assets/images/hero-tree-field-2048.webp`，2048×1444；从原图裁取 `(0,1900,3024,4032)` 后等比缩放。
-- 手机封面：`home-assets/images/hero-tree-field-960.webp`，960×1711；从同一原图裁取 `(1400,2250,2400,4032)` 后等比缩放，页面横向裁切定位为 68%。
-- 高清原图保留于本地 `output/photo-selection-20260928/9173951-original.jpg`。
-- 上一版人物近景来自 Leah Newhouse 的 [Two Women Making Love Hand Signs](https://www.pexels.com/photo/two-women-making-love-hand-signs-1449671/)，派生图已移至本地 `主站版本归档/20260928-近景封面停用/`，不再用于页面或当前部署。
-- 已停用的六张湖景 WebP 位于本地 `主站版本归档/20260928-湖景素材停用/`，不进入仓库或部署包。
-- 湖景历史原始图片位于本地 `output/daylight-study/nature-lake/{morning,sunset,night}-original.png`，不进入仓库或部署包。
-- 仅进行裁切、等比缩放与 WebP 编码。网页不依赖生成工具目录。
-- 旧草地配图与素材记录封存在 `主站版本归档/20260927-184148-Daylight草地版/`，不再打包进部署文件。
+- 桌面：`home-assets/images/hero-weiming-3840.webp`，3840×2880，完整原图等比缩小、WebP quality 90。
+- 手机：`home-assets/images/hero-weiming-1280.webp`，1280×2277；原图裁切区域 `(1400,0,3120,3060)` 后等比缩小、WebP quality 90。
+- 完整原图在本地 `output/weiming-photo/spring-dusk-original.jpg`，未上传至公开站点。
+- Canvas 使用同一照片，按滚动进度叠加暖光与蓝调，保留既有晨光、夕照、夜色节奏；减少动态效果时显示原始静态照片。
+- 上一版树下牵手照片资源保留在 `主站版本归档/20260928-人物封面停用/`，不进入当前部署包。
+- 更早的人物近景、生成湖景与草地素材仍保留在原本的项目归档目录，不恢复到当前页面。
 
 ## 历史生成提示词（已停用）
 
@@ -48,4 +44,4 @@ Use case: lighting-weather. Edit ONLY the lighting of this exact lake photograph
 
 字体为自托管、按页面文字子集化的 Noto Serif SC Medium，许可见 `home-assets/licenses/OFL-NotoSerifSC.txt`。正文使用系统字体。图标为 Phosphor，许可随项目保留。品牌图标和 favicon 沿用现有版本。
 
-GSAP 3.15.0、Lenis 1.3.26 与 esbuild 0.28.2 的版本固定在锁文件；依赖许可和打包版权声明保留。首屏 170 帧按滚动位置计算，没有后台视频循环。减少动态效果时显示清晨静态主图。
+GSAP 3.15.0、Lenis 1.3.26 与 esbuild 0.28.2 的版本固定在锁文件；依赖许可和打包版权声明保留。首屏 170 帧按滚动位置计算，没有后台视频循环。减少动态效果时显示静态主图。
