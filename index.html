@@ -3,109 +3,92 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#faf5f2">
+  <meta name="theme-color" content="#e8e8e6">
   <meta name="color-scheme" content="light dark">
   <title>以手予爱 ShouYuLove</title>
-  <meta name="description" content="北京大学爱心社手语分社心创组的项目导航，提供以手寻语、手语查询和传情绘意的入口。">
+  <meta name="description" content="在这里，发现手语学习工具、互动游戏，以及服务北大同学的校园应用。">
   <link rel="canonical" href="https://shouyulove.cn/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="以手予爱 ShouYuLove">
-  <meta property="og:description" content="通过以手寻语、手语查询和传情绘意学习与练习手语。">
+  <meta property="og:description" content="在这里，发现手语学习工具、互动游戏，以及服务北大同学的校园应用。">
   <meta property="og:url" content="https://shouyulove.cn/">
   <meta property="og:image" content="https://shouyulove.cn/home-assets/images/hero-weiming-3840.webp">
-  <link rel="icon" type="image/png" href="./home-assets/images/favicon.png">
+  <link rel="icon" href="./home-assets/images/favicon.png">
   <link rel="apple-touch-icon" href="./home-assets/images/apple-touch-icon.png">
-  <link rel="preload" href="./home-assets/fonts/daylight-headings.woff2?v=collections-13" as="font" type="font/woff2" crossorigin>
-  <script>try{if(localStorage.getItem('signmate-theme')==='dark'){document.documentElement.dataset.theme='dark';document.querySelector('meta[name="theme-color"]').content='#1c211b';}}catch(_){}</script>
-  <link rel="stylesheet" href="./home-assets/styles.css?v=collections-13">
-  <script src="./home-assets/main.js?v=collections-13" defer></script>
+  <link rel="preload" href="./home-assets/fonts/garden-serif.woff2?v=garden-14" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./home-assets/garden.css?v=garden-14">
+  <script>try{if(localStorage.getItem('signmate-theme')==='dark')document.documentElement.dataset.theme='dark';if(localStorage.getItem('shouyu-simple')==='true')document.documentElement.dataset.simple='true'}catch(e){}</script>
+  <script type="module" src="./home-assets/garden.bundle.js?v=garden-14"></script>
 </head>
-<body id="top">
-  <a class="skip-link" href="#projects">跳到作品集</a>
+<body id="top" data-page="home">
+  <a class="skip-link" href="#content">跳到正文</a>
+  <canvas id="garden" aria-hidden="true"></canvas>
+  <div class="scene-fallback" aria-hidden="true"></div>
   <header class="site-header">
-    <a class="brand" href="#welcome" aria-label="以手予爱 ShouYuLove，返回首页"><img src="./home-assets/images/brand-mark.webp" width="32" height="32" alt=""><span>以手予爱 ShouYuLove</span></a>
+    <a class="corner-brand" href="./" aria-label="以手予爱 ShouYuLove，返回首页">以手予爱 <span lang="en">ShouYuLove</span></a>
     <nav class="primary-nav" aria-label="主导航"><a href="#about">关于心创组</a><a class="nav-projects" href="./sign-projects/">手语作品</a><a class="nav-projects" href="./campus/">燕园服务</a></nav>
   </header>
-  <main id="main">
-    <section id="welcome" class="hero" aria-labelledby="welcome-title">
-      <div class="hero-pin"><div class="hero-frame">
-        <picture class="hero-picture"><source media="(max-width:767px)" srcset="./home-assets/images/hero-weiming-1280.webp"><img class="hero-image" src="./home-assets/images/hero-weiming-3840.webp" width="3840" height="2880" fetchpriority="high" alt="北大未名湖畔的灯笼、树影与黄昏天空，无人物的校园实拍"></picture>
-        <div class="hero-shade" aria-hidden="true"></div>
-        <div class="hero-copy"><h1 id="welcome-title">以手予爱<br><span lang="en">ShouYuLove</span></h1><p class="hero-description">在这里，发现手语作品与燕园服务。</p></div>
-        <aside class="quick-start" aria-label="项目直达">
-          <div class="quick-links">
-            <!-- SHORTCUTS:START -->
-<a class="quick-link" href="./sign-projects/"><svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#book-open-text"></use></svg><span>手语作品</span><svg class="icon quick-arrow" aria-hidden="true"><use href="./home-assets/icons.svg#arrow-up-right"></use></svg></a>
-<a class="quick-link" href="./campus/"><svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#squares-four"></use></svg><span>燕园服务</span><svg class="icon quick-arrow" aria-hidden="true"><use href="./home-assets/icons.svg#arrow-up-right"></use></svg></a>
-<!-- SHORTCUTS:END -->
-          </div>
-        </aside>
-      </div></div>
-    </section>
-
-    <section id="about" class="attention" aria-labelledby="about-title">
-      <div class="attention-pin"><div class="attention-shadow" aria-hidden="true"></div>
-        <div class="attention-statement"><h2 id="about-title" class="display" data-split>我们是心创组。</h2><p>北京大学爱心社手语分社的创新部组，用 AI 与创意探索手语学习、社团协作和无障碍公益。</p><p>以手予爱 ShouYuLove 是我们心创组推出的作品系列名称，也是我们的愿景。</p></div>
-      </div>
-    </section>
-
-    <section id="explore" class="journey" aria-label="探索我们的项目">
-      <div class="journey-pin"><div class="journey-track">
-        <div class="journey-spacer" aria-hidden="true"></div>
-        <!-- SHOWCASE:START -->
-<article id="work-sign" class="project-slide journey-panel" data-label="手语作品" aria-labelledby="slide-sign">
-      <div class="slide-copy"><h2 class="slide-title collection-title" id="slide-sign"><a class="slide-link" href="./sign-projects/">手语作品<svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#arrow-up-right"></use></svg></a></h2><p class="slide-description">围绕手语学习与表达，探索查询工具、互动游戏和无障碍交流。</p></div>
-      <div class="project-art" aria-hidden="true"><svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#book-open-text"></use></svg></div>
-    </article>
-<article id="work-campus" class="project-slide journey-panel" data-label="燕园服务" aria-labelledby="slide-campus">
-      <div class="slide-copy"><h2 class="slide-title collection-title" id="slide-campus"><a class="slide-link" href="./campus/">燕园服务<svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#arrow-up-right"></use></svg></a></h2><p class="slide-description">心创组成员为北大同学开发的实用工具，让校园学习与生活更方便。</p></div>
-      <div class="project-art" aria-hidden="true"><svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#squares-four"></use></svg></div>
-    </article>
-<!-- SHOWCASE:END -->
-        <div class="journey-spacer" aria-hidden="true"></div>
-      </div>
-      <div class="journey-controls" hidden><button class="journey-previous" type="button" aria-label="上一项"><svg class="icon" aria-hidden="true"><use href="./home-assets/icons.svg#caret-right"></use></svg></button><span class="journey-position sr-only" aria-live="polite"></span><button class="journey-next" type="button" aria-label="下一项"><svg class="icon" aria-hidden="true"><use href="./home-assets/icons.svg#caret-right"></use></svg></button></div>
-      </div>
-    </section>
-
-    <section class="light-story" aria-labelledby="light-title">
-      <div class="light-pin">
-        <div class="light-stage" aria-hidden="true"><div class="light-tilt"><div class="light-sheet"></div></div></div>
-        <div class="light-message"><h2 id="light-title" class="display" data-split>用 AI 与创意，<br>开发学习工具。</h2></div>
-      </div>
-    </section>
-
-    <section id="projects" class="projects section-space" aria-labelledby="projects-title" tabindex="-1">
-      <div class="section-wrap"><h2 id="projects-title" class="sr-only">作品集</h2>
-        <div class="project-tools" hidden><label class="search-field"><svg class="icon" aria-hidden="true"><use href="./home-assets/icons.svg#magnifying-glass"></use></svg><input id="project-search" type="search" placeholder="搜索名称或用途" aria-label="搜索项目" autocomplete="off"></label><div id="project-filters" class="project-filters" role="group" aria-label="按类别筛选项目"></div></div>
-        <div class="project-list">
-          <!-- PROJECTS:START -->
-          <a class="project-item" data-project="sign" data-category="手语作品" href="./sign-projects/">
-            <span class="project-icon"><svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#book-open-text"></use></svg></span>
-            <span class="project-copy"><span class="project-name">手语作品</span><span class="project-summary">围绕手语学习与表达，探索查询工具、互动游戏和无障碍交流。</span></span>
-            <span class="project-go"><svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#arrow-up-right"></use></svg></span>
-          </a>
-          <a class="project-item" data-project="campus" data-category="燕园服务" href="./campus/">
-            <span class="project-icon"><svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#squares-four"></use></svg></span>
-            <span class="project-copy"><span class="project-name">燕园服务</span><span class="project-summary">心创组成员为北大同学开发的实用工具，让校园学习与生活更方便。</span></span>
-            <span class="project-go"><svg class="icon " aria-hidden="true"><use href="./home-assets/icons.svg#arrow-up-right"></use></svg></span>
-          </a>
-<!-- PROJECTS:END -->
-        </div>
-        <div class="project-empty" hidden><button class="text-link" type="button" id="clear-search">没有匹配项目，清除筛选<svg class="icon" aria-hidden="true"><use href="./home-assets/icons.svg#arrow-up-right"></use></svg></button></div><p id="project-count" class="sr-only" aria-live="polite"></p>
-      </div>
-    </section>
-
-    <section id="teamwork" class="teamwork section-space" aria-label="心创组的工作与协作" tabindex="-1">
-      <div class="section-wrap">
-        <div class="teamwork-grid reveal">
-          <div class="teamwork-item"><h2>我们做什么</h2><p>开发手语学习工具与互动游戏，也为社团的资料整理和日常协作提供技术支持。</p></div>
-          <div class="teamwork-item"><h2>我们怎样协作</h2><p>围绕具体想法组成项目小组，一起完成开发、测试与上线，再根据使用反馈持续改进。</p></div>
-        </div>
-      </div>
-    </section>
-  </main>
-  <footer class="site-footer"><div class="footer-top"><a class="footer-wordmark" href="#welcome">以手予爱 <span lang="en">ShouYuLove</span></a><a class="back-top text-link" href="#top">回到顶部<svg class="icon" aria-hidden="true"><use href="./home-assets/icons.svg#arrow-up-right"></use></svg></a></div><div class="footer-bottom"><button class="motion-toggle" type="button" aria-pressed="false" hidden>简洁浏览</button><button class="theme-toggle" type="button" aria-label="切换到深色模式" aria-pressed="false" hidden><svg class="icon theme-moon" aria-hidden="true"><use href="./home-assets/icons.svg#moon"></use></svg><svg class="icon theme-sun" aria-hidden="true"><use href="./home-assets/icons.svg#sun"></use></svg><span>切换到深色</span></button></div><p class="photo-credit">封面摄影：<a href="https://commons.wikimedia.org/wiki/File:Weiming_Lake_Spring_Dusk.jpg" target="_blank" rel="noopener">星外之神</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>（裁切、压缩及滚动调色）</p></footer>
+  <main id="content" tabindex="-1"><section id="welcome" class="intro grid" aria-labelledby="welcome-title">
+  <h1 class="intro-brand" id="welcome-title"><span class="display">以手予爱</span><span lang="en">ShouYuLove</span></h1>
+  <p class="intro-identity display">我们是北京大学爱心社<span class="identity-group">手语分社心创组</span></p>
+  <a class="scroll-cue" href="#dream">向下探索 <span aria-hidden="true">↓</span></a>
+</section>
+<section class="dream grid" id="dream" aria-label="梦想"><p class="manifesto display" data-reveal><span class="reveal-line">以手予爱，用心创造。</span><span class="reveal-line">让每一个好的想法，</span><span class="reveal-line">都抵达需要的人。</span></p></section>
+<figure class="landscape grid">
+  <div class="landscape-frame" data-parallax><picture><source media="(max-width:767px)" srcset="./home-assets/images/hero-weiming-1280.webp"><img src="./home-assets/images/hero-weiming-3840.webp" width="3840" height="2880" alt="北大未名湖畔的灯笼、树影与黄昏天空，无人物的校园实拍" loading="eager" decoding="async"></picture></div>
+</figure>
+<section class="about grid" id="about" aria-labelledby="about-title">
+  <h2 id="about-title" class="section-title">关于心创组</h2>
+  <div class="about-intro"><p class="display" data-reveal>以手予爱 ShouYuLove 是我们心创组推出的作品系列名称，也是我们的愿景。</p><p>在这里，发现手语学习工具、互动游戏，以及服务北大同学的校园应用。</p></div>
+  <div class="vision"><h3>愿景</h3><p data-reveal>心创组致力于用人工智能技术服务手语分社与无障碍事业：让手语学习变得更有趣，让分社的知识与记忆被好好安放，让繁复的社务变得轻盈，也承接其他各部组的奇思妙想的实现；我们还期望与公益伙伴携手开发更具影响力的项目，进行学术创新，探索无障碍事业的更多可能。在这里，技术门槛被降到最低，我们以手予爱，用心创造。让每一个好的想法，都抵达需要的人。</p></div>
+</section>
+<section id="works" class="works" aria-labelledby="works-title"><span id="projects" class="anchor-alias" aria-hidden="true"></span><span id="explore" class="anchor-alias" aria-hidden="true"></span>
+  <div class="collection-intro grid"><h2 class="display" id="works-title">作品集</h2><div class="collection-links"><a href="./sign-projects/"><span class="collection-name">手语作品 <span aria-hidden="true">↗</span></span><span class="collection-description">围绕手语学习与表达，探索查询工具、互动游戏和无障碍交流。</span></a><a href="./campus/"><span class="collection-name">燕园服务 <span aria-hidden="true">↗</span></span><span class="collection-description">心创组成员为北大同学开发的实用工具，让校园学习与生活更方便。</span></a></div></div>
+  <article class="project grid project-signtrace" id="work-signtrace" data-project="signtrace" aria-labelledby="title-signtrace">
+  <a class="project-media" href="https://shouyulove.cn/signtrace/" target="_blank" rel="noopener" aria-label="打开以手寻语 SignTrace，在新标签页" data-cursor="进入">
+    <div class="art art-signtrace" aria-hidden="true"><span class="trace-orbit orbit-one"></span><span class="trace-orbit orbit-two"></span><span class="trace-orbit orbit-three"></span><span class="trace-character display">语</span><span class="art-word" lang="en">SignTrace</span></div><span class="media-entry" aria-hidden="true">以手寻语 SignTrace <span>↗</span></span>
+  </a>
+  <div class="project-copy"><h3 class="display" id="title-signtrace"><a href="https://shouyulove.cn/signtrace/" target="_blank" rel="noopener">以手寻语 SignTrace <span aria-hidden="true">↗</span></a></h3><p class="project-description">用自然语言描述你看到的手语动作，寻找对应词义；也可以输入词语，查询手语表达。</p><p class="project-creator">设计者：涂增基 朱星烨 王宁静 黄庭逸</p></div><span class="quick-name display" aria-hidden="true">以手寻语 SignTrace</span>
+</article>
+<article class="project grid project-dictionary" id="work-dictionary" data-project="dictionary" aria-labelledby="title-dictionary">
+  <a class="project-media" href="https://shouyulove.cn/dict" target="_blank" rel="noopener" aria-label="打开分社手语词典，在新标签页" data-cursor="进入">
+    <div class="art art-dictionary" aria-hidden="true"><div class="dictionary-grid"><span>手</span><span>语</span><span>世</span><span>界</span><span>以</span><span>手</span><span>予</span><span>爱</span><span>学</span><span>习</span><span>表</span><span>达</span></div></div><span class="media-entry" aria-hidden="true">分社手语词典 <span>↗</span></span>
+  </a>
+  <div class="project-copy"><h3 class="display" id="title-dictionary"><a href="https://shouyulove.cn/dict" target="_blank" rel="noopener">分社手语词典 <span aria-hidden="true">↗</span></a></h3><p class="project-description">面向分社内部学习的国家通用手语词典，支持按词语或动作检索，帮助查阅和复习手语表达。</p><p class="project-creator">设计者：朱星烨 涂增基</p></div><span class="quick-name display" aria-hidden="true">分社手语词典</span>
+</article>
+<article class="project grid project-chuanqinghuiyi" id="work-chuanqinghuiyi" data-project="chuanqinghuiyi" aria-labelledby="title-chuanqinghuiyi">
+  <a class="project-media" href="https://shouyulove.cn/chuanqinghuiyi/" target="_blank" rel="noopener" aria-label="打开传情绘意-手语版，在新标签页" data-cursor="进入">
+    <div class="art art-chuanqinghuiyi" aria-hidden="true"><span class="game-character display">传</span><span class="game-character display">情</span><span class="game-character display">绘</span><span class="game-character display">意</span></div><span class="media-entry" aria-hidden="true">传情绘意-手语版 <span>↗</span></span>
+  </a>
+  <div class="project-copy"><h3 class="display" id="title-chuanqinghuiyi"><a href="https://shouyulove.cn/chuanqinghuiyi/" target="_blank" rel="noopener">传情绘意-手语版 <span aria-hidden="true">↗</span></a></h3><p class="project-description">和伙伴轮流比划、猜词，通过不同难度的题目练习手语表达，让学习与社团活动更有趣。</p><p class="project-creator">设计者：涂增基</p></div><span class="quick-name display" aria-hidden="true">传情绘意-手语版</span>
+</article>
+<article class="project grid project-pinhaoke" id="work-pinhaoke" data-project="pinhaoke" aria-labelledby="title-pinhaoke">
+  <a class="project-media" href="https://www.pinhaoke.love/" target="_blank" rel="noopener" aria-label="打开拼好课，在新标签页" data-cursor="进入">
+    <div class="art art-pinhaoke" aria-hidden="true"><div class="course-grid"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><span class="course-word display">拼好课</span></div><span class="media-entry" aria-hidden="true">拼好课 <span>↗</span></span>
+  </a>
+  <div class="project-copy"><h3 class="display" id="title-pinhaoke"><a href="https://www.pinhaoke.love/" target="_blank" rel="noopener">拼好课 <span aria-hidden="true">↗</span></a></h3><p class="project-description">搜索和筛选北大课程，查看课程详情，收藏感兴趣的课程，并整理、导出自己的课表。</p><p class="project-creator">设计者：涂增基</p></div><span class="quick-name display" aria-hidden="true">拼好课</span>
+</article>
+</section>
+<section class="working grid" id="teamwork" aria-label="工作与协作方式">
+  <div class="work-copy"><h2 class="section-title">我们做什么</h2><p data-reveal>开发手语学习工具与互动游戏，也为社团的资料整理和日常协作提供技术支持。围绕真实的学习与使用需求，把想法做成可以被使用的作品。</p></div>
+  <div class="collaboration-copy"><h2 class="section-title">我们怎样协作</h2><p data-reveal>围绕具体想法组成项目小组，一起梳理需求，完成设计、开发与测试。作品上线后，再根据使用反馈持续改进。</p></div>
+</section>
+</main>
+  <footer class="site-footer" id="principles">
+    <div class="footer-content grid">
+      <h2 class="display">边界</h2>
+      <ul class="principles"><li>为手语分社，为无障碍事业服务。坚守公益本心。</li><li>对他人创作 / 知识产权负责。不擅自把他人(老师、同事、学生)的原创内容投喂给 AI 做训练、改写或风格模仿</li><li>对隐私 / 数据安全负责。对数据进行脱敏，去除敏感的隐私信息。</li></ul>
+      <a class="footer-brand display" href="./">以手予爱 <span lang="en">ShouYuLove</span></a>
+      <div class="footer-meta"><span>北京大学爱心社手语分社心创组</span><a href="#top">返回顶部 ↑</a><small class="photo-credit">封面摄影：<a href="https://commons.wikimedia.org/wiki/File:Weiming_Lake_Spring_Dusk.jpg" target="_blank" rel="noopener">星外之神</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>（裁切、压缩及动态调色）</small></div>
+    </div>
+  </footer>
+  <div class="corner-controls"><button class="works-toggle" type="button" data-open-menu hidden>浏览作品集 <span aria-hidden="true">＋</span></button><a class="works-fallback" href="./#works">浏览作品集 ↗</a><div class="preferences"><button data-theme-toggle type="button" hidden aria-label="切换至深色模式">深色</button><button data-motion-toggle type="button" hidden aria-pressed="false">简洁浏览</button></div></div>
+  <dialog class="works-menu" aria-labelledby="menu-title" data-lenis-prevent>
+    <button type="button" class="menu-close" data-close-menu>关闭 <span aria-hidden="true">×</span></button>
+    <div class="menu-content grid"><h2 id="menu-title">作品集</h2><div class="menu-links"><a href="./sign-projects/"><span class="collection-name">手语作品 <span aria-hidden="true">↗</span></span><span class="collection-description">围绕手语学习与表达，探索查询工具、互动游戏和无障碍交流。</span></a><a href="./campus/"><span class="collection-name">燕园服务 <span aria-hidden="true">↗</span></span><span class="collection-description">心创组成员为北大同学开发的实用工具，让校园学习与生活更方便。</span></a></div><p class="menu-note">在这里，发现手语学习工具、互动游戏，以及服务北大同学的校园应用。</p></div>
+  </dialog>
+  <div class="cursor" aria-hidden="true"><span>进入</span></div>
+  <svg class="effect-defs" aria-hidden="true" width="0" height="0"><defs><filter id="liquid" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".008 .012" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
 </body>
 </html>

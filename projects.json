@@ -1,31 +1,33 @@
 [
   {
     "id": "signtrace",
-    "name": "以手寻语",
+    "name": "以手寻语 SignTrace",
+    "collection": "sign",
     "category": "手语学习",
     "description": "用自然语言描述你看到的手语动作，寻找对应词义；也可以输入词语，查询手语表达。",
+    "creator": "涂增基 朱星烨 王宁静 黄庭逸",
     "url": "https://shouyulove.cn/signtrace/",
-    "icon": "magnifying-glass",
-    "collection": "sign"
+    "icon": "magnifying-glass"
   },
   {
     "id": "dictionary",
-    "name": "手语查询",
+    "name": "分社手语词典",
+    "collection": "sign",
     "category": "手语学习",
-    "description": "按词语或动作检索国家通用手语词典，支持正向和反向查询，供分社内部学习。",
+    "description": "面向分社内部学习的国家通用手语词典，支持按词语或动作检索，帮助查阅和复习手语表达。",
+    "creator": "朱星烨 涂增基",
     "url": "https://shouyulove.cn/dict",
-    "icon": "book-open-text",
-    "collection": "sign"
+    "icon": "book-open-text"
   },
   {
     "id": "chuanqinghuiyi",
-    "name": "传情绘意",
-    "creator": "涂增基",
+    "name": "传情绘意-手语版",
+    "collection": "sign",
     "category": "互动游戏",
-    "description": "和伙伴轮流比划、猜词，在手语版你比划我猜中练习表达。",
+    "description": "和伙伴轮流比划、猜词，通过不同难度的题目练习手语表达，让学习与社团活动更有趣。",
+    "creator": "涂增基",
     "url": "https://shouyulove.cn/chuanqinghuiyi/",
-    "icon": "game-controller",
-    "collection": "sign"
+    "icon": "game-controller"
   },
   {
     "id": "pinhaoke",
@@ -33,7 +35,7 @@
     "collection": "campus",
     "category": "课程工具",
     "description": "搜索和筛选北大课程，查看课程详情，收藏感兴趣的课程，并整理、导出自己的课表。",
-    "creator": "Zengji Tu",
+    "creator": "涂增基",
     "url": "https://www.pinhaoke.love/",
     "icon": "book-open-text"
   }

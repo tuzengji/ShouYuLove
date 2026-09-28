@@ -3,7 +3,7 @@ from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 
 root = Path(__file__).resolve().parent.parent
-out = root / 'output/shouyulove-home-daylight.zip'
+out = root / 'output/shouyulove-home-garden.zip'
 out.parent.mkdir(exist_ok=True)
 pages = ['index.html', 'sign-projects/index.html', 'campus/index.html']
 files = [root / page for page in pages] + sorted(p for p in (root / 'home-assets').rglob('*') if p.is_file() and p.name != '.DS_Store')

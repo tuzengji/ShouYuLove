@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e8e8e6">
+  <meta name="color-scheme" content="light dark">
+  <title>@@TITLE@@</title>
+  <meta name="description" content="@@DESCRIPTION@@">
+  <link rel="canonical" href="https://shouyulove.cn/@@PATH@@">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:title" content="@@TITLE@@">
+  <meta property="og:description" content="@@DESCRIPTION@@">
+  <meta property="og:url" content="https://shouyulove.cn/@@PATH@@">
+  <meta property="og:image" content="https://shouyulove.cn/home-assets/images/hero-weiming-3840.webp">
+  <link rel="icon" href="@@PREFIX@@home-assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="@@PREFIX@@home-assets/images/apple-touch-icon.png">
+  <link rel="preload" href="@@PREFIX@@home-assets/fonts/garden-serif.woff2?v=garden-14" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="@@PREFIX@@home-assets/garden.css?v=garden-14">
+  <script>try{if(localStorage.getItem('signmate-theme')==='dark')document.documentElement.dataset.theme='dark';if(localStorage.getItem('shouyu-simple')==='true')document.documentElement.dataset.simple='true'}catch(e){}</script>
+  <script type="module" src="@@PREFIX@@home-assets/garden.bundle.js?v=garden-14"></script>
+</head>
+<body id="top" data-page="@@PAGE@@">
+  <a class="skip-link" href="#content">跳到正文</a>
+  <canvas id="garden" aria-hidden="true"></canvas>
+  <div class="scene-fallback" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="corner-brand" href="@@PREFIX@@" aria-label="以手予爱 ShouYuLove，返回首页">以手予爱 <span lang="en">ShouYuLove</span></a>
+    <nav class="primary-nav" aria-label="主导航">@@NAV@@</nav>
+  </header>
+  <main id="content" tabindex="-1">@@CONTENT@@</main>
+  <footer class="site-footer" id="principles">
+    <div class="footer-content grid">
+      <h2 class="display">边界</h2>
+      <ul class="principles">@@PRINCIPLES@@</ul>
+      <a class="footer-brand display" href="@@PREFIX@@">以手予爱 <span lang="en">ShouYuLove</span></a>
+      <div class="footer-meta"><span>北京大学爱心社手语分社心创组</span><a href="#top">返回顶部 ↑</a>@@CREDIT@@</div>
+    </div>
+  </footer>
+  <div class="corner-controls"><button class="works-toggle" type="button" data-open-menu hidden>浏览作品集 <span aria-hidden="true">＋</span></button><a class="works-fallback" href="@@PREFIX@@#works">浏览作品集 ↗</a><div class="preferences"><button data-theme-toggle type="button" hidden aria-label="切换至深色模式">深色</button><button data-motion-toggle type="button" hidden aria-pressed="false">简洁浏览</button></div></div>
+  <dialog class="works-menu" aria-labelledby="menu-title" data-lenis-prevent>
+    <button type="button" class="menu-close" data-close-menu>关闭 <span aria-hidden="true">×</span></button>
+    <div class="menu-content grid"><h2 id="menu-title">作品集</h2><div class="menu-links">@@MENULINKS@@</div><p class="menu-note">@@SUMMARY@@</p></div>
+  </dialog>
+  <div class="cursor" aria-hidden="true"><span>进入</span></div>
+  <svg class="effect-defs" aria-hidden="true" width="0" height="0"><defs><filter id="liquid" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".008 .012" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+</body>
+</html>

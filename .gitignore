@@ -3,3 +3,4 @@
 output/
 node_modules/
 主站版本归档/
+__pycache__/

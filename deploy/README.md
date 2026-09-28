@@ -1,45 +1,41 @@
 # 主站部署记录
 
-2026-09-28 已更新到 https://shouyulove.cn/，名称为「以手予爱 ShouYuLove」。HTTP 与 HTTPS 根路径均提供主站。源码仓库为公开的 [tuzengji/ShouYuLove](https://github.com/tuzengji/ShouYuLove)。
+2026-09-29，Immersive Garden 风格改编版已上线 https://shouyulove.cn/ 。公开源码仓库为 [tuzengji/ShouYuLove](https://github.com/tuzengji/ShouYuLove)。原风格完整源文件、编译产物与旧部署说明另有本地归档和Git历史。
 
-## 当前部署
+## 当前部署与回退点
 
 - 主机：`ubuntu@49.232.193.175`。
-- 公开目录：`/var/www/shouyulove-home`，为当前发布目录的符号链接。
-- 当前发布：`/var/www/shouyulove-home-releases/20260928T144827Z-collections13`。
-- 上一版：`/var/www/shouyulove-home-releases/20260928T135914Z-naturecreators12`，保留可直接回退。
-- 本次配置备份：`/etc/nginx/backups/shouyulove-home-20260928T144827Z-collections13`，包含站点配置、主页 snippet 和上一版路径。
-- 站点配置：`/etc/nginx/sites-available/shouyulove`，由 `sites-enabled/shouyulove` 引用。
-- 主页配置：`/etc/nginx/snippets/shouyulove-home.conf`，接管 `/`、`/home-assets/`、`/sign-projects/` 与 `/campus/`，后两者支持无尾斜杠跳转。
-- 切换前配置：`/etc/nginx/backups/shouyulove-home-20260927T111544Z-plain5/shouyulove.conf`。
+- 公开符号链接：`/var/www/shouyulove-home`。
+- 当前发布：`/var/www/shouyulove-home-releases/20260928T175314Z-garden14`。
+- 上版：`/var/www/shouyulove-home-releases/20260928T144827Z-collections13`（Daylight双分类高清湖光版）。
+- 本次配置及旧指向备份：`/etc/nginx/backups/shouyulove-home-20260928T175314Z-garden14`。
+- 配置：`/etc/nginx/sites-available/shouyulove` 与 `/etc/nginx/snippets/shouyulove-home.conf`。
+- 本次两个配置文件逐字节保持不变，仅原子切换静态文件符号链接。没有reload nginx或重启任何后端应用。
+- 共享资源版本：`garden-14`。改共享CSS、JS或字体时更新模板、CSS字体及动态模块入口中的版本。
 
-以手寻语 `/signtrace/`、词典 `/dict` 和游戏 `/chuanqinghuiyi/` 的既有代理保留，后端应用未重启。
+## 发布流程
 
-## 更新流程
+1. 阅读当前线上配置和发布指向，检查源文案、执行 `npm run build` 与 `python3 scripts/check_catalog.py`，通过桌面/手机/减少动画检查。
+2. `python3 scripts/package_site.py` 生成 `output/shouyulove-home-garden.zip`。只允许3页HTML及 `home-assets/`；本版27个文件、908,519字节。
+3. 创建唯一发布目录并校验ZIP、每个提取文件与权限，保留最新配置及旧发布指向备份。仅在旧指向、旧HTML和配置哈希仍匹配时，原子替换公开符号链接。
+4. 三个主站页面做有时限的内容就绪检查；失败则恢复旧符号链接。本次配置不变，静态内容更新不需要reload。若后续确需改nginx，备份只能放 `/etc/nginx/backups/`，验证 `nginx -t` 后再reload。
+5. 公网逐文件校验，并验证根入口、两目录、三个子站及真实浏览器的加载/链接。不得发布研究复刻、原工作室素材、源笔记、归档、node_modules或子站数据。
 
-1. 执行 `npm run build` 和 `python3 scripts/check_catalog.py`，检查浏览器中的桌面、手机与减少动态效果模式。
-2. 执行 `python3 scripts/package_site.py`，仅上传 ZIP 中的 `index.html`、`sign-projects/index.html`、`campus/index.html` 与 `home-assets/`。
-3. 在远端创建新的发布目录，校验传输后的文件和权限，再原子切换 `/var/www/shouyulove-home` 符号链接；保留旧发布供回退。
-4. 若改 nginx，先读取线上最新配置，将备份放在 `/etc/nginx/backups/`，通过 `nginx -t` 后 reload。
-5. Reload 返回时新 worker 可能尚未接管请求；应进行有时限的内容就绪检查，再验证公网根页面、资源与三个子站。
+`/signtrace/`、`/chuanqinghuiyi/`、`/dict` 始终属于各自应用，不随主页发布。仅部署用户服务器或本地预览，不能使用chatgpt.site。
 
-不得把 `主站版本归档/`、`output/`、`docs/`、源项目数据或私密资料上传到公开目录。变更共享 CSS、JS 或字体时递增 `index.html`、CSS 和动态模块入口中的缓存版本，当前为 `collections-13`。
+## 回退
 
-## 恢复切换前的根入口
+当前和上版共用同一套nginx路由。先确认线上仍指向上述当前发布，再创建指向上版的临时符号链接，用 `os.replace` 原子替换 `/var/www/shouyulove-home`。保留失败版本文件供调查，不重启三个子站。若未来修改过nginx，需同时审查相应备份；不要把本次“无需改配置”的结论套到未来发布。
 
-将上述备份配置复制回 `/etc/nginx/sites-available/shouyulove`，执行 `sudo nginx -t`，通过后 `sudo systemctl reload nginx`。根入口会恢复为此前的 SignTrace 代理；无需停掉任何应用服务。新的静态发布文件可以保留供再次上线。
+本地旧风格存档位于 `主站版本归档/20260929-012636-Daylight双分类高清湖光版/`，含 `site/`、`SHA256.json`、`恢复说明.md` 与同名tar.gz。37个文件已校验。
 
-本版新增两个目录路由。若回退到不含分类页面的旧版，还需恢复本次备份中的 `shouyulove-home.conf` 到 `/etc/nginx/snippets/shouyulove-home.conf`，将符号链接指回上一版，通过 `nginx -t` 后 reload。三个子站配置不变。
+## 验证证据
 
-## 验证记录
+- `output/deployment/garden14-preflight.json`：上线前最新配置与旧发布哈希。
+- `garden14-request.json`、`garden14-release.json`：发布白名单、校验、备份和新旧指向。
+- `garden14-online-checks.json`：27个公网文件逐字节匹配、7条路由GET成功、配置不变。
+- `garden14-browser-checks.json`：线上首页/手语目录/手机燕园服务/菜单。
+- `output/immersive-rebuild-qa/live-*.png`：线上实际截图。
+- 一次性发布脚本 `output/deployment/publish_garden.py` 含状态漂移检查、解压校验、配置不变断言及失败回退；重用前必须重新生成最新请求，不直接重跑本次请求。
 
-- `output/deployment/collections13-release.json`：当前发布、配置备份及上一版位置。
-- `output/deployment/collections13-request.json`：部署前最新配置及旧发布哈希、公开文件白名单和新 snippet 哈希。
-- `output/deployment/collections13-online-checks.json`：21 个公开文件的 SHA-256，以及 HTTP 主页、两个目录跳转、三个子站和拼好课入口状态。
-- `output/playwright/collections-live-*.png`：线上桌面三页和手机目录截图；本地截图前缀为 `collections-*`。
-- 21 个公开文件与本地部署包逐字节一致；上述页面 GET 均返回 200。真实浏览器从首页进入两个目录，并实际点击拼好课打开新标签页，原目录保留；无页面错误。
-- 发布前后 `nginx -t` 通过；只更新主页 snippet 并 reload nginx，没有重启后端应用。主站配置文件及三个子站代理保持原样。
-
-本次封面使用无人出镜的北大未名湖畔黄昏实拍，原图 4080×3060，桌面资源 3840×2880；首页和两个独立分类页面共用导航。手语作品收录三个原有项目；燕园服务收录拼好课。创作者只填写已有来源的姓名，不猜填。
-
-一次性发布脚本 `output/deployment/publish_collections.py` 带旧发布、配置和新包哈希检查，保存可恢复备份；三页就绪检查失败时恢复上一版符号链接和旧 snippet。后续更新须重新读取线上状态，不直接重跑旧请求。
+两目录按3个手语项目+1个校园服务分流。四件作品与设计者来自最新Obsidian文档。唯一实拍照片保留高清版本和公开许可；原创浮雕与字形海报不引用原工作室运行素材。

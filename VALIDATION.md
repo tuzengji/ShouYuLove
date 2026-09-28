@@ -1,4 +1,23 @@
-# 当前版本验证（2026-09-28）
+# 当前版本验证（2026-09-29）
+
+- 已发布 Immersive Garden 风格改编主站：https://shouyulove.cn/ ，手语作品与燕园服务继续位于 `/sign-projects/`、`/campus/`。
+- 原 Daylight 风格37个已跟踪文件及压缩包逐字节校验通过，归档于 `主站版本归档/20260929-012636-Daylight双分类高清湖光版/`。
+- Obsidian 源文档逐字导入，身份、品牌含义、梦想、完整愿景、工作/协作和边界未擅自改写；设计者按最新原文为涂增基、朱星烨、王宁静、黄庭逸。首页四项目、两目录分别3/1。
+- `npm ci`、`npm run build`、`scripts/check_catalog.py`、部署包白名单均通过。目录检查含12项扩展、HTML转义、空状态、非法输入不覆盖页面、新标签链接、仅一张照片及源文案一致性。
+- 字体子集已补齐全部当前display文本与标点（83 glyphs），woff2 14,932字节。唯一照片源4080×3060，桌面3840×2880、手机1280×2277，公开保留署名与CC BY-SA 4.0。
+- 桌面1440×900，真实触屏Chromium上下文390×844、320×568、568×320，三页无横溢出。修复横屏首屏高度、菜单滚动后关闭按钮消失、减少动画首屏提示重叠、菜单透正文。
+- 无JavaScript三页仍有4/3/1项目与可用链接；prefers-reduced-motion三页内容不隐藏。用户简洁浏览销毁动画并恢复普通流。深浅色切换、Escape关闭、菜单焦点与滚动恢复通过。
+- 串行化场景异步创建，快速连续切换6次后只有当前有效场景，错误/警告均0；切至reduced后场景帧计数1→1静止。阻断装饰模块请求时菜单以深底浅字回退，可读可关闭。
+- 实际点击拼好课在新标签页打开，原目录保留。线上桌面首页/手语目录、触屏燕园服务/菜单复核通过，没有页面错误。
+- 27个公开文件与部署包SHA-256完全一致；HTTP主页、两个目录重定向、SignTrace、词典（转/dict/entries）、游戏与拼好课GET均200。
+- 配置部署前后SHA-256相同。只原子切换静态目录，nginx -t通过；未reload nginx、未重启后端。
+- 当前发布：`/var/www/shouyulove-home-releases/20260928T175314Z-garden14`。上版 `/var/www/shouyulove-home-releases/20260928T144827Z-collections13` 保留可回退。
+- 机器证据：`output/deployment/garden14-{request,release,online-checks,browser-checks}.json`；`output/immersive-rebuild-qa/lifecycle-final.json`；独立审查 `output/immersive-research/comparison/production-qa/QA.md`。
+- 参考首页单独复刻与风格改编分开验收；原站媒体/模型不会进入公开包。不以参考稿的几何对齐宣称品牌站逐像素一致，尚有差异在参考稿README与QA中注明。本轮未运行Lighthouse，不复用旧版分数。
+
+---
+
+# 历史版本验证（2026-09-28）
 
 - 已上线：https://shouyulove.cn/；手语作品：https://shouyulove.cn/sign-projects/；燕园服务：https://shouyulove.cn/campus/。
 - 唯一封面为星外之神拍摄的无人北大未名湖畔黄昏，原图 4080×3060，桌面 3840×2880，手机 1280×2277。网页脚注和公开文件保留 CC BY-SA 4.0 署名、来源及修改说明。
