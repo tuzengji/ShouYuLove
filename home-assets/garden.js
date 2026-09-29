@@ -59,14 +59,31 @@ function frame(time){
     if(Math.abs(previousScene.dark-dark)>.001){scene.setDark(dark);previousScene.dark=dark;}
   }
   runtime.fast=sceneFast;runtime.dark=dark;
-  root.style.setProperty('--overview-scale',String(1/(1+3*sceneFast)));
-  root.style.setProperty('--overview-title',String(clamp((sceneFast-.15)*1.5)));
-  root.style.setProperty('--overview-copy',String(1-sceneFast*.85));
+  // Touch reveal belongs to the relief canvas only. Keep layout variables tied
+  // to scroll velocity so a tap cannot scale the whole page on mobile.
+  root.style.setProperty('--overview-scale',String(1/(1+3*fast)));
+  root.style.setProperty('--overview-title',String(clamp((fast-.15)*1.5)));
+  root.style.setProperty('--overview-copy',String(1-fast*.85));
   if(!reduced.matches&&!touch.matches){
     currentPointer.x+=(pointer.x-currentPointer.x)*.24;
     currentPointer.y+=(pointer.y-currentPointer.y)*.24;
     cursor.style.left=currentPointer.x+'px';cursor.style.top=currentPointer.y+'px';
   }
+}
+function prepareGlyphReveal(el){
+  if(!el||el.dataset.glyphReveal==='true')return [...el.querySelectorAll('.reveal-glyph')];
+  const text=el.textContent.trim();
+  el.dataset.glyphReveal='true';
+  el.setAttribute('aria-label',text);
+  el.replaceChildren();
+  for(const char of [...text]){
+    const span=document.createElement('span');
+    span.className='reveal-glyph';
+    span.setAttribute('aria-hidden','true');
+    span.textContent=char===' '?'\u00a0':char;
+    el.append(span);
+  }
+  return [...el.querySelectorAll('.reveal-glyph')];
 }
 async function start(){
   const id=++bootId;runtime.ready=false;
@@ -78,13 +95,20 @@ async function start(){
   runtime.mode=motion?'motion':'reduced';
   if(motion){
     body.classList.add('has-motion');
-    lenis=new Lenis({lerp:.05,smoothWheel:true,syncTouch:false,anchors:false});
+    // Native touch scrolling is steadier on phones; keep Lenis for desktop wheels.
+    lenis=touch.matches?null:new Lenis({lerp:.05,smoothWheel:true,syncTouch:false,anchors:false});
+    const manifestoGlyphs=prepareGlyphReveal(document.querySelector('.manifesto'));
     animationContext=gsap.context(()=>{
       if(document.querySelector('.intro'))gsap.set('.intro-brand, .intro-identity, .scroll-cue',{autoAlpha:0,y:24,filter:'blur(14px)'});
-      document.querySelectorAll('[data-reveal]').forEach(el=>{
+      document.querySelectorAll('[data-reveal]:not(.manifesto)').forEach(el=>{
         const display=el.classList.contains('display');
         gsap.fromTo(el,{opacity:display?.15:1,filter:display?'blur(5px)':'none',y:display?36:16},{opacity:1,filter:display?'blur(0px)':'none',y:0,ease:'none',scrollTrigger:{trigger:el,start:'top 100%',end:display?'top 75%':'top 87%',scrub:.45}});
       });
+      if(manifestoGlyphs.length){
+        gsap.fromTo(manifestoGlyphs,
+          {opacity:.15,filter:'blur(10px)',y:24,clipPath:'inset(-12% 100% -20% -10%)'},
+          {opacity:1,filter:'blur(0px)',y:0,clipPath:'inset(-12% -10% -20% -10%)',stagger:.025,ease:'none',scrollTrigger:{trigger:'.manifesto',start:'top 96%',end:'top 42%',scrub:.65}});
+      }
       memberCards.forEach(el=>gsap.fromTo(el,{opacity:.18,filter:'blur(10px)',y:100,scale:.78},{opacity:1,filter:'blur(0px)',y:0,scale:1.04,ease:'none',scrollTrigger:{trigger:el,start:'top 94%',end:'top 48%',scrub:.18}}));
       if(!touch.matches){
         document.querySelectorAll('.project-media').forEach(el=>gsap.fromTo(el,{y:innerWidth*.027},{y:-innerWidth*.027,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:.8}}));
@@ -128,7 +152,7 @@ window.addEventListener('pointermove',event=>{
   }
 },{passive:true});
 window.addEventListener('pointerdown',event=>{
-  if(touch.matches&&!reduced.matches){touchReveal=Math.max(touchReveal,.92);body.classList.add('touch-revealing');window.setTimeout(()=>body.classList.remove('touch-revealing'),520);}
+  if(touch.matches&&!reduced.matches){touchReveal=Math.max(touchReveal,.2);body.classList.add('touch-revealing');window.setTimeout(()=>body.classList.remove('touch-revealing'),360);}
 },{passive:true});
 window.addEventListener('pointerout',event=>{if(!event.relatedTarget){pointer.x=-100;pointer.y=-100;}});
 media.forEach(el=>{
