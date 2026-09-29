@@ -73,6 +73,12 @@ python3 scripts/check_catalog.py
 
 ## 旧风格归档
 
+本轮加载、泼墨与手机揭示版归档：
+
+`主站版本归档/20260929-144410-加载泼墨复刻版/`
+
+对应提交 `468a26e`，含完整 `site/`、逐文件 `SHA256.json`、恢复说明与同名 tar.gz；clone-website Skill 的原站行为审查位于 `output/immersive-research/clone-skill-audit-20260929/`。
+
 本次更换前完整存档：
 
 `主站版本归档/20260929-012636-Daylight双分类高清湖光版/`
