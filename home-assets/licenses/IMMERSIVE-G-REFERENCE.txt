@@ -1,3 +1,5 @@
 Temporary original-relief reproduction requested for the ShouYuLove redesign.
 Source site: https://immersive-g.com/ (accessed 2026-09-29).
 The relief model, shader, menu-scene geometry and texture files are served assets from the referenced site and remain attributable to their original authors. They are included here because the site owner explicitly requested a temporary visual reproduction; review usage rights before redistributing this public release.
+
+The PSTimes webfont file is included as a temporary typography reference from the same public site reproduction. Review redistribution rights before a permanent public release.

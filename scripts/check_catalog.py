@@ -33,6 +33,8 @@ for key in ('identity','meaning','summary','dream','vision','work','collaboratio
     assert normalized(content[key]) in home.normalized,key
 for item in content['principles']:assert normalized(item) in home.normalized
 assert not home.images,'The homepage has no standalone photograph section'
+assert 'footer-black-stage' in (ROOT/'index.html').read_text() and 'footer-brand' in (ROOT/'index.html').read_text()
+assert all(token not in (ROOT/'index.html').read_text() for token in ('data-theme-toggle','data-motion-toggle','works-menu','secondary-scene'))
 for name,collection in [('sign-projects','sign'),('campus','campus')]:
     page=Page((ROOT/name/'index.html').read_text());expected=[p for p in original if p['collection']==collection]
     assert page.projects==[p['id'] for p in expected]

@@ -33,3 +33,28 @@ html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}.primary-nav{
 
 
 @media(max-width:767px){.portfolio-group{padding-top:10px}.portfolio-group+.portfolio-group{margin-top:80px}.portfolio-group-heading{padding-bottom:55px}.portfolio-group-heading>div{grid-column:1/-1}.portfolio-group-heading h3{font-size:38px}.portfolio-group-heading p{font-size:17px;line-height:1.9;margin-top:14px}.portfolio-group-heading .text-link{margin-top:20px}.portfolio-group-other{padding-top:60px}}
+
+/* Immersive contact ending: quiet principles, then a single black brand stage. */
+@font-face{font-family:PSTimes;src:url('./fonts/pstimes-regular.woff2?v=garden-17') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+.display,.project-copy h3,.collection-name,.collection-intro>h2,.portfolio-group-heading h3,.catalog-intro h1,.section-title{font-family:PSTimes,Garden Serif,"Songti SC","Noto Serif SC",serif}
+.site-footer{position:relative;z-index:2;min-height:0;padding:0;color:var(--ink);background:transparent;transition:none}
+.scene-ready .site-footer{background:transparent}
+.footer-principles{min-height:45svh;padding-block:10svh 7svh;align-items:start;row-gap:24px}
+.footer-boundary-title{grid-column:2/5;font-size:15px;line-height:1.4;font-weight:400;opacity:.48}
+.principles{grid-column:6/12;opacity:.56}
+.principles li{font-size:14px;line-height:1.7;padding-block:0 16px}
+.principles li+li{border-top:1px solid color-mix(in srgb,var(--ink) 18%,transparent);padding-top:16px}
+.footer-meta{grid-column:6/12;display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:11px;line-height:1.6;color:var(--muted);opacity:.52}
+.footer-meta a{text-decoration:underline;text-underline-offset:3px}
+.footer-black-stage{position:relative;z-index:2;min-height:100svh;background:#030303;color:#e8e8e8;display:grid;place-items:center;overflow:hidden}
+.footer-brand{grid-column:auto;font-size:clamp(52px,8vw,140px);line-height:1.04;letter-spacing:-.045em;align-self:auto;margin:0;color:#e8e8e8}
+.footer-brand span{font-family:PSTimes,Garden Serif,"Times New Roman",serif;font-size:.48em;letter-spacing:.015em;margin-left:.16em}
+.footer-brand:hover{opacity:.72}
+@media(max-width:1024px){.footer-boundary-title{grid-column:2/5}.footer-principles .principles,.footer-principles .footer-meta{grid-column:5/12}}
+@media(max-width:767px){.footer-principles{min-height:55svh;padding-block:80px 60px;row-gap:26px}.footer-boundary-title,.footer-principles .principles,.footer-principles .footer-meta{grid-column:1/-1}.footer-boundary-title{font-size:14px}.principles{opacity:.52}.principles li{font-size:13px;line-height:1.8;padding-bottom:14px}.principles li+li{padding-top:14px}.footer-meta{font-size:10px;gap:12px}.footer-black-stage{min-height:100svh}.footer-brand{font-size:clamp(44px,12vw,76px);white-space:nowrap}.footer-brand span{display:inline;font-size:.48em;margin-left:.12em}}
+@media(prefers-reduced-motion:reduce){.footer-black-stage{background:#030303}.footer-brand{opacity:1}}
+.at-footer .site-header{opacity:0;pointer-events:none}
+.footer-principles{background:#101010;color:#e8e8e8;position:relative;z-index:2}
+.footer-principles .footer-boundary-title,.footer-principles .principles,.footer-principles .footer-meta{color:#e8e8e8}
+.footer-principles .principles li+li{border-top-color:#ffffff25}
+.footer-principles .footer-meta{color:#e8e8e899}
