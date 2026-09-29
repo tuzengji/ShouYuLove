@@ -35,9 +35,16 @@ for project in catalog:
         raise ValueError('Project URL must be an HTTP(S) address')
     if project.get('icon', 'arrow-up-right') not in icons:
         raise ValueError('Unknown project icon')
-for key in ('identity', 'meaning', 'summary', 'dream', 'vision', 'work', 'collaboration'):
+    if project.get('logo'):
+        logo = Path(project['logo'])
+        if logo.is_absolute() or '..' in logo.parts or not (ROOT / logo).is_file():
+            raise ValueError('Project logo must point to a local file')
+for key in ('identity', 'meaning', 'dream', 'vision'):
     if not isinstance(content.get(key), str) or not content[key].strip():
         raise ValueError(f'Missing public copy: {key}')
+for key in ('summary', 'work', 'collaboration'):
+    if key in content and not isinstance(content[key], str):
+        raise ValueError(f'Optional public copy must be text: {key}')
 if not content.get('principles') or any(not isinstance(p, str) for p in content['principles']):
     raise ValueError('Missing principles')
 
@@ -48,27 +55,21 @@ def render(template, values):
         return values[match[1]]
     return re.sub(r'@@([A-Z]+)@@', replace, template)
 
-def artwork(project):
-    id = project['id']
-    if id == 'signtrace':
-        return '<span class="trace-orbit orbit-one"></span><span class="trace-orbit orbit-two"></span><span class="trace-orbit orbit-three"></span><span class="trace-character display">语</span><span class="art-word" lang="en">SignTrace</span>'
-    if id == 'dictionary':
-        return '<div class="dictionary-grid">'+''.join(f'<span>{char}</span>' for char in '手语世界以手予爱学习表达')+'</div>'
-    if id == 'chuanqinghuiyi':
-        return '<span class="game-character display">传</span><span class="game-character display">情</span><span class="game-character display">绘</span><span class="game-character display">意</span>'
-    if id == 'pinhaoke':
-        return '<div class="course-grid">'+''.join('<i></i>' for _ in range(28))+'</div><span class="course-word display">拼好课</span>'
+def artwork(project, prefix=''):
+    logo=project.get('logo')
+    if logo:
+        return f'<img class="project-logo" src="{escape(prefix+logo,quote=True)}" alt="">'
     return '<span class="generic-art display">'+escape(project['name'])+'</span>'
 
-def project_rows(projects):
+def project_rows(projects, prefix=''):
     rows = []
     for index, project in enumerate(projects):
         p = {key: escape(str(value), quote=True) for key, value in project.items()}
-        art = p['id'] if p['id'] in {'signtrace','dictionary','chuanqinghuiyi','pinhaoke'} else 'generic'
+        art = p['id'] if p['id'] in {'signtrace','dictionary','chuanqinghuiyi','pinhaoke','beida-zhidao','qinghua-zhidao'} else 'generic'
         creator = f'<p class="project-creator">设计者：{p["creator"]}</p>' if 'creator' in p else ''
         rows.append(f'''<article class="project grid project-{art}" id="work-{p['id']}" data-project="{p['id']}" aria-labelledby="title-{p['id']}">
   <a class="project-media project-diagram" href="{p['url']}" target="_blank" rel="noopener" aria-label="打开{p['name']}，在新标签页" data-cursor="进入">
-    <div class="art art-{art}" aria-hidden="true">{artwork(project)}</div><span class="media-entry" aria-hidden="true">{p['name']} <span>↗</span></span>
+    <div class="art art-{art}" aria-hidden="true">{artwork(project,prefix)}</div><span class="media-entry" aria-hidden="true">{p['name']} <span>↗</span></span>
   </a>
   <div class="project-copy"><h3 class="display" id="title-{p['id']}"><a href="{p['url']}" target="_blank" rel="noopener">{p['name']} <span aria-hidden="true">↗</span></a></h3><p class="project-description">{p['description']}</p>{creator}</div><span class="quick-name display" aria-hidden="true">{p['name']}</span>
 </article>''')
@@ -77,7 +78,11 @@ def project_rows(projects):
 def nav(prefix, active):
     about = '#about' if active is None else '../#about'
     current = ' aria-current="page"' if active else ''
-    return f'<a href="{about}">关于心创组</a><a class="nav-portfolio" href="{prefix}#works"{current}>作品集</a>'
+    return f'<a class="ink-hover" href="{about}">关于心创组</a><a class="nav-portfolio ink-hover" href="{prefix}#works"{current}>作品集</a>'
+
+def members_markup(members):
+    total=len(members)
+    return '\n'.join(f'<article class="member-card" data-member-index="{i+1}" aria-label="第{i+1}位成员：{escape(name)}"><span class="member-index">{i+1:02d} / {total:02d}</span><h3 class="display">{escape(name)}</h3><span class="member-mark" aria-hidden="true"></span></article>' for i,name in enumerate(members))
 
 def collection_links(prefix, active=None, descriptions=False):
     links = []
@@ -97,7 +102,7 @@ for active in (None, 'sign', 'campus'):
     c = COLLECTIONS.get(active)
     path = c['path']+'/' if c else ''
     title = f'{c["name"]} · 以手予爱 ShouYuLove' if c else content['brand']
-    values = {**plain, 'TITLE':escape(title), 'DESCRIPTION':escape(c['description'] if c else content['summary']),
+    values = {**plain, 'TITLE':escape(title), 'DESCRIPTION':escape(c['description'] if c else (content.get('summary') or content['meaning'])),
         'PREFIX':prefix, 'PATH':path, 'PAGE':active or 'home', 'NAV':nav(prefix,active),
         'PRINCIPLES':''.join(f'<li>{escape(p)}</li>' for p in content['principles']),
         'MENULINKS':collection_links(prefix,active,True), 'CREDIT':''}
@@ -105,19 +110,23 @@ for active in (None, 'sign', 'campus'):
         values['IDENTITY'] = escape(content['identity']).replace('手语分社心创组','<span class="identity-group">手语分社心创组</span>')
         values['DREAM'] = ''.join('<span class="reveal-line">'+escape(part)+'</span>' for part in re.findall(r'.+?(?:。|，(?=都)|$)',content['dream']))
         values['COLLECTIONLINKS'] = collection_links(prefix,descriptions=True)
+        values['PROJECTSCTA'] = prefix+'#works'
+        values['SUMMARYBLOCK'] = f'<p>{plain["SUMMARY"]}</p>' if plain.get('SUMMARY') else ''
+        values['WORKING'] = f'<section class="working grid" id="teamwork" aria-label="工作与协作方式"><div class="work-copy"><h2 class="section-title">我们做什么</h2><p data-reveal>{plain["WORK"]}</p></div><div class="collaboration-copy"><h2 class="section-title">我们怎样协作</h2><p data-reveal>{plain["COLLABORATION"]}</p></div></section>' if plain.get('WORK') and plain.get('COLLABORATION') else ''
+        values['MEMBERS'] = f'<section class="members-scene" id="members" aria-labelledby="members-title"><div class="members-intro grid"><span class="members-kicker">第一届</span><h2 class="display" id="members-title">心创组第一届成员</h2></div><div class="members-rail">{members_markup(content.get("members",[]))}</div></section>'
         core, other = (COLLECTIONS['sign'], COLLECTIONS['campus'])
         values.update(
             CORENAME=escape(core['name']), COREDESCRIPTION=escape(core['description']),
-            COREPATH=prefix+core['path']+'/', COREPROJECTS=project_rows([p for p in catalog if p['collection']=='sign']),
+            COREPATH=prefix+core['path']+'/', COREPROJECTS=project_rows([p for p in catalog if p['collection']=='sign'],prefix),
             OTHERNAME=escape(other['name']), OTHERDESCRIPTION=escape(other['description']),
-            OTHERPATH=prefix+other['path']+'/', OTHERPROJECTS=project_rows([p for p in catalog if p['collection']=='campus']),
+            OTHERPATH=prefix+other['path']+'/', OTHERPROJECTS=project_rows([p for p in catalog if p['collection']=='campus'],prefix),
         )
         values['CONTENT'] = render(home_template, values)
     else:
         other = COLLECTIONS['campus' if active == 'sign' else 'sign']
         values.update(COLLECTIONTITLE=escape(c['name']),COLLECTIONDESCRIPTION=escape(c['description']),
             COLLECTIONTABS=collection_links(prefix,active), OTHERPATH='../'+other['path']+'/', OTHERNAME=escape(other['name']),
-            PROJECTS=project_rows([p for p in catalog if p['collection']==active]))
+            PROJECTS=project_rows([p for p in catalog if p['collection']==active],prefix), PROJECTSCTA=prefix+'#works', SUMMARYBLOCK='', WORKING='', MEMBERS='')
         values['CONTENT'] = render(collection_template,values)
     outputs[ROOT/path/'index.html'] = render(base, values)
 # All records and templates are validated before any generated page is replaced.

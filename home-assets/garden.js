@@ -6,7 +6,7 @@ gsap.registerPlugin(ScrollTrigger);
 const root=document.documentElement, body=document.body;
 const canvas=document.querySelector('#garden'), footer=document.querySelector('.site-footer');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'), touch=matchMedia('(pointer: coarse)');
-const cursor=document.querySelector('.cursor'), media=[...document.querySelectorAll('.project-media')];
+const cursor=document.querySelector('.cursor'), media=[...document.querySelectorAll('.project-media')], memberCards=[...document.querySelectorAll('.member-card')], inkLinks=[...document.querySelectorAll('.ink-hover')];
 let lenis, scene, animationContext, bootId=0;
 let lastScroll=scrollY, velocity=0, fast=0, dark=0, footerAmount=0, disposed=false, lastFrame=0;
 let sceneQueue=Promise.resolve(), previousScene={scroll:-1,fast:-1,dark:-1};
@@ -61,6 +61,7 @@ async function start(){
         const display=el.classList.contains('display');
         gsap.fromTo(el,{opacity:display?.15:1,filter:display?'blur(5px)':'none',y:display?36:16},{opacity:1,filter:display?'blur(0px)':'none',y:0,ease:'none',scrollTrigger:{trigger:el,start:'top 100%',end:display?'top 75%':'top 87%',scrub:.45}});
       });
+      memberCards.forEach(el=>gsap.fromTo(el,{opacity:.18,filter:'blur(10px)',y:100,scale:.78},{opacity:1,filter:'blur(0px)',y:0,scale:1.04,ease:'none',scrollTrigger:{trigger:el,start:'top 94%',end:'top 48%',scrub:.18}}));
       if(!touch.matches){
         document.querySelectorAll('.project-media').forEach(el=>gsap.fromTo(el,{y:innerWidth*.027},{y:-innerWidth*.027,ease:'none',scrollTrigger:{trigger:el.parentElement,start:'top bottom',end:'bottom top',scrub:.8}}));
         if(document.querySelector('.intro'))gsap.to('.intro-brand, .intro-identity, .scroll-cue',{y:innerHeight*.17,ease:'none',scrollTrigger:{trigger:'.intro',start:'top top',end:'bottom top',scrub:true}});
@@ -68,7 +69,7 @@ async function start(){
     });
   }
   try{
-    const {createRelief}=await import('./reference-relief.bundle.js?v=garden-18');
+    const {createRelief}=await import('./reference-relief.bundle.js?v=garden-20');
     if(id!==bootId||disposed)return;
     const task=sceneQueue.then(async()=>{
       if(id!==bootId||disposed)return;
@@ -112,6 +113,10 @@ media.forEach(el=>{
     gsap.to('#liquid feDisplacementMap',{attr:{scale:0},duration:.8});
     el.style.setProperty('--mx','0');el.style.setProperty('--my','0');
   });
+});
+inkLinks.forEach(el=>{
+  el.addEventListener('pointerenter',()=>{if(!reduced.matches&&!touch.matches)gsap.to('#liquid feDisplacementMap',{attr:{scale:24},duration:.75,ease:'sine.out'});});
+  el.addEventListener('pointerleave',()=>{gsap.to('#liquid feDisplacementMap',{attr:{scale:0},duration:.8,ease:'sine.out'});});
 });
 window.addEventListener('pagehide',event=>{if(event.persisted)return;disposed=true;++bootId;lenis?.destroy();animationContext?.revert();scene?.dispose();gsap.ticker.remove(frame);});
 measure();gsap.ticker.add(frame);gsap.ticker.lagSmoothing(0);

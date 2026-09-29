@@ -1,16 +1,16 @@
 # 当前版本验证（2026-09-29）
 
-- 本地版本已完成 Immersive Garden 原始浮雕、双分类作品集、紧凑项目示意图、左上品牌/右下探索布局、统一中英文衬线字体、导航收缩与纯黑沉浸式页尾；线上入口为 https://shouyulove.cn/ ，分类页为 `/sign-projects/`、`/campus/`。
+- 本地版本已完成 Obsidian 新内容同步、Immersive Garden 原始浮雕、双分类六项目作品集、六个透明 logo、第一届成员滚动缩放总览、按钮泼墨反馈、左上品牌/右下探索布局、统一中英文衬线字体、导航收缩与纯黑沉浸式页尾；线上入口为 https://shouyulove.cn/ ，分类页为 `/sign-projects/`、`/campus/`。
 - 原 Daylight 风格37个已跟踪文件及压缩包逐字节校验通过，归档于 `主站版本归档/20260929-012636-Daylight双分类高清湖光版/`。
-- Obsidian 源文档逐字导入，身份、品牌含义、梦想、完整愿景、工作/协作和边界未擅自改写；首页四项目、两目录分别3/1，分类名为「核心创意」「其他作品」。
-- `npm ci`、`npm run build`、`scripts/check_catalog.py`、部署包白名单均通过。目录检查含扩展记录、HTML转义、空状态、非法输入不覆盖页面、新标签链接、四个紧凑示意图、无独立照片、纯黑页尾及源文案一致性。
-- 桌面真实 Chromium 看到本地浮雕、连续作品卡片和纯黑结尾；390×844 手机首屏、三件连续作品和页尾无横溢出；减少动态效果模式 `window.__garden.mode` 为 `reduced`、场景就绪、错误数组为空。
+- Obsidian 源文档逐字导入，身份、品牌含义、梦想、完整愿景、边界、六个项目和12位成员均已同步；两目录分别3/3，分类名为「核心创意」「其他作品」。缺少单独简介的两条新增项目使用明确标注的栏目级短说明。
+- `npm run build`、`scripts/check_catalog.py`、部署包白名单均通过。目录检查含扩展记录、HTML转义、空状态、非法输入不覆盖页面、新标签链接、六个紧凑示意图/logo、12位成员、无独立照片、纯黑页尾及源文案一致性。
+- 桌面真实 Chromium 看到本地浮雕、连续作品卡片、成员缩放总览和纯黑结尾；390×844 手机首屏、成员卡片和页尾无横溢出；减少动态效果模式保留成员与 logo 静态内容，错误数组为空。
 - 首页导航仅含「关于心创组」「作品集」，作品集锚点可滚到两组内容；目录页保留两组切换链接。未保留深色模式、简洁预览、作品集弹层或 secondary menu 场景。
 - 本地 Chromium 请求的高/低质量浮雕模型及 Draco 文件均返回200，控制台错误与警告均为0。
-- 30个公开文件的部署包校验通过；关键公网文件哈希一致，PSTimes 字体、浮雕高/低模型与 Draco 资源响应头为 200，HTTP 主页、两个目录、SignTrace、词典（转/dict/entries）和游戏均 200。
+- 36个公开文件的部署包校验通过；关键公网文件哈希一致，六个透明 logo、PSTimes 字体、浮雕高/低模型与 Draco 资源响应头为 200，HTTP 主页、两个目录、SignTrace、词典（转/dict/entries）和游戏均 200。
 - 配置部署前后 SHA-256 相同。只原子切换静态目录，nginx -t 通过；未 reload nginx、未重启后端。
-- 当前发布：`/var/www/shouyulove-home-releases/20260929T050940Z-compact20`。上版 `/var/www/shouyulove-home-releases/20260929T035719Z-contact18` 保留可回退。
-- 机器证据：`output/deployment/compact20-{preflight,request,online-checks,browser-checks}.json`；本地与线上作品/首屏截图位于 `output/playwright/`。
+- 当前发布：`/var/www/shouyulove-home-releases/20260929T055640Z-members22`。上版 `/var/www/shouyulove-home-releases/20260929T054905Z-members21` 保留可回退。
+- 机器证据：`output/deployment/members22-{preflight,request,online-checks,browser-checks}.json`；本地与线上作品/成员/首屏截图位于 `output/playwright/`。
 - 参考首页单独复刻与风格改编分开验收；原站媒体/模型不会进入公开包。不以参考稿的几何对齐宣称品牌站逐像素一致，尚有差异在参考稿README与QA中注明。本轮未运行Lighthouse，不复用旧版分数。
 
 ---

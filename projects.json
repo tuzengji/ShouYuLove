@@ -7,7 +7,8 @@
     "description": "用自然语言描述你看到的手语动作，寻找对应词义；也可以输入词语，查询手语表达。",
     "creator": "涂增基 朱星烨 王宁静 黄庭逸",
     "url": "https://shouyulove.cn/signtrace/",
-    "icon": "magnifying-glass"
+    "icon": "magnifying-glass",
+    "logo": "home-assets/logos/signtrace.svg"
   },
   {
     "id": "dictionary",
@@ -17,7 +18,8 @@
     "description": "面向分社内部学习的国家通用手语词典，支持按词语或动作检索，帮助查阅和复习手语表达。",
     "creator": "朱星烨 涂增基",
     "url": "https://shouyulove.cn/dict",
-    "icon": "book-open-text"
+    "icon": "book-open-text",
+    "logo": "home-assets/logos/dictionary.svg"
   },
   {
     "id": "chuanqinghuiyi",
@@ -27,7 +29,8 @@
     "description": "和伙伴轮流比划、猜词，通过不同难度的题目练习手语表达，让学习与社团活动更有趣。",
     "creator": "涂增基",
     "url": "https://shouyulove.cn/chuanqinghuiyi/",
-    "icon": "game-controller"
+    "icon": "game-controller",
+    "logo": "home-assets/logos/chuanqinghuiyi.svg"
   },
   {
     "id": "pinhaoke",
@@ -37,6 +40,29 @@
     "description": "搜索和筛选北大课程，查看课程详情，收藏感兴趣的课程，并整理、导出自己的课表。",
     "creator": "涂增基",
     "url": "https://www.pinhaoke.love/",
-    "icon": "book-open-text"
+    "icon": "book-open-text",
+    "logo": "home-assets/logos/pinhaoke.svg"
+  },
+  {
+    "id": "beida-zhidao",
+    "name": "北大知道",
+    "collection": "campus",
+    "category": "校园服务",
+    "description": "心创组成员开发的校园服务工具。",
+    "creator": "涂增基",
+    "url": "http://101.37.209.227/",
+    "icon": "book-open-text",
+    "logo": "home-assets/logos/beida-zhidao.svg"
+  },
+  {
+    "id": "qinghua-zhidao",
+    "name": "清华知道",
+    "collection": "campus",
+    "category": "校园服务",
+    "description": "心创组成员开发的校园服务工具。",
+    "creator": "涂增基",
+    "url": "http://101.37.209.227/thu",
+    "icon": "book-open-text",
+    "logo": "home-assets/logos/qinghua-zhidao.svg"
   }
 ]
