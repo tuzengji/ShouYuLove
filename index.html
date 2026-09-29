@@ -15,11 +15,19 @@
   <meta property="og:url" content="https://shouyulove.cn/">
   <link rel="icon" href="./home-assets/images/favicon.png">
   <link rel="apple-touch-icon" href="./home-assets/images/apple-touch-icon.png">
-  <link rel="preload" href="./home-assets/fonts/pstimes-regular.woff2?v=garden-20" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="./home-assets/garden.css?v=garden-20">
-  <script type="module" src="./home-assets/garden.bundle.js?v=garden-20"></script>
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preload" href="./home-assets/fonts/pstimes-regular.woff2?v=garden-21" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./home-assets/garden.css?v=garden-21">
+  <script type="module" src="./home-assets/garden.bundle.js?v=garden-21"></script>
 </head>
 <body id="top" data-page="home">
+  <div class="site-loader" id="site-loader" role="status" aria-live="polite" aria-label="正在加载以手予爱">
+    <div class="site-loader__inner">
+      <div class="site-loader__brand display">以手予爱 <span lang="en">ShouYuLove</span></div>
+      <div class="site-loader__progress"><span class="site-loader__fill" id="site-loader-fill"></span></div>
+      <div class="site-loader__meta"><span>正在揭开花朵</span><span id="site-loader-value">0</span></div>
+    </div>
+  </div>
   <a class="skip-link" href="#content">跳到正文</a>
   <canvas id="garden" aria-hidden="true"></canvas>
   <div class="scene-fallback" aria-hidden="true"></div>
@@ -110,6 +118,14 @@
     </div>
   </footer>
   <div class="cursor" aria-hidden="true"><span>进入</span></div>
-  <svg class="effect-defs" aria-hidden="true" width="0" height="0"><defs><filter id="liquid" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".008 .012" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+  <svg class="effect-defs" aria-hidden="true" width="0" height="0"><defs>
+    <filter id="liquid" x="-10%" y="-10%" width="120%" height="120%"><feTurbulence type="fractalNoise" baseFrequency=".008 .012" numOctaves="2" seed="9" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="G"/></filter>
+    <filter id="ink-splash" x="-35%" y="-90%" width="170%" height="280%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency=".014 .032" numOctaves="3" seed="17" result="ink-noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="ink-noise" scale="30" xChannelSelector="R" yChannelSelector="G" result="ink-warp"/>
+      <feGaussianBlur in="ink-warp" stdDeviation="5.5" result="ink-soft"/>
+      <feColorMatrix in="ink-soft" type="matrix" values="0 0 0 0 .055 0 0 0 0 .065 0 0 0 0 .07 0 0 0 .86 0"/>
+    </filter>
+  </defs></svg>
 </body>
 </html>

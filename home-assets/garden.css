@@ -35,7 +35,7 @@ html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}.primary-nav{
 @media(max-width:767px){.portfolio-group{padding-top:10px}.portfolio-group+.portfolio-group{margin-top:80px}.portfolio-group-heading{padding-bottom:55px}.portfolio-group-heading>div{grid-column:1/-1}.portfolio-group-heading h3{font-size:38px}.portfolio-group-heading p{font-size:17px;line-height:1.9;margin-top:14px}.portfolio-group-heading .text-link{margin-top:20px}.portfolio-group-other{padding-top:60px}}
 
 /* Immersive contact ending: quiet principles, then a single black brand stage. */
-@font-face{font-family:PSTimes;src:url('./fonts/pstimes-regular.woff2?v=garden-20') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:PSTimes;src:url('./fonts/pstimes-regular.woff2?v=garden-21') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 .display,.project-copy h3,.collection-name,.collection-intro>h2,.portfolio-group-heading h3,.catalog-intro h1,.section-title{font-family:PSTimes,Garden Serif,"Songti SC","Noto Serif SC",serif}
 .site-footer{position:relative;z-index:2;min-height:0;padding:0;color:var(--ink);background:transparent;transition:none}
 .scene-ready .site-footer{background:transparent}
@@ -184,3 +184,37 @@ body,button,input,.display,.project-copy h3,.collection-name,.collection-intro>h
   .member-card h3{font-size:clamp(38px,12vw,58px)}
   .projects-cta{left:22px;bottom:22px;font-size:13px}
 }
+
+/* Loading and reference-style ink bloom. The original uses animated canvas ink;
+   this keeps the same broad, blurred silhouette with self-owned SVG noise. */
+.site-loader{position:fixed;inset:0;z-index:80;display:grid;place-items:center;background:var(--paper);color:var(--ink);opacity:1;visibility:visible;transition:opacity 1s cubic-bezier(.2,0,0,1),visibility 1s;pointer-events:auto}
+html:not(.js) .site-loader{display:none}
+.site-loader.is-done{opacity:0;visibility:hidden;pointer-events:none}
+.site-loader__inner{width:min(38vw,520px);min-width:230px;display:grid;gap:20px}
+.site-loader__brand{font-size:clamp(28px,3.4vw,52px);line-height:1.2;letter-spacing:.025em;opacity:0;transform:translateY(18px);filter:blur(10px);animation:loader-brand-in 1.1s .12s cubic-bezier(.2,0,0,1) forwards}
+.site-loader__brand span{font-size:.62em;letter-spacing:.07em;margin-left:.16em}
+.site-loader__progress{height:1px;background:color-mix(in srgb,var(--ink) 18%,transparent);overflow:hidden;margin-top:clamp(28px,4vw,56px)}
+.site-loader__fill{display:block;width:100%;height:100%;background:var(--ink);transform-origin:left center;transform:scaleX(0);will-change:transform}
+.site-loader__meta{display:flex;justify-content:space-between;gap:20px;font-size:12px;letter-spacing:.07em;color:var(--muted);opacity:0;animation:loader-meta-in .8s .42s ease forwards}
+.site-loader__meta span:last-child{font-variant-numeric:tabular-nums;min-width:3ch;text-align:right}
+@keyframes loader-brand-in{to{opacity:1;transform:none;filter:none}}
+@keyframes loader-meta-in{to{opacity:.8}}
+html.js body:not(.loader-ready) .intro-brand,html.js body:not(.loader-ready) .intro-identity,html.js body:not(.loader-ready) .scroll-cue{visibility:hidden}
+
+.ink-hover::before{inset:-44px -86px;opacity:0;transform:translate(22px,-6px) scale(.12) rotate(-7deg);border-radius:48% 38% 56% 42%;background:
+  radial-gradient(ellipse at 91% 42%,#111611 0 15%,transparent 42%),
+  radial-gradient(ellipse at 74% 18%,#111611 0 14%,transparent 40%),
+  radial-gradient(ellipse at 57% 62%,#111611 0 18%,transparent 44%),
+  radial-gradient(ellipse at 35% 31%,#111611 0 13%,transparent 41%),
+  radial-gradient(ellipse at 16% 72%,#111611 0 9%,transparent 33%),
+  radial-gradient(ellipse at 99% 86%,#111611 0 8%,transparent 28%);
+  filter:url(#ink-splash);transition:opacity .32s,transform 1.05s cubic-bezier(.2,0,0,1)}
+.ink-hover:hover::before,.ink-hover:focus-visible::before,.ink-hover:active::before{opacity:.82;transform:translate(0,0) scale(1.16) rotate(0)}
+.ink-hover:hover,.ink-hover:focus-visible,.ink-hover:active{color:#f0f0e9}
+.projects-cta::before{inset:-30px -52px;transform-origin:left center}
+@media(max-width:767px){
+  .site-loader__inner{width:calc(100vw - 44px);min-width:0;gap:16px}
+  .site-loader__brand{font-size:34px}
+  .ink-hover::before{inset:-36px -58px}
+}
+@media(prefers-reduced-motion:reduce){.site-loader{transition:none}.site-loader__brand,.site-loader__meta{animation:none;opacity:1;transform:none;filter:none}.ink-hover::before{display:none}}

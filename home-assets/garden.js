@@ -6,14 +6,35 @@ gsap.registerPlugin(ScrollTrigger);
 const root=document.documentElement, body=document.body;
 const canvas=document.querySelector('#garden'), footer=document.querySelector('.site-footer');
 const reduced=matchMedia('(prefers-reduced-motion: reduce)'), touch=matchMedia('(pointer: coarse)');
+const loader=document.querySelector('#site-loader'), loaderFill=document.querySelector('#site-loader-fill'), loaderValue=document.querySelector('#site-loader-value');
 const cursor=document.querySelector('.cursor'), media=[...document.querySelectorAll('.project-media')], memberCards=[...document.querySelectorAll('.member-card')], inkLinks=[...document.querySelectorAll('.ink-hover')];
 let lenis, scene, animationContext, bootId=0;
 let lastScroll=scrollY, velocity=0, fast=0, dark=0, footerAmount=0, disposed=false, lastFrame=0;
+let touchReveal=0, loaderValueState=0, loaderFinished=false, loaderStartedAt=0, loaderTween;
 let sceneQueue=Promise.resolve(), previousScene={scroll:-1,fast:-1,dark:-1};
 let pointer={x:-100,y:-100}, currentPointer={x:-100,y:-100}, hoverMedia=null;
 const runtime={ready:false,errors:[],mode:'loading',scene:null,scroll:0,fast:0,dark:0};
 window.__garden=runtime;
 const clamp=(v,min=0,max=1)=>Math.max(min,Math.min(max,v));
+function setLoaderProgress(value){
+  if(!loader||loaderFinished)return;
+  loaderValueState=Math.max(loaderValueState,clamp(value));
+  if(loaderFill)loaderFill.style.transform=`scaleX(${loaderValueState})`;
+  if(loaderValue)loaderValue.textContent=String(Math.round(loaderValueState*100));
+}
+function beginLoader(){
+  if(!loader||loaderFinished)return;
+  loaderStartedAt=performance.now();loader.classList.remove('is-done');body.classList.remove('loader-ready');loaderValueState=0;setLoaderProgress(0);
+  loaderTween=gsap.to({value:0},{value:.72,duration:2.8,ease:'sine.inOut',onUpdate(){setLoaderProgress(this.targets()[0].value)}});
+}
+function finishLoader(){
+  if(!loader||loaderFinished)return;
+  const wait=Math.max(0,1100-(performance.now()-loaderStartedAt));
+  if(wait>0){window.setTimeout(finishLoader,wait);return;}
+  loaderTween&&loaderTween.kill();setLoaderProgress(1);loaderFinished=true;body.classList.add('loader-ready');
+  loader.classList.add('is-done');
+  if(!reduced.matches&&document.querySelector('.intro'))gsap.to('.intro-brand, .intro-identity, .scroll-cue',{autoAlpha:1,y:0,filter:'blur(0px)',duration:1.35,delay:.16,stagger:.15,ease:'power3.out',clearProps:'transform,opacity,filter,visibility'});
+}
 function measure(){
   footerAmount=clamp((innerHeight*.8-footer.getBoundingClientRect().top)/(innerHeight*.85));
   body.classList.toggle('past-intro',scrollY>Math.max(60,innerHeight*.5));
@@ -26,19 +47,21 @@ function frame(time){
   lenis?.raf(time*1000);
   const delta=scrollY-lastScroll;lastScroll=scrollY;
   velocity+=(Math.abs(delta)*16.67/Math.max(dt,1)-velocity)*.15;
-  const fastTarget=(!reduced.matches&&!touch.matches&&velocity>75)?clamp((velocity-75)/200):0;
+  const fastTarget=(!reduced.matches&&velocity>75)?clamp((velocity-75)/200):0;
   fast+=(fastTarget-fast)*(fastTarget>fast?.035:.06);
+  touchReveal+=(0-touchReveal)*(touchReveal>.01?.045:.16);
+  const sceneFast=Math.max(fast,touchReveal);
   measure();
   dark+=(footerAmount-dark)*(reduced.matches?1:.045);
   if(scene){
     if(previousScene.scroll!==scrollY){scene.setScroll(scrollY);previousScene.scroll=scrollY;}
-    if(Math.abs(previousScene.fast-fast)>.001){scene.setFast(fast);previousScene.fast=fast;}
+    if(Math.abs(previousScene.fast-sceneFast)>.001){scene.setFast(sceneFast);previousScene.fast=sceneFast;}
     if(Math.abs(previousScene.dark-dark)>.001){scene.setDark(dark);previousScene.dark=dark;}
   }
-  runtime.fast=fast;runtime.dark=dark;
-  root.style.setProperty('--overview-scale',String(1/(1+3*fast)));
-  root.style.setProperty('--overview-title',String(clamp((fast-.15)*1.5)));
-  root.style.setProperty('--overview-copy',String(1-fast*.85));
+  runtime.fast=sceneFast;runtime.dark=dark;
+  root.style.setProperty('--overview-scale',String(1/(1+3*sceneFast)));
+  root.style.setProperty('--overview-title',String(clamp((sceneFast-.15)*1.5)));
+  root.style.setProperty('--overview-copy',String(1-sceneFast*.85));
   if(!reduced.matches&&!touch.matches){
     currentPointer.x+=(pointer.x-currentPointer.x)*.24;
     currentPointer.y+=(pointer.y-currentPointer.y)*.24;
@@ -47,6 +70,7 @@ function frame(time){
 }
 async function start(){
   const id=++bootId;runtime.ready=false;
+  if(!loaderFinished)beginLoader();
   lenis?.destroy();lenis=undefined;animationContext?.revert();animationContext=undefined;
   scene?.dispose();scene=undefined;runtime.scene=null;
   body.classList.remove('has-motion','scene-ready');
@@ -56,7 +80,7 @@ async function start(){
     body.classList.add('has-motion');
     lenis=new Lenis({lerp:.05,smoothWheel:true,syncTouch:false,anchors:false});
     animationContext=gsap.context(()=>{
-      if(document.querySelector('.intro'))gsap.from('.intro-brand, .intro-identity, .scroll-cue',{opacity:0,y:16,duration:1.25,stagger:.12,ease:'sine.out',delay:.15,clearProps:'transform,opacity'});
+      if(document.querySelector('.intro'))gsap.set('.intro-brand, .intro-identity, .scroll-cue',{autoAlpha:0,y:24,filter:'blur(14px)'});
       document.querySelectorAll('[data-reveal]').forEach(el=>{
         const display=el.classList.contains('display');
         gsap.fromTo(el,{opacity:display?.15:1,filter:display?'blur(5px)':'none',y:display?36:16},{opacity:1,filter:display?'blur(0px)':'none',y:0,ease:'none',scrollTrigger:{trigger:el,start:'top 100%',end:display?'top 75%':'top 87%',scrub:.45}});
@@ -69,7 +93,8 @@ async function start(){
     });
   }
   try{
-    const {createRelief}=await import('./reference-relief.bundle.js?v=garden-20');
+    setLoaderProgress(.12);
+    const {createRelief}=await import('./reference-relief.bundle.js?v=garden-21');
     if(id!==bootId||disposed)return;
     const task=sceneQueue.then(async()=>{
       if(id!==bootId||disposed)return;
@@ -77,7 +102,7 @@ async function start(){
       const bundleUrl=bundleScript?.src||new URL('./home-assets/garden.bundle.js',document.baseURI).href;
       const assetBase=new URL('relief-assets/',bundleUrl).href;
       const mobileQuality=touch.matches||innerWidth<768||/Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-      const next=await createRelief({canvas,reducedMotion:!motion,quality:mobileQuality?'low':'high',randomSeed:42,assetBase});
+      const next=await createRelief({canvas,reducedMotion:!motion,quality:mobileQuality?'low':'high',randomSeed:42,assetBase,onProgress:value=>setLoaderProgress(.16+value*.78)});
       if(id!==bootId||disposed){next.dispose();return;}
       previousScene={scroll:-1,fast:-1,dark:-1};scene=next;
       scene.setScroll(scrollY);scene.setDark(footerAmount);
@@ -85,7 +110,7 @@ async function start(){
     });
     sceneQueue=task.catch(()=>{});await task;
   }catch(error){if(id===bootId&&!disposed){runtime.errors.push(String(error));runtime.mode='static-fallback';}}
-  if(id===bootId){runtime.ready=true;ScrollTrigger.refresh();measure();}
+  if(id===bootId){runtime.ready=true;finishLoader();ScrollTrigger.refresh();measure();}
 }
 reduced.addEventListener('change',start);
 window.addEventListener('resize',()=>{scene?.resize(innerWidth,innerHeight);ScrollTrigger.refresh();measure();});
@@ -102,11 +127,14 @@ window.addEventListener('pointermove',event=>{
     hoverMedia.style.setProperty('--my',String((event.clientY-r.top)/r.height-.5));
   }
 },{passive:true});
+window.addEventListener('pointerdown',event=>{
+  if(touch.matches&&!reduced.matches){touchReveal=Math.max(touchReveal,.92);body.classList.add('touch-revealing');window.setTimeout(()=>body.classList.remove('touch-revealing'),520);}
+},{passive:true});
 window.addEventListener('pointerout',event=>{if(!event.relatedTarget){pointer.x=-100;pointer.y=-100;}});
 media.forEach(el=>{
   el.addEventListener('pointerenter',()=>{
     hoverMedia=el;cursor.classList.add('is-media');
-    if(!reduced.matches&&!touch.matches)gsap.to('#liquid feDisplacementMap',{attr:{scale:15},duration:1.4,ease:'sine.out'});
+  if(!reduced.matches&&!touch.matches)gsap.to('#liquid feDisplacementMap',{attr:{scale:15},duration:1.4,ease:'sine.out'});
   });
   el.addEventListener('pointerleave',()=>{
     hoverMedia=null;cursor.classList.remove('is-media');

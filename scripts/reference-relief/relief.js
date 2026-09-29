@@ -131,9 +131,11 @@ function createExtrusion(renderer, maskNoise, time, type) {
 }
 
 /** A self-contained reference relief. All scroll values are positive CSS pixels. */
-export async function createRelief({ canvas, assetBase = './assets/', quality = 'low', reducedMotion = false, randomSeed = 42 } = {}) {
+export async function createRelief({ canvas, assetBase = './assets/', quality = 'low', reducedMotion = false, randomSeed = 42, onProgress } = {}) {
   if (!(canvas instanceof HTMLCanvasElement)) throw new TypeError('createRelief requires a canvas.');
   if (!['low', 'high'].includes(quality)) throw new TypeError('quality must be low or high.');
+  const progress = value => { try { onProgress?.(Math.max(0, Math.min(1, Number(value) || 0))); } catch {} };
+  progress(.04);
   const base = new URL(assetBase.endsWith('/') ? assetBase : `${assetBase}/`, document.baseURI);
   const asset = name => new URL(name, base).href;
   const mobile = /Android|iPhone|iPod/i.test(navigator.userAgent);
@@ -159,12 +161,14 @@ export async function createRelief({ canvas, assetBase = './assets/', quality = 
   const floatType = /iPad|iPhone|iPod/i.test(navigator.userAgent) || !hasFloat ? HalfFloatType : FloatType;
   const draco = new DRACOLoader().setDecoderPath(asset('draco/')).setWorkerLimit(2);
   const loader = new GLTFLoader().setDRACOLoader(draco), textureLoader = new TextureLoader();
+  progress(.14);
   const loaded = await Promise.allSettled([
     loader.loadAsync(asset(`reliefs_${quality}_compressed.glb`)),
     textureLoader.loadAsync(asset('plaster.jpg')),
     textureLoader.loadAsync(asset('mask-noise.png')),
     textureLoader.loadAsync(asset('rgb-attenuation-0,9.png')),
   ]);
+  progress(.82);
   draco.dispose();
   const failed = loaded.find(item => item.status === 'rejected');
   if (failed) {
@@ -333,6 +337,7 @@ export async function createRelief({ canvas, assetBase = './assets/', quality = 
   renderer.compile(scene, camera);
   if (stats.errors.length) { dispose(); throw new Error(stats.errors.join('\n')); }
   stats.ready = true;
+  progress(1);
   return {
     setScroll(value) { if (!disposed) { scroll = Math.max(0, Number(value) || 0); requestFrame(); } },
     setFast(value) { if (!disposed) { uniforms.uFastScroll.value = clamp01(value); requestFrame(); } },
