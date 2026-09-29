@@ -11,10 +11,11 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 class Page(HTMLParser):
     def __init__(self,html):
-        super().__init__();self.text=[];self.projects=[];self.links=[];self.images=[];self.feed(html)
+        super().__init__();self.text=[];self.projects=[];self.diagrams=[];self.links=[];self.images=[];self.feed(html)
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
         if 'data-project' in a:self.projects.append(a['data-project'])
+        if 'project-diagram' in a.get('class','').split():self.diagrams.append(a.get('aria-label',''))
         if tag=='a':self.links.append(a)
         if tag=='img':self.images.append(a)
     def handle_data(self,data):self.text.append(data)
@@ -33,11 +34,13 @@ for key in ('identity','meaning','summary','dream','vision','work','collaboratio
     assert normalized(content[key]) in home.normalized,key
 for item in content['principles']:assert normalized(item) in home.normalized
 assert not home.images,'The homepage has no standalone photograph section'
+assert len(home.diagrams)==len(original),'Every work must have a compact diagram'
 assert 'footer-black-stage' in (ROOT/'index.html').read_text() and 'footer-brand' in (ROOT/'index.html').read_text()
 assert all(token not in (ROOT/'index.html').read_text() for token in ('data-theme-toggle','data-motion-toggle','works-menu','secondary-scene'))
 for name,collection in [('sign-projects','sign'),('campus','campus')]:
     page=Page((ROOT/name/'index.html').read_text());expected=[p for p in original if p['collection']==collection]
     assert page.projects==[p['id'] for p in expected]
+    assert len(page.diagrams)==len(expected),'Every catalog work must have a compact diagram'
     for p in expected:
         for key in ('name','description','creator'):
             if key in p:assert normalized(p[key]) in page.normalized
@@ -65,4 +68,4 @@ with tempfile.TemporaryDirectory(prefix='catalog-check-',dir=ROOT/'output') as t
         assert {p:(case/p).read_text() for p in paths}==generated,'Invalid input replaced a page'
     assert run([p for p in original if p['collection']=='sign']).returncode==0
     assert '这里暂时没有作品。' in (case/paths[2]).read_text()
-print('PASS: all approved copy, four creator records, two catalogs, new-tab links, no standalone photo, escaping, expansion and fail-before-write validation.')
+print('PASS: all approved copy, four creator records, two catalogs, compact diagrams, new-tab links, no standalone photo, escaping, expansion and fail-before-write validation.')

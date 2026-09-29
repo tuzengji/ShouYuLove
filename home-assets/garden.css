@@ -35,7 +35,7 @@ html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}.primary-nav{
 @media(max-width:767px){.portfolio-group{padding-top:10px}.portfolio-group+.portfolio-group{margin-top:80px}.portfolio-group-heading{padding-bottom:55px}.portfolio-group-heading>div{grid-column:1/-1}.portfolio-group-heading h3{font-size:38px}.portfolio-group-heading p{font-size:17px;line-height:1.9;margin-top:14px}.portfolio-group-heading .text-link{margin-top:20px}.portfolio-group-other{padding-top:60px}}
 
 /* Immersive contact ending: quiet principles, then a single black brand stage. */
-@font-face{font-family:PSTimes;src:url('./fonts/pstimes-regular.woff2?v=garden-17') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:PSTimes;src:url('./fonts/pstimes-regular.woff2?v=garden-18') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 .display,.project-copy h3,.collection-name,.collection-intro>h2,.portfolio-group-heading h3,.catalog-intro h1,.section-title{font-family:PSTimes,Garden Serif,"Songti SC","Noto Serif SC",serif}
 .site-footer{position:relative;z-index:2;min-height:0;padding:0;color:var(--ink);background:transparent;transition:none}
 .scene-ready .site-footer{background:transparent}
@@ -58,3 +58,80 @@ html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}.primary-nav{
 .footer-principles .footer-boundary-title,.footer-principles .principles,.footer-principles .footer-meta{color:#e8e8e8}
 .footer-principles .principles li+li{border-top-color:#ffffff25}
 .footer-principles .footer-meta{color:#e8e8e899}
+
+/* One serif system for every language; weight and size carry hierarchy. */
+:root{--serif:PSTimes,"Noto Serif SC","Songti SC",serif;font-family:var(--serif)}
+body,button,input,.display,.project-copy h3,.collection-name,.collection-intro>h2,.portfolio-group-heading h3,.catalog-intro h1,.section-title,.intro-brand [lang],.project-copy h3 span,.art-word,.dictionary-grid span,.footer-brand span{font-family:var(--serif)}
+.display{letter-spacing:.01em}
+.intro-brand [lang],.project-copy h3 span,.art-word,.footer-brand span{letter-spacing:.06em}
+.intro{align-items:stretch}
+.intro-brand{position:absolute;top:clamp(72px,10vh,148px);left:clamp(22px,9.35vw,136px);grid-column:auto;align-self:auto;margin:0}
+.intro-brand .display{letter-spacing:.04em}
+.intro-identity{align-self:center}
+.scroll-cue{position:absolute;right:var(--edge);bottom:clamp(32px,8vh,96px);grid-column:auto;justify-self:auto}
+
+/* Compact project cards keep several works in one continuous scroll. */
+.works{padding-block:4vw 8vw}
+.collection-intro{padding-bottom:clamp(40px,5vw,82px)}
+.portfolio-group-heading{padding-bottom:clamp(28px,4vw,64px)}
+.portfolio-group-heading h3{font-size:clamp(42px,5vw,72px);font-weight:600}
+.section-title{font-size:clamp(22px,2vw,30px);font-weight:600}
+.project{grid-template-columns:repeat(12,minmax(0,1fr));align-items:center;min-height:0;margin:0;padding-block:clamp(28px,4vw,60px);border-top:1px solid var(--line)}
+.project:last-child{border-bottom:1px solid var(--line)}
+.project .project-media{grid-column:2/5;grid-row:1;width:100%;max-height:240px;aspect-ratio:1.35;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-radius:3px;box-shadow:0 12px 32px #18201812}
+.project .project-copy{grid-column:6/12;grid-row:1;align-self:center;max-width:42em}
+.project-copy h3{font-size:clamp(28px,2.4vw,38px);font-weight:600;line-height:1.35;letter-spacing:.01em}
+.project-copy h3 span{font-size:.62em;font-weight:400;white-space:nowrap}
+.project-description{font-size:19px;line-height:1.8;margin-top:14px}
+.project-creator{font-size:15px;line-height:1.8;margin-top:12px}
+.project .media-entry{display:none}
+.project .art{inset:0;width:100%;height:100%;border-radius:inherit}
+.project-diagram{cursor:pointer}
+.project .trace-character{font-size:clamp(88px,11vw,170px)}
+.project .dictionary-grid span{font-size:clamp(24px,3.5vw,50px)}
+.project .game-character{font-size:clamp(42px,6vw,82px);line-height:1.1}
+.project .course-word{font-size:clamp(34px,5vw,68px)}
+.portfolio-group-other{padding-top:clamp(48px,7vw,110px)}
+.catalog-intro{min-height:45svh;padding-top:120px;padding-bottom:66px}
+.catalog .project{margin:0}
+.catalog-end{padding-block:3vw 10vw}
+.footer-brand{letter-spacing:.01em}
+.footer-brand span{font-size:.52em;letter-spacing:.06em;margin-left:.2em}
+.art-signtrace::before{content:"";position:absolute;width:58%;aspect-ratio:1;border:1px solid #fbe3d366;border-radius:50%;transform:rotate(-18deg) scaleY(.42)}
+.art-signtrace::after{content:"";position:absolute;inset:18%;border:1px solid #fbe3d344;border-radius:50%;transform:rotate(32deg) scaleY(.42)}
+.art-signtrace .trace-orbit{opacity:.55}
+.art-word{font-size:13px;bottom:12%;top:auto;left:10%;font-weight:400}
+.art-dictionary::before{content:"WORDS / GESTURES";position:absolute;top:9%;left:9%;font-family:var(--serif);font-size:10px;letter-spacing:.08em;opacity:.6}
+.art-chuanqinghuiyi::before{content:"一起比划 · 一起猜";position:absolute;top:10%;left:11%;font-family:var(--serif);font-size:11px;letter-spacing:.05em;opacity:.65}
+.art-pinhaoke::before{content:"PKU COURSE PLANNER";position:absolute;top:9%;left:10%;font-family:var(--serif);font-size:10px;letter-spacing:.08em;opacity:.7;z-index:2}
+@media(max-width:1024px){
+  .project .project-media{grid-column:2/5}
+  .project .project-copy{grid-column:6/13}
+  .project-copy h3{font-size:30px}
+  .project-description{font-size:17px}
+}
+@media(max-width:767px){
+  .intro-brand{top:72px;left:22px;grid-column:auto;margin:0}
+  .intro-brand .display{font-size:30px;letter-spacing:.03em}
+  .intro-brand [lang]{font-size:20px;letter-spacing:.06em}
+  .intro-identity{align-self:center}
+  .scroll-cue{right:22px;left:auto;bottom:14vh}
+  .portfolio-group-heading h3{font-size:42px;font-weight:600}
+  .section-title{font-size:22px;font-weight:600}
+  .project,.catalog .project{grid-template-columns:repeat(6,minmax(0,1fr));column-gap:12px;row-gap:0;padding-block:30px}
+  .project .project-media{grid-column:1/3;grid-row:1;aspect-ratio:1;max-height:none;align-self:start}
+  .project .project-copy{grid-column:3/7;grid-row:1;align-self:center;max-width:none}
+  .project-copy h3{font-size:24px;line-height:1.35}
+  .project-copy h3 span{font-size:.6em}
+  .project-description{font-size:15px;line-height:1.75;margin-top:9px}
+  .project-creator{font-size:13px;line-height:1.7;margin-top:9px}
+  .project .art{inset:0}
+  .project .trace-character{font-size:clamp(56px,15vw,76px)}
+  .project .dictionary-grid span{font-size:clamp(20px,7vw,30px)}
+  .project .game-character{font-size:clamp(26px,8vw,38px)}
+  .project .course-word{font-size:clamp(28px,10vw,42px)}
+  .art-dictionary::before,.art-chuanqinghuiyi::before,.art-pinhaoke::before{font-size:7px}
+  .art-word{font-size:9px}
+  .footer-brand span{font-size:.52em;letter-spacing:.05em;margin-left:.14em}
+  .catalog-intro{min-height:0;padding-top:120px;padding-bottom:52px}
+}

@@ -67,7 +67,7 @@ def project_rows(projects):
         art = p['id'] if p['id'] in {'signtrace','dictionary','chuanqinghuiyi','pinhaoke'} else 'generic'
         creator = f'<p class="project-creator">设计者：{p["creator"]}</p>' if 'creator' in p else ''
         rows.append(f'''<article class="project grid project-{art}" id="work-{p['id']}" data-project="{p['id']}" aria-labelledby="title-{p['id']}">
-  <a class="project-media" href="{p['url']}" target="_blank" rel="noopener" aria-label="打开{p['name']}，在新标签页" data-cursor="进入">
+  <a class="project-media project-diagram" href="{p['url']}" target="_blank" rel="noopener" aria-label="打开{p['name']}，在新标签页" data-cursor="进入">
     <div class="art art-{art}" aria-hidden="true">{artwork(project)}</div><span class="media-entry" aria-hidden="true">{p['name']} <span>↗</span></span>
   </a>
   <div class="project-copy"><h3 class="display" id="title-{p['id']}"><a href="{p['url']}" target="_blank" rel="noopener">{p['name']} <span aria-hidden="true">↗</span></a></h3><p class="project-description">{p['description']}</p>{creator}</div><span class="quick-name display" aria-hidden="true">{p['name']}</span>

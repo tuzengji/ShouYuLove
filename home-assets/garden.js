@@ -68,7 +68,7 @@ async function start(){
     });
   }
   try{
-    const {createRelief}=await import('./reference-relief.bundle.js?v=garden-16');
+    const {createRelief}=await import('./reference-relief.bundle.js?v=garden-18');
     if(id!==bootId||disposed)return;
     const task=sceneQueue.then(async()=>{
       if(id!==bootId||disposed)return;
