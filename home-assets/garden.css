@@ -36,7 +36,7 @@ html{scrollbar-width:none}html::-webkit-scrollbar{width:0;height:0}.primary-nav{
 @media(max-width:767px){.portfolio-group{padding-top:10px}.portfolio-group+.portfolio-group{margin-top:80px}.portfolio-group-heading{padding-bottom:55px}.portfolio-group-heading>div{grid-column:1/-1}.portfolio-group-heading h3{font-size:38px}.portfolio-group-heading p{font-size:17px;line-height:1.9;margin-top:14px}.portfolio-group-heading .text-link{margin-top:20px}.portfolio-group-other{padding-top:60px}}
 
 /* Immersive contact ending: quiet principles, then a single black brand stage. */
-@font-face{font-family:PSTimes;src:url('./fonts/pstimes-regular.woff2?v=garden-21') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:PSTimes;src:url('./fonts/pstimes-regular.woff2?v=garden-22') format('woff2');font-weight:400;font-style:normal;font-display:swap}
 .display,.project-copy h3,.collection-name,.collection-intro>h2,.portfolio-group-heading h3,.catalog-intro h1,.section-title{font-family:PSTimes,Garden Serif,"Songti SC","Noto Serif SC",serif}
 .site-footer{position:relative;z-index:2;min-height:0;padding:0;color:var(--ink);background:transparent;transition:none}
 .scene-ready .site-footer{background:transparent}

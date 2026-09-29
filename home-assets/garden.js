@@ -118,7 +118,7 @@ async function start(){
   }
   try{
     setLoaderProgress(.12);
-    const {createRelief}=await import('./reference-relief.bundle.js?v=garden-21');
+    const {createRelief}=await import('./reference-relief.bundle.js?v=garden-22');
     if(id!==bootId||disposed)return;
     const task=sceneQueue.then(async()=>{
       if(id!==bootId||disposed)return;
