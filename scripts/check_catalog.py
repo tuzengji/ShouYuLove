@@ -32,7 +32,7 @@ home=Page((ROOT/'index.html').read_text())
 for key in ('identity','meaning','summary','dream','vision','work','collaboration'):
     assert normalized(content[key]) in home.normalized,key
 for item in content['principles']:assert normalized(item) in home.normalized
-assert len(home.images)==1,'Exactly one real photograph on the homepage'
+assert not home.images,'The homepage has no standalone photograph section'
 for name,collection in [('sign-projects','sign'),('campus','campus')]:
     page=Page((ROOT/name/'index.html').read_text());expected=[p for p in original if p['collection']==collection]
     assert page.projects==[p['id'] for p in expected]
@@ -63,4 +63,4 @@ with tempfile.TemporaryDirectory(prefix='catalog-check-',dir=ROOT/'output') as t
         assert {p:(case/p).read_text() for p in paths}==generated,'Invalid input replaced a page'
     assert run([p for p in original if p['collection']=='sign']).returncode==0
     assert '这里暂时没有作品。' in (case/paths[2]).read_text()
-print('PASS: all approved copy, four creator records, two catalogs, new-tab links, one photo, escaping, expansion and fail-before-write validation.')
+print('PASS: all approved copy, four creator records, two catalogs, new-tab links, no standalone photo, escaping, expansion and fail-before-write validation.')

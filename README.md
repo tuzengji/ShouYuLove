@@ -1,6 +1,6 @@
 # 以手予爱 ShouYuLove 主站
 
-北京大学爱心社手语分社心创组的作品与介绍。公开入口 https://shouyulove.cn/ ，源码仓库 [tuzengji/ShouYuLove](https://github.com/tuzengji/ShouYuLove)。原生 HTML、CSS、JavaScript；使用现有 GSAP、Lenis 与 esbuild，新增 Three.js 绘制原创植物浮雕。
+北京大学爱心社手语分社心创组的作品与介绍。公开入口 https://shouyulove.cn/ ，源码仓库 [tuzengji/ShouYuLove](https://github.com/tuzengji/ShouYuLove)。原生 HTML、CSS、JavaScript；使用现有 GSAP、Lenis 与 esbuild，采用 Immersive Garden 参考站的浮雕渲染器与本地模型。
 
 新版参考 [Immersive Garden](https://immersive-g.com/) 的灰色石膏空间、十二列排版、错落展陈、指针流场和明暗过渡。参考首页的独立复刻保存在本地 `output/immersive-clone/`，原工作室图片、模型、视频、字体与音频仅用于该研究稿，不放入公开主站。
 
@@ -21,7 +21,7 @@ python3 scripts/check_catalog.py
 python3 scripts/package_site.py
 ```
 
-构建更新 `home-assets/garden.bundle.js` 与 `brand-relief.bundle.js`。两个模块分开加载，装饰场景故障时正文仍可阅读；不需要服务端 JavaScript。
+构建更新 `home-assets/garden.bundle.js` 与 `reference-relief.bundle.js`。装饰场景故障时正文仍可阅读；不需要服务端 JavaScript。
 
 ## 内容来源
 
@@ -43,10 +43,10 @@ python3 scripts/check_catalog.py
 
 | 页面 | 作品 | 设计者 |
 | --- | --- | --- |
-| `/sign-projects/` 手语作品 | 以手寻语 SignTrace | 涂增基 朱星烨 王宁静 黄庭逸 |
+| `/sign-projects/` 核心创意 | 以手寻语 SignTrace | 涂增基 朱星烨 王宁静 黄庭逸 |
 | 同上 | 分社手语词典 | 朱星烨 涂增基 |
 | 同上 | 传情绘意-手语版 | 涂增基 |
-| `/campus/` 燕园服务 | 拼好课 | 涂增基 |
+| `/campus/` 其他作品 | 拼好课 | 涂增基 |
 
 作品外链在新标签页打开；分类页在当前标签页打开。四件作品保留名称、用途介绍与设计者，关键信息不用悬停才能看到。只介绍心创组工作与协作，不增加招新、联系方式或分社架构。
 
@@ -54,20 +54,15 @@ python3 scripts/check_catalog.py
 
 ## 交互与访问
 
-- 六幅原创花叶、水纹的真实起伏网格。指针让局部浮雕显现并带来流体扰动，滚动切换花叶，快速滚动缩放场景与作品。
-- 图片内层视差、作品悬停的轻微液态形变、文字显现、全屏作品目录与深色页尾。
-- 顶部保留关于心创组、手语作品、燕园服务；两个作品入口用橙色强调。
-- 手机按内容顺序纵向浏览，关闭跟手流体，采用较低网格与像素比；菜单支持触屏滚动，关闭按钮固定可见。
-- 系统减少动态效果、低性能设备、WebGL 不可用、无 JavaScript、用户选择简洁浏览时均有完整回退。动画开关与明暗主题记住本机选择。
-- 页面正文和链接是真实 HTML；菜单用原生 dialog，支持 Escape、焦点恢复与保留滚动位置。后台暂停场景，页面离开释放资源。
+- 原始浮雕场景随指针、滚动和页尾明暗变化；作品卡片保留轻微视差、悬停液态形变和文字显现。
+- 顶部只保留「关于心创组」「作品集」两个入口；作品集锚点按「核心创意」「其他作品」分组，并提供各自目录页。
+- 手机采用低模浮雕与原生触控滚动；减少动态效果时保留完整正文和静态浮雕回退。页面离开释放场景资源。
 
 动效参数、测量边界及参考的有意区别见 [设计与动效记录](docs/research/immersive-g/MOTION.md)。
 
 ## 素材
 
-首页只使用一张无人出镜的北大未名湖畔高清实拍。原图 4080×3060，桌面 3840×2880、手机裁切 1280×2277。摄影：星外之神，CC BY-SA 4.0，页面页尾与 `home-assets/licenses/WEIMING-PHOTO.txt` 保留署名、来源与修改说明。
-
-背景花叶为程序化原创几何，四件作品的海报为文字与几何排版；没有 AI 生成人物、外国人物封面或网站截图。标题字体是 Noto Serif SC 的本地 OFL 子集；正文为系统无衬线字体。GSAP、Lenis、Three.js、字体和图标许可位于 `home-assets/licenses/`。
+首页不再单独展示照片；背景使用本地浮雕模型、纹理与 Draco 解码器。四件作品的海报为文字与几何排版；没有 AI 生成人物、外国人物封面或网站截图。标题字体是 Noto Serif SC 的本地 OFL 子集；正文为系统无衬线字体。GSAP、Lenis、Three.js、参考站素材说明、字体和图标许可位于 `home-assets/licenses/`。
 
 ## 旧风格归档
 
@@ -79,6 +74,6 @@ python3 scripts/check_catalog.py
 
 ## 发布
 
-执行 `python3 scripts/package_site.py` 得到 `output/shouyulove-home-garden.zip`。只发布 `index.html`、`sign-projects/index.html`、`campus/index.html` 和 `home-assets/`；不发布源码笔记、研究复刻、归档或 node_modules。
+执行 `python3 scripts/package_site.py` 得到 `output/shouyulove-home-relief.zip`。只发布 `index.html`、`sign-projects/index.html`、`campus/index.html` 和 `home-assets/`；不发布源码笔记、研究复刻、归档或 node_modules。
 
 部署到用户服务器。部署、校验与回退参见 [deploy/README.md](deploy/README.md)。不得部署到 chatgpt.site，三个既有子站保持独立。

@@ -25,14 +25,14 @@ def parse(text):
     projects=[]
     for id,name,collection,category,icon in metadata:
         source=block(name)
-        link=re.search(r'^地址：\[[^\]]+\]\((https://[^\s)]+)\)',source,re.M)
+        link=re.search(r'^地址：(?:\[[^\]]+\]\()?((?:https?://)[^\s)]+)\)?',source,re.M)
         creator=re.search(r'^设计者：(.+)$',source,re.M)
         description=source.split('\n\n',1)[0].strip()
         if not link or not creator or not description:raise ValueError('Incomplete project '+name)
         projects.append(dict(id=id,name=name,collection=collection,category=category,description=description,creator=creator[1].strip(),url=link[1],icon=icon))
     data['collections']={
-       'sign':{'name':'手语作品','path':'sign-projects','description':clean(block('为分社、手语、无障碍事业服务：'))},
-       'campus':{'name':'燕园服务','path':'campus','description':clean(block('为广大同学服务：'))}}
+       'sign':{'name':'核心创意','path':'sign-projects','description':clean(block('核心创意'))},
+       'campus':{'name':'其他作品','path':'campus','description':clean(block('其他作品'))}}
     return data,projects
 
 def main():

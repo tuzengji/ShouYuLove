@@ -1,11 +1,11 @@
 {
   "name": "shouyulove-home",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "private": true,
   "type": "module",
   "scripts": {
     "sync-projects": "python3 scripts/sync_projects.py",
-    "build": "npm run sync-projects && esbuild home-assets/garden.js --bundle --minify --format=esm --legal-comments=linked --external:'./brand-relief.bundle.js*' --outfile=home-assets/garden.bundle.js && esbuild home-assets/brand-relief.js --bundle --minify --format=esm --legal-comments=linked --outfile=home-assets/brand-relief.bundle.js",
+    "build": "npm run sync-projects && esbuild home-assets/garden.js --bundle --minify --format=esm --legal-comments=linked --external:'./reference-relief.bundle.js*' --outfile=home-assets/garden.bundle.js && esbuild scripts/reference-relief-entry.js --bundle --minify --format=esm --legal-comments=linked --outfile=home-assets/reference-relief.bundle.js",
     "preview": "python3 -m http.server 8028 --bind 127.0.0.1"
   },
   "dependencies": {

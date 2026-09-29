@@ -76,11 +76,8 @@ def project_rows(projects):
 
 def nav(prefix, active):
     about = '#about' if active is None else '../#about'
-    links = [f'<a href="{about}">关于心创组</a>']
-    for key, collection in COLLECTIONS.items():
-        current = ' aria-current="page"' if key == active else ''
-        links.append(f'<a class="nav-projects" href="{prefix}{collection["path"]}/"{current}>{escape(collection["name"])}</a>')
-    return ''.join(links)
+    current = ' aria-current="page"' if active else ''
+    return f'<a href="{about}">关于心创组</a><a class="nav-portfolio" href="{prefix}#works"{current}>作品集</a>'
 
 def collection_links(prefix, active=None, descriptions=False):
     links = []
@@ -108,9 +105,14 @@ for active in (None, 'sign', 'campus'):
         values['IDENTITY'] = escape(content['identity']).replace('手语分社心创组','<span class="identity-group">手语分社心创组</span>')
         values['DREAM'] = ''.join('<span class="reveal-line">'+escape(part)+'</span>' for part in re.findall(r'.+?(?:。|，(?=都)|$)',content['dream']))
         values['COLLECTIONLINKS'] = collection_links(prefix,descriptions=True)
-        values['PROJECTS'] = project_rows(catalog)
+        core, other = (COLLECTIONS['sign'], COLLECTIONS['campus'])
+        values.update(
+            CORENAME=escape(core['name']), COREDESCRIPTION=escape(core['description']),
+            COREPATH=prefix+core['path']+'/', COREPROJECTS=project_rows([p for p in catalog if p['collection']=='sign']),
+            OTHERNAME=escape(other['name']), OTHERDESCRIPTION=escape(other['description']),
+            OTHERPATH=prefix+other['path']+'/', OTHERPROJECTS=project_rows([p for p in catalog if p['collection']=='campus']),
+        )
         values['CONTENT'] = render(home_template, values)
-        values['CREDIT'] = '<small class="photo-credit">封面摄影：<a href="https://commons.wikimedia.org/wiki/File:Weiming_Lake_Spring_Dusk.jpg" target="_blank" rel="noopener">星外之神</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>（裁切、压缩及动态调色）</small>'
     else:
         other = COLLECTIONS['campus' if active == 'sign' else 'sign']
         values.update(COLLECTIONTITLE=escape(c['name']),COLLECTIONDESCRIPTION=escape(c['description']),

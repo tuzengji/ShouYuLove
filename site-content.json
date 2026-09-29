@@ -14,12 +14,12 @@
   ],
   "collections": {
     "sign": {
-      "name": "手语作品",
+      "name": "核心创意",
       "path": "sign-projects",
       "description": "围绕手语学习与表达，探索查询工具、互动游戏和无障碍交流。"
     },
     "campus": {
-      "name": "燕园服务",
+      "name": "其他作品",
       "path": "campus",
       "description": "心创组成员为北大同学开发的实用工具，让校园学习与生活更方便。"
     }

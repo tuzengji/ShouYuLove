@@ -6,7 +6,7 @@ import {
 import {
   fluidVertex, fluidClear, fluidSplat, fluidAdvect, fluidDivergence, fluidCurl,
   fluidVorticity, fluidPressure, fluidGradientSubtract,
-} from './brand-shaders.js';
+} from './shaders.js';
 
 export function fullscreenTriangle() {
   const geometry = new BufferGeometry();
