@@ -1,6 +1,13 @@
 .DS_Store
 .playwright-cli/
+__pycache__/
+*.py[cod]
+.venv/
 output/
 node_modules/
 主站版本归档/
-__pycache__/
+字体候选/
+.env
+.env.*
+*.pem
+*.key

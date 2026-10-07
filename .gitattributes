@@ -1,0 +1,7 @@
+# Preserve bytes in the runtime manifest across clone/checkouts.
+/index.html -text
+/_payload.json -text
+/projects/** -text
+/the-studio/** -text
+/sites/** -text
+/runtime-manifest.json -text

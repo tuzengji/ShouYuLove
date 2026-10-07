@@ -1,91 +1,53 @@
 # 以手予爱 ShouYuLove 主站
 
-北京大学爱心社手语分社心创组的作品与介绍。公开入口 https://shouyulove.cn/ ，源码仓库 [tuzengji/ShouYuLove](https://github.com/tuzengji/ShouYuLove)。原生 HTML、CSS、JavaScript；使用现有 GSAP、Lenis 与 esbuild，采用 Immersive Garden 参考站的浮雕渲染器与本地模型。
+[以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-新版参考 [Immersive Garden](https://immersive-g.com/) 的灰色石膏空间、十二列排版、错落展陈、指针流场和明暗过渡。参考首页的独立复刻保存在本地 `output/immersive-clone/`，原工作室图片、模型、视频、字体与音频仅用于该研究稿，不放入公开主站。
+本仓库保存当前已公开的精确静态版本：232 个运行文件、15 条页面路由、5 个相对资源链接，共 108,085,445 字节。包含已确认的中文字体、六个作品标识、背景音乐和光标提示清理。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。原始记录对应 `20261005T023111Z-astra-home`，2026-10-07 再次与线上文件逐项核对一致。
 
-## 预览与构建
+## 验证、恢复与本地预览
 
-仓库包含构建产物，直接预览无需安装依赖：
-
-```sh
-python3 -m http.server 8028 --bind 127.0.0.1
-```
-
-打开 http://127.0.0.1:8028/ 。修改代码后：
+只需 Python 3.9+ 和支持相对符号链接的文件系统，不需要 npm、pip 或重新构建：
 
 ```sh
-npm ci
-npm run build
-python3 scripts/check_catalog.py
-python3 scripts/package_site.py
+python3 -B scripts/runtime_snapshot.py verify
+python3 -B scripts/runtime_snapshot.py export output/runtime
+python3 -B serve.py --directory output/runtime --port 8038
 ```
 
-构建更新 `home-assets/garden.bundle.js` 与 `reference-relief.bundle.js`。装饰场景故障时正文仍可阅读；不需要服务端 JavaScript。
+打开 `http://127.0.0.1:8038/`，结束时使用 Ctrl-C。导出工具按清单复制文件和链接，校验每个文件并拒绝覆盖已有目标；再次导出时请指定一个新的目录。导出的目录只包含运行白名单，源码、说明和版本历史不会混入。
 
-## 内容来源
-
-公开内容以用户整理的 Obsidian 文档为依据：
-
-`/Users/wishingcat/ObsidianNotes/AI Study/❄️进行中/心创组主站-以手予爱.md`
-
-`content-source.md` 保存本次导入的原文快照；`site-content.json` 保存介绍、梦想、愿景、边界、第一届成员及分类介绍；`projects.json` 是项目记录的唯一数据来源。导入只读取原文，不修改 Obsidian 文件：
+验证已有独立副本：
 
 ```sh
-python3 scripts/import_content.py
-npm run build
-python3 scripts/check_catalog.py
+python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 ```
 
-导入器识别现有六件作品和 12 位第一届成员。增加作品时，先补齐源文档与导入器中的项目元数据，再导入；也可单独维护 `projects.json`，同时相应更新内容快照与检查。不得猜填作者、功能或未经确认的项目。
+当前版本已退出旧 esbuild/garden 工程；不要恢复旧 `package.json`、`home-assets/` 或已退出展示的页面。
 
-首页介绍心创组、呈现六件作品和第一届成员，并链接两个独立分类页：
+## 维护源码
 
-| 页面 | 作品 | 设计者 |
-| --- | --- | --- |
-| `/sign-projects/` 核心创意 | 以手寻语 SignTrace | 涂增基 朱星烨 王宁静 黄庭逸 |
-| 同上 | 分社手语词典 | 朱星烨 涂增基 |
-| 同上 | 传情绘意-手语版 | 涂增基 |
-| `/campus/` 其他作品 | 拼好课 | 涂增基 |
-| 同上 | 北大知道 | 涂增基 |
-| 同上 | 清华知道 | 涂增基 |
+`content-source.md` 保存当前已公开文案；`styles/shouyulove-v1-1-cursor-clean.css` 保存当前样式。`scripts/build_content.py` 保留既有内容生成逻辑和每批次复用加载字标的优化，`tests/test_build_content.py` 覆盖两批构建间字体刷新及各页面共享字标的行为。
 
-作品外链在新标签页打开；分类页在当前标签页打开。六件作品保留名称、用途介绍与设计者，关键信息不用悬停才能看到。成员区采用滚动缩放式连续陈列，不增加招新、联系方式或分社架构。
+维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
 
-模板为 `templates/base.html`、`home.html`、`collection.html`。生成器先校验全部记录和模板，再更新三页；项目必填 `id`、`name`、`collection`、`category`、`description`、`url`，可选 `creator`、`icon`。空分类显示空状态。
+- `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
+- `主站版本归档/20261001-120733-Astra替换前/source/home-assets/images/` 中使用的两个站点图标。
+- `output/deployment/shouyulove-hover-boundaries-20261004/font-source/` 中的当前字体源、子集与中文图集。
+- 六个透明 Logo 原图、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
 
-## 交互与访问
+这些历史原始素材和内部发布证据未作为公开运行版本重新发布。克隆可独立恢复现有站点；它不等同于包含全部设计原稿和原始 V0 的完整内容重建环境。保留原始资料的维护者应在独立副本中配置素材，再运行构建。构建脚本会重建固定的 `output/shouyulove-cursor-clean-site/`，因此不要把该目录作为唯一备份。
 
-- 原始浮雕场景随指针、滚动和页尾明暗变化；首屏先经过带 0–100 进度的加载层，再以模糊、位移和渐变透明显现文字。
-- 顶部导航使用参考站同样的大片泼墨反馈：自托管 SVG 噪声经过位移、模糊后从控件边缘扩散；手机点击会短暂揭开浮雕并平滑衰减。
-- 第一届成员压缩为一个视口内的四列（手机三列）连续网格，进入视口时以轻微缩放和模糊退场形成原站式总览节奏。
-- 顶部只保留「关于心创组」「作品集」两个入口；作品集锚点按「核心创意」「其他作品」分组，并提供各自目录页。
-- 手机采用低模浮雕与原生触控滚动；减少动态效果时保留完整正文和静态浮雕回退。页面离开释放场景资源。
-- 页尾沿用原站的沉浸式收束：边界缩为低存在感暗色信息，最后一屏切换为纯黑，只保留居中的「以手予爱 ShouYuLove」。中英文统一使用本地 Noto Serif SC 子集衬线字体，字号和字重负责层级区分；第二屏文案按字渐变揭示。
-- 作品集采用连续滚动的紧凑项目卡片；每件作品使用本地透明 SVG logo 与文字说明，不依赖大幅照片或单独作品页。
+源码回归检查使用 Python 3.13 和以下依赖：
 
-动效参数、测量边界及参考的有意区别见 [设计与动效记录](docs/research/immersive-g/MOTION.md)。
+```sh
+python3 -m pip install -r requirements-build.txt
+python3 -B -m unittest discover -s tests -v
+```
 
-## 素材
+回归测试自行创建临时页面与输入，不要求 V0 或完整字体。需要新增字形或重新生成音乐时，另外使用对应的 `prepare_chinese_font.py` / `prepare_music.py`；这些生成步骤依赖 fontTools/Brotli、NumPy、SciPy、FFmpeg，以及固定版本 msdfgen v1.13，不能用它们替代运行快照恢复。
 
-首页不再单独展示照片；背景使用本地浮雕模型、纹理与 Draco 解码器。六件作品使用本地透明 SVG logo；没有 AI 生成人物、外国人物封面或网站截图。全站中英文统一使用本地 Noto Serif SC 子集衬线字体，GSAP、Lenis、Three.js、参考站素材说明、字体和图标许可位于 `home-assets/licenses/`。
+## 发布和许可
 
-## 旧风格归档
+仅导出白名单供既有主站发布流程使用，见 [部署说明](deploy/README.md)。Git 同步与站点发布是独立动作；文件已经与线上一致时，无需再次上传或重启服务。
 
-本轮加载、泼墨与手机揭示版归档：
-
-`主站版本归档/20260929-144410-加载泼墨复刻版/`
-
-对应提交 `468a26e`，含完整 `site/`、逐文件 `SHA256.json`、恢复说明与同名 tar.gz；clone-website Skill 的原站行为审查位于 `output/immersive-research/clone-skill-audit-20260929/`。
-
-本次更换前完整存档：
-
-`主站版本归档/20260929-012636-Daylight双分类高清湖光版/`
-
-含 `site/`、`SHA256.json`、`恢复说明.md`，另有同名 tar.gz。37 个源文件及编译产物已逐文件与归档、压缩包校验。旧提交 `015c6554c6838da6d9720270a0096e96f263e65e` 仍在 Git 历史中。归档保留旧版 Daylight 湖光动效、两类目录、高清封面与部署资料；可独立用 Python HTTP 服务打开。
-
-## 发布
-
-执行 `python3 scripts/package_site.py` 得到 `output/shouyulove-home-relief.zip`。只发布 `index.html`、`sign-projects/index.html`、`campus/index.html` 和 `home-assets/`；不发布源码笔记、研究复刻、归档或 node_modules。
-
-部署到用户服务器。部署、校验与回退参见 [deploy/README.md](deploy/README.md)。不得部署到 chatgpt.site，三个既有子站保持独立。
+保留 [第三方许可与归属说明](THIRD_PARTY_NOTICES.md)。公开仓库不包含凭据、服务器状态快照、内部交接、研究材料或历史大目录。

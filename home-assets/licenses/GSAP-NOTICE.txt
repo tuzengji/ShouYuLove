@@ -1,5 +1,0 @@
-GSAP 3.15.0, CSSPlugin, Observer and ScrollTrigger
-Copyright 2008-2026, GreenSock. All rights reserved.
-Standard no-charge license: https://gsap.com/standard-license
-Upstream: https://gsap.com/
-Full upstream notices emitted by esbuild are retained in ../motion.bundle.js.LEGAL.txt.
