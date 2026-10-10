@@ -252,12 +252,9 @@ body { font-family: HelveticaNeueRegular, "ShouYuSerif", serif; }
 /* Square source, DOM geometry and GPU plane use the same dimensions at every size. */
 .projectsPage .listingProjects__previewItems img { aspect-ratio: 1; object-fit: contain; }
 
-/* Match the WebGL logo feathering while HTML is loading and in DOM previews. */
+/* Keep the artwork opaque while the pale background fades in DOM previews. */
 img[src*="/shouyulove/"][src*="-square."] {
-  -webkit-mask-image: url("__SYL_LOGO_EDGE_MASK__");
-  mask-image: url("__SYL_LOGO_EDGE_MASK__");
-  mask-size: 100% 100%;
-  mask-repeat: no-repeat;
+  filter: url("#syl-project-icon-alpha");
 }
 @media (max-width: 360px) {
   .homePage .page__wrapper > .projectBlock { flex-basis: calc(100% - 48px); }

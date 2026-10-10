@@ -13,12 +13,12 @@ from bs4 import BeautifulSoup
 from PIL import Image
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
-from optimize_runtime import optimize_chunk, logo_edge_mask
+from optimize_runtime import optimize_chunk, logo_svg_filter
 
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-organic-edges-20261010"
+RECORDS = ROOT / "output/deployment/shouyulove-translucent-bg-20261010"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -28,7 +28,7 @@ SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
 FONT_SOURCE = ROOT / "output/deployment/shouyulove-jieguo-20261009/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
-MODULE_VERSION = "syl-v1-1-organic-edges"
+MODULE_VERSION = "syl-v1-1-translucent-bg"
 BRIDGE_VERSION = "syl-v1-1-catchpot"
 SOURCE = ROOT / "content-source.md"
 
@@ -498,6 +498,7 @@ def html_pages(content, pages, listing, renames, wordmark=None):
         preview['aria-hidden'] = 'true'
         preview.insert_before(early_page(content, page))
         preview.insert_before(copy.deepcopy(loader))
+        soup.body.append(BeautifulSoup(logo_svg_filter(), 'html.parser').svg)
         soup.body.append(soup.new_tag('script', src='/assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
         fallback = BeautifulSoup('<noscript><style>#boot-loader{display:none}</style><main class="static-preview"><h1>以手予爱<br/>ShouYuLove</h1><p>'+html.escape(content["identity"])+
             '</p><p>'+html.escape(content["series"])+ '</p><h2>梦想</h2><p>'+html.escape(content["dream"])+
@@ -552,9 +553,7 @@ def main():
     wordmark = loader_wordmark()
     renames = runtime_chunks(wordmark)
     html_pages(content,pages,listing,renames,wordmark)
-    stylesheet = (ROOT/"styles/shouyulove-v1-1-jieguo.css").read_text()
-    assert '__SYL_LOGO_EDGE_MASK__' in stylesheet
-    (OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css")).write_text(stylesheet.replace('__SYL_LOGO_EDGE_MASK__', logo_edge_mask()))
+    shutil.copy2(ROOT/"styles/shouyulove-v1-1-jieguo.css", OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css"))
     shutil.copy2(ROOT/'scripts/fast_bootstrap.js', OUT/SHARED/('assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
     shutil.copytree(MOBILE_TEXTURES, OUT/SHARED/'webgl/about/model/textures/ktx2/mobile')
     sounds = OUT / SHARED / "sounds/general"

@@ -1,1 +1,0 @@
-import{_ as t,f as e,j as s,av as a,o as r}from"./entry.DyxL_KXi.syl-v1-1-organic-edges.js";const n={class:"protoLayout"},_={__name:"proto",setup(c){return e(()=>{}),(o,d)=>(r(),s("div",n,[a(o.$slots,"default",{},void 0,!0)]))}},u=t(_,[["__scopeId","data-v-cf5d5788"]]);export{u as default};

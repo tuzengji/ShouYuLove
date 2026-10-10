@@ -4,9 +4,31 @@ from pathlib import Path
 from urllib.parse import quote
 
 
+LOGO_BACKGROUND_OPACITY = .72
+
+
 def logo_edge_mask():
     svg = (Path(__file__).resolve().parents[1] / 'styles/project-logo-mask.svg').read_text()
     return 'data:image/svg+xml,' + quote(svg, safe='')
+
+
+def logo_svg_filter():
+    """Fade the pale background while retaining fully opaque dark artwork."""
+    opacity = str(LOGO_BACKGROUND_OPACITY)
+    return ('<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" '
+            'aria-hidden="true" focusable="false" style="position:absolute;pointer-events:none">'
+            '<defs><filter id="syl-project-icon-alpha" x="0" y="0" width="1" height="1" '
+            'filterUnits="objectBoundingBox" primitiveUnits="objectBoundingBox" '
+            'color-interpolation-filters="sRGB">'
+            '<feImage href="' + logo_edge_mask() + '" x="0" y="0" width="1" height="1" '
+            'preserveAspectRatio="none" result="edge"/>'
+            '<feColorMatrix in="SourceGraphic" type="matrix" '
+            'values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 -2.126 -7.152 -.722 0 6.5" result="ink"/>'
+            '<feComposite in="edge" in2="ink" operator="arithmetic" '
+            'k1="-' + opacity + '" k2="' + opacity + '" k3="1" k4="0" result="coverage"/>'
+            '<feComposite in="SourceGraphic" in2="coverage" operator="in"/>'
+            '</filter></defs></svg>')
+
 
 def optimize_chunk(name, text, version):
     if name != "entry.DyxL_KXi.js":
@@ -28,7 +50,9 @@ def optimize_chunk(name, text, version):
     replace('uniform float uZoomProgress;float cremap',
             'uniform float uZoomProgress;uniform bool uSoftProjectEdges;uniform sampler2D uProjectEdgeMask;float cremap')
     replace('gl_FragColor.rgb=color;gl_FragColor.a=alpha*uAlpha;if(uvImage.y>1.0||uvImage.y<0.0)',
-            'if(uSoftProjectEdges){alpha*=texture2D(uProjectEdgeMask,vUv).a;}gl_FragColor.rgb=color;gl_FragColor.a=alpha*uAlpha;if(uvImage.y>1.0||uvImage.y<0.0)')
+            'if(uSoftProjectEdges){float inkAlpha=clamp((0.65-dot(tex.rgb,vec3(0.2126,0.7152,0.0722)))*10.0,0.0,1.0);'
+            'float backgroundAlpha=texture2D(uProjectEdgeMask,vUv).a*' + str(LOGO_BACKGROUND_OPACITY) + ';'
+            'alpha*=inkAlpha+backgroundAlpha*(1.0-inkAlpha);}gl_FragColor.rgb=color;gl_FragColor.a=alpha*uAlpha;if(uvImage.y>1.0||uvImage.y<0.0)')
 
     # Texture bytes are unchanged when a new module version is released.
     texture_version = 'syl-v1-1-fast'
