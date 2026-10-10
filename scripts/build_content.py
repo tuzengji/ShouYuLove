@@ -19,7 +19,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-list-hover-20261010"
+RECORDS = ROOT / "output/deployment/shouyulove-projects-blank-20261010"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -30,7 +30,7 @@ OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/ho
 FONT_SOURCE = ROOT / "output/deployment/shouyulove-md-binding-20261010/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
 FONT_VERSION = "syl-v1-1-md-source"
-MODULE_VERSION = "syl-v1-1-list-hover"
+MODULE_VERSION = "syl-v1-1-projects-ready"
 BRIDGE_VERSION = "syl-v1-1-md-source"
 SOURCE = source_path(ROOT)
 

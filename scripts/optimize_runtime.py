@@ -87,6 +87,26 @@ function __sylLoadScene(view){
   js.addViewAssets(view._viewConfig);view.resourceManager._setupResources();
   return view._loadAssets().then(()=>{view.prepare();view.$root._resize();return view;});
 }
+// The exported works view assumed its scene was preloaded. Keep its links
+// usable while loading, then start the native scene only for the current page.
+const __sylProjectsShow=vye.prototype.show,__sylProjectsHide=vye.prototype.hide;
+vye.prototype.show=function(){
+  if(this._areResourcesLoaded())return __sylProjectsShow.call(this);
+  const page=this._pageRef;
+  this._state.hiding=false;
+  __sylLoadScene(this).then(()=>{
+    if(this.$viewManager.active!==this||this._state.hiding||this._pageRef!==page||!page?.isConnected)return;
+    const animation=__sylProjectsShow.call(this);
+    animation.killTweensOf(page);
+    Ie.set(page,{autoAlpha:1});
+  }).catch(console.error);
+  return Ie.to(page,{autoAlpha:1,duration:.2});
+};
+vye.prototype.hide=function(done){
+  if(this._components)return __sylProjectsHide.call(this,done);
+  this._state.hiding=true;
+  return Ie.to(this._pageRef,{autoAlpha:0,duration:.2,onComplete:done});
+};
 const __sylAboutHover=_ve.prototype.animOverOut;
 _ve.prototype.animOverOut=function(over=true){
   this.__sylHoverWanted=over;
