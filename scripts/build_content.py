@@ -18,7 +18,8 @@ from optimize_runtime import optimize_chunk
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-fast-20261009"
+RECORDS = ROOT / "output/deployment/shouyulove-soft-edges-20261010"
+MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
 V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
@@ -27,7 +28,7 @@ SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
 FONT_SOURCE = ROOT / "output/deployment/shouyulove-jieguo-20261009/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
-MODULE_VERSION = "syl-v1-1-fast"
+MODULE_VERSION = "syl-v1-1-soft-edges"
 BRIDGE_VERSION = "syl-v1-1-catchpot"
 SOURCE = ROOT / "content-source.md"
 
@@ -553,7 +554,7 @@ def main():
     html_pages(content,pages,listing,renames,wordmark)
     shutil.copy2(ROOT/"styles/shouyulove-v1-1-jieguo.css",OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css"))
     shutil.copy2(ROOT/'scripts/fast_bootstrap.js', OUT/SHARED/('assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
-    shutil.copytree(RECORDS/'mobile-textures', OUT/SHARED/'webgl/about/model/textures/ktx2/mobile')
+    shutil.copytree(MOBILE_TEXTURES, OUT/SHARED/'webgl/about/model/textures/ktx2/mobile')
     sounds = OUT / SHARED / "sounds/general"
     for name in ["IG_HomePage_v5_v4.mp3", "IG_FocusPage_v5_v8.mp3", "IG_AboutPage_v5_v5.mp3"]:
         (sounds / name).unlink()

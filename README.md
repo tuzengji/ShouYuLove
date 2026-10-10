@@ -2,7 +2,7 @@
 
 [以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-本仓库保存当前已公开的精确静态版本：238 个运行文件、16 条页面路由、5 个相对资源链接，共 110,055,723 字节。七个作品的图片和标题居中，介绍与署名左对齐；接锅入口为 `/catchpot/`。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。2026-10-10 发布版本为 `20261010T063417Z-astra-home`。
+本仓库保存当前已公开的精确静态版本：238 个运行文件、16 条页面路由、5 个相对资源链接，共 110,058,107 字节。七个作品的图标边缘逐渐变透明，与浮雕背景柔和过渡；图片和标题居中，介绍与署名左对齐；接锅入口为 `/catchpot/`。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。2026-10-10 发布版本为 `20261010T071007Z-astra-home`。
 
 首页只预载当前场景；心创组在悬停或进入时加载，页脚在接近可视区域时加载。正文和导航由初始 HTML 提供，原生视图完成后保留阅读位置；音乐稍后加载。手机两张法线纹理为 1024×1024，合计 1.75 MB，较原版减少约 61%。版本化公共资源缓存一年且 `immutable`，HTML 和页面 payload 使用 `no-cache`。
 
@@ -28,7 +28,7 @@ python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 
 ## 维护源码
 
-`content-source.md` 保存当前已公开文案；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载和手机纹理补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。三个回归检查覆盖批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
+`content-source.md` 保存当前已公开文案；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。三个回归检查覆盖批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
 
 维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
 

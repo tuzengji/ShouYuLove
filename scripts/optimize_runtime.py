@@ -12,10 +12,22 @@ def optimize_chunk(name, text, version):
     replace('e.push(...D3(t))', 'e.push(...D3({...t,preload:!1}))')
     replace('function d(){s.setAsLoaded(),p()}',
             'function d(){s.setAsLoaded(),p(),__sylAfterReady(h)}')
+
+    # Feather the logo tile itself, leaving the central artwork fully opaque.
+    # DOM previews use the same 14% falloff in the stylesheet.
+    replace('uPreviewTextureAlpha:{value:0}}',
+            'uPreviewTextureAlpha:{value:0},uSoftProjectEdges:{value:!!(this.isImage&&this.assetUrl?.includes("/shouyulove/")&&this.assetUrl.includes("-square."))}}')
+    replace('uniform float uZoomProgress;float cremap',
+            'uniform float uZoomProgress;uniform bool uSoftProjectEdges;float cremap')
+    replace('gl_FragColor.rgb=color;gl_FragColor.a=alpha*uAlpha;if(uvImage.y>1.0||uvImage.y<0.0)',
+            'if(uSoftProjectEdges){vec2 edgeAlpha=smoothstep(vec2(0.),vec2(.14),min(vUv,1.-vUv));alpha*=edgeAlpha.x*edgeAlpha.y;}gl_FragColor.rgb=color;gl_FragColor.a=alpha*uAlpha;if(uvImage.y>1.0||uvImage.y<0.0)')
+
+    # Texture bytes are unchanged when a new module version is released.
+    texture_version = 'syl-v1-1-fast'
     for number in ['05', '06']:
         resource_name = 'about/normalMap' + str(int(number))
         old = ('fallback:{mobile_or_lowTier:{type:kr==="ktx2"?"ktx2":"texture",path:`/webgl/about/model/textures/${kr}/ultralow/normal_' + number + '.${kr}`,name:"' + resource_name + '"}}')
-        new = ('fallback:{mobile:{type:"ktx2",path:"/webgl/about/model/textures/ktx2/mobile/normal_' + number + '.' + version + '.ktx2",name:"' + resource_name + '"},' + old.removeprefix('fallback:{'))
+        new = ('fallback:{mobile:{type:"ktx2",path:"/webgl/about/model/textures/ktx2/mobile/normal_' + number + '.' + texture_version + '.ktx2",name:"' + resource_name + '"},' + old.removeprefix('fallback:{'))
         replace(old, new)
 
     # These hooks run before the asynchronous Nuxt mount. Existing animation
