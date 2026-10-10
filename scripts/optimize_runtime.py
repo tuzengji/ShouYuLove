@@ -1,4 +1,12 @@
 """Adapt the exported runtime without changing its artwork or scene animations."""
+import json
+from pathlib import Path
+from urllib.parse import quote
+
+
+def logo_edge_mask():
+    svg = (Path(__file__).resolve().parents[1] / 'styles/project-logo-mask.svg').read_text()
+    return 'data:image/svg+xml,' + quote(svg, safe='')
 
 def optimize_chunk(name, text, version):
     if name != "entry.DyxL_KXi.js":
@@ -13,14 +21,14 @@ def optimize_chunk(name, text, version):
     replace('function d(){s.setAsLoaded(),p()}',
             'function d(){s.setAsLoaded(),p(),__sylAfterReady(h)}')
 
-    # Feather the logo tile itself, leaving the central artwork fully opaque.
-    # DOM previews use the same 14% falloff in the stylesheet.
+    # One embedded vector mask gives DOM and GPU logos the same broad,
+    # uneven feathering without another network request or edited logo files.
     replace('uPreviewTextureAlpha:{value:0}}',
-            'uPreviewTextureAlpha:{value:0},uSoftProjectEdges:{value:!!(this.isImage&&this.assetUrl?.includes("/shouyulove/")&&this.assetUrl.includes("-square."))}}')
+            'uPreviewTextureAlpha:{value:0},uProjectEdgeMask:{value:__sylLogoEdgeMask},uSoftProjectEdges:{value:!!(this.isImage&&this.assetUrl?.includes("/shouyulove/")&&this.assetUrl.includes("-square."))}}')
     replace('uniform float uZoomProgress;float cremap',
-            'uniform float uZoomProgress;uniform bool uSoftProjectEdges;float cremap')
+            'uniform float uZoomProgress;uniform bool uSoftProjectEdges;uniform sampler2D uProjectEdgeMask;float cremap')
     replace('gl_FragColor.rgb=color;gl_FragColor.a=alpha*uAlpha;if(uvImage.y>1.0||uvImage.y<0.0)',
-            'if(uSoftProjectEdges){vec2 edgeAlpha=smoothstep(vec2(0.),vec2(.14),min(vUv,1.-vUv));alpha*=edgeAlpha.x*edgeAlpha.y;}gl_FragColor.rgb=color;gl_FragColor.a=alpha*uAlpha;if(uvImage.y>1.0||uvImage.y<0.0)')
+            'if(uSoftProjectEdges){alpha*=texture2D(uProjectEdgeMask,vUv).a;}gl_FragColor.rgb=color;gl_FragColor.a=alpha*uAlpha;if(uvImage.y>1.0||uvImage.y<0.0)')
 
     # Texture bytes are unchanged when a new module version is released.
     texture_version = 'syl-v1-1-fast'
@@ -32,6 +40,9 @@ def optimize_chunk(name, text, version):
 
     # These hooks run before the asynchronous Nuxt mount. Existing animation
     # methods remain responsible for drawing, hovering and changing scenes.
+    text += ('\nconst __sylLogoEdgeMask=new vi(),__sylLogoEdgeImage=new Image();'
+             '__sylLogoEdgeImage.onload=()=>{__sylLogoEdgeMask.image=__sylLogoEdgeImage;__sylLogoEdgeMask.needsUpdate=true;};'
+             '__sylLogoEdgeImage.src=' + json.dumps(logo_edge_mask()) + ';\n')
     text += r'''
 const __sylAddViews=Wme.prototype._addViewsAssets;
 Wme.prototype._addViewsAssets=function(views=[],loader=this._resourceLoader){

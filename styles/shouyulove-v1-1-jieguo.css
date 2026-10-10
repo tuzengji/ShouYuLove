@@ -254,11 +254,9 @@ body { font-family: HelveticaNeueRegular, "ShouYuSerif", serif; }
 
 /* Match the WebGL logo feathering while HTML is loading and in DOM previews. */
 img[src*="/shouyulove/"][src*="-square."] {
-  --project-edge-fade: transparent 0%, rgba(0,0,0,.15625) 3.5%, rgba(0,0,0,.5) 7%, rgba(0,0,0,.84375) 10.5%, #000 14% 86%, rgba(0,0,0,.84375) 89.5%, rgba(0,0,0,.5) 93%, rgba(0,0,0,.15625) 96.5%, transparent 100%;
-  -webkit-mask-image: linear-gradient(to right, var(--project-edge-fade)), linear-gradient(to bottom, var(--project-edge-fade));
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, var(--project-edge-fade)), linear-gradient(to bottom, var(--project-edge-fade));
-  mask-composite: intersect;
+  -webkit-mask-image: url("__SYL_LOGO_EDGE_MASK__");
+  mask-image: url("__SYL_LOGO_EDGE_MASK__");
+  mask-size: 100% 100%;
   mask-repeat: no-repeat;
 }
 @media (max-width: 360px) {
