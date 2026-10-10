@@ -14,11 +14,12 @@ from PIL import Image
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
 from optimize_runtime import optimize_chunk, logo_svg_filter
+from content_source import source_path, sync_snapshot
 
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-content-sync-20261010"
+RECORDS = ROOT / "output/deployment/shouyulove-list-hover-20261010"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -26,12 +27,12 @@ V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
-FONT_SOURCE = RECORDS / "font-source"
+FONT_SOURCE = ROOT / "output/deployment/shouyulove-md-binding-20261010/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
-FONT_VERSION = "syl-v1-1-content-sync"
-MODULE_VERSION = "syl-v1-1-content-sync"
-BRIDGE_VERSION = "syl-v1-1-content-sync"
-SOURCE = ROOT / "content-source.md"
+FONT_VERSION = "syl-v1-1-md-source"
+MODULE_VERSION = "syl-v1-1-list-hover"
+BRIDGE_VERSION = "syl-v1-1-md-source"
+SOURCE = source_path(ROOT)
 
 
 def section(text, heading):
@@ -40,8 +41,8 @@ def section(text, heading):
     return match.group(1).strip()
 
 
-def parse_content():
-    text = SOURCE.read_text()
+def parse_content(text=None):
+    text = SOURCE.read_text(encoding='utf-8') if text is None else text
     projects = []
     identifiers = ["signtrace", "dictionary", "chuanqinghuiyi", "pinhaoke", "beida-zhidao", "qinghua-zhidao", "jieguo"]
     for identifier, match in zip(identifiers, re.finditer(r"(?m)^#### ([^\n]+)\n(.*?)(?=^#### |^### |\Z)", text, re.S)):
@@ -535,7 +536,11 @@ def font_preview():
 
 
 def main():
-    content = parse_content()
+    source_text = SOURCE.read_text(encoding='utf-8')
+    content = parse_content(source_text)
+    cmap = TTFont(FONT_SOURCE / 'swei-spring-serif.woff2').getBestCmap()
+    missing = sorted({c for c in json.dumps(content, ensure_ascii=False) if ord(c) > 127 and ord(c) not in cmap})
+    assert not missing, 'Regenerate and version the Chinese font for: ' + ''.join(missing)
     assert OUT.parent == ROOT / "output" and OUT.name == "shouyulove-jieguo-site"
     RECORDS.mkdir(parents=True, exist_ok=True)
     if OUT.exists():
@@ -563,6 +568,8 @@ def main():
     for name in ["ShouYuLove_Warm_Airy_v1_1.mp3", "ShouYuLove_Warm_Airy_v1_1.txt"]:
         shutil.copy2(ROOT / "music" / name, sounds / name)
     font_preview()
+    assert SOURCE.read_text(encoding='utf-8') == source_text, 'Content source changed during build; run again.'
+    sync_snapshot(ROOT, source_text)
     (RECORDS/"content.json").write_text(json.dumps(content,ensure_ascii=False,indent=2)+"\n")
     manifest = dict(routes={page["url"]: (route+"/" if route else "")+"index.html" for route,page in pages.items()},files={},symlinks={},bytes=0)
     for path in sorted(OUT.rglob("*")):

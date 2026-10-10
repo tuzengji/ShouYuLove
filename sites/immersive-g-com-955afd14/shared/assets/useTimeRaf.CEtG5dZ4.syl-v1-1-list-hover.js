@@ -1,0 +1,1 @@
+import{f as c,h as o,v as i,aA as m}from"./entry.DyxL_KXi.syl-v1-1-list-hover.js";function d(a){const t=new m,e=()=>{const s=t.getDelta(),n=t.getElapsedTime();a(s,n)};c(()=>{o.ticker.add(e)}),i(()=>{o.ticker.remove(e),t.stop()})}export{d as u};

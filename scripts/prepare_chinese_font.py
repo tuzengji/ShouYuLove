@@ -10,17 +10,18 @@ import numpy as np
 from fontTools.ttLib import TTFont
 from fontTools import subset
 from PIL import Image, ImageFont
+from content_source import source_path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRECTORY = ROOT / "output/deployment/shouyulove-content-sync-20261010/font-source"
+DIRECTORY = ROOT / "output/deployment/shouyulove-md-binding-20261010/font-source"
 FONT = DIRECTORY / "SweiSpringSugarCJKsc-Regular.ttf"
 MSDFGEN = ROOT / "output/tools/msdfgen-v1.13/build/msdfgen"
-LABELS = "点击了解 向下探索 作品集 作品导航 首页 返回 心创组 开启声音 关闭 静音 设计者"
+LABELS = "点击了解 向下探索 作品集 作品导航 首页 返回 心创组 开启声音 关闭 静音 设计者 打开"
 
 
 def main():
-    text = (ROOT / "content-source.md").read_text() + LABELS
+    text = source_path(ROOT).read_text(encoding='utf-8') + LABELS
     characters = sorted(c for c in set(text) if ord(c) > 127)
     native = TTFont(FONT)
     cmap = native.getBestCmap()

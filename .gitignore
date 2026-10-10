@@ -11,3 +11,5 @@ node_modules/
 .env.*
 *.pem
 *.key
+
+.content-source-path

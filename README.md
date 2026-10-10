@@ -2,7 +2,7 @@
 
 [以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-本仓库保存当前已公开的精确静态版本：238 个运行文件、16 条页面路由、5 个相对资源链接，共 110,100,862 字节。公开文案已按指定原稿同步，第一届成员为 13 人（包含李昌昊）；七个作品图标的底色透明度为 28%，边缘保持宽幅不规则渐隐，图案完全不透明，融入浮雕背景；图片和标题居中，介绍与署名左对齐；接锅入口为 `/catchpot/`。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。2026-10-10 发布版本为 `20261010T101759Z-astra-home`。
+本仓库保存当前已公开的精确静态版本：238 个运行文件、16 条页面路由、5 个相对资源链接，共 110,105,245 字节。本机已绑定用户指定 MD 为正文文本源，公开文案已按最新原稿同步，第一届成员为 13 人（包含李昌昊）；七个作品图标的底色透明度为 28%，边缘保持宽幅不规则渐隐，图案完全不透明，融入浮雕背景；图片和标题居中，介绍与署名左对齐；作品目录悬停改为标题深绿色与 3px 位移，署名保持原位；接锅入口为 `/catchpot/`。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。2026-10-10 发布版本为 `20261010T122724Z-astra-home`。
 
 首页只预载当前场景；心创组在悬停或进入时加载，页脚在接近可视区域时加载。正文和导航由初始 HTML 提供，原生视图完成后保留阅读位置；音乐稍后加载。手机两张法线纹理为 1024×1024，合计 1.75 MB，较原版减少约 61%。版本化公共资源缓存一年且 `immutable`，HTML 和页面 payload 使用 `no-cache`。
 
@@ -28,13 +28,13 @@ python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 
 ## 维护源码
 
-`content-source.md` 保存当前已公开文案；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 324 字，字体缓存名由独立 `FONT_VERSION` 管理。三个回归检查覆盖批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
+`scripts/content_source.py` 解析本机正文源绑定，`content-source.md` 保存成功构建生成的公开文案副本；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 326 字，字体缓存名由独立 `FONT_VERSION` 管理。四个回归检查覆盖文本源绑定、批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
 
 维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
 
 - `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
 - `主站版本归档/20261001-120733-Astra替换前/source/home-assets/images/` 中使用的两个站点图标。
-- `output/deployment/shouyulove-content-sync-20261010/font-source/` 中的当前字体源、子集与中文图集。
+- `output/deployment/shouyulove-md-binding-20261010/font-source/` 中的当前字体源、子集与中文图集。
 - 六个透明 Logo 原图、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
 - `output/deployment/shouyulove-fast-20261009/mobile-textures/` 中的两张手机纹理。重建脚本为 `scripts/prepare_mobile_textures.py`，使用固定版本 Khronos KTX-Software 4.4.2；已生成的纹理也在运行快照中。
 
@@ -54,3 +54,9 @@ python3 -B -m unittest discover -s tests -v
 按白名单使用既有主站发布流程，见 [部署说明](deploy/README.md)。按用户要求，后续修改需同步推送仓库并更新既有服务器部署；另有明确要求时从其要求。
 
 保留 [第三方许可与归属说明](THIRD_PARTY_NOTICES.md)。公开仓库不包含凭据、服务器状态快照、内部交接、研究材料或历史大目录。
+
+## 正文文本源绑定
+
+本机 `.content-source-path` 保存正文 MD 的绝对路径（一行 UTF-8），该配置由 Git 忽略。修改主站文案时先同步修改该 MD；`scripts/build_content.py` 和 `scripts/prepare_chinese_font.py` 均直接读取绑定原稿，成功构建自动更新仓库的 `content-source.md` 副本。已绑定原稿不可读取时，构建会停止；没有本机绑定的克隆使用仓库副本。
+
+文字更新流程：编辑绑定 MD，检查新增用字与对应字体版本，构建并检查电脑、手机页面，再提交推送和更新既有服务器部署。

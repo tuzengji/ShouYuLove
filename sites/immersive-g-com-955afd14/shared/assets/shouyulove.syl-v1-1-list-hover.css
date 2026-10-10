@@ -1,6 +1,6 @@
 @font-face {
   font-family: "PSTimes";
-  src: url("/sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-content-sync.woff2") format("woff2");
+  src: url("/sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-md-source.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: "ShouYuSerif";
-  src: url("/sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-content-sync.woff2") format("woff2");
+  src: url("/sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-md-source.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -224,7 +224,27 @@ body { font-family: HelveticaNeueRegular, "ShouYuSerif", serif; }
 .projectsPage { position: relative; z-index: 1; }
 .homePage .projectCard__designers { margin: 0; font-family: PSTimes, "ShouYuSerif", serif; font-size: 16px; line-height: 1.65; color: #343434; }
 .projectsPage .projectListItem__designers { font-family: PSTimes, "ShouYuSerif", serif; font-size: 15px; line-height: 1.65; color: #343434; grid-column: 8 / 13; grid-row: 2; margin: 0; }
-.projectsPage .projectListItem .name { grid-row: 1; }
+.projectsPage .projectListItem a.name {
+  grid-row: 1;
+  line-height: 1.5;
+  transition: color 200ms ease, transform 200ms ease;
+}
+.projectsPage .projectListItem a.name::after { content: none; }
+@media (hover: hover) and (pointer: fine) {
+  .projectsPage .projectListItem:hover .name {
+    color: #294c3a;
+    transform: translateX(3px);
+  }
+}
+.projectsPage .projectListItem .name:focus-visible {
+  color: #294c3a;
+  outline: 1px solid currentColor;
+  outline-offset: 5px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .projectsPage .projectListItem a.name { transition: none; }
+  .projectsPage .projectListItem:hover .name { transform: none; }
+}
 .homePage .textBlock[id="边界"] .textBlock__text--1,
 .homePage .textBlock[id="心创组第一届成员"] .textBlock__text--1 { grid-column: 2 / 12; font-size: clamp(38px, 2.9vw, 52px); line-height: 1.35; }
 .homePage .textBlock[id="心创组第一届成员"] { padding-top: 100px; padding-bottom: 120px; row-gap: 56px; }
