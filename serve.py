@@ -5,6 +5,10 @@ import argparse
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+import re
+from urllib.parse import urlsplit
+
+VERSIONED_RESOURCE = re.compile(r'\.(?:syl-v[0-9A-Za-z._-]+|[A-Za-z0-9_-]{8,})\.(?:js|css|woff2?|png|webp|ktx2|glb|json|mp3)$', re.I)
 
 
 class Server(ThreadingHTTPServer):
@@ -12,6 +16,23 @@ class Server(ThreadingHTTPServer):
 
 
 class Handler(SimpleHTTPRequestHandler):
+    def send_response(self, code, message=None):
+        self.response_status = code
+        super().send_response(code, message)
+
+    def end_headers(self):
+        path = urlsplit(self.path).path
+        if self.response_status not in (200, 206, 304):
+            cache = 'no-store'
+        elif VERSIONED_RESOURCE.search(path):
+            cache = 'public, max-age=31536000, immutable'
+        elif path.endswith('.html') or path.endswith('/') or path.endswith('_payload.json'):
+            cache = 'no-cache'
+        else:
+            cache = 'public, max-age=3600'
+        self.send_header('Cache-Control', cache)
+        super().end_headers()
+
     def do_POST(self):
         if self.path.split("?", 1)[0] != "/api/local-newsletter":
             self.send_error(405)

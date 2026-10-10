@@ -6,6 +6,7 @@
     "/projects/pinhaoke/": "projects/pinhaoke/index.html",
     "/projects/beida-zhidao/": "projects/beida-zhidao/index.html",
     "/projects/qinghua-zhidao/": "projects/qinghua-zhidao/index.html",
+    "/projects/jieguo/": "projects/jieguo/index.html",
     "/": "index.html",
     "/projects/": "projects/index.html",
     "/the-studio/the-studio/": "the-studio/the-studio/index.html",
@@ -18,12 +19,12 @@
   },
   "files": {
     "_payload.json": {
-      "bytes": 7945,
-      "sha256": "0ae3321d84c5eed5a0cb56d94a35192c16461288b7f4557e3d7ba71fd5349599"
+      "bytes": 8900,
+      "sha256": "bb667cc85a865b1cf20e0b0e7a58d45a5568b23659714b0c7e1b7b7ef141a8b9"
     },
     "index.html": {
-      "bytes": 101181,
-      "sha256": "f2e1543290760c73452f6d696d75cf8a78711ada717d6e3dd872c84c7bd0ef42"
+      "bytes": 111872,
+      "sha256": "74d7fb5bd6bc4125cb73fcf6e21ba0367157c31d3ec3fb1777745f67d8a7d0ee"
     },
     "projects/_payload.json": {
       "bytes": 347,
@@ -34,80 +35,88 @@
       "sha256": "dbd61af495a59275773371a343b78121c08acce800355165e1b3593d93b1af83"
     },
     "projects/beida-zhidao/index.html": {
-      "bytes": 103895,
-      "sha256": "7a32b5d67856af858bfddf64fd0c98734ea6e92dde6793718dec273e63aad2d6"
+      "bytes": 107240,
+      "sha256": "499974ef70cf30235006ecc9790b181a112302afcdece26e2b188d0abcd06459"
     },
     "projects/chuanqinghuiyi/_payload.json": {
       "bytes": 912,
       "sha256": "96f96b86d1ee5085a1be1612bc969b6f6ac7445e059e36b2de6e9c58b8ca2ee5"
     },
     "projects/chuanqinghuiyi/index.html": {
-      "bytes": 103903,
-      "sha256": "35bda13458b318d0857a996b4dc00d6b5bacc4bb85feaf200967e9d6d43b270b"
+      "bytes": 107301,
+      "sha256": "c921b76b5350dd24d66187e953a7a1f96c7f49892aab5d5a2ace56ce69259c80"
     },
     "projects/dictionary/_payload.json": {
       "bytes": 898,
-      "sha256": "8e5888fbf6d9c8243149d8502a44d667a44d0169a2583246290f30feee4e78d7"
+      "sha256": "36b6d7bb6566255bf5127e57e33ef498ef805af71884475e94a2577d8516e9ca"
     },
     "projects/dictionary/index.html": {
-      "bytes": 103883,
-      "sha256": "d9ddda7e3853b42055dfc532d46e9fb3157a415ec9541b9e971ca9e57a696419"
+      "bytes": 107284,
+      "sha256": "8f05191242477b1bcd5c9776b46039c2fd3244d4a124ece26d6a54e94a600393"
     },
     "projects/index.html": {
-      "bytes": 75636,
-      "sha256": "8a3c837a0018ca6e0a2b4439d309468e312ca25e11f2c6334a9d4c2170998252"
+      "bytes": 79410,
+      "sha256": "4c142ddb6de51b9e3ad25e151e2335aada8669f61e40ecbe75c38d44ecb8fff9"
+    },
+    "projects/jieguo/_payload.json": {
+      "bytes": 779,
+      "sha256": "a98e111fb8d38f4cdd2f6fc6636c4c1d93d122306500febeccf9622f77bf09e5"
+    },
+    "projects/jieguo/index.html": {
+      "bytes": 107141,
+      "sha256": "0662be5aae67969b1f712066c4a2aeb6b7c4dd4c25d59110362e7ea6fd6edffd"
     },
     "projects/pinhaoke/_payload.json": {
       "bytes": 824,
       "sha256": "16c9e56d22cec5d727f6c40d747743d518b1ab8fe9794b67432432eab0fb7211"
     },
     "projects/pinhaoke/index.html": {
-      "bytes": 103859,
-      "sha256": "d2095ee15aa8e09eb6858cda7f0a56ccba20e03fa968b51350314126492264e4"
+      "bytes": 107209,
+      "sha256": "f3871ab20bfcbd185bd61f6d554df97c4f34380af1b3ebfadd039c72f610440b"
     },
     "projects/qinghua-zhidao/_payload.json": {
       "bytes": 847,
       "sha256": "49d77349b4fbe89063bfe9e362aec985cf216c4f4675618ed85bf94f805c1e8a"
     },
     "projects/qinghua-zhidao/index.html": {
-      "bytes": 103901,
-      "sha256": "deb33a3791b9f6d410439c18e2c4bbe3b71ee10db38c3b2559122fbfe92faed4"
+      "bytes": 107249,
+      "sha256": "4763a0da40ec70cd217248ec20bd12b69e521206e077a89db533cabd83ccb24a"
     },
     "projects/signtrace/_payload.json": {
       "bytes": 949,
-      "sha256": "129cee604c78ed5952684c0f1337654e3d0783a3d906aad00ea7d18b6d87834b"
+      "sha256": "4a6592433ad82ef5256cfe6268953cddb9b34bb8b7d17570d25a13b45009933a"
     },
     "projects/signtrace/index.html": {
-      "bytes": 103888,
-      "sha256": "97f47a4e8881430b588efeb6bfefe00f588a4bfc87adca0545a0596fa49991b4"
+      "bytes": 107318,
+      "sha256": "510854efee1175d04bc7c355db2cc24f584ebba0a999ead952b46aae22fb309d"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.css": {
       "bytes": 6054,
       "sha256": "fd74d1c5490c8faba31c0d196847e6c8a7e2052f97eae44e2174250758ffc328"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/AboutPage.DgUWXiAT.syl-v1-1-hover-clean.js": {
-      "bytes": 6279,
-      "sha256": "ba78e69fa99ec6afbd868809fcaa2dcd187124388afa2bd28c4264264c3b518c"
+    "sites/immersive-g-com-955afd14/shared/assets/AboutPage.DgUWXiAT.syl-v1-1-fast.js": {
+      "bytes": 6251,
+      "sha256": "3c01df8c8a2bc3d6ee56e766bf0f3993aa0ca05f41cd461d1f8650bfc779bb30"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.BJXpRcDM.syl-v1-1-hover-clean.js": {
-      "bytes": 19699,
-      "sha256": "cfa2ec7c8db6a6bc721cd3c08a3002d2760acbd6f6399f8049e900653f7c3d38"
+    "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.BJXpRcDM.syl-v1-1-fast.js": {
+      "bytes": 19685,
+      "sha256": "ce9a122988450cf97515de08cf530a40f5590eae5a9111dec0890f8409db48c5"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.C3T5QDcr.css": {
       "bytes": 14322,
       "sha256": "b90a4faa29305ca2deb8fa9bbc91037c490b9f24fd1a2a3a9471375a86d21e58"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/BasicButton.D91CLqAw.syl-v1-1-hover-clean.js": {
-      "bytes": 5904,
-      "sha256": "19e74e6061384266081f2a4b27145992f8312a8161f63faa67bb5681626a5c35"
+    "sites/immersive-g-com-955afd14/shared/assets/BasicButton.D91CLqAw.syl-v1-1-fast.js": {
+      "bytes": 5897,
+      "sha256": "3f6bb3c156b8645e41ebe929ad6fe56dff6a304f379b39c5b14ff7f1116c03ca"
     },
     "sites/immersive-g-com-955afd14/shared/assets/BasicButton.Dorc8BWb.css": {
       "bytes": 754,
       "sha256": "5c569bfab6ff345b08327875d2efc0991bd4825fbbe4cfc86ee9abcf84222f97"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.Bs5C7G0C.syl-v1-1-hover-clean.js": {
-      "bytes": 1637,
-      "sha256": "2fe617b2952d47faf03fad95fb678c353905e9044e0871341d3008bcc51d34d5"
+    "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.Bs5C7G0C.syl-v1-1-fast.js": {
+      "bytes": 1630,
+      "sha256": "f19c349d65161e7748903951758eca5dbd7e807acd0b1f988fcd420d321d7cd4"
     },
     "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.DY5DOHtB.css": {
       "bytes": 741,
@@ -133,13 +142,13 @@
       "bytes": 25399,
       "sha256": "fde19ac25ae5027b83e3302b481825183a7d91c24edad56a6aef53dd75ede82c"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.DoznkBHg.syl-v1-1-hover-clean.js": {
-      "bytes": 10731,
-      "sha256": "f4c36321623597d803101e667ba012631fe98aae133b9135402ffc212ac13ee3"
+    "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.DoznkBHg.syl-v1-1-fast.js": {
+      "bytes": 10710,
+      "sha256": "f85ea0b0c3b05fc777ed2c6ffaad46985d8b9e6d4b13623d4bf54b5f9bea2c3c"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/HomePage.ClaPmn7U.syl-v1-1-hover-clean.js": {
-      "bytes": 6410,
-      "sha256": "af664916114eced9339b1e3be7ef0961f9a70da2aa43eacb5314e9f311817cd2"
+    "sites/immersive-g-com-955afd14/shared/assets/HomePage.ClaPmn7U.syl-v1-1-fast.js": {
+      "bytes": 6382,
+      "sha256": "a7a252f0fde072b5a1dc03767ffe3d4851cf8e4ea88573c00abd38799793d230"
     },
     "sites/immersive-g-com-955afd14/shared/assets/HomePage.fr1d8OeO.css": {
       "bytes": 2020,
@@ -153,9 +162,9 @@
       "bytes": 50812,
       "sha256": "21f89b0bd1aecb3989498ec6a73c4b238312b95703d38f3d86575abd4a606d1a"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.B66t4y4U.syl-v1-1-hover-clean.js": {
-      "bytes": 2979,
-      "sha256": "4408ce2844dcdfc2a3af382a327679a05ac3f1ccfcc9e4a2acd3cdd48d38cbbe"
+    "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.B66t4y4U.syl-v1-1-fast.js": {
+      "bytes": 2965,
+      "sha256": "468b84ea8d16da98b1389f3e20b861cbb54275c51d9120160b45116dfdd639bb"
     },
     "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.BLAoBKI3.css": {
       "bytes": 1235,
@@ -165,27 +174,27 @@
       "bytes": 5184,
       "sha256": "7f42ade1037e6611d286bd22427388109dd0a921c053c927cc3369e50a0f47c2"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.Bh_iOA_x.syl-v1-1-hover-clean.js": {
-      "bytes": 3186,
-      "sha256": "75d1f4e7a74bc8059e33c8976070e3c682b843babe04a72152b547733ba98303"
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.Bh_iOA_x.syl-v1-1-fast.js": {
+      "bytes": 3172,
+      "sha256": "58978e96da89bc2dcee460dd982dc71ebfb4cce2fc6eb735bc38e8260d6bd648"
     },
     "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.CazkSH89.css": {
       "bytes": 14396,
       "sha256": "649e179c8c4cb6af3dc06bc8f1f2481b076b2b4847266cb4c35ed970fbad4b87"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.Cv0OM6xq.syl-v1-1-hover-clean.js": {
-      "bytes": 13600,
-      "sha256": "5737dfe89949cceafe0a48eb1631373e4018c4344e99ed803a6f9487edf6ce5e"
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.Cv0OM6xq.syl-v1-1-fast.js": {
+      "bytes": 13565,
+      "sha256": "1d6a865ebe30cecb3003d745cdc96fd7a03919c34c7493cc5e37b379cf6d4800"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/asyncData.B6IxwMmT.syl-v1-1-hover-clean.js": {
-      "bytes": 2619,
-      "sha256": "87bd56ca22b2d879d309404dba3744eb1491f1a2088fddcb2d0e028c8167f242"
+    "sites/immersive-g-com-955afd14/shared/assets/asyncData.B6IxwMmT.syl-v1-1-fast.js": {
+      "bytes": 2612,
+      "sha256": "eb57fa84f07433b1e2cbf09d910b17547844ec10b01d390a73909b9a253103fa"
     },
     "sites/immersive-g-com-955afd14/shared/assets/builds/meta/558cc702-e975-4c10-98f0-521aeb85ebc4.json": {
       "bytes": 6229,
       "sha256": "28aa8c4647467783170aee4c07fdc74bab3b592c21308645bea6d376424fa107"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/component-stub.FmFgRqLi.syl-v1-1-hover-clean.js": {
+    "sites/immersive-g-com-955afd14/shared/assets/component-stub.FmFgRqLi.syl-v1-1-fast.js": {
       "bytes": 33,
       "sha256": "49751e83c2dabf8a8ead01b84ca4a250f0f305b4845f33a0cd4ffe880e409d63"
     },
@@ -193,17 +202,21 @@
       "bytes": 12016,
       "sha256": "aa4fb9683a2e4f451dad0a1534bf0f7791ec6daec98c17e26cafa1a833fbb6e7"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/default.CxpTjDRZ.syl-v1-1-hover-clean.js": {
-      "bytes": 18059,
-      "sha256": "a579abe0365f308db59c2db70309dff95db299534392bbb2ccdcc5995e4077a5"
+    "sites/immersive-g-com-955afd14/shared/assets/default.CxpTjDRZ.syl-v1-1-fast.js": {
+      "bytes": 18017,
+      "sha256": "27240dad7c6d76c25999eb74ef6c3cade0574a812580db6e45973dcaf9dc0384"
     },
     "sites/immersive-g-com-955afd14/shared/assets/entry.CU8H-nqP.css": {
       "bytes": 11079,
       "sha256": "a4a19a274ca42601e2b6aa613816d608fec983d620786c6ed25fc33feb9e8d12"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/entry.DyxL_KXi.syl-v1-1-hover-clean.js": {
-      "bytes": 2443442,
-      "sha256": "7e8d7e4cc1dc1f1e612d52d61c4ac2cfa86321d297f539959f353b283b2ac4fa"
+    "sites/immersive-g-com-955afd14/shared/assets/entry.DyxL_KXi.syl-v1-1-fast.js": {
+      "bytes": 2446064,
+      "sha256": "6345777b6961f56caf1715d405de07bcbebe8f56cfe4cd090faeb85903c5149b"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/fast-bootstrap.syl-v1-1-fast.js": {
+      "bytes": 1343,
+      "sha256": "1385d8b9dc769d63caef3d934602fb8b4da46d86167d84421d4f4a474653dcdb"
     },
     "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/01-当前思源宋体/OFL.txt": {
       "bytes": 4350,
@@ -333,61 +346,61 @@
       "bytes": 45,
       "sha256": "f735aa6b63a73488b278b99a724ec9fde76a368af585594fada048f45f44136e"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/index.C0GRCNhC.syl-v1-1-hover-clean.js": {
-      "bytes": 896,
-      "sha256": "e1e0dcdccb429e0e655cb0cb70e3a8b51765c5841bbf4ab3b684749496485e11"
+    "sites/immersive-g-com-955afd14/shared/assets/index.C0GRCNhC.syl-v1-1-fast.js": {
+      "bytes": 861,
+      "sha256": "865c42a08b7c0b6644c2ca23ca8e5da35a1a40a9ef1958aa2c221154a96b5d2a"
     },
     "sites/immersive-g-com-955afd14/shared/assets/index.CZfKaD6V.css": {
       "bytes": 5070,
       "sha256": "28e0268b5272d0925b2b095ad16063942535233a766466c53a3c1be7f266076b"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/index.CeH_ahVV.syl-v1-1-hover-clean.js": {
-      "bytes": 9504,
-      "sha256": "b0be15dd8017a99d5660be1905410c2aa87143e7bc94b921bc76894110a14929"
+    "sites/immersive-g-com-955afd14/shared/assets/index.CeH_ahVV.syl-v1-1-fast.js": {
+      "bytes": 9455,
+      "sha256": "4e589d7004d26df8ebcf93b64e6b2636940689432cb9f84411e742f6d2314fa9"
     },
     "sites/immersive-g-com-955afd14/shared/assets/index.D0bR5Jkt.css": {
       "bytes": 45,
       "sha256": "ee7912f1eec9548a38a142b781b005b0ece031bccb77fae856acebb004b0bdda"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/index.D4TZz6rT.syl-v1-1-hover-clean.js": {
-      "bytes": 752,
-      "sha256": "3cd11b431a6972e3695d06df9e5f9e5e86d7c4a4920a11c8e2cce5d391c1760b"
+    "sites/immersive-g-com-955afd14/shared/assets/index.D4TZz6rT.syl-v1-1-fast.js": {
+      "bytes": 703,
+      "sha256": "4a508492154c17449a30fefe510d439a856a8536e2492a659906034145212786"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/index.D7bwnB0L.syl-v1-1-hover-clean.js": {
-      "bytes": 1103,
-      "sha256": "b583d628eb3da40e7c0a7186b4853988c0c413529446e51b7697344280c68622"
+    "sites/immersive-g-com-955afd14/shared/assets/index.D7bwnB0L.syl-v1-1-fast.js": {
+      "bytes": 1047,
+      "sha256": "6454cd49e06cb4758a687b29a58c08e8cf078035ad3d04367d492f12670be490"
     },
     "sites/immersive-g-com-955afd14/shared/assets/preview.Co-aDpgF.css": {
       "bytes": 45,
       "sha256": "b35314e47718b7e93c1e132172d4b925fa3e532548cbfa7d5a42b6561c8bfc8f"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/preview.qrRKLGJD.syl-v1-1-hover-clean.js": {
-      "bytes": 1671,
-      "sha256": "f91bb46ba61d349468fe9a92dd6ff4c243fa484092f6dbc7ff44f5f28621b5e7"
+    "sites/immersive-g-com-955afd14/shared/assets/preview.qrRKLGJD.syl-v1-1-fast.js": {
+      "bytes": 1594,
+      "sha256": "ec5fe9d4280d1a3bdd45b3931c607db7644b85e1eb120352d7e76b917f216b2e"
     },
     "sites/immersive-g-com-955afd14/shared/assets/proto.D3A8TGcB.css": {
       "bytes": 85,
       "sha256": "345a1c59a674dca8c5b1709b82d17c1a4b57716d501fe5de117b516d888b78d8"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/proto.DuMH9e-J.syl-v1-1-hover-clean.js": {
-      "bytes": 290,
-      "sha256": "70e6314d99cd18358264061cf82a2a88840086c09a7de5b6ad3dedeb82994e27"
+    "sites/immersive-g-com-955afd14/shared/assets/proto.DuMH9e-J.syl-v1-1-fast.js": {
+      "bytes": 283,
+      "sha256": "73246d1676775d1aae54f4e2de3e7fce0d083e05aa4982d0a62ff1430259df5c"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/shouyulove-v1-1-cursor-clean.css": {
-      "bytes": 13579,
-      "sha256": "0f4f727c9fa908722eb0568e496043390036489fb26b3b64dbe81dc7dd99903e"
+    "sites/immersive-g-com-955afd14/shared/assets/shouyulove.syl-v1-1-fast.css": {
+      "bytes": 15783,
+      "sha256": "e01083e65b109bdf95a05739a62c1595c39953541543cb868b492604ae460479"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/sortGeometryVertices-CjfG_b7R.syl-v1-1-hover-clean.js": {
+    "sites/immersive-g-com-955afd14/shared/assets/sortGeometryVertices-CjfG_b7R.syl-v1-1-fast.js": {
       "bytes": 867,
       "sha256": "1970c5db108f440528e6d8fd041319462fea506488658e6e089b50d862d8593d"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/useTimeRaf.CEtG5dZ4.syl-v1-1-hover-clean.js": {
-      "bytes": 246,
-      "sha256": "eec2a7bb1fcce1b84727449ff96d8d21086d5f5b6feae70fae9ba84029994f57"
+    "sites/immersive-g-com-955afd14/shared/assets/useTimeRaf.CEtG5dZ4.syl-v1-1-fast.js": {
+      "bytes": 239,
+      "sha256": "326eeec26e8aa6f997e502eef39dcad30c7335bab6316487a306f4a165941e47"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/vue3-lottie.es.B1QeRuZw.syl-v1-1-hover-clean.js": {
-      "bytes": 314202,
-      "sha256": "e8569a95b20016b05bafd3099417763ae21391cc97dd90d170d20653980d3adc"
+    "sites/immersive-g-com-955afd14/shared/assets/vue3-lottie.es.B1QeRuZw.syl-v1-1-fast.js": {
+      "bytes": 314195,
+      "sha256": "0b8687dc0ccda651f6e2e41b20543b0920524fcb54beb20bbb8a32dc133d258d"
     },
     "sites/immersive-g-com-955afd14/shared/benchmarks/d-amd.json": {
       "bytes": 155246,
@@ -477,9 +490,9 @@
       "bytes": 567548,
       "sha256": "b9ba731a04b5a5f7920a9448f6bf0d9853506a45560efd290f14f98e00e0a6b8"
     },
-    "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-hover-clean.js": {
-      "bytes": 20036,
-      "sha256": "f9fbcc3e084b84cfe1351d85f46e20edad1569d54d2528252f5e1ee95b65c0a7"
+    "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-catchpot.js": {
+      "bytes": 21492,
+      "sha256": "bcb5afe1c4af595a5a4b5378b24b2436f0ed934529ea7814b4efc69331be0888"
     },
     "sites/immersive-g-com-955afd14/shared/lotties/menu/about/blackClick.json": {
       "bytes": 2517,
@@ -537,15 +550,15 @@
       "bytes": 29397,
       "sha256": "502e487da233a2091770cc73e17a0cdbe864a77c6705cff69301cc79f167a9d0"
     },
-    "sites/immersive-g-com-955afd14/shared/shouyulove/beida-zhidao-square.syl-v1-1-hover-clean.png": {
+    "sites/immersive-g-com-955afd14/shared/shouyulove/beida-zhidao-square.syl-v1-1-jieguo.png": {
       "bytes": 48986,
       "sha256": "9699e811764dd1748d85332dfd942cca2f5d97086233f77ea3dc6abcc86aa3b3"
     },
-    "sites/immersive-g-com-955afd14/shared/shouyulove/chuanqinghuiyi-square.syl-v1-1-hover-clean.png": {
+    "sites/immersive-g-com-955afd14/shared/shouyulove/chuanqinghuiyi-square.syl-v1-1-jieguo.png": {
       "bytes": 55514,
       "sha256": "4e97c68e161615b9890a4a689232ba734f24cb8fd67859156c90cbd262d9c508"
     },
-    "sites/immersive-g-com-955afd14/shared/shouyulove/dictionary-square.syl-v1-1-hover-clean.png": {
+    "sites/immersive-g-com-955afd14/shared/shouyulove/dictionary-square.syl-v1-1-jieguo.png": {
       "bytes": 50059,
       "sha256": "115c0d5092c48cea8d9fe1ea7b12cf9c4ed71588555d2a529db5b3626f42b135"
     },
@@ -553,21 +566,25 @@
       "bytes": 5832,
       "sha256": "64331fb6cefee4bd8a0569808816caafe98e73d1ff2abead6afb92658a0a2e42"
     },
-    "sites/immersive-g-com-955afd14/shared/shouyulove/pinhaoke-square.syl-v1-1-hover-clean.png": {
+    "sites/immersive-g-com-955afd14/shared/shouyulove/jieguo-square.syl-v1-1-jieguo.png": {
+      "bytes": 37536,
+      "sha256": "add77c4220f8a8e57a7750172c6a9d333107c13c3a4db4d411ac0d55b19d396a"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/pinhaoke-square.syl-v1-1-jieguo.png": {
       "bytes": 57401,
       "sha256": "1a795a68fc22e009c8055510ab7039a9f49b7d5d571a457ca4deaea185a65295"
     },
-    "sites/immersive-g-com-955afd14/shared/shouyulove/qinghua-zhidao-square.syl-v1-1-hover-clean.png": {
+    "sites/immersive-g-com-955afd14/shared/shouyulove/qinghua-zhidao-square.syl-v1-1-jieguo.png": {
       "bytes": 42577,
       "sha256": "66ed46c37b0141b40dbd58944383a03cb3e5e041fedd202540d48fd0f92320b6"
     },
-    "sites/immersive-g-com-955afd14/shared/shouyulove/signtrace-square.syl-v1-1-hover-clean.png": {
+    "sites/immersive-g-com-955afd14/shared/shouyulove/signtrace-square.syl-v1-1-jieguo.png": {
       "bytes": 57986,
       "sha256": "52788f54842533cc8e68d7a8eaa68040b9b4717813393b3a2cb45dcfa4b5f36c"
     },
-    "sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-hover-clean.woff2": {
-      "bytes": 60720,
-      "sha256": "35e7dc9e7db7f693d90b52c9b9214e2c1a1d3eeb796e7f6a68f9d1508b558074"
+    "sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-jieguo.woff2": {
+      "bytes": 60996,
+      "sha256": "f5fbee0c3b948f7e1383f2f388cbc9052b8a884803716641d7161da017c2ff50"
     },
     "sites/immersive-g-com-955afd14/shared/sounds/general/IG_Eventsounds_v3_Home_To_About_Thunder_1.mp3": {
       "bytes": 292269,
@@ -636,6 +653,14 @@
     "sites/immersive-g-com-955afd14/shared/webgl/about/model/textures/ktx2/low/normal_06.ktx2": {
       "bytes": 1450733,
       "sha256": "6bd91773721dd66ebfaa5f409bbf75b3b67dd8a9fa8ae689bcf6db4774447f9f"
+    },
+    "sites/immersive-g-com-955afd14/shared/webgl/about/model/textures/ktx2/mobile/normal_05.syl-v1-1-fast.ktx2": {
+      "bytes": 887469,
+      "sha256": "61faabf9a13a43c62d5ba7f2cb70f9f5ac02ca3ad119dd4568400986497999d4"
+    },
+    "sites/immersive-g-com-955afd14/shared/webgl/about/model/textures/ktx2/mobile/normal_06.syl-v1-1-fast.ktx2": {
+      "bytes": 861853,
+      "sha256": "430df2766aaa6643d70a49f03da9cb615677d7400a9daa8c55b3871abefa22f1"
     },
     "sites/immersive-g-com-955afd14/shared/webgl/about/model/textures/ktx2/ultralow/normal_01.ktx2": {
       "bytes": 1126477,
@@ -849,17 +874,17 @@
       "bytes": 13196,
       "sha256": "f3d461f33986a799868660fd2214cbf68fd9283c2350d36311fd799344bb3c39"
     },
-    "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf.syl-v1-1-hover-clean.json": {
-      "bytes": 70049,
-      "sha256": "75b0cf4f708879adf909baf42e2713b3ac862aa38475015ec4b1619d74c67f6c"
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf.syl-v1-1-jieguo.json": {
+      "bytes": 70387,
+      "sha256": "2d050cbe6178f97fd0372454390e6fda436a8937a99347054e72804084fcf7ca"
     },
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue.png": {
       "bytes": 68941,
       "sha256": "6dc348243780e39fe2fa16eacfe1b00fec37b3bae84a51268268c6c0ce7e5853"
     },
-    "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue.syl-v1-1-hover-clean.png": {
-      "bytes": 709148,
-      "sha256": "3be9933d1ec2b8b78386dbd4204dc4c305ae52b44570f70fb6ead4fca1792bf9"
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue.syl-v1-1-jieguo.png": {
+      "bytes": 712451,
+      "sha256": "6745061dff59bd74a7cf85bc8f2a0874af104387b6235669f4821c44c7eee64a"
     },
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.json": {
       "bytes": 153551,
@@ -869,13 +894,13 @@
       "bytes": 78186,
       "sha256": "3f3fa66348ec5888275feb3df922f9282bea0399ef58deffa82c59953e3164b0"
     },
-    "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-hover-clean.json": {
-      "bytes": 233253,
-      "sha256": "716825ebaf92276ab5fd9a1f1e2830ec6cffa81cf1896701e78cea3c619dbb76"
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-jieguo.json": {
+      "bytes": 233593,
+      "sha256": "5a931d815a8eb0f5082446db04a9e116fc7304d8d2b0bc97a8b0338537de4e7e"
     },
-    "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-hover-clean.png": {
-      "bytes": 721062,
-      "sha256": "ba01ab7831eaaafbae7ef62e90c8bd3a3842821294e76d2276ea1f893904afef"
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-jieguo.png": {
+      "bytes": 723941,
+      "sha256": "37bca784aaa478a098309e9d21e01833e3a77d4407970bd87567c73ae7c22409"
     },
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/TimesNowNumbers/TimesNow.json": {
       "bytes": 1877,
@@ -898,52 +923,52 @@
       "sha256": "229b1ee73265a54df5c08c00b698fd0cf09236e14cb4aeb564ce5863c69a0a55"
     },
     "the-studio/awards/index.html": {
-      "bytes": 68248,
-      "sha256": "0a4137d2eca576676e3d9fd7c66baf8f9f34d66fa7b02fb3aac4845160f66c7b"
+      "bytes": 72333,
+      "sha256": "9ef5b14edb2b3ef040843afa69e882b60a7e23920c23263e20e7cac33260ba79"
     },
     "the-studio/clients/_payload.json": {
       "bytes": 987,
       "sha256": "2427c332edf206e4f96706d58acf02ad9ec420faf00782656ff565f7aa064a5c"
     },
     "the-studio/clients/index.html": {
-      "bytes": 68252,
-      "sha256": "5854fd64bb07c5c67d7093e336cbba2050ccaa1d883712b249961daf6c14819b"
+      "bytes": 71646,
+      "sha256": "0f8e0dc76cd9ad9544501379ea3fa01628e3aebbc4c4a60853f8a8e1a2329e54"
     },
     "the-studio/contact-us/_payload.json": {
       "bytes": 596,
       "sha256": "e1af701fe8b28bfba4094aacfa9a2f36ce2d65dfb5d607fcd5178a3be6374d07"
     },
     "the-studio/contact-us/index.html": {
-      "bytes": 68320,
-      "sha256": "161aa9fc948223ef6bd0cb87d7e30c5a65a0e21a304e9299a9e24f217f227407"
+      "bytes": 71386,
+      "sha256": "4afa7e4421d8c46f90163b2d5f5a8fd63b2c1020de9e1545e6bac3f3d28924d8"
     },
     "the-studio/index.html": {
-      "bytes": 68551,
-      "sha256": "7320908c5dc220e2ed506907e878983acc28350b1af7aaebc7c2f6e1e8cd1f1a"
+      "bytes": 72516,
+      "sha256": "40e68f1f323a8691f197426dd73ba150c4c35af2bde46d72624c1758e474dbfa"
     },
     "the-studio/our-approach/_payload.json": {
       "bytes": 526,
       "sha256": "54fcc337c0a095dc2c3299fb1a571100a9601f205df01a83002803610fa6cb31"
     },
     "the-studio/our-approach/index.html": {
-      "bytes": 68308,
-      "sha256": "112ef17bde39a96d889f9a890ae2592bb3f6a1f0a3cced5ce98ee2a0cca94478"
+      "bytes": 71296,
+      "sha256": "301b767ba908fcfa8038868c427d105acf0aab84267109f1be649f813cdc7c3e"
     },
     "the-studio/services/_payload.json": {
       "bytes": 1997,
-      "sha256": "c9a6e57fc4e9374b08882f6a7029cf7d5f9538bba4f96a35041f4a0bae570fc3"
+      "sha256": "56e856840c29a39775ce45b97428ea21be2dcfc998d5213270069e776dfdb708"
     },
     "the-studio/services/index.html": {
-      "bytes": 68272,
-      "sha256": "36ef978903f207309dfc8b44a4d9f89aeec6df241169f601675c61c077a84fc6"
+      "bytes": 72526,
+      "sha256": "4020f3ed283fd123322d5d6e9e620f5bef3b0e35c9a670887aa378f8a23ffebf"
     },
     "the-studio/the-studio/_payload.json": {
       "bytes": 1414,
       "sha256": "273e6dcdcba4035adc5aa146670aef7e5a63d0b333af997c444fb1833afeaeca"
     },
     "the-studio/the-studio/index.html": {
-      "bytes": 68290,
-      "sha256": "2b169b53f5c017960edff52e5b64c685f117c9e329206ce18573aec3208ca767"
+      "bytes": 72089,
+      "sha256": "5fdd687b01e044eb296c2f5321967054e0d18b215eca5ad4a70b82bab4bf7547"
     }
   },
   "symlinks": {
@@ -953,5 +978,5 @@
     "sounds": "sites/immersive-g-com-955afd14/shared/sounds",
     "webgl": "sites/immersive-g-com-955afd14/shared/webgl"
   },
-  "bytes": 108085445
+  "bytes": 110055723
 }

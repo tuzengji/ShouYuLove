@@ -13,7 +13,7 @@ from PIL import Image, ImageFont
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRECTORY = ROOT / "output/deployment/shouyulove-hover-boundaries-20261004/font-source"
+DIRECTORY = ROOT / "output/deployment/shouyulove-jieguo-20261009/font-source"
 FONT = DIRECTORY / "SweiSpringSugarCJKsc-Regular.ttf"
 MSDFGEN = ROOT / "output/tools/msdfgen-v1.13/build/msdfgen"
 LABELS = "点击了解 向下探索 作品集 作品导航 首页 返回 心创组 开启声音 关闭 静音 设计者"

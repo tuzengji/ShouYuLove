@@ -2,7 +2,9 @@
 
 [以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-本仓库保存当前已公开的精确静态版本：232 个运行文件、15 条页面路由、5 个相对资源链接，共 108,085,445 字节。包含已确认的中文字体、六个作品标识、背景音乐和光标提示清理。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。原始记录对应 `20261005T023111Z-astra-home`，2026-10-07 再次与线上文件逐项核对一致。
+本仓库保存当前已公开的精确静态版本：238 个运行文件、16 条页面路由、5 个相对资源链接，共 110,055,723 字节。七个作品的图片和标题居中，介绍与署名左对齐；接锅入口为 `/catchpot/`。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。2026-10-10 发布版本为 `20261010T063417Z-astra-home`。
+
+首页只预载当前场景；心创组在悬停或进入时加载，页脚在接近可视区域时加载。正文和导航由初始 HTML 提供，原生视图完成后保留阅读位置；音乐稍后加载。手机两张法线纹理为 1024×1024，合计 1.75 MB，较原版减少约 61%。版本化公共资源缓存一年且 `immutable`，HTML 和页面 payload 使用 `no-cache`。
 
 ## 验证、恢复与本地预览
 
@@ -26,16 +28,17 @@ python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 
 ## 维护源码
 
-`content-source.md` 保存当前已公开文案；`styles/shouyulove-v1-1-cursor-clean.css` 保存当前样式。`scripts/build_content.py` 保留既有内容生成逻辑和每批次复用加载字标的优化，`tests/test_build_content.py` 覆盖两批构建间字体刷新及各页面共享字标的行为。
+`content-source.md` 保存当前已公开文案；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载和手机纹理补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。三个回归检查覆盖批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
 
 维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
 
 - `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
 - `主站版本归档/20261001-120733-Astra替换前/source/home-assets/images/` 中使用的两个站点图标。
-- `output/deployment/shouyulove-hover-boundaries-20261004/font-source/` 中的当前字体源、子集与中文图集。
+- `output/deployment/shouyulove-jieguo-20261009/font-source/` 中的当前字体源、子集与中文图集。
 - 六个透明 Logo 原图、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
+- `output/deployment/shouyulove-fast-20261009/mobile-textures/` 中的两张手机纹理。重建脚本为 `scripts/prepare_mobile_textures.py`，使用固定版本 Khronos KTX-Software 4.4.2；已生成的纹理也在运行快照中。
 
-这些历史原始素材和内部发布证据未作为公开运行版本重新发布。克隆可独立恢复现有站点；它不等同于包含全部设计原稿和原始 V0 的完整内容重建环境。保留原始资料的维护者应在独立副本中配置素材，再运行构建。构建脚本会重建固定的 `output/shouyulove-cursor-clean-site/`，因此不要把该目录作为唯一备份。
+克隆可独立恢复现有站点。完整内容重建还需上述原始素材；构建脚本会重建固定的 `output/shouyulove-jieguo-site/`，运行前保存已有输出。
 
 源码回归检查使用 Python 3.13 和以下依赖：
 
@@ -48,6 +51,6 @@ python3 -B -m unittest discover -s tests -v
 
 ## 发布和许可
 
-仅导出白名单供既有主站发布流程使用，见 [部署说明](deploy/README.md)。Git 同步与站点发布是独立动作；文件已经与线上一致时，无需再次上传或重启服务。
+按白名单使用既有主站发布流程，见 [部署说明](deploy/README.md)。按用户要求，后续修改需同步推送仓库并更新既有服务器部署；另有明确要求时从其要求。
 
 保留 [第三方许可与归属说明](THIRD_PARTY_NOTICES.md)。公开仓库不包含凭据、服务器状态快照、内部交接、研究材料或历史大目录。

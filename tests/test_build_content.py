@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+import sys
 from unittest.mock import patch
 
 from bs4 import BeautifulSoup
@@ -26,7 +27,8 @@ class LoaderBatchTests(unittest.TestCase):
         backup.write_text(json.dumps({"local_backup": "/historical/V0-test"}))
         spec = importlib.util.spec_from_file_location("test_builder", source)
         self.builder = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(self.builder)
+        with patch('sys.path', [str(SOURCE.parent), *sys.path]):
+            spec.loader.exec_module(self.builder)
         self.builder.OUT.mkdir(parents=True)
         shared = self.builder.OUT / self.builder.SHARED
         shared.mkdir(parents=True)
@@ -45,7 +47,7 @@ class LoaderBatchTests(unittest.TestCase):
         self.content = dict(identity="Example", series="Series", dream="Dream", vision="Vision",
                             projects=[], boundaries=[], members=[])
         self.pages = {"" if i == 0 else f"page-{i}":
-                      {"title": f"Page {i}", "url": "/" if i == 0 else f"/page-{i}/"}
+                      {"title": f"Page {i}", "url": "/" if i == 0 else f"/page-{i}/", "type": "home" if i == 0 else "project"}
                       for i in range(15)}
 
     def assert_all_loaders(self, expected):

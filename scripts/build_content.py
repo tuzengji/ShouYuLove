@@ -13,19 +13,22 @@ from bs4 import BeautifulSoup
 from PIL import Image
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
+from optimize_runtime import optimize_chunk
 
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-cursor-clean-20261005"
+RECORDS = ROOT / "output/deployment/shouyulove-fast-20261009"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
 V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
-OUT = ROOT / "output/shouyulove-cursor-clean-site"
+OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
-FONT_SOURCE = ROOT / "output/deployment/shouyulove-hover-boundaries-20261004/font-source"
-RUNTIME_VERSION = "syl-v1-1-hover-clean"
+FONT_SOURCE = ROOT / "output/deployment/shouyulove-jieguo-20261009/font-source"
+RUNTIME_VERSION = "syl-v1-1-jieguo"
+MODULE_VERSION = "syl-v1-1-fast"
+BRIDGE_VERSION = "syl-v1-1-catchpot"
 SOURCE = ROOT / "content-source.md"
 
 
@@ -38,7 +41,7 @@ def section(text, heading):
 def parse_content():
     text = SOURCE.read_text()
     projects = []
-    identifiers = ["signtrace", "dictionary", "chuanqinghuiyi", "pinhaoke", "beida-zhidao", "qinghua-zhidao"]
+    identifiers = ["signtrace", "dictionary", "chuanqinghuiyi", "pinhaoke", "beida-zhidao", "qinghua-zhidao", "jieguo"]
     for identifier, match in zip(identifiers, re.finditer(r"(?m)^#### ([^\n]+)\n(.*?)(?=^#### |^### |\Z)", text, re.S)):
         title, body = match.groups()
         address = re.search(r"(?m)^地址：(.+)$", body).group(1).strip()
@@ -50,8 +53,8 @@ def parse_content():
         label = re.search(r"地址：\[([^]]+)\]", body)
         projects.append(dict(id=identifier, title=title, description=description, url=url, designers=designers,
                              label=label.group(1) if label else "打开" + title,
-                             category="核心创意" if len(projects) < 3 else "其他作品"))
-    assert len(projects) == 6
+                             category=re.findall(r"(?m)^### ([^\n]+)$", text[:match.start()])[-1]))
+    assert len(projects) == 7
     members = section(text, "心创组第一届成员").splitlines()
     assert len(members) == 12
     introduction = re.search(r"(?m)^## 第二页\s*$\n(.*?)(?=^### )", text, re.S)
@@ -65,7 +68,8 @@ def parse_content():
                 boundaries=[line[2:] for line in section(text, "边界").splitlines() if line.startswith("- ")],
                 identity=identity, series=series,
                 core=section(text, "核心创意").split("####", 1)[0].strip(),
-                other=section(text, "其他作品").split("####", 1)[0].strip())
+                other=section(text, "其他作品").split("####", 1)[0].strip(),
+                internal=section(text, "心创组内部使用").split("####", 1)[0].strip())
 
 
 def text_block(title, body, size="medium"):
@@ -77,9 +81,11 @@ def raster_assets(content):
     destination = OUT / SHARED / "shouyulove"
     destination.mkdir(parents=True, exist_ok=True)
     palettes = [("#d4deda", "#879f92"), ("#e1e7e3", "#9aad9e"), ("#eddcd0", "#b39f8e"),
-                ("#dde5d9", "#94a28d"), ("#dedde6", "#9b97ac"), ("#e3ded3", "#aca38b")]
+                ("#dde5d9", "#94a28d"), ("#dedde6", "#9b97ac"), ("#e3ded3", "#aca38b"), ("#dde8e1", "#63836f")]
     for project, palette in zip(content["projects"], palettes):
         icon = ROOT / "project-logos/20261004-轻盈版" / (project["id"] + ".png")
+        if project["id"] == "jieguo":
+            icon = ROOT / "project-logos/jieguo.png"
         mark = Image.open(icon).convert("RGBA")
         assert mark.width == mark.height and mark.getchannel("A").getextrema() == (0, 255), icon
         size = 640
@@ -140,11 +146,14 @@ def make_pages(content):
     # Keep all second-screen copy in the original MSDF title component and its reveal timeline.
     introduction = "\n".join([content["identity"], content["series"], "我们的梦想是\n" + content["dream"]])
     home["blocks"] = [dict(type="hero", id="home-intro", text1=html.escape(introduction), textAlign="left", cta=None, url=None),
-                      text_block("愿景", content["vision"]), text_block("核心创意", content["core"], "large")]
+                      text_block("愿景", content["vision"])]
     listing = []
-    for number, project in enumerate(content["projects"]):
-        if number == 3:
-            home["blocks"].append(text_block("其他作品", content["other"], "large"))
+    descriptions = {"核心创意": content["core"], "其他作品": content["other"], "心创组内部使用": content["internal"]}
+    category = None
+    for project in content["projects"]:
+        if project["category"] != category:
+            category = project["category"]
+            home["blocks"].append(text_block(category, descriptions[category], "large"))
         description = html.escape(project["description"])
         legend = (project["description"] + "\n" if description else "") + "设计者：" + project["designers"]
         uri = "projects/" + project["id"]
@@ -170,9 +179,9 @@ def make_pages(content):
     sections = [("the-studio", "心创组", content["identity"], [text_block("", content["series"]), text_block("愿景",content["vision"])]),
                 ("our-approach", "梦想", content["dream"], []),
                 ("services", "核心创意", content["core"], [text_block(p["title"], html.escape(p["description"])+
-                    '<br/><a href="'+html.escape(p["url"])+ '" target="_blank" rel="noopener noreferrer">'+p["label"]+'</a><br/>设计者：'+p["designers"]) for p in content["projects"][:3]]),
+                    '<br/><a href="'+html.escape(p["url"])+ '" target="_blank" rel="noopener noreferrer">'+p["label"]+'</a><br/>设计者：'+p["designers"]) for p in content["projects"] if p["category"] == "核心创意"]),
                 ("awards", "其他作品", content["other"], [text_block(p["title"], html.escape(p["description"])+
-                    '<br/><a href="'+html.escape(p["url"])+ '" target="_blank" rel="noopener noreferrer">'+p["label"]+'</a><br/>设计者：'+p["designers"]) for p in content["projects"][3:]]),
+                    '<br/><a href="'+html.escape(p["url"])+ '" target="_blank" rel="noopener noreferrer">'+p["label"]+'</a><br/>设计者：'+p["designers"]) for p in content["projects"] if p["category"] == "其他作品"]),
                 ("clients", "边界", content["boundaries"][0], [text_block("",x) for x in content["boundaries"][1:]]),
                 ("contact-us", "心创组第一届成员", "　".join(content["members"]), [])]
     about_sections = []
@@ -272,7 +281,7 @@ def runtime_chunks(wordmark=None):
     wordmark = loader_wordmark() if wordmark is None else wordmark
     assets = OUT / SHARED / "assets"
     modules = sorted(assets.glob("*.js"))
-    renames = {p.name: p.stem + "." + RUNTIME_VERSION + ".js" for p in modules}
+    renames = {p.name: p.stem + "." + MODULE_VERSION + ".js" for p in modules}
     for path in modules:
         text = path.read_text()
         if path.name == "entry.DyxL_KXi.js":
@@ -397,9 +406,37 @@ def runtime_chunks(wordmark=None):
             text = text.replace(old, '', 1)
         for old, new in renames.items():
             text = text.replace(old, new)
-        (assets / renames[path.name]).write_text(text)
+        (assets / renames[path.name]).write_text(optimize_chunk(path.name, text, MODULE_VERSION))
         path.unlink()
     return renames
+
+
+def early_page(content, page):
+    """Accessible approved content, replaced once the native view is ready."""
+    pieces = ['<main id="syl-early" class="homePage"><nav class="syl-early-nav"><a href="/">首页</a><a href="/the-studio/">心创组</a></nav><div class="page__wrapper">']
+    title = '以手予爱<br/>ShouYuLove' if page['type'] == 'home' else html.escape(page['title'])
+    pieces.append('<section class="syl-early-brand" data-syl-key="brand"><h1>' + title + '</h1></section>')
+    for block in page.get('blocks', []):
+        kind = block['type']
+        key = html.escape(block.get('id', ''), quote=True)
+        if kind == 'hero':
+            pieces.append('<section class="syl-early-section" data-syl-key="' + key + '"><p class="syl-early-intro">' + block.get('text1', '') + '</p></section>')
+            if block.get('url'):
+                pieces.append('<p class="syl-early-section"><a href="' + html.escape(block['url'], quote=True) + '" target="_blank" rel="noopener noreferrer">' + html.escape(block.get('cta') or page['title']) + '</a></p>')
+        elif kind == 'text':
+            pieces.append('<section class="syl-early-section textBlock" data-syl-key="' + key + '"><h2>' + block.get('text1', '') + '</h2><div class="syl-early-copy">' + (block.get('text2') or '') + '</div></section>')
+        elif kind == 'project':
+            media = block['medias'][0]; uri = html.escape(block['uri'], quote=True)
+            pieces.append('<section class="projectBlock" data-uri="' + uri + '" data-syl-key="' + uri + '"><h2 class="projectCard__title">' + html.escape(block['title']) + '</h2><div class="mediaBlock__grid"><img class="mediaBlock__image image" width="180" height="180" loading="lazy" alt="" src="' + html.escape(media['media']['url'], quote=True) + '"/><div class="mediaBlock__image text"><p>' + html.escape(media.get('legend', '')) + '</p></div></div><p class="projectCard__designers">设计者：' + html.escape(block['projectSpecs']) + '</p><a class="projectEntry" href="' + html.escape(block['projectUrl'], quote=True) + '" target="_blank" rel="noopener noreferrer" aria-label="打开' + html.escape(block['title'], quote=True) + '"></a></section>')
+        elif kind == 'footer':
+            pieces.append('<section class="syl-early-brand"><p>以手予爱<br/>ShouYuLove</p></section>')
+        elif kind == 'listingProjects':
+            pieces.append('<section class="syl-early-section">' + ''.join('<p><a href="' + html.escape(project['url'], quote=True) + '" target="_blank" rel="noopener noreferrer">' + html.escape(project['title']) + '</a></p>' for project in content['projects']) + '</section>')
+    if page['type'] == 'about':
+        for section in page.get('sections', []):
+            pieces.append('<section class="syl-early-section"><h2><a href="/' + html.escape(section['uri'], quote=True) + '/">' + html.escape(section['title']) + '</a></h2><p>' + html.escape(section['desc']) + '</p></section>')
+    pieces.append('</div></main>')
+    return BeautifulSoup(''.join(pieces), 'html.parser').main
 
 
 def html_pages(content, pages, listing, renames, wordmark=None):
@@ -427,6 +464,7 @@ def html_pages(content, pages, listing, renames, wordmark=None):
                     serverRendered=False, path=page["url"], data=Tagged("ShallowReactive",{key:page}))
         soup.select_one("#__NUXT_DATA__").string = json.dumps(flatten(data),ensure_ascii=False,separators=(",",":")).replace("<","\\u003c")
         soup.html["lang"] = "zh-CN"
+        soup.html['class'] = ['syl-fast-early']
         soup.title.string = "以手予爱 ShouYuLove" if not route else page["title"]+" · 以手予爱 ShouYuLove"
         for meta in soup.find_all("meta"):
             if meta.get("name") == "description" or meta.get("property") in ["og:description","twitter:description"]:
@@ -447,7 +485,7 @@ def html_pages(content, pages, listing, renames, wordmark=None):
                 node["href"] = "/"+str(SHARED/"shouyulove/favicon.png")
             if "apple-touch-icon" in node.get("rel",[]):
                 node["href"] = "/"+str(SHARED/"shouyulove/apple-touch-icon.png")
-        stylesheet = soup.new_tag("link",rel="stylesheet",href="/assets/shouyulove-v1-1-cursor-clean.css")
+        stylesheet = soup.new_tag("link",rel="stylesheet",href="/assets/shouyulove." + MODULE_VERSION + ".css")
         soup.head.append(stylesheet)
         boot_style = soup.new_tag("style", id="boot-loader-style")
         boot_style.string = '#boot-loader{position:fixed;inset:0;height:100vh;width:100%;background:#e8e8e8;z-index:1010}#boot-loader .introLoader__logo svg,#boot-loader .introLoader__baseline>div,#boot-loader .introLoader__scrollDown{opacity:1}'
@@ -456,7 +494,10 @@ def html_pages(content, pages, listing, renames, wordmark=None):
             soup.head.append(soup.new_tag("link", rel="preload", href="/" + str(SHARED / font), **{"as": "font", "type": "font/woff2", "crossorigin": "anonymous"}))
         # Keep the first paint outside Vue's root so asynchronous route setup cannot clear it early.
         preview = soup.select_one("#__nuxt");preview.clear()
+        preview['aria-hidden'] = 'true'
+        preview.insert_before(early_page(content, page))
         preview.insert_before(copy.deepcopy(loader))
+        soup.body.append(soup.new_tag('script', src='/assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
         fallback = BeautifulSoup('<noscript><style>#boot-loader{display:none}</style><main class="static-preview"><h1>以手予爱<br/>ShouYuLove</h1><p>'+html.escape(content["identity"])+
             '</p><p>'+html.escape(content["series"])+ '</p><h2>梦想</h2><p>'+html.escape(content["dream"])+
             '</p><h2>愿景</h2><p>'+html.escape(content["vision"])+ '</p>'+''.join('<h2>'+html.escape(p["title"])+
@@ -466,13 +507,13 @@ def html_pages(content, pages, listing, renames, wordmark=None):
             '<h2>心创组第一届成员</h2><p>'+ '　'.join(content["members"])+ '</p></main></noscript>','html.parser')
         preview.append(fallback.noscript)
         text = str(soup)
-        text = text.replace("/shared/local-bridge.js", "/shared/local-bridge." + RUNTIME_VERSION + ".js")
+        text = text.replace("/shared/local-bridge.js", "/shared/local-bridge." + BRIDGE_VERSION + ".js")
         for old,new in renames.items():
             text = text.replace(old,new)
         destination = OUT / route / "index.html";destination.parent.mkdir(parents=True,exist_ok=True);destination.write_text(text)
         (destination.parent/"_payload.json").write_text(json.dumps(flatten(dict(data=Tagged("ShallowReactive",{key:page}))),
             ensure_ascii=False,separators=(",",":")).replace("<","\\u003c"))
-    (OUT / SHARED / ("local-bridge." + RUNTIME_VERSION + ".js")).write_text("window.__IG_LOCAL_PAGES__="+json.dumps(pages,ensure_ascii=False,separators=(",",":"))+";\n")
+    (OUT / SHARED / ("local-bridge." + BRIDGE_VERSION + ".js")).write_text("window.__IG_LOCAL_PAGES__="+json.dumps(pages,ensure_ascii=False,separators=(",",":"))+";\n")
 
 
 def font_preview():
@@ -492,7 +533,7 @@ def font_preview():
 
 def main():
     content = parse_content()
-    assert OUT.parent == ROOT / "output" and OUT.name == "shouyulove-cursor-clean-site"
+    assert OUT.parent == ROOT / "output" and OUT.name == "shouyulove-jieguo-site"
     RECORDS.mkdir(parents=True, exist_ok=True)
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -510,7 +551,9 @@ def main():
     wordmark = loader_wordmark()
     renames = runtime_chunks(wordmark)
     html_pages(content,pages,listing,renames,wordmark)
-    shutil.copy2(ROOT/"styles/shouyulove-v1-1-cursor-clean.css",OUT/SHARED/"assets/shouyulove-v1-1-cursor-clean.css")
+    shutil.copy2(ROOT/"styles/shouyulove-v1-1-jieguo.css",OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css"))
+    shutil.copy2(ROOT/'scripts/fast_bootstrap.js', OUT/SHARED/('assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
+    shutil.copytree(RECORDS/'mobile-textures', OUT/SHARED/'webgl/about/model/textures/ktx2/mobile')
     sounds = OUT / SHARED / "sounds/general"
     for name in ["IG_HomePage_v5_v4.mp3", "IG_FocusPage_v5_v8.mp3", "IG_AboutPage_v5_v5.mp3"]:
         (sounds / name).unlink()
@@ -525,9 +568,9 @@ def main():
             manifest["symlinks"][name] = str(path.readlink())
         elif path.is_file():
             contents = path.read_bytes();manifest["files"][name] = dict(bytes=len(contents),sha256=hashlib.sha256(contents).hexdigest());manifest["bytes"] += len(contents)
-    assert len(manifest["routes"]) == 15 and len(manifest["symlinks"]) == 5
+    assert len(manifest["routes"]) == 16 and len(manifest["symlinks"]) == 5
     (RECORDS/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n")
-    print(json.dumps(dict(pages=15,files=len(manifest["files"]),bytes=manifest["bytes"]),indent=2))
+    print(json.dumps(dict(pages=len(pages),files=len(manifest["files"]),bytes=manifest["bytes"]),indent=2))
 
 
 if __name__ == "__main__":
