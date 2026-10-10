@@ -18,7 +18,7 @@ from optimize_runtime import optimize_chunk, logo_svg_filter
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-translucent-bg-20261010"
+RECORDS = ROOT / "output/deployment/shouyulove-content-sync-20261010"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -26,10 +26,11 @@ V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
-FONT_SOURCE = ROOT / "output/deployment/shouyulove-jieguo-20261009/font-source"
+FONT_SOURCE = RECORDS / "font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
-MODULE_VERSION = "syl-v1-1-translucent-bg"
-BRIDGE_VERSION = "syl-v1-1-catchpot"
+FONT_VERSION = "syl-v1-1-content-sync"
+MODULE_VERSION = "syl-v1-1-content-sync"
+BRIDGE_VERSION = "syl-v1-1-content-sync"
 SOURCE = ROOT / "content-source.md"
 
 
@@ -56,8 +57,8 @@ def parse_content():
                              label=label.group(1) if label else "打开" + title,
                              category=re.findall(r"(?m)^### ([^\n]+)$", text[:match.start()])[-1]))
     assert len(projects) == 7
-    members = section(text, "心创组第一届成员").splitlines()
-    assert len(members) == 12
+    members = [line.strip() for line in section(text, "心创组第一届成员").splitlines() if line.strip()]
+    assert members and len(members) == len(set(members)), "Empty or duplicate member names"
     introduction = re.search(r"(?m)^## 第二页\s*$\n(.*?)(?=^### )", text, re.S)
     assert introduction, "Second-screen introduction"
     identity, series = [line.strip() for line in introduction.group(1).splitlines() if line.strip()]
@@ -99,7 +100,7 @@ def raster_assets(content):
         mark = mark.resize((round(mark.width * scale), round(mark.height * scale)), Image.Resampling.LANCZOS)
         picture.paste(mark, ((size-mark.width)//2, (size-mark.height)//2), mark)
         picture.save(destination / f"{project['id']}-square.{RUNTIME_VERSION}.png", optimize=True)
-    shutil.copy2(FONT_SOURCE / "swei-spring-serif.woff2", destination / ("swei-spring-serif." + RUNTIME_VERSION + ".woff2"))
+    shutil.copy2(FONT_SOURCE / "swei-spring-serif.woff2", destination / ("swei-spring-serif." + FONT_VERSION + ".woff2"))
     shutil.copy2(FONT_SOURCE / "OFL-SweiSpring.txt", destination / "OFL-SweiSpring.txt")
     for name in ["favicon.png", "apple-touch-icon.png"]:
         shutil.copy2(OLD_ASSETS / "images" / name, destination / name)
@@ -127,9 +128,9 @@ def chinese_atlases():
             data["chars"].append(item)
         data["common"].update(scaleW=2048, scaleH=2048)
         data["info"]["charset"] = [x["char"] for x in data["chars"]]
-        data["pages"] = [name + "." + RUNTIME_VERSION + ".png"]
-        atlas.save(destination / (name + "." + RUNTIME_VERSION + ".png"), optimize=True)
-        (destination / (font_name + "." + RUNTIME_VERSION + ".json")).write_text(json.dumps(data, ensure_ascii=False))
+        data["pages"] = [name + "." + FONT_VERSION + ".png"]
+        atlas.save(destination / (name + "." + FONT_VERSION + ".png"), optimize=True)
+        (destination / (font_name + "." + FONT_VERSION + ".json")).write_text(json.dumps(data, ensure_ascii=False))
 
 
 def media(project, width, position, legend=None):
@@ -359,10 +360,10 @@ def runtime_chunks(wordmark=None):
                              'title:"Close"':'title:"首页"', 'title:"Menu"':'title:"心创组"',
                              'title:"Immersive Garden"':'title:"以手予爱 ShouYuLove"',
                              "Since 2013 we have produced more than 67 projects.":"作品集",
-                             "/webgl/msdf/PSTimesBody/PSTimes-Regular.png":"/webgl/msdf/PSTimesBody/PSTimes-Regular."+RUNTIME_VERSION+".png",
-                             "/webgl/msdf/PSTimesBody/PSTimes-Regular.json":"/webgl/msdf/PSTimesBody/PSTimes-Regular."+RUNTIME_VERSION+".json",
-                             "/webgl/msdf/Helvetica-neue/Helvetica-neue.png":"/webgl/msdf/Helvetica-neue/Helvetica-neue."+RUNTIME_VERSION+".png",
-                             "/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf.json":"/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf."+RUNTIME_VERSION+".json"}.items():
+                             "/webgl/msdf/PSTimesBody/PSTimes-Regular.png":"/webgl/msdf/PSTimesBody/PSTimes-Regular."+FONT_VERSION+".png",
+                             "/webgl/msdf/PSTimesBody/PSTimes-Regular.json":"/webgl/msdf/PSTimesBody/PSTimes-Regular."+FONT_VERSION+".json",
+                             "/webgl/msdf/Helvetica-neue/Helvetica-neue.png":"/webgl/msdf/Helvetica-neue/Helvetica-neue."+FONT_VERSION+".png",
+                             "/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf.json":"/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf."+FONT_VERSION+".json"}.items():
                 assert old in text, old
                 text = text.replace(old, new)
         if path.name == "HomePage.ClaPmn7U.js":
@@ -376,7 +377,7 @@ def runtime_chunks(wordmark=None):
             assert text.count(old) == 1, old
             text = text.replace(old, '"data-uri":n.uri},[A("h2",{class:"projectCard__title"},n.title,1),(s(!0),y(D,null,H(p(r)', 1)
         if path.name == "HeroBlock.DoznkBHg.js":
-            # Animate the twelve grid cells directly instead of splitting the grid into text lines.
+            # Animate member grid cells directly instead of splitting the grid into text lines.
             old = 'l=new J(n.value,{type:"lines"}),P()'
             assert text.count(old) == 1, old
             text = text.replace(old, 'l=n.value.querySelector(".memberGrid")?{lines:Array.from(n.value.querySelectorAll(".memberName")),split:()=>{}}:new J(n.value,{type:"lines"}),P()', 1)
@@ -491,7 +492,7 @@ def html_pages(content, pages, listing, renames, wordmark=None):
         boot_style = soup.new_tag("style", id="boot-loader-style")
         boot_style.string = '#boot-loader{position:fixed;inset:0;height:100vh;width:100%;background:#e8e8e8;z-index:1010}#boot-loader .introLoader__logo svg,#boot-loader .introLoader__baseline>div,#boot-loader .introLoader__scrollDown{opacity:1}'
         soup.head.append(boot_style)
-        for font in ["assets/PSTimes-Regular.hY69LrJ0.woff2", "shouyulove/swei-spring-serif." + RUNTIME_VERSION + ".woff2"]:
+        for font in ["assets/PSTimes-Regular.hY69LrJ0.woff2", "shouyulove/swei-spring-serif." + FONT_VERSION + ".woff2"]:
             soup.head.append(soup.new_tag("link", rel="preload", href="/" + str(SHARED / font), **{"as": "font", "type": "font/woff2", "crossorigin": "anonymous"}))
         # Keep the first paint outside Vue's root so asynchronous route setup cannot clear it early.
         preview = soup.select_one("#__nuxt");preview.clear()

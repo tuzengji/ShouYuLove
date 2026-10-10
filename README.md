@@ -2,7 +2,7 @@
 
 [以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-本仓库保存当前已公开的精确静态版本：238 个运行文件、16 条页面路由、5 个相对资源链接，共 110,091,038 字节。七个作品图标的底色透明度为 28%，边缘保持宽幅不规则渐隐，图案完全不透明，融入浮雕背景；图片和标题居中，介绍与署名左对齐；接锅入口为 `/catchpot/`。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。2026-10-10 发布版本为 `20261010T075856Z-astra-home`。
+本仓库保存当前已公开的精确静态版本：238 个运行文件、16 条页面路由、5 个相对资源链接，共 110,100,862 字节。公开文案已按指定原稿同步，第一届成员为 13 人（包含李昌昊）；七个作品图标的底色透明度为 28%，边缘保持宽幅不规则渐隐，图案完全不透明，融入浮雕背景；图片和标题居中，介绍与署名左对齐；接锅入口为 `/catchpot/`。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。2026-10-10 发布版本为 `20261010T101759Z-astra-home`。
 
 首页只预载当前场景；心创组在悬停或进入时加载，页脚在接近可视区域时加载。正文和导航由初始 HTML 提供，原生视图完成后保留阅读位置；音乐稍后加载。手机两张法线纹理为 1024×1024，合计 1.75 MB，较原版减少约 61%。版本化公共资源缓存一年且 `immutable`，HTML 和页面 payload 使用 `no-cache`。
 
@@ -28,13 +28,13 @@ python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 
 ## 维护源码
 
-`content-source.md` 保存当前已公开文案；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。三个回归检查覆盖批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
+`content-source.md` 保存当前已公开文案；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 324 字，字体缓存名由独立 `FONT_VERSION` 管理。三个回归检查覆盖批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
 
 维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
 
 - `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
 - `主站版本归档/20261001-120733-Astra替换前/source/home-assets/images/` 中使用的两个站点图标。
-- `output/deployment/shouyulove-jieguo-20261009/font-source/` 中的当前字体源、子集与中文图集。
+- `output/deployment/shouyulove-content-sync-20261010/font-source/` 中的当前字体源、子集与中文图集。
 - 六个透明 Logo 原图、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
 - `output/deployment/shouyulove-fast-20261009/mobile-textures/` 中的两张手机纹理。重建脚本为 `scripts/prepare_mobile_textures.py`，使用固定版本 Khronos KTX-Software 4.4.2；已生成的纹理也在运行快照中。
 
