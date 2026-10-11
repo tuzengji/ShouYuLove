@@ -20,7 +20,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-portfolio-icons-20261011"
+RECORDS = ROOT / "output/deployment/shouyulove-logos-20261012"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -29,10 +29,10 @@ OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
 FONT_SOURCE = ROOT / "output/deployment/shouyulove-recap-entry-20261011/font-source"
-RUNTIME_VERSION = "syl-v1-1-jieguo"
+RUNTIME_VERSION = "syl-v1-1-unified-logos"
 FONT_VERSION = "syl-v1-1-portfolio-recap"
-MODULE_VERSION = "syl-v1-1-portfolio-recap"
-BRIDGE_VERSION = "syl-v1-1-portfolio-recap"
+MODULE_VERSION = "syl-v1-1-unified-logos"
+BRIDGE_VERSION = "syl-v1-1-unified-logos"
 SOURCE = source_path(ROOT)
 
 
@@ -108,9 +108,7 @@ def raster_assets(content):
     palettes["2026-year-end-summary"] = ("#e4ded1", "#94a28d")
     for project in content["projects"]:
         palette = palettes[project["id"]]
-        icon = ROOT / "project-logos/20261004-轻盈版" / (project["id"] + ".png")
-        if project["id"] in {"jieguo", "2026-sign-language-cultural-festival", "2026-year-end-summary"}:
-            icon = ROOT / "project-logos" / (project["id"] + ".png")
+        icon = ROOT / "project-logos/20261012-统一曲线" / (project["id"] + ".png")
         mark = Image.open(icon).convert("RGBA")
         assert mark.getchannel("A").getextrema() == (0, 255), icon
         size = 640

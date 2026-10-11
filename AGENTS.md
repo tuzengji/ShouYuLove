@@ -38,3 +38,5 @@
 
 - 作品集由 `scripts/build_content.py` 的 `portfolio_page` 与 `styles/portfolio.css` 维护，展示九个项目的图标、简介与分组；核心创意桌面两列、手机单列，奇数末项跨列。其他作品不显示设计者。保留原字体、图标羽化、完整三维场景与延后加载方式。
 - 年终总结为第五个核心创意，入口 `/2026-year-end-summary/`，详情 `/projects/2026-year-end-summary/`。解析 Markdown 地址时优先使用链接目标。字体源位于 `output/deployment/shouyulove-recap-entry-20261011/font-source/`。
+
+- 2026-10-12：九项目图标源统一为 `project-logos/20261012-统一曲线/`。替换图像后更新 `RUNTIME_VERSION` 与引用它的数据桥/场景版本；保留旧素材，首页与作品集使用同一套 Logo。

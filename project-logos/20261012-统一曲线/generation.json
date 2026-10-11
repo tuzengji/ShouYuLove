@@ -1,0 +1,110 @@
+[
+  {
+    "id": "signtrace",
+    "file": "signtrace.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 342891,
+    "sha256": "4cf7844874e3d2f5df3e7282b7c0df77cf5640b1bc397a7f550a2287df565ef1",
+    "tool": "built-in image_gen",
+    "generated_file": "exec-d2d3feb1-0284-4881-ac09-8f308356da6f.png"
+  },
+  {
+    "id": "dictionary",
+    "file": "dictionary.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 348824,
+    "sha256": "e739258d87665111b7f27fbd6240931820267d07ccd7ed69901c972ff839c7ed",
+    "tool": "built-in image_gen",
+    "generated_file": "exec-303a092f-5527-4a1a-a4fa-6c00e60221c7.png"
+  },
+  {
+    "id": "chuanqinghuiyi",
+    "file": "chuanqinghuiyi.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 348093,
+    "sha256": "8c0f4eb92adaed634637c8c9c1f544318c152c3b261de8fa20b4b91b5fe83f3b",
+    "tool": "built-in image_gen",
+    "generated_file": "exec-a0ea1a5d-1e02-4328-aea6-1463e7744d10.png"
+  },
+  {
+    "id": "2026-sign-language-cultural-festival",
+    "file": "2026-sign-language-cultural-festival.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 421370,
+    "sha256": "c1a2b3fff81a0d555fe8b2569b070580e1bdfe72a5dc905cccecfacf4d474997",
+    "tool": "built-in image_gen",
+    "generated_file": "exec-85be854d-ae24-4c3f-92f4-5ace33e2d946.png"
+  },
+  {
+    "id": "2026-year-end-summary",
+    "file": "2026-year-end-summary.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 317884,
+    "sha256": "5d8a2e95dab76ec33f3eb66a6b8e4ee0aa78ab2f02a17dc16df2bfa24adf0967",
+    "tool": "built-in image_gen",
+    "generated_file": "exec-93bb4224-34ce-47ea-ab28-2197dd1d448c.png"
+  },
+  {
+    "id": "pinhaoke",
+    "file": "pinhaoke.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 442062,
+    "sha256": "dd2ba112675fe12eaf0c5f8fae4f6bf437b468d400bca730a3117317a56e8912",
+    "tool": "built-in image_gen",
+    "generated_file": "exec-7e441ed6-3925-40e9-8176-83519ae92ee5.png"
+  },
+  {
+    "id": "jieguo",
+    "file": "jieguo.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 306003,
+    "sha256": "b4eb5337383e33b48b65de92f553f8c38058e08f1e01acd6fabe5fc21bcd7f6e",
+    "tool": "built-in image_gen",
+    "generated_file": "exec-3965f107-5c0c-45b5-ba6b-b277ef8049cf.png"
+  },
+  {
+    "id": "beida-zhidao",
+    "file": "beida-zhidao.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 262477,
+    "sha256": "09bf4f34a11cc5923453f946b9fc2dcd88a25938d205fab542cc81f1d91e0d89",
+    "tool": "built-in image_gen",
+    "generated_file": "exec-ec71b5ee-f5c8-4e8c-9875-64b656402275.png"
+  },
+  {
+    "id": "qinghua-zhidao",
+    "file": "qinghua-zhidao.png",
+    "size": [
+      1254,
+      1254
+    ],
+    "bytes": 309321,
+    "sha256": "f066dbf330582aaf0f678266e2aa26cef9e40032829283b587d4fe41717356f0",
+    "tool": "built-in image_gen",
+    "generated_file": "exec-ae4312a2-48d4-4063-a9bf-f3aed3afe764.png"
+  }
+]
