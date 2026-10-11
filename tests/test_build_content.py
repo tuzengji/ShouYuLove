@@ -66,6 +66,8 @@ class LoaderBatchTests(unittest.TestCase):
                 self.assertEqual(loaders[0]['aria-valuenow'], '0')
                 self.assertEqual(loaders[0]['aria-valuemax'], '100')
                 self.assertNotIn('aria-hidden', soup.select_one('#__nuxt').attrs)
+                self.assertEqual(len(soup.select('link[href="/assets/fonts.' + self.builder.MODULE_VERSION + '.css"]')), 1)
+                self.assertFalse(soup.select('link[as="font"]'))
 
     def test_project_ids_survive_insertions_and_reordering(self):
         text = (SOURCE.parents[1] / "content-source.md").read_text()

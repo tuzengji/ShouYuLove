@@ -42,6 +42,11 @@ requestAnimationFrame(() => requestAnimationFrame(() => {
       root.setAttribute('aria-hidden', 'true');
       document.body.append(root);
       await Promise.all(scene.styles.map(href => new Promise((resolve, reject) => {
+        const url = new URL(href, location.href).href;
+        if ([...document.querySelectorAll('link[rel="stylesheet"]')].some(link => link.href === url)) {
+          resolve();
+          return;
+        }
         const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.href = href;

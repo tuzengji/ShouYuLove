@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Put the approved Markdown into Astra's existing pages and WebGL runtime."""
 
+import base64
 import copy
 import hashlib
 import html
@@ -19,7 +20,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-festival-20261011"
+RECORDS = ROOT / "output/deployment/shouyulove-font-stability-20261011"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -30,7 +31,7 @@ OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/ho
 FONT_SOURCE = ROOT / "output/deployment/shouyulove-festival-20261011/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
 FONT_VERSION = "syl-v1-1-festival"
-MODULE_VERSION = "syl-v1-1-festival"
+MODULE_VERSION = "syl-v1-1-stable-fonts"
 BRIDGE_VERSION = "syl-v1-1-festival"
 SOURCE = source_path(ROOT)
 
@@ -308,11 +309,29 @@ def initial_loader(wordmark=None):
     return loader
 
 
+def stable_font_rules(style):
+    style = re.sub(r"@font-face\s*\{[^}]*\}", "", style)
+    return re.sub(r"font-family:\s*(PSTimes|HelveticaNeueRegular|HelveticaNeueLight)([^;}]*)",
+                  lambda match: "font-family:" + match[1] + ("" if "ShouYuSerif" in match[2] else ",ShouYuSerif") + match[2], style)
+
+
 def runtime_chunks(wordmark=None):
     wordmark = loader_wordmark() if wordmark is None else wordmark
     assets = OUT / SHARED / "assets"
     modules = sorted(assets.glob("*.js"))
     renames = {p.name: p.stem + "." + MODULE_VERSION + ".js" for p in modules}
+    # Font definitions live only in the shared, first-paint stylesheet.
+    font_definitions = 0
+    for path in sorted(assets.glob("*.css")):
+        original = path.read_text()
+        font_definitions += len(re.findall(r"@font-face\s*\{[^}]*\}", original))
+        # Keep the original Latin roles, with one shared Chinese face in each stack.
+        style = stable_font_rules(original)
+        if style != original:
+            renames[path.name] = path.stem + "." + MODULE_VERSION + ".css"
+            (assets / renames[path.name]).write_text(style)
+            path.unlink()
+    assert font_definitions == 3, "Original Latin font definitions"
     for path in modules:
         text = path.read_text()
         if path.name == "entry.DyxL_KXi.js":
@@ -443,6 +462,22 @@ def runtime_chunks(wordmark=None):
     return renames
 
 
+def font_stylesheet():
+    """Keep the approved font bytes in one cached CSS response, before first paint."""
+    shared = OUT / SHARED
+    data = lambda path: "url(data:font/woff2;base64," + base64.b64encode(path.read_bytes()).decode("ascii") + ") format('woff2')"
+    faces = []
+    for family, filename in [("PSTimes", "PSTimes-Regular.hY69LrJ0.woff2"),
+                             ("HelveticaNeueRegular", "HelveticaNeue-Regular.XE2tdPOO.woff2"),
+                             ("HelveticaNeueLight", "HelveticaNeue-Light.DlSTh50s.woff2")]:
+        faces.append("@font-face{font-family:" + family + ";font-style:normal;font-weight:400;font-display:block;src:" + data(shared / "assets" / filename) + ";}")
+    chinese = data(shared / "shouyulove" / ("swei-spring-serif." + FONT_VERSION + ".woff2"))
+    faces.append("@font-face{font-family:ShouYuSerif;font-style:normal;font-weight:400;font-display:block;src:" + chinese + ";unicode-range:U+3000-9FFF,U+FF00-FFEF,U+2010-203F;}")
+    # Apply the homepage's text rasterization before deferred scene CSS arrives.
+    faces.append("*{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility}")
+    (shared / "assets" / ("fonts." + MODULE_VERSION + ".css")).write_text("\n".join(faces) + "\n")
+
+
 def home_shortcut(content):
     copy = content["shortcut"]
     label = html.escape(copy["按钮"])
@@ -471,6 +506,8 @@ def html_pages(content, pages, listing, renames, wordmark=None):
     for route, page in pages.items():
         template_route = route if (V0 / route / "index.html").exists() else "projects/louis-vuitton-1"
         soup = BeautifulSoup((V0 / template_route / "index.html").read_text(), "html.parser")
+        for style in soup.find_all("style"):
+            style.string = stable_font_rules(style.get_text())
         data = revive(json.loads(soup.select_one("#__NUXT_DATA__").string))
         data["pinia"]["ui"]["audio"]["isMuted"] = False
         ds = data["pinia"]["datas"]
@@ -510,13 +547,12 @@ def html_pages(content, pages, listing, renames, wordmark=None):
             if "manifest" in node.get("rel", []):
                 node.decompose()
         soup.head.append(soup.new_tag("link", rel="manifest", href="/" + str(SHARED / "shouyulove" / f"works-manifest.{MODULE_VERSION}.json")))
+        soup.head.append(soup.new_tag("link", rel="stylesheet", href="/assets/fonts." + MODULE_VERSION + ".css"))
         stylesheet = soup.new_tag("link",rel="stylesheet",href="/assets/shouyulove." + MODULE_VERSION + ".css")
         soup.head.append(stylesheet)
         boot_style = soup.new_tag("style", id="boot-loader-style")
         boot_style.string = '#boot-loader{position:fixed;inset:0;height:100vh;width:100%;background:#e8e8e8;z-index:1010}#boot-loader .introLoader__logo svg,#boot-loader .introLoader__baseline>div,#boot-loader .introLoader__scrollDown{opacity:1}'
         soup.head.append(boot_style)
-        for font in ["assets/PSTimes-Regular.hY69LrJ0.woff2", "shouyulove/swei-spring-serif." + FONT_VERSION + ".woff2"]:
-            soup.head.append(soup.new_tag("link", rel="preload", href="/" + str(SHARED / font), **{"as": "font", "type": "font/woff2", "crossorigin": "anonymous"}))
         # Keep the first paint outside Vue's root so asynchronous route setup cannot clear it early.
         preview = soup.select_one("#__nuxt");preview.clear()
         preview.attrs.pop('aria-hidden', None)
@@ -544,7 +580,7 @@ def html_pages(content, pages, listing, renames, wordmark=None):
 
 
 def portfolio_page(content):
-    """The directory stays usable without JavaScript, fonts or background resources."""
+    """The directory uses the same first-paint fonts and defers its scene resources."""
     shared = "/" + str(SHARED)
     css = (ROOT / "styles/portfolio.css").read_text().replace("__SHARED__", shared).replace("__FONT_VERSION__", FONT_VERSION)
     shortcut_css = (ROOT / "styles/shouyulove-v1-1-jieguo.css").read_text().split("/* Keep the works shortcut", 1)[1]
@@ -570,6 +606,7 @@ def portfolio_page(content):
               '<link rel="icon" href="' + shared + '/shouyulove/favicon.png"/>',
               '<link rel="apple-touch-icon" href="' + shared + '/shouyulove/apple-touch-icon.png"/>',
               '<link rel="manifest" href="' + shared + '/shouyulove/works-manifest.' + MODULE_VERSION + '.json"/>',
+              '<link rel="stylesheet" href="/assets/fonts.' + MODULE_VERSION + '.css"/>',
               '<style>' + css + '</style></head><body class="portfolio-page">',
               '<div class="portfolio-background" aria-hidden="true" data-scene="' + scene_url + '"></div>',
               '<header class="portfolio-header"><h1>' + html.escape(content['portfolio']['title']) + '</h1><a href="/">' + html.escape(content['portfolio']['home']) + '</a></header>',
@@ -637,6 +674,7 @@ def main():
     pages,listing = make_pages(content)
     wordmark = loader_wordmark()
     renames = runtime_chunks(wordmark)
+    font_stylesheet()
     html_pages(content,pages,listing,renames,wordmark)
     portfolio_page(content)
     (OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css")).write_text((ROOT/"styles/shouyulove-v1-1-jieguo.css").read_text().replace("__FONT_VERSION__", FONT_VERSION))
