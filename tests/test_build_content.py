@@ -67,6 +67,22 @@ class LoaderBatchTests(unittest.TestCase):
                 self.assertEqual(loaders[0]['aria-valuemax'], '100')
                 self.assertNotIn('aria-hidden', soup.select_one('#__nuxt').attrs)
 
+    def test_project_ids_survive_insertions_and_reordering(self):
+        text = (SOURCE.parents[1] / "content-source.md").read_text()
+        projects = self.builder.parse_content(text)["projects"]
+        self.assertEqual(len(projects), 8)
+        by_id = {p["id"]: p for p in projects}
+        self.assertEqual(by_id["pinhaoke"]["title"], "拼好课")
+        self.assertEqual(by_id["jieguo"]["url"], "https://shouyulove.cn/catchpot/")
+        festival = by_id["2026-sign-language-cultural-festival"]
+        self.assertEqual(festival["designers"], "周丽敏 涂增基 黄庭逸")
+        self.assertEqual(festival["category"], "核心创意")
+        import re
+        pattern = r"(?m)^#### [^\n]+\n.*?(?=^#### |^### |\Z)"
+        blocks = list(re.finditer(pattern, text, re.S))[:4]
+        reordered = text[:blocks[0].start()] + ''.join(m.group() for m in reversed(blocks)) + text[blocks[-1].end():]
+        self.assertEqual({p["id"]: p for p in self.builder.parse_content(reordered)["projects"]}, by_id)
+
     def test_font_refreshes_between_batches_and_every_page_keeps_loader(self):
         # A process running two builds must pick up a changed font, rather than a global cache.
         with patch.object(self.builder, "loader_wordmark", side_effect=[

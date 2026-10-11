@@ -6,13 +6,13 @@ async (page) => {
   let release;
   try {
    const p=await c.newPage(),errors=[],requests=[];
-   p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>requests.push({url:r.url(),time:Date.now()}));
+   await p.bringToFront();p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>requests.push({url:r.url(),time:Date.now()}));
    const hold=new Promise(r=>release=r);
    await p.route('**/webgl/projects/fish.glb',async r=>{await hold;await r.continue();});
    await p.goto(base+'/portfolio/',{waitUntil:'domcontentloaded',timeout:90000});
    await p.waitForFunction(()=>performance.getEntriesByName('syl-portfolio-readable').length);
    const initial=await p.locator('.portfolio-link').evaluateAll(nodes=>nodes.map(e=>({href:e.href,top:e.getBoundingClientRect().top,title:e.querySelector('h3').textContent})));
-   if(initial.length!==7||initial[0].top>300)throw new Error('Initial links unavailable');
+   if(initial.length!==8||initial[0].top>300)throw new Error('Initial links unavailable');
    const hierarchy=await p.evaluate(()=>({categories:[...document.querySelectorAll('.portfolio-section h2')].map(e=>e.textContent),headingSize:parseFloat(getComputedStyle(document.querySelector('.portfolio-section h2')).fontSize),primarySize:parseFloat(getComputedStyle(document.querySelector('.portfolio-link h3')).fontSize),secondarySize:parseFloat(getComputedStyle(document.querySelector('.portfolio-section--secondary h3')).fontSize),primaryRow:document.querySelector('.portfolio-link').getBoundingClientRect().height,secondaryRow:document.querySelector('.portfolio-section--secondary .portfolio-link').getBoundingClientRect().height}));
    if(hierarchy.categories.join(',')!=='核心创意,心创组内部使用,其他作品'||hierarchy.headingSize<=hierarchy.primarySize||hierarchy.secondarySize>=hierarchy.primarySize||hierarchy.secondaryRow>=hierarchy.primaryRow)throw new Error('Directory hierarchy');
    if(requests.some(r=>/entry\..*\.js|\/webgl\//.test(r.url)))throw new Error('Scene requested before content paint');
@@ -29,7 +29,7 @@ async (page) => {
    await p.waitForTimeout(1200);
    if(new URL(p.url()).pathname!=='/portfolio/')throw new Error('Scene changed canonical URL');
    if(Math.abs(await p.evaluate(()=>scrollY)-y)>2)throw new Error('Scene reset document scroll '+JSON.stringify({before:y,after:await p.evaluate(()=>scrollY)}));
-   if(await p.locator('.portfolio-link').count()!==7)throw new Error('Scene replaced directory');
+   if(await p.locator('.portfolio-link').count()!==8)throw new Error('Scene replaced directory');
    await p.evaluate(()=>scrollTo(0,0));
    const geometry=await p.locator('.portfolio-link').evaluateAll(nodes=>nodes.map(e=>e.getBoundingClientRect().top));
    if(geometry.some((top,i)=>Math.abs(top-initial[i].top)>2))throw new Error('Scene shifted directory layout');
@@ -42,12 +42,12 @@ async (page) => {
    if(requests.some(r=>/\.mp3|\/sounds\//.test(r.url)))throw new Error('Directory downloaded sound');
    await p.screenshot({path:'output/playwright/portfolio-3d/'+width+'.png'});
    if(errors.length)throw new Error(errors.join('\n'));
-   results.push({width,links:7,blockedModelLinksUsable:true,scrollPreserved:true,geometryPreserved:true,audioRequests:0,hierarchy,scene,errors});
+   results.push({width,links:8,blockedModelLinksUsable:true,scrollPreserved:true,geometryPreserved:true,audioRequests:0,hierarchy,scene,errors});
   }finally{release?.();await c.close();}
  }
  for(const mode of ['no-js','failed-scene']) {
   const c=await page.context().browser().newContext({viewport:{width:390,height:900},javaScriptEnabled:mode!=='no-js',userAgent:'Mozilla/5.0 ShouYuLove-QA'});
-  try{const p=await c.newPage();if(mode==='failed-scene')await p.route('**/portfolio-scene.*.json',r=>r.abort());await p.goto(base+'/portfolio/');if(mode==='failed-scene')await p.waitForFunction(()=>performance.getEntriesByName('syl-portfolio-scene-error').length);if(await p.locator('.portfolio-link').count()!==7)throw new Error('Fallback links lost');await p.locator('.portfolio-link').last().scrollIntoViewIfNeeded();results.push({mode,links:7,scroll:true});}finally{await c.close();}
+  try{const p=await c.newPage();if(mode==='failed-scene')await p.route('**/portfolio-scene.*.json',r=>r.abort());await p.goto(base+'/portfolio/');if(mode==='failed-scene')await p.waitForFunction(()=>performance.getEntriesByName('syl-portfolio-scene-error').length);if(await p.locator('.portfolio-link').count()!==8)throw new Error('Fallback links lost');await p.locator('.portfolio-link').last().scrollIntoViewIfNeeded();results.push({mode,links:8,scroll:true});}finally{await c.close();}
  }
  return {base,passed:true,results};
 }

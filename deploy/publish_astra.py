@@ -38,7 +38,7 @@ def switch(home, release):
 
 def get(path):
     request = urllib.request.Request("http://127.0.0.1" + path,
-                                     headers={"Host": "shouyulove.cn"})
+                                     headers={"Host": "shouyulove.cn", "User-Agent": "ShouYuLove-QA"})
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
             return response.status, response.read()

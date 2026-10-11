@@ -19,7 +19,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-native-loader-20261011"
+RECORDS = ROOT / "output/deployment/shouyulove-festival-20261011"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -27,11 +27,11 @@ V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
-FONT_SOURCE = ROOT / "output/deployment/shouyulove-home-shortcut-20261011/font-source"
+FONT_SOURCE = ROOT / "output/deployment/shouyulove-festival-20261011/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
-FONT_VERSION = "syl-v1-1-home-shortcut"
-MODULE_VERSION = "syl-v1-1-native-loader"
-BRIDGE_VERSION = "syl-v1-1-portfolio-3d"
+FONT_VERSION = "syl-v1-1-festival"
+MODULE_VERSION = "syl-v1-1-festival"
+BRIDGE_VERSION = "syl-v1-1-festival"
 SOURCE = source_path(ROOT)
 
 
@@ -44,9 +44,14 @@ def section(text, heading):
 def parse_content(text=None):
     text = SOURCE.read_text(encoding='utf-8') if text is None else text
     projects = []
-    identifiers = ["signtrace", "dictionary", "chuanqinghuiyi", "pinhaoke", "beida-zhidao", "qinghua-zhidao", "jieguo"]
-    for identifier, match in zip(identifiers, re.finditer(r"(?m)^#### ([^\n]+)\n(.*?)(?=^#### |^### |\Z)", text, re.S)):
+    identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary",
+                   "传情绘意-手语版": "chuanqinghuiyi", "2026 手语文化节": "2026-sign-language-cultural-festival",
+                   "拼好课": "pinhaoke", "北大知道 PKU Know": "beida-zhidao",
+                   "清华知道 THU Know": "qinghua-zhidao", "接锅": "jieguo"}
+    for match in re.finditer(r"(?m)^#### ([^\n]+)\n(.*?)(?=^#### |^### |\Z)", text, re.S):
         title, body = match.groups()
+        assert title in identifiers, "Unknown project: " + title
+        identifier = identifiers[title]
         address = re.search(r"(?m)^地址：(.+)$", body).group(1).strip()
         link = re.search(r"https?://[^\s)]+", address)
         url = link.group() if link else "https://" + address
@@ -57,7 +62,7 @@ def parse_content(text=None):
         projects.append(dict(id=identifier, title=title, description=description, url=url, designers=designers,
                              label=label.group(1) if label else "打开" + title,
                              category=re.findall(r"(?m)^### ([^\n]+)$", text[:match.start()])[-1]))
-    assert len(projects) == 7
+    assert {p["id"] for p in projects} == set(identifiers.values()) and len(projects) == len(identifiers), "Missing or duplicate project"
     members = [line.strip() for line in section(text, "心创组第一届成员").splitlines() if line.strip()]
     assert members and len(members) == len(set(members)), "Empty or duplicate member names"
     introduction = re.search(r"(?m)^## 第二页\s*$\n(.*?)(?=^### )", text, re.S)
@@ -95,12 +100,15 @@ def raster_assets(content):
     destination.mkdir(parents=True, exist_ok=True)
     palettes = [("#d4deda", "#879f92"), ("#e1e7e3", "#9aad9e"), ("#eddcd0", "#b39f8e"),
                 ("#dde5d9", "#94a28d"), ("#dedde6", "#9b97ac"), ("#e3ded3", "#aca38b"), ("#dde8e1", "#63836f")]
-    for project, palette in zip(content["projects"], palettes):
+    palettes = dict(zip(["signtrace", "dictionary", "chuanqinghuiyi", "pinhaoke", "beida-zhidao", "qinghua-zhidao", "jieguo"], palettes))
+    palettes["2026-sign-language-cultural-festival"] = ("#f4e7de", "#b39f8e")
+    for project in content["projects"]:
+        palette = palettes[project["id"]]
         icon = ROOT / "project-logos/20261004-轻盈版" / (project["id"] + ".png")
-        if project["id"] == "jieguo":
-            icon = ROOT / "project-logos/jieguo.png"
+        if project["id"] in {"jieguo", "2026-sign-language-cultural-festival"}:
+            icon = ROOT / "project-logos" / (project["id"] + ".png")
         mark = Image.open(icon).convert("RGBA")
-        assert mark.width == mark.height and mark.getchannel("A").getextrema() == (0, 255), icon
+        assert mark.getchannel("A").getextrema() == (0, 255), icon
         size = 640
         picture = Image.new("RGB", (size, size), palette[0])
         # Fit the visible artwork consistently; the untouched transparent masters stay local.
@@ -631,7 +639,7 @@ def main():
     renames = runtime_chunks(wordmark)
     html_pages(content,pages,listing,renames,wordmark)
     portfolio_page(content)
-    shutil.copy2(ROOT/"styles/shouyulove-v1-1-jieguo.css", OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css"))
+    (OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css")).write_text((ROOT/"styles/shouyulove-v1-1-jieguo.css").read_text().replace("__FONT_VERSION__", FONT_VERSION))
     shutil.copy2(ROOT/'scripts/fast_bootstrap.js', OUT/SHARED/('assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
     shutil.copy2(ROOT/'scripts/home_shortcut.js', OUT/SHARED/('assets/home-shortcut.' + MODULE_VERSION + '.js'))
     shutil.copy2(ROOT/'scripts/portfolio.js', OUT/SHARED/('assets/portfolio.' + MODULE_VERSION + '.js'))
@@ -654,7 +662,7 @@ def main():
             manifest["symlinks"][name] = str(path.readlink())
         elif path.is_file():
             contents = path.read_bytes();manifest["files"][name] = dict(bytes=len(contents),sha256=hashlib.sha256(contents).hexdigest());manifest["bytes"] += len(contents)
-    assert len(manifest["routes"]) == 16 and len(manifest["symlinks"]) == 5
+    assert len(manifest["routes"]) == len(content["projects"]) + 9 and len(manifest["symlinks"]) == 5
     (RECORDS/"manifest.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+"\n")
     print(json.dumps(dict(pages=len(pages),files=len(manifest["files"]),bytes=manifest["bytes"]),indent=2))
 
