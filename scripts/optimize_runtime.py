@@ -42,6 +42,13 @@ def optimize_chunk(name, text, version):
     replace('e.push(...D3(t))', 'e.push(...D3({...t,preload:!1}))')
     replace('function d(){s.setAsLoaded(),p()}',
             'function d(){s.setAsLoaded(),p(),__sylAfterReady(h)}')
+    # Display resource progress without the original randomized starting floor.
+    replace('O=.05+.05*Math.random()', 'O=0')
+    replace('ref_key:"$el",ref:r,class:qo({introLoader:!0,main:i.main',
+            'ref_key:"$el",ref:r,role:e.main?"progressbar":null,"aria-label":e.main?"网站加载中":null,"aria-valuemin":e.main?0:null,"aria-valuemax":e.main?100:null,"aria-valuenow":e.main?Math.round(On(M)*100):null,class:qo({introLoader:!0,main:i.main')
+    # The exported component originally patched only its class; progress is dynamic too.
+    replace(']),_:1},512)],2))}},ywe=wh(Awe',
+            ']),_:1},512)],16))}},ywe=wh(Awe')
     # The independent directory reuses the full native scene as a background.
     # Its document keeps scrolling/links; only this page binds scene input globally.
     replace('const r=document.querySelector("#__nuxt");r[n]("click",this._handleClick),r[n]("mousemove",this._mousemove)',

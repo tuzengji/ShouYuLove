@@ -99,7 +99,7 @@ async (page) => {
   try {
     const wide = await desktop.newPage();
     await wide.goto(base + '/portfolio/', {waitUntil:'domcontentloaded',timeout:90000});
-    await wide.waitForFunction(() => !document.getElementById('syl-early'), null, {timeout:90000});
+    await wide.waitForFunction(() => performance.getEntriesByName('syl-native-ready').length, null, {timeout:90000});
     assert(await wide.locator('#syl-home-shortcut').isHidden(), 'Shortcut visible on desktop');
     await wide.screenshot({path:'output/playwright/home-shortcut/desktop-1440.png'});
     results.push({device:'desktop',hidden:true});

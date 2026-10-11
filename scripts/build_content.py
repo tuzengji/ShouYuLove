@@ -19,7 +19,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-portfolio-other-credit-20261011"
+RECORDS = ROOT / "output/deployment/shouyulove-native-loader-20261011"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -30,7 +30,7 @@ OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/ho
 FONT_SOURCE = ROOT / "output/deployment/shouyulove-home-shortcut-20261011/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
 FONT_VERSION = "syl-v1-1-home-shortcut"
-MODULE_VERSION = "syl-v1-1-portfolio-3d"
+MODULE_VERSION = "syl-v1-1-native-loader"
 BRIDGE_VERSION = "syl-v1-1-portfolio-3d"
 SOURCE = source_path(ROOT)
 
@@ -288,7 +288,7 @@ def loader_wordmark():
 def initial_loader(wordmark=None):
     wordmark = loader_wordmark() if wordmark is None else wordmark
     # Reuse the native loader's grid and wordmark until Vue has mounted that same screen.
-    markup = '<div id="boot-loader" class="introLoader" role="status" aria-label="网站加载中">' + \
+    markup = '<div id="boot-loader" class="introLoader" role="progressbar" aria-label="网站加载中" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">' + \
         '<div class="gridWrapper padding rowGap introLoader__wrapper" data-v-ad74c4db>' + \
         '<div class="introLoader__logo"><svg width="170" height="22" viewBox="0 0 170 22" aria-label="心创组">' + wordmark + '</svg></div>' + \
         '<div class="introLoader__progressWrapper"><div class="introLoader__progressBar"></div>' + \
@@ -435,34 +435,6 @@ def runtime_chunks(wordmark=None):
     return renames
 
 
-def early_page(content, page):
-    """Accessible approved content, replaced once the native view is ready."""
-    pieces = ['<main id="syl-early" class="homePage"><nav class="syl-early-nav"><a href="/">首页</a><a href="/the-studio/">心创组</a><a href="/portfolio/">作品集</a></nav><div class="page__wrapper">']
-    title = '以手予爱<br/>ShouYuLove' if page['type'] == 'home' else html.escape(page['title'])
-    pieces.append('<section class="syl-early-brand" data-syl-key="brand"><h1>' + title + '</h1></section>')
-    for block in page.get('blocks', []):
-        kind = block['type']
-        key = html.escape(block.get('id', ''), quote=True)
-        if kind == 'hero':
-            pieces.append('<section class="syl-early-section" data-syl-key="' + key + '"><p class="syl-early-intro">' + block.get('text1', '') + '</p></section>')
-            if block.get('url'):
-                pieces.append('<p class="syl-early-section"><a href="' + html.escape(block['url'], quote=True) + '" target="_blank" rel="noopener noreferrer">' + html.escape(block.get('cta') or page['title']) + '</a></p>')
-        elif kind == 'text':
-            pieces.append('<section class="syl-early-section textBlock" data-syl-key="' + key + '"><h2>' + block.get('text1', '') + '</h2><div class="syl-early-copy">' + (block.get('text2') or '') + '</div></section>')
-        elif kind == 'project':
-            media = block['medias'][0]; uri = html.escape(block['uri'], quote=True)
-            pieces.append('<section class="projectBlock" data-uri="' + uri + '" data-syl-key="' + uri + '"><h2 class="projectCard__title">' + html.escape(block['title']) + '</h2><div class="mediaBlock__grid"><img class="mediaBlock__image image" width="180" height="180" loading="lazy" alt="" src="' + html.escape(media['media']['url'], quote=True) + '"/><div class="mediaBlock__image text"><p>' + html.escape(media.get('legend', '')) + '</p></div></div><p class="projectCard__designers">设计者：' + html.escape(block['projectSpecs']) + '</p><a class="projectEntry" href="' + html.escape(block['projectUrl'], quote=True) + '" target="_blank" rel="noopener noreferrer" aria-label="打开' + html.escape(block['title'], quote=True) + '"></a></section>')
-        elif kind == 'footer':
-            pieces.append('<section class="syl-early-brand"><p>以手予爱<br/>ShouYuLove</p></section>')
-        elif kind == 'listingProjects':
-            pieces.append('<section class="syl-early-section">' + ''.join('<p><a href="' + html.escape(project['url'], quote=True) + '" target="_blank" rel="noopener noreferrer">' + html.escape(project['title']) + '</a></p>' for project in content['projects']) + '</section>')
-    if page['type'] == 'about':
-        for section in page.get('sections', []):
-            pieces.append('<section class="syl-early-section"><h2><a href="/' + html.escape(section['uri'], quote=True) + '/">' + html.escape(section['title']) + '</a></h2><p>' + html.escape(section['desc']) + '</p></section>')
-    pieces.append('</div></main>')
-    return BeautifulSoup(''.join(pieces), 'html.parser').main
-
-
 def home_shortcut(content):
     copy = content["shortcut"]
     label = html.escape(copy["按钮"])
@@ -504,7 +476,7 @@ def html_pages(content, pages, listing, renames, wordmark=None):
                     serverRendered=False, path=page["url"], data=Tagged("ShallowReactive",{key:page}))
         soup.select_one("#__NUXT_DATA__").string = json.dumps(flatten(data),ensure_ascii=False,separators=(",",":")).replace("<","\\u003c")
         soup.html["lang"] = "zh-CN"
-        soup.html['class'] = ['syl-fast-early']
+        soup.html.attrs.pop('class', None)
         soup.title.string = "以手予爱 ShouYuLove" if not route else page["title"]+" · 以手予爱 ShouYuLove"
         for meta in soup.find_all("meta"):
             if meta.get("name") == "apple-mobile-web-app-title":
@@ -539,8 +511,7 @@ def html_pages(content, pages, listing, renames, wordmark=None):
             soup.head.append(soup.new_tag("link", rel="preload", href="/" + str(SHARED / font), **{"as": "font", "type": "font/woff2", "crossorigin": "anonymous"}))
         # Keep the first paint outside Vue's root so asynchronous route setup cannot clear it early.
         preview = soup.select_one("#__nuxt");preview.clear()
-        preview['aria-hidden'] = 'true'
-        preview.insert_before(early_page(content, page))
+        preview.attrs.pop('aria-hidden', None)
         preview.insert_before(copy.deepcopy(loader))
         soup.body.append(BeautifulSoup(logo_svg_filter(), 'html.parser').svg)
         soup.body.append(soup.new_tag('script', src='/assets/fast-bootstrap.' + MODULE_VERSION + '.js'))

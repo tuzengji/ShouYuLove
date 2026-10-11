@@ -5,19 +5,10 @@ async (page) => {
   const context=await page.context().browser().newContext({viewport:{width,height:900},isMobile:width<500,hasTouch:width<500,userAgent:width<500?'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36 ShouYuLove-QA':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 ShouYuLove-QA'});
   try{
    const p=await context.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
-   await p.route('**/webgl/**/*.glb',r=>r.abort());
    await p.goto(base+'/',{waitUntil:'domcontentloaded',timeout:90000});
-   await p.locator('#syl-early a[href="/portfolio/"]').click();
-   await p.waitForURL(base+'/portfolio/');
-   if(await p.locator('.portfolio-link').count()!==7)throw new Error('Early home to lightweight directory');
-   await p.locator('.portfolio-header a[href="/"]').click();await p.waitForURL(base+'/');
-   await p.goBack();await p.waitForURL(base+'/portfolio/');await p.locator('.portfolio-link').first().waitFor();
-   await p.goForward();await p.waitForURL(base+'/');
-   // The deliberately aborted homepage models may reject; the directory did not load them.
-   const blockedHomeErrors=errors.splice(0);
-   await p.unroute('**/webgl/**/*.glb');
-   await p.goto(base+'/',{waitUntil:'domcontentloaded',timeout:90000});
-   await p.waitForFunction(()=>!document.getElementById('syl-early'),null,{timeout:90000});
+   await p.bringToFront();
+   await p.waitForFunction(()=>performance.getEntriesByName('syl-native-ready').length,null,{timeout:90000});
+   if(await p.locator('#syl-early').count())throw new Error('Temporary page returned');
    if(width>=500)await p.locator('a.projectsBttn').click();
    else{
     const target=p.locator('.footer__projectsCta');
@@ -33,8 +24,11 @@ async (page) => {
    }
    await p.waitForURL(base+'/portfolio/');await p.locator('.portfolio-link').first().waitFor();
    if(new URL(p.url()).pathname!=='/portfolio/')throw new Error('Native home link changed address');
+   await p.locator('.portfolio-header a[href="/"]').click();await p.waitForURL(base+'/');
+   await p.goBack();await p.waitForURL(base+'/portfolio/');await p.locator('.portfolio-link').first().waitFor();
+   await p.goForward();await p.waitForURL(base+'/');
    if(errors.length)throw new Error(errors.join('\n'));
-   results.push({width,earlyHome:true,nativeHome:true,history:true,links:7,blockedHomeErrors,errors});
+   results.push({width,nativeHome:true,history:true,links:7,errors});
   }finally{await context.close();}
  }
  return {base,passed:true,results};

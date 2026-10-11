@@ -61,6 +61,11 @@ class LoaderBatchTests(unittest.TestCase):
                 self.assertEqual(loaders[0].select_one("svg path")["d"], expected)
                 self.assertIsNone(loaders[0].find_parent(id="__nuxt"))
                 self.assertIsNotNone(soup.select_one("#__nuxt noscript"))
+                self.assertIsNone(soup.select_one('#syl-early'))
+                self.assertNotIn('syl-fast-early', soup.html.get('class', []))
+                self.assertEqual(loaders[0]['aria-valuenow'], '0')
+                self.assertEqual(loaders[0]['aria-valuemax'], '100')
+                self.assertNotIn('aria-hidden', soup.select_one('#__nuxt').attrs)
 
     def test_font_refreshes_between_batches_and_every_page_keeps_loader(self):
         # A process running two builds must pick up a changed font, rather than a global cache.
