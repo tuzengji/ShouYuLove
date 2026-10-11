@@ -19,4 +19,4 @@
 
 - 手机「添加到桌面」仅在作品集显示；文案由正文 MD 生成。维护时保留原生提示与浏览器指引，检查声音开关间距、安全区、横屏、站内切换和独立窗口隐藏；使用 `tests/home_shortcut.js`。
 
-- 2026-10-11：作品集改为独立轻量 `/portfolio/`，旧目录入口使用 308；七个详情地址保留。`styles/portfolio.css` 和 `scripts/portfolio.js` 维护始终可用的静态目录；完整原生三维场景在内容首次绘制至少两秒后于后台加载。保持原有模型、着色器、鼠标跟随和流体交互，不可用纹理替代；禁止阻塞内容或加载音乐。`scripts/optimize_runtime.py` 将原生场景保留在独立目录后方，禁止重置目录滚动、改变正式地址或覆盖作品列表。回归入口 `tests/portfolio_scene.js`。私有统计源码在 `deploy/private_stats/`，数据库与密钥仅留服务器；检查统计资料不可从网站下载，QA 请求不得污染访问数字。当前构建清单 `output/deployment/shouyulove-portfolio-3d-20261011/`。
+- 2026-10-11：作品集改为独立轻量 `/portfolio/`，旧目录入口使用 308；七个详情地址保留。`styles/portfolio.css` 和 `scripts/portfolio.js` 维护始终可用的静态目录；完整原生三维场景在内容首次绘制至少两秒后于后台加载。保持原有模型、着色器、鼠标跟随和流体交互，不可用纹理替代；禁止阻塞内容或加载音乐。`scripts/optimize_runtime.py` 将原生场景保留在独立目录后方，禁止重置目录滚动、改变正式地址或覆盖作品列表。回归入口 `tests/portfolio_scene.js`。私有统计源码在 `deploy/private_stats/`，数据库与密钥仅留服务器；检查统计资料不可从网站下载，QA 请求不得污染访问数字。当前构建清单 `output/deployment/shouyulove-portfolio-secondary-20261011/`。

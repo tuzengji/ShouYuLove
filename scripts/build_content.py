@@ -19,7 +19,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-portfolio-3d-20261011"
+RECORDS = ROOT / "output/deployment/shouyulove-portfolio-secondary-20261011"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -591,8 +591,8 @@ def portfolio_page(content):
               '<link rel="manifest" href="' + shared + '/shouyulove/works-manifest.' + MODULE_VERSION + '.json"/>',
               '<style>' + css + '</style></head><body class="portfolio-page">',
               '<div class="portfolio-background" aria-hidden="true" data-scene="' + scene_url + '"></div>',
-              '<header class="portfolio-header"><p>以手予爱 <span lang="en">ShouYuLove</span></p><a href="/">' + html.escape(content['portfolio']['home']) + '</a></header>',
-              '<main id="portfolio"><h1>' + html.escape(content['portfolio']['title']) + '</h1>']
+              '<header class="portfolio-header"><h1>' + html.escape(content['portfolio']['title']) + '</h1><a href="/">' + html.escape(content['portfolio']['home']) + '</a></header>',
+              '<main id="portfolio">']
     category = None
     priorities = {name: index for index, name in enumerate(content['portfolio']['order'])}
     for project in sorted(content['projects'], key=lambda project: priorities[project['category']]):
