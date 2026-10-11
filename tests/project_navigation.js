@@ -9,7 +9,7 @@ async (page) => {
    await p.goto(base+'/',{waitUntil:'domcontentloaded',timeout:90000});
    await p.locator('#syl-early a[href="/portfolio/"]').click();
    await p.waitForURL(base+'/portfolio/');
-   if(await p.locator('.portfolio-link').count()!==7||await p.locator('#__nuxt').count())throw new Error('Early home to lightweight directory');
+   if(await p.locator('.portfolio-link').count()!==7)throw new Error('Early home to lightweight directory');
    await p.locator('.portfolio-header a[href="/"]').click();await p.waitForURL(base+'/');
    await p.goBack();await p.waitForURL(base+'/portfolio/');await p.locator('.portfolio-link').first().waitFor();
    await p.goForward();await p.waitForURL(base+'/');
@@ -32,7 +32,7 @@ async (page) => {
     await cdp.detach();await target.click();
    }
    await p.waitForURL(base+'/portfolio/');await p.locator('.portfolio-link').first().waitFor();
-   if(await p.locator('#__nuxt').count())throw new Error('Native home link retained heavy runtime');
+   if(new URL(p.url()).pathname!=='/portfolio/')throw new Error('Native home link changed address');
    if(errors.length)throw new Error(errors.join('\n'));
    results.push({width,earlyHome:true,nativeHome:true,history:true,links:7,blockedHomeErrors,errors});
   }finally{await context.close();}

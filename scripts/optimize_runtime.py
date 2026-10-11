@@ -42,6 +42,12 @@ def optimize_chunk(name, text, version):
     replace('e.push(...D3(t))', 'e.push(...D3({...t,preload:!1}))')
     replace('function d(){s.setAsLoaded(),p()}',
             'function d(){s.setAsLoaded(),p(),__sylAfterReady(h)}')
+    # The independent directory reuses the full native scene as a background.
+    # Its document keeps scrolling/links; only this page binds scene input globally.
+    replace('const r=document.querySelector("#__nuxt");r[n]("click",this._handleClick),r[n]("mousemove",this._mousemove)',
+            'const r=window.__sylPortfolio?document:document.querySelector("#__nuxt");r[n]("click",this._handleClick),r[n]("mousemove",this._mousemove)')
+    replace('scrollBehavior(i,e,t){var c;const n=Bn()',
+            'scrollBehavior(i,e,t){if(window.__sylPortfolio)return false;var c;const n=Bn()')
 
     # One embedded vector mask gives DOM and GPU logos the same broad,
     # uneven feathering without another network request or edited logo files.
@@ -125,11 +131,22 @@ $ye.prototype.show=function(){
 $ye.prototype.hide=function(){this.__sylFooterWanted=false;return this.sceneComponent?__sylFooterHide.call(this):Ie.timeline();};
 const __sylPlayTheme=Fde.prototype.playTheme;
 Fde.prototype.playTheme=function(theme){
+  if(window.__sylPortfolio)return;
   if(js._initialLoading!==false){this.__sylPendingTheme=theme;return;}
   return __sylPlayTheme.call(this,theme);
 };
 function __sylAfterReady(app){
   setTimeout(()=>{
+    if(window.__sylPortfolio){
+      const timer=setInterval(()=>{
+        const view=app.viewManager.get("projects")?.instance;
+        if(!dh().ready||!as().mainLoader.progressComplete||!view?._components?.bgSimulation)return;
+        clearInterval(timer);
+        view._sceneUi.visible=false;
+        window.__sylPortfolio.ready(app,view);
+      },50);
+      return;
+    }
     const footer=app.viewManager.get("footer")?.instance;
     const observer=footer&&new IntersectionObserver(entries=>{if(entries.some(e=>e.isIntersecting)){observer.disconnect();__sylLoadScene(footer).catch(console.error);}},{rootMargin:"200% 0px"});
     document.querySelectorAll("#__nuxt .footer").forEach(e=>observer?.observe(e));
@@ -138,5 +155,7 @@ function __sylAfterReady(app){
     if(theme!==undefined)vo.playTheme(theme);
   },0);
 }
+const __sylAudioInit=Fde.prototype.init;
+Fde.prototype.init=function(){if(!window.__sylPortfolio)return __sylAudioInit.call(this);};
 '''
     return text

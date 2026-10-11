@@ -19,7 +19,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-portfolio-lite-20261011"
+RECORDS = ROOT / "output/deployment/shouyulove-portfolio-3d-20261011"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -30,8 +30,8 @@ OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/ho
 FONT_SOURCE = ROOT / "output/deployment/shouyulove-home-shortcut-20261011/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
 FONT_VERSION = "syl-v1-1-home-shortcut"
-MODULE_VERSION = "syl-v1-1-portfolio-lite"
-BRIDGE_VERSION = "syl-v1-1-md-source"
+MODULE_VERSION = "syl-v1-1-portfolio-3d"
+BRIDGE_VERSION = "syl-v1-1-portfolio-3d"
 SOURCE = source_path(ROOT)
 
 
@@ -69,8 +69,10 @@ def parse_content(text=None):
     shortcut = dict(line.split("：", 1) for line in section(text, "添加到桌面").splitlines() if line.strip())
     assert set(shortcut) == {"按钮", "关闭", "iPhone", "其他浏览器", "内置浏览器"} and all(shortcut.values()), "Shortcut copy"
     labels = dict(line.split("：", 1) for line in section(text, "作品集页面").splitlines() if line.strip())
-    assert set(labels) == {"标题", "首页入口"} and all(labels.values()), "Portfolio copy"
-    portfolio = dict(title=labels['标题'], home=labels['首页入口'])
+    assert set(labels) == {"标题", "首页入口", "展示顺序"} and all(labels.values()), "Portfolio copy"
+    order = labels['展示顺序'].split('、')
+    assert len(order) == 3 and set(order) == {"核心创意", "其他作品", "心创组内部使用"}, "Portfolio category order"
+    portfolio = dict(title=labels['标题'], home=labels['首页入口'], order=order)
     return dict(projects=projects, members=members, dream=section(text, "我们的梦想是").strip("* "),
                 shortcut=shortcut, portfolio=portfolio,
                 vision=vision,
@@ -192,7 +194,7 @@ def make_pages(content):
                            text_block("心创组第一届成员", '<div class="memberGrid">'+"".join('<span class="memberName">'+html.escape(name)+"</span>" for name in content["members"])+"</div>"),
                            dict(type="footer")])
     pages[""] = home
-    pages["projects"] = dict(uri="projects", slug="projects", type="projects", title="作品集", url="/projects/",
+    pages["projects"] = dict(uri="portfolio", slug="portfolio", type="projects", title="作品集", url="/portfolio/",
                               loaded=True, loading=False, metas=None, blocks=[dict(type="hero", text1="作品集", textAlign="center"),
                                dict(type="listingProjects"), dict(type="footer")])
     sections = [("the-studio", "心创组", content["identity"], [text_block("", content["series"]), text_block("愿景",content["vision"])]),
@@ -566,6 +568,19 @@ def portfolio_page(content):
     css = (ROOT / "styles/portfolio.css").read_text().replace("__SHARED__", shared).replace("__FONT_VERSION__", FONT_VERSION)
     shortcut_css = (ROOT / "styles/shouyulove-v1-1-jieguo.css").read_text().split("/* Keep the works shortcut", 1)[1]
     css += "\n/* Keep the works shortcut" + shortcut_css + '\n#syl-home-shortcut { bottom: calc(20px + env(safe-area-inset-bottom)); }'
+    native = BeautifulSoup((OUT / 'projects/index.html').read_text(), 'html.parser')
+    config_script = next(s.string for s in native.find_all('script') if s.string and 'window.__NUXT__.config=' in s.string)
+    config = json.loads(config_script.split('window.__NUXT__.config=', 1)[1].rstrip(';'))
+    pages = json.loads((OUT / SHARED / ('local-bridge.' + BRIDGE_VERSION + '.js')).read_text().split('=', 1)[1].rstrip(';\n'))
+    pages['portfolio'] = dict(pages['projects'], uri='portfolio', slug='portfolio', url='/portfolio/')
+    # Keep Nuxt's scene boot data off the critical HTML path, with its own cache version.
+    boot = revive(json.loads(native.select_one('#__NUXT_DATA__').string))
+    boot['path'] = '/portfolio/'
+    scene = dict(data=json.dumps(flatten(boot), ensure_ascii=False, separators=(',', ':')), config=config, pages=pages,
+                 styles=[link['href'] for link in native.select('link[rel="stylesheet"]')],
+                 entry=native.select_one('script[type="module"][src]')['src'])
+    scene_url = '/assets/portfolio-scene.' + MODULE_VERSION + '.json'
+    (OUT / SHARED / scene_url.removeprefix('/')).write_text(json.dumps(scene, ensure_ascii=False, separators=(',', ':')))
     pieces = ['<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/>',
               '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>',
               '<title>' + html.escape(content['portfolio']['title']) + ' · 以手予爱 ShouYuLove</title>',
@@ -575,16 +590,18 @@ def portfolio_page(content):
               '<link rel="apple-touch-icon" href="' + shared + '/shouyulove/apple-touch-icon.png"/>',
               '<link rel="manifest" href="' + shared + '/shouyulove/works-manifest.' + MODULE_VERSION + '.json"/>',
               '<style>' + css + '</style></head><body class="portfolio-page">',
-              '<div class="portfolio-background" aria-hidden="true" data-texture="/webgl/home/plaster.jpg"></div>',
+              '<div class="portfolio-background" aria-hidden="true" data-scene="' + scene_url + '"></div>',
               '<header class="portfolio-header"><p>以手予爱 <span lang="en">ShouYuLove</span></p><a href="/">' + html.escape(content['portfolio']['home']) + '</a></header>',
               '<main id="portfolio"><h1>' + html.escape(content['portfolio']['title']) + '</h1>']
     category = None
-    for project in content['projects']:
+    priorities = {name: index for index, name in enumerate(content['portfolio']['order'])}
+    for project in sorted(content['projects'], key=lambda project: priorities[project['category']]):
         if project['category'] != category:
             if category is not None:
                 pieces.append('</ul></section>')
             category = project['category']
-            pieces.append('<section class="portfolio-section"><h2>' + html.escape(category) + '</h2><ul>')
+            secondary = ' portfolio-section--secondary' if category == '其他作品' else ''
+            pieces.append('<section class="portfolio-section' + secondary + '"><h2>' + html.escape(category) + '</h2><ul>')
         pieces.append('<li><a class="portfolio-link" href="' + html.escape(project['url'], quote=True) +
                       '" target="_blank" rel="noopener noreferrer"><div><h3>' + html.escape(project['title']) +
                       '</h3><p>设计者：' + html.escape(project['designers']) + '</p></div>' +
