@@ -45,6 +45,7 @@ class LoaderBatchTests(unittest.TestCase):
         fallback.parent.mkdir(parents=True)
         fallback.write_text(template)
         self.content = dict(identity="Example", series="Series", dream="Dream", vision="Vision",
+                            shortcut={"按钮": "Add", "关闭": "Close", "iPhone": "Share", "其他浏览器": "Menu", "内置浏览器": "Browser"},
                             projects=[], boundaries=[], members=[])
         self.pages = {"" if i == 0 else f"page-{i}":
                       {"title": f"Page {i}", "url": "/" if i == 0 else f"/page-{i}/", "type": "home" if i == 0 else "project"}

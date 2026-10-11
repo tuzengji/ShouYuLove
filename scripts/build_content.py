@@ -19,7 +19,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-projects-blank-20261010"
+RECORDS = ROOT / "output/deployment/shouyulove-home-shortcut-20261011"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -27,10 +27,10 @@ V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
-FONT_SOURCE = ROOT / "output/deployment/shouyulove-md-binding-20261010/font-source"
+FONT_SOURCE = RECORDS / "font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
-FONT_VERSION = "syl-v1-1-md-source"
-MODULE_VERSION = "syl-v1-1-projects-ready"
+FONT_VERSION = "syl-v1-1-home-shortcut"
+MODULE_VERSION = "syl-v1-1-home-shortcut"
 BRIDGE_VERSION = "syl-v1-1-md-source"
 SOURCE = source_path(ROOT)
 
@@ -66,7 +66,10 @@ def parse_content(text=None):
     vision = section(text, "愿景")
     # The source document includes an editing note outside the published blockquote.
     vision = "\n".join(line.removeprefix("> ").strip() for line in vision.splitlines() if line.startswith("> ")) or vision.split("\n\n", 1)[0]
+    shortcut = dict(line.split("：", 1) for line in section(text, "添加到桌面").splitlines() if line.strip())
+    assert set(shortcut) == {"按钮", "关闭", "iPhone", "其他浏览器", "内置浏览器"} and all(shortcut.values()), "Shortcut copy"
     return dict(projects=projects, members=members, dream=section(text, "我们的梦想是").strip("* "),
+                shortcut=shortcut,
                 vision=vision,
                 boundaries=[line[2:] for line in section(text, "边界").splitlines() if line.startswith("- ")],
                 identity=identity, series=series,
@@ -105,6 +108,16 @@ def raster_assets(content):
     shutil.copy2(FONT_SOURCE / "OFL-SweiSpring.txt", destination / "OFL-SweiSpring.txt")
     for name in ["favicon.png", "apple-touch-icon.png"]:
         shutil.copy2(OLD_ASSETS / "images" / name, destination / name)
+    icon = Image.open(destination / "apple-touch-icon.png").convert("RGB")
+    icons = []
+    for size in [192, 512]:
+        name = f"home-icon-{size}.{MODULE_VERSION}.png"
+        icon.resize((size, size), Image.Resampling.LANCZOS).save(destination / name, optimize=True)
+        icons.append(dict(src="/" + str(SHARED / "shouyulove" / name), sizes=f"{size}x{size}", type="image/png"))
+    manifest = dict(id="/projects/", name="以手予爱 ShouYuLove", short_name="以手予爱", lang="zh-CN",
+                    start_url="/projects/", scope="/projects/", display="standalone", icons=icons,
+                    theme_color="#e8e8e8", background_color="#e8e8e8")
+    (destination / f"works-manifest.{MODULE_VERSION}.json").write_text(json.dumps(manifest, ensure_ascii=False) + "\n")
 
 
 def chinese_atlases():
@@ -442,6 +455,22 @@ def early_page(content, page):
     return BeautifulSoup(''.join(pieces), 'html.parser').main
 
 
+def home_shortcut(content):
+    copy = content["shortcut"]
+    label = html.escape(copy["按钮"])
+    close = html.escape(copy["关闭"])
+    return BeautifulSoup('<div id="syl-home-shortcut" hidden>'
+        '<button id="syl-home-shortcut-button" type="button" aria-controls="syl-shortcut-guide" aria-expanded="false">'
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></svg>' + label + '</button>'
+        '<aside id="syl-shortcut-guide" role="region" aria-labelledby="syl-shortcut-title" hidden '
+        'data-ios="' + html.escape(copy["iPhone"], quote=True) + '" data-other="' + html.escape(copy["其他浏览器"], quote=True) +
+        '" data-embedded="' + html.escape(copy["内置浏览器"], quote=True) + '">'
+        '<h2 id="syl-shortcut-title">' + label + '</h2><p></p>'
+        '<button type="button" class="syl-shortcut-close" aria-label="' + close + '">'
+        '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg></button>'
+        '</aside></div>', 'html.parser').div
+
+
 def html_pages(content, pages, listing, renames, wordmark=None):
     # A full CJK font is expensive to decode; build the identical loader once per batch.
     # Clone its DOM per page because BeautifulSoup moves inserted nodes between parents.
@@ -470,6 +499,8 @@ def html_pages(content, pages, listing, renames, wordmark=None):
         soup.html['class'] = ['syl-fast-early']
         soup.title.string = "以手予爱 ShouYuLove" if not route else page["title"]+" · 以手予爱 ShouYuLove"
         for meta in soup.find_all("meta"):
+            if meta.get("name") == "apple-mobile-web-app-title":
+                meta["content"] = "以手予爱"
             if meta.get("name") == "description" or meta.get("property") in ["og:description","twitter:description"]:
                 meta["content"] = content["identity"]
             if meta.get("property") in ["og:title","twitter:title"]:
@@ -488,6 +519,9 @@ def html_pages(content, pages, listing, renames, wordmark=None):
                 node["href"] = "/"+str(SHARED/"shouyulove/favicon.png")
             if "apple-touch-icon" in node.get("rel",[]):
                 node["href"] = "/"+str(SHARED/"shouyulove/apple-touch-icon.png")
+            if "manifest" in node.get("rel", []):
+                node.decompose()
+        soup.head.append(soup.new_tag("link", rel="manifest", href="/" + str(SHARED / "shouyulove" / f"works-manifest.{MODULE_VERSION}.json")))
         stylesheet = soup.new_tag("link",rel="stylesheet",href="/assets/shouyulove." + MODULE_VERSION + ".css")
         soup.head.append(stylesheet)
         boot_style = soup.new_tag("style", id="boot-loader-style")
@@ -502,6 +536,8 @@ def html_pages(content, pages, listing, renames, wordmark=None):
         preview.insert_before(copy.deepcopy(loader))
         soup.body.append(BeautifulSoup(logo_svg_filter(), 'html.parser').svg)
         soup.body.append(soup.new_tag('script', src='/assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
+        soup.body.append(home_shortcut(content))
+        soup.body.append(soup.new_tag('script', src='/assets/home-shortcut.' + MODULE_VERSION + '.js'))
         fallback = BeautifulSoup('<noscript><style>#boot-loader{display:none}</style><main class="static-preview"><h1>以手予爱<br/>ShouYuLove</h1><p>'+html.escape(content["identity"])+
             '</p><p>'+html.escape(content["series"])+ '</p><h2>梦想</h2><p>'+html.escape(content["dream"])+
             '</p><h2>愿景</h2><p>'+html.escape(content["vision"])+ '</p>'+''.join('<h2>'+html.escape(p["title"])+
@@ -561,6 +597,7 @@ def main():
     html_pages(content,pages,listing,renames,wordmark)
     shutil.copy2(ROOT/"styles/shouyulove-v1-1-jieguo.css", OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css"))
     shutil.copy2(ROOT/'scripts/fast_bootstrap.js', OUT/SHARED/('assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
+    shutil.copy2(ROOT/'scripts/home_shortcut.js', OUT/SHARED/('assets/home-shortcut.' + MODULE_VERSION + '.js'))
     shutil.copytree(MOBILE_TEXTURES, OUT/SHARED/'webgl/about/model/textures/ktx2/mobile')
     sounds = OUT / SHARED / "sounds/general"
     for name in ["IG_HomePage_v5_v4.mp3", "IG_FocusPage_v5_v8.mp3", "IG_AboutPage_v5_v5.mp3"]:
