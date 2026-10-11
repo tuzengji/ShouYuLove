@@ -33,8 +33,8 @@
       "sha256": "dca051daf8d96ac54379b5685a45b300213a038627fbdb9af8d76e535f61ea6e"
     },
     "portfolio/index.html": {
-      "bytes": 11282,
-      "sha256": "1e8dddfad3d66080d56d272c71de092be0b5473982d0c3b6bef9f771b03db96d"
+      "bytes": 11198,
+      "sha256": "61c823ecf6f7920fc9f5d9211016aa48bf553b6267bcea822e01f16f959e31ee"
     },
     "projects/_payload.json": {
       "bytes": 350,
@@ -1012,5 +1012,5 @@
     "sounds": "sites/immersive-g-com-955afd14/shared/sounds",
     "webgl": "sites/immersive-g-com-955afd14/shared/webgl"
   },
-  "bytes": 110395760
+  "bytes": 110395676
 }

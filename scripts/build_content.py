@@ -19,7 +19,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-portfolio-secondary-20261011"
+RECORDS = ROOT / "output/deployment/shouyulove-portfolio-other-credit-20261011"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -69,10 +69,12 @@ def parse_content(text=None):
     shortcut = dict(line.split("：", 1) for line in section(text, "添加到桌面").splitlines() if line.strip())
     assert set(shortcut) == {"按钮", "关闭", "iPhone", "其他浏览器", "内置浏览器"} and all(shortcut.values()), "Shortcut copy"
     labels = dict(line.split("：", 1) for line in section(text, "作品集页面").splitlines() if line.strip())
-    assert set(labels) == {"标题", "首页入口", "展示顺序"} and all(labels.values()), "Portfolio copy"
+    assert set(labels) == {"标题", "首页入口", "展示顺序", "其他作品设计者"} and all(labels.values()), "Portfolio copy"
     order = labels['展示顺序'].split('、')
     assert len(order) == 3 and set(order) == {"核心创意", "其他作品", "心创组内部使用"}, "Portfolio category order"
-    portfolio = dict(title=labels['标题'], home=labels['首页入口'], order=order)
+    assert labels['其他作品设计者'] in {'显示', '不显示'}, "Other-project credit setting"
+    portfolio = dict(title=labels['标题'], home=labels['首页入口'], order=order,
+                     show_other_designers=labels['其他作品设计者'] == '显示')
     return dict(projects=projects, members=members, dream=section(text, "我们的梦想是").strip("* "),
                 shortcut=shortcut, portfolio=portfolio,
                 vision=vision,
@@ -602,9 +604,10 @@ def portfolio_page(content):
             category = project['category']
             secondary = ' portfolio-section--secondary' if category == '其他作品' else ''
             pieces.append('<section class="portfolio-section' + secondary + '"><h2>' + html.escape(category) + '</h2><ul>')
+        credit = ('<p>设计者：' + html.escape(project['designers']) + '</p>') if category != '其他作品' or content['portfolio']['show_other_designers'] else ''
         pieces.append('<li><a class="portfolio-link" href="' + html.escape(project['url'], quote=True) +
                       '" target="_blank" rel="noopener noreferrer"><div><h3>' + html.escape(project['title']) +
-                      '</h3><p>设计者：' + html.escape(project['designers']) + '</p></div>' +
+                      '</h3>' + credit + '</div>' +
                       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li>')
     if category is not None:
         pieces.append('</ul></section>')
