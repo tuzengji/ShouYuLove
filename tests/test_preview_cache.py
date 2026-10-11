@@ -21,6 +21,15 @@ class CachePolicyTests(unittest.TestCase):
             thread = Thread(target=server.serve_forever, daemon=True)
             thread.start()
             try:
+                for method in ['GET', 'HEAD']:
+                    for path in ['/projects', '/projects/', '/projects/index.html', '/portfolio']:
+                        client = HTTPConnection('127.0.0.1', server.server_port)
+                        client.request(method, path + '?from=test')
+                        response = client.getresponse()
+                        self.assertEqual(response.status, 308)
+                        self.assertEqual(response.getheader('Location'), '/portfolio/?from=test')
+                        response.read()
+                        client.close()
                 for name, age in [('index.html', 'no-cache'), ('entry.syl-v1-1-fast.js', 'public, max-age=31536000, immutable'), ('entry.AbCdEf12.js', 'public, max-age=31536000, immutable'), ('plain.json', 'public, max-age=3600'), ('missing.syl-v1-1-fast.js', 'no-store')]:
                     with self.subTest(name=name):
                         client = HTTPConnection('127.0.0.1', server.server_port)

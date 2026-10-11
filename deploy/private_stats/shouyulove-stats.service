@@ -1,0 +1,23 @@
+[Unit]
+Description=ShouYuLove private daily visit statistics
+After=local-fs.target
+
+[Service]
+Type=simple
+User=root
+Group=www-data
+UMask=0077
+RuntimeDirectory=shouyulove-stats
+RuntimeDirectoryMode=0750
+StateDirectory=shouyulove-stats
+StateDirectoryMode=0700
+ExecStart=/usr/bin/python3 /opt/shouyulove-stats/visits.py serve
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

@@ -15,7 +15,7 @@
   }
 
   function update() {
-    wrapper.hidden = !mobile.matches || !/^\/projects\/?$/.test(location.pathname) ||
+    wrapper.hidden = !mobile.matches || !/^\/portfolio\/?$/.test(location.pathname) ||
       installed || standalone.matches || navigator.standalone === true;
     if (wrapper.hidden) closeGuide();
   }

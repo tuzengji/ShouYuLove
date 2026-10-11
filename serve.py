@@ -16,6 +16,24 @@ class Server(ThreadingHTTPServer):
 
 
 class Handler(SimpleHTTPRequestHandler):
+    def redirect_directory(self):
+        url = urlsplit(self.path)
+        if url.path not in ('/projects', '/projects/', '/projects/index.html', '/portfolio'):
+            return False
+        self.send_response(308)
+        self.send_header('Location', '/portfolio/' + ('?' + url.query if url.query else ''))
+        self.send_header('Content-Length', '0')
+        self.end_headers()
+        return True
+
+    def do_GET(self):
+        if not self.redirect_directory():
+            super().do_GET()
+
+    def do_HEAD(self):
+        if not self.redirect_directory():
+            super().do_HEAD()
+
     def send_response(self, code, message=None):
         self.response_status = code
         super().send_response(code, message)

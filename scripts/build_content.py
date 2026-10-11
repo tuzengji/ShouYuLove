@@ -19,7 +19,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-home-shortcut-20261011"
+RECORDS = ROOT / "output/deployment/shouyulove-portfolio-lite-20261011"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -27,10 +27,10 @@ V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
-FONT_SOURCE = RECORDS / "font-source"
+FONT_SOURCE = ROOT / "output/deployment/shouyulove-home-shortcut-20261011/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
 FONT_VERSION = "syl-v1-1-home-shortcut"
-MODULE_VERSION = "syl-v1-1-home-shortcut"
+MODULE_VERSION = "syl-v1-1-portfolio-lite"
 BRIDGE_VERSION = "syl-v1-1-md-source"
 SOURCE = source_path(ROOT)
 
@@ -68,8 +68,11 @@ def parse_content(text=None):
     vision = "\n".join(line.removeprefix("> ").strip() for line in vision.splitlines() if line.startswith("> ")) or vision.split("\n\n", 1)[0]
     shortcut = dict(line.split("：", 1) for line in section(text, "添加到桌面").splitlines() if line.strip())
     assert set(shortcut) == {"按钮", "关闭", "iPhone", "其他浏览器", "内置浏览器"} and all(shortcut.values()), "Shortcut copy"
+    labels = dict(line.split("：", 1) for line in section(text, "作品集页面").splitlines() if line.strip())
+    assert set(labels) == {"标题", "首页入口"} and all(labels.values()), "Portfolio copy"
+    portfolio = dict(title=labels['标题'], home=labels['首页入口'])
     return dict(projects=projects, members=members, dream=section(text, "我们的梦想是").strip("* "),
-                shortcut=shortcut,
+                shortcut=shortcut, portfolio=portfolio,
                 vision=vision,
                 boundaries=[line[2:] for line in section(text, "边界").splitlines() if line.startswith("- ")],
                 identity=identity, series=series,
@@ -115,7 +118,7 @@ def raster_assets(content):
         icon.resize((size, size), Image.Resampling.LANCZOS).save(destination / name, optimize=True)
         icons.append(dict(src="/" + str(SHARED / "shouyulove" / name), sizes=f"{size}x{size}", type="image/png"))
     manifest = dict(id="/projects/", name="以手予爱 ShouYuLove", short_name="以手予爱", lang="zh-CN",
-                    start_url="/projects/", scope="/projects/", display="standalone", icons=icons,
+                    start_url="/portfolio/", scope="/portfolio/", display="standalone", icons=icons,
                     theme_color="#e8e8e8", background_color="#e8e8e8")
     (destination / f"works-manifest.{MODULE_VERSION}.json").write_text(json.dumps(manifest, ensure_ascii=False) + "\n")
 
@@ -408,6 +411,7 @@ def runtime_chunks(wordmark=None):
                              "https://fr.linkedin.com/company/immersive-garden":"/", 'te(" X ")':'te(" 作品集 ")',
                              'te(" Instagram ")':'te(" 心创组 ")', 'te(" Linkedin ")':'te(" 首页 ")'}.items():
                 text = text.replace(old, new)
+            text = text.replace('"/projects/"', '"/portfolio/"')
         if path.name == "AboutPage.DgUWXiAT.js":
             text = text.replace(" Click to explore ", " 点击了解 ")
             # Native mobile uses DOM text; desktop uses the original WebGL title meshes.
@@ -429,7 +433,7 @@ def runtime_chunks(wordmark=None):
 
 def early_page(content, page):
     """Accessible approved content, replaced once the native view is ready."""
-    pieces = ['<main id="syl-early" class="homePage"><nav class="syl-early-nav"><a href="/">首页</a><a href="/the-studio/">心创组</a></nav><div class="page__wrapper">']
+    pieces = ['<main id="syl-early" class="homePage"><nav class="syl-early-nav"><a href="/">首页</a><a href="/the-studio/">心创组</a><a href="/portfolio/">作品集</a></nav><div class="page__wrapper">']
     title = '以手予爱<br/>ShouYuLove' if page['type'] == 'home' else html.escape(page['title'])
     pieces.append('<section class="syl-early-brand" data-syl-key="brand"><h1>' + title + '</h1></section>')
     for block in page.get('blocks', []):
@@ -556,6 +560,46 @@ def html_pages(content, pages, listing, renames, wordmark=None):
     (OUT / SHARED / ("local-bridge." + BRIDGE_VERSION + ".js")).write_text("window.__IG_LOCAL_PAGES__="+json.dumps(pages,ensure_ascii=False,separators=(",",":"))+";\n")
 
 
+def portfolio_page(content):
+    """The directory stays usable without JavaScript, fonts or background resources."""
+    shared = "/" + str(SHARED)
+    css = (ROOT / "styles/portfolio.css").read_text().replace("__SHARED__", shared).replace("__FONT_VERSION__", FONT_VERSION)
+    shortcut_css = (ROOT / "styles/shouyulove-v1-1-jieguo.css").read_text().split("/* Keep the works shortcut", 1)[1]
+    css += "\n/* Keep the works shortcut" + shortcut_css + '\n#syl-home-shortcut { bottom: calc(20px + env(safe-area-inset-bottom)); }'
+    pieces = ['<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/>',
+              '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>',
+              '<title>' + html.escape(content['portfolio']['title']) + ' · 以手予爱 ShouYuLove</title>',
+              '<meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="以手予爱"/>',
+              '<link rel="canonical" href="https://shouyulove.cn/portfolio/"/>',
+              '<link rel="icon" href="' + shared + '/shouyulove/favicon.png"/>',
+              '<link rel="apple-touch-icon" href="' + shared + '/shouyulove/apple-touch-icon.png"/>',
+              '<link rel="manifest" href="' + shared + '/shouyulove/works-manifest.' + MODULE_VERSION + '.json"/>',
+              '<style>' + css + '</style></head><body class="portfolio-page">',
+              '<div class="portfolio-background" aria-hidden="true" data-texture="/webgl/home/plaster.jpg"></div>',
+              '<header class="portfolio-header"><p>以手予爱 <span lang="en">ShouYuLove</span></p><a href="/">' + html.escape(content['portfolio']['home']) + '</a></header>',
+              '<main id="portfolio"><h1>' + html.escape(content['portfolio']['title']) + '</h1>']
+    category = None
+    for project in content['projects']:
+        if project['category'] != category:
+            if category is not None:
+                pieces.append('</ul></section>')
+            category = project['category']
+            pieces.append('<section class="portfolio-section"><h2>' + html.escape(category) + '</h2><ul>')
+        pieces.append('<li><a class="portfolio-link" href="' + html.escape(project['url'], quote=True) +
+                      '" target="_blank" rel="noopener noreferrer"><div><h3>' + html.escape(project['title']) +
+                      '</h3><p>设计者：' + html.escape(project['designers']) + '</p></div>' +
+                      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li>')
+    if category is not None:
+        pieces.append('</ul></section>')
+    pieces.extend(['</main>', str(home_shortcut(content)),
+                   '<script defer src="/assets/home-shortcut.' + MODULE_VERSION + '.js"></script>',
+                   '<script defer src="/assets/portfolio.' + MODULE_VERSION + '.js"></script></body></html>'])
+    destination = OUT / 'portfolio/index.html'; destination.parent.mkdir(parents=True)
+    destination.write_text(''.join(pieces))
+    # Static exports retain a lightweight redirect even without an Nginx configuration.
+    (OUT / 'projects/index.html').write_text('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/><meta http-equiv="refresh" content="0;url=/portfolio/"/><link rel="canonical" href="https://shouyulove.cn/portfolio/"/><title>作品集</title></head><body><a href="/portfolio/">作品集</a></body></html>')
+
+
 def font_preview():
     source = ROOT / "字体候选"
     target = OUT / SHARED / "assets/font-preview-v1-1-2"
@@ -595,9 +639,11 @@ def main():
     wordmark = loader_wordmark()
     renames = runtime_chunks(wordmark)
     html_pages(content,pages,listing,renames,wordmark)
+    portfolio_page(content)
     shutil.copy2(ROOT/"styles/shouyulove-v1-1-jieguo.css", OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css"))
     shutil.copy2(ROOT/'scripts/fast_bootstrap.js', OUT/SHARED/('assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
     shutil.copy2(ROOT/'scripts/home_shortcut.js', OUT/SHARED/('assets/home-shortcut.' + MODULE_VERSION + '.js'))
+    shutil.copy2(ROOT/'scripts/portfolio.js', OUT/SHARED/('assets/portfolio.' + MODULE_VERSION + '.js'))
     shutil.copytree(MOBILE_TEXTURES, OUT/SHARED/'webgl/about/model/textures/ktx2/mobile')
     sounds = OUT / SHARED / "sounds/general"
     for name in ["IG_HomePage_v5_v4.mp3", "IG_FocusPage_v5_v8.mp3", "IG_AboutPage_v5_v5.mp3"]:
@@ -608,7 +654,9 @@ def main():
     assert SOURCE.read_text(encoding='utf-8') == source_text, 'Content source changed during build; run again.'
     sync_snapshot(ROOT, source_text)
     (RECORDS/"content.json").write_text(json.dumps(content,ensure_ascii=False,indent=2)+"\n")
-    manifest = dict(routes={page["url"]: (route+"/" if route else "")+"index.html" for route,page in pages.items()},files={},symlinks={},bytes=0)
+    routes = {page["url"]: (route+"/" if route else "")+"index.html" for route,page in pages.items() if route != 'projects'}
+    routes['/portfolio/'] = 'portfolio/index.html'
+    manifest = dict(routes=routes,redirects={'/projects':'/portfolio/','/projects/':'/portfolio/','/projects/index.html':'/portfolio/','/portfolio':'/portfolio/'},files={},symlinks={},bytes=0)
     for path in sorted(OUT.rglob("*")):
         name = str(path.relative_to(OUT))
         if path.is_symlink():

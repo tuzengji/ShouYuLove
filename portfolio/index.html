@@ -1,0 +1,67 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><title>作品集 · 以手予爱 ShouYuLove</title><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="以手予爱"/><link rel="canonical" href="https://shouyulove.cn/portfolio/"/><link rel="icon" href="/sites/immersive-g-com-955afd14/shared/shouyulove/favicon.png"/><link rel="apple-touch-icon" href="/sites/immersive-g-com-955afd14/shared/shouyulove/apple-touch-icon.png"/><link rel="manifest" href="/sites/immersive-g-com-955afd14/shared/shouyulove/works-manifest.syl-v1-1-portfolio-lite.json"/><style>@font-face { font-family: PSTimes; src: url('/sites/immersive-g-com-955afd14/shared/assets/PSTimes-Regular.hY69LrJ0.woff2') format('woff2'); font-display: swap; }
+@font-face { font-family: ShouYuSerif; src: url('/sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-home-shortcut.woff2') format('woff2'); font-display: swap; unicode-range: U+3000-9FFF, U+FF00-FFEF, U+2010-203F; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #f5f5f3; color: #172d23; font-family: PSTimes, ShouYuSerif, serif; }
+a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+a:focus-visible { outline: 2px solid #294c3a; outline-offset: 4px; }
+::selection { color: #fff; background: #294c3a; }
+.portfolio-background { position: fixed; inset: -20px; z-index: -1; pointer-events: none; background-size: 800px; opacity: 0; transition: opacity 600ms ease-out; }
+.portfolio-background.ready { opacity: .4; animation: paper-drift 32s ease-in-out infinite alternate; }
+.portfolio-header, #portfolio { width: min(700px, calc(100% - 48px)); margin-inline: auto; }
+.portfolio-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 28px 0 24px; }
+.portfolio-header p { margin: 0; font-size: 22px; line-height: 1.3; }
+.portfolio-header p span { font-size: 16px; }
+.portfolio-header > a { min-height: 44px; display: grid; align-items: center; font-size: 16px; }
+#portfolio { padding: 0 0 100px; }
+#portfolio h1 { margin: 0 0 28px; font-size: 36px; font-weight: 400; line-height: 1.2; }
+.portfolio-section + .portfolio-section { margin-top: 24px; }
+.portfolio-section h2 { margin: 0 0 6px; color: #486355; font-size: 16px; font-weight: 400; line-height: 1.5; }
+.portfolio-section ul { margin: 0; padding: 0; list-style: none; }
+.portfolio-link { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid #d9ded9; min-height: 70px; touch-action: manipulation; }
+.portfolio-link div { min-width: 0; }
+.portfolio-link h3 { margin: 0 0 4px; font-size: 22px; font-weight: 400; line-height: 1.35; overflow-wrap: anywhere; }
+.portfolio-link p { margin: 0; color: #486355; font-size: 14px; line-height: 1.5; overflow-wrap: anywhere; }
+.portfolio-link svg { flex: none; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+@media (hover:hover) and (pointer:fine) { .portfolio-link:hover { color: #37654a; } .portfolio-header > a:hover { text-decoration: underline; text-underline-offset: 4px; } }
+@media (max-width:640px) { .portfolio-header { padding: 20px 0; } #portfolio h1 { font-size: 30px; margin-bottom: 22px; } .portfolio-link h3 { font-size: 20px; } .portfolio-link p { font-size: 13px; } .portfolio-section + .portfolio-section { margin-top: 20px; } }
+@keyframes paper-drift { from { transform: translate(-8px, -8px); } to { transform: translate(8px, 8px); } }
+@media (prefers-reduced-motion:reduce) { .portfolio-background { animation: none; transition: none; } }
+
+/* Keep the works shortcut above the existing sound control and phone safe areas. */
+#syl-home-shortcut { display: none; }
+#syl-home-shortcut[hidden], #syl-shortcut-guide[hidden] { display: none !important; }
+@media (max-width:640px), (max-width:960px) and (max-height:640px) and (pointer:coarse) {
+  #syl-home-shortcut {
+    display: block; position: fixed; z-index: 100002;
+    right: max(20px, env(safe-area-inset-right));
+    bottom: calc(88px + env(safe-area-inset-bottom));
+    font-family: PSTimes, "ShouYuSerif", serif; color: #294c3a;
+  }
+  #syl-home-shortcut button { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  #syl-home-shortcut-button {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 44px; padding: 10px 16px; border: 0; border-radius: 999px;
+    background: #294c3a; color: #fff; font: inherit; font-size: 16px; line-height: 1.5;
+    touch-action: manipulation;
+  }
+  #syl-home-shortcut svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+  #syl-home-shortcut-button:active { background: #1d392b; }
+  #syl-home-shortcut-button:disabled { opacity: .65; cursor: wait; }
+  #syl-home-shortcut button:focus-visible { outline: 2px solid #294c3a; outline-offset: 4px; }
+  #syl-shortcut-guide {
+    position: absolute; bottom: calc(100% + 12px); right: 0;
+    width: min(300px, calc(100vw - 40px)); max-height: calc(100svh - 170px);
+    box-sizing: border-box; overflow: auto; padding: 22px;
+    border: 1px solid #9daaa2; border-radius: 12px; background: #e8e8e8;
+  }
+  #syl-shortcut-guide h2 { margin: 0 30px 12px 0; font: inherit; font-size: 22px; line-height: 1.4; }
+  #syl-shortcut-guide p { margin: 0; font-size: 16px; line-height: 1.75; text-wrap: pretty; }
+  #syl-shortcut-guide .syl-shortcut-close {
+    position: absolute; top: 8px; right: 8px; width: 44px; height: 44px;
+    display: grid; place-content: center; border: 0; border-radius: 50%;
+    background: transparent; color: inherit; touch-action: manipulation;
+  }
+  #syl-shortcut-guide ::selection { background: #294c3a; color: #fff; }
+}
+
+#syl-home-shortcut { bottom: calc(20px + env(safe-area-inset-bottom)); }</style></head><body class="portfolio-page"><div class="portfolio-background" aria-hidden="true" data-texture="/webgl/home/plaster.jpg"></div><header class="portfolio-header"><p>以手予爱 <span lang="en">ShouYuLove</span></p><a href="/">首页</a></header><main id="portfolio"><h1>作品集</h1><section class="portfolio-section"><h2>核心创意</h2><ul><li><a class="portfolio-link" href="https://shouyulove.cn/signtrace/" target="_blank" rel="noopener noreferrer"><div><h3>以手寻语 SignTrace</h3><p>设计者：涂增基 朱星晔 王宁静 黄庭逸</p></div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li><li><a class="portfolio-link" href="https://shouyulove.cn/dict" target="_blank" rel="noopener noreferrer"><div><h3>分社手语词典</h3><p>设计者：朱星晔</p></div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li><li><a class="portfolio-link" href="https://shouyulove.cn/chuanqinghuiyi/" target="_blank" rel="noopener noreferrer"><div><h3>传情绘意-手语版</h3><p>设计者：涂增基</p></div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li></ul></section><section class="portfolio-section"><h2>其他作品</h2><ul><li><a class="portfolio-link" href="https://pinhaoke.love" target="_blank" rel="noopener noreferrer"><div><h3>拼好课</h3><p>设计者：涂增基</p></div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li><li><a class="portfolio-link" href="https://pkuknow.cn" target="_blank" rel="noopener noreferrer"><div><h3>北大知道 PKU Know</h3><p>设计者：涂增基</p></div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li><li><a class="portfolio-link" href="https://pkuknow.cn/thu" target="_blank" rel="noopener noreferrer"><div><h3>清华知道 THU Know</h3><p>设计者：涂增基</p></div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li></ul></section><section class="portfolio-section"><h2>心创组内部使用</h2><ul><li><a class="portfolio-link" href="https://shouyulove.cn/catchpot/" target="_blank" rel="noopener noreferrer"><div><h3>接锅</h3><p>设计者：心创组</p></div><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li></ul></section></main><div hidden="" id="syl-home-shortcut"><button aria-controls="syl-shortcut-guide" aria-expanded="false" id="syl-home-shortcut-button" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"></path></svg>添加到桌面</button><aside aria-labelledby="syl-shortcut-title" data-embedded="请先从右上角菜单选择「在浏览器中打开」，再添加到桌面。" data-ios="用 Safari 打开本页，轻点「分享」，选择「添加到主屏幕」，再点「添加」。" data-other="打开浏览器菜单，选择「添加到主屏幕」或「安装应用」，再确认添加。" hidden="" id="syl-shortcut-guide" role="region"><h2 id="syl-shortcut-title">添加到桌面</h2><p></p><button aria-label="关闭" class="syl-shortcut-close" type="button"><svg aria-hidden="true" viewbox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"></path></svg></button></aside></div><script defer src="/assets/home-shortcut.syl-v1-1-portfolio-lite.js"></script><script defer src="/assets/portfolio.syl-v1-1-portfolio-lite.js"></script></body></html>

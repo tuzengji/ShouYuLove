@@ -13,15 +13,14 @@ async (page) => {
     const mobile = await android.newPage();
     const errors = [];
     mobile.on('pageerror', error => errors.push(error.message));
-    await mobile.goto(base + '/projects/', {waitUntil:'domcontentloaded',timeout:90000});
+    await mobile.goto(base + '/portfolio/', {waitUntil:'domcontentloaded',timeout:90000});
     const button = mobile.locator('#syl-home-shortcut-button');
     const guide = mobile.locator('#syl-shortcut-guide');
     await button.waitFor({state:'visible'});
     await mobile.waitForFunction(() => !document.getElementById('syl-early'), null, {timeout:90000});
     const box = await button.boundingBox();
-    const sound = await mobile.locator('.soundWrapper').boundingBox();
-    assert(box.height >= 44 && box.y + box.height <= sound.y, 'Shortcut overlaps sound or is too small');
-    assert(await mobile.locator('.projectsPage .projectListItem').count() === 7, 'Works changed');
+    assert(box.height >= 44 && box.y + box.height <= 880, 'Shortcut safe-area or touch size');
+    assert(await mobile.locator('.portfolio-link').count() === 7, 'Works changed');
     await mobile.screenshot({path:'output/playwright/home-shortcut/mobile-390.png'});
     await button.click();
     assert((await guide.innerText()).includes('打开浏览器菜单'), 'Android instructions');
@@ -62,21 +61,15 @@ async (page) => {
     await button.click();
     await guide.waitFor({state:'visible'});
     await mobile.keyboard.press('Escape');
-    await mobile.locator('.projectsPage a.prevNextBttn[href="/"]').click();
+    await mobile.locator('.portfolio-header a[href="/"]').click();
     await mobile.waitForURL(base + '/');
     assert(await button.isHidden(), 'Shortcut leaked onto homepage');
-    await mobile.waitForFunction(() => {
-      const g = document.querySelector('#__nuxt')?.__vue_app__?.config.globalProperties;
-      return document.querySelector('#__nuxt .homePage') && g?.$pinia.state.value.transition.transitionState === 'none' &&
-        g.$nuxt.$webglApp.viewManager.active?._areResourcesLoaded();
-    }, null, {timeout:90000});
     await mobile.goBack();
-    await mobile.waitForURL(base + '/projects/');
+    await mobile.waitForURL(base + '/portfolio/');
     await button.waitFor({state:'visible'});
-    await mobile.waitForFunction(() => document.querySelector('#__nuxt')?.__vue_app__?.config.globalProperties.$pinia.state.value.transition.transitionState === 'none', null, {timeout:90000});
     const cdp = await android.newCDPSession(mobile);
     const manifest = await cdp.send('Page.getAppManifest');
-    assert(manifest.errors.length === 0 && JSON.parse(manifest.data).start_url === '/projects/', 'Invalid manifest');
+    assert(manifest.errors.length === 0 && JSON.parse(manifest.data).start_url === '/portfolio/', 'Invalid manifest');
     assert(await mobile.locator('meta[name="apple-mobile-web-app-title"]').getAttribute('content') === '以手予爱', 'Wrong iPhone home-screen name');
     await cdp.detach();
     await mockPrompt('accepted');
@@ -89,10 +82,10 @@ async (page) => {
     const ios = await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,
       userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 Version/18.0 Mobile/15E148 Safari/604.1' + (embedded ? ' MicroMessenger/8.0.0' : '')});
     try {
-      // Pause native startup: the new button and guide must still be usable.
-      await ios.route('**/assets/entry.*.js', route => route.abort());
+      // Block the background: links and installation guidance remain usable.
+      await ios.route('**/plaster.jpg', route => route.abort());
       const phone = await ios.newPage();
-      await phone.goto(base + '/projects/', {waitUntil:'domcontentloaded',timeout:90000});
+      await phone.goto(base + '/portfolio/', {waitUntil:'domcontentloaded',timeout:90000});
       const button = phone.locator('#syl-home-shortcut-button');
       await button.click();
       const text = await phone.locator('#syl-shortcut-guide').innerText();
@@ -105,7 +98,7 @@ async (page) => {
   const desktop = await browser.newContext({viewport:{width:1440,height:900}});
   try {
     const wide = await desktop.newPage();
-    await wide.goto(base + '/projects/', {waitUntil:'domcontentloaded',timeout:90000});
+    await wide.goto(base + '/portfolio/', {waitUntil:'domcontentloaded',timeout:90000});
     await wide.waitForFunction(() => !document.getElementById('syl-early'), null, {timeout:90000});
     assert(await wide.locator('#syl-home-shortcut').isHidden(), 'Shortcut visible on desktop');
     await wide.screenshot({path:'output/playwright/home-shortcut/desktop-1440.png'});

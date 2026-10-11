@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/bin/python3 /opt/shouyulove-stats/visits.py report "$@"

@@ -18,3 +18,5 @@
 - 作品集导航须检查从已加载首页点击进入、资源暂停期间返回、延迟完成后再次进入、前进后退和直接打开。`tests/project_navigation.js` 是实际浏览器回归；首次资源未准备好时保持正文可读，加载回调不能恢复已离开的页面。
 
 - 手机「添加到桌面」仅在作品集显示；文案由正文 MD 生成。维护时保留原生提示与浏览器指引，检查声音开关间距、安全区、横屏、站内切换和独立窗口隐藏；使用 `tests/home_shortcut.js`。
+
+- 2026-10-11：作品集改为独立轻量 `/portfolio/`，旧目录入口使用 308；七个详情地址保留。`styles/portfolio.css` 和 `scripts/portfolio.js` 维护静态目录和后置纹理，禁止恢复作品集 Nuxt/WebGL/音乐预载。私有统计源码在 `deploy/private_stats/`，数据库与密钥仅留服务器；检查统计资料不可从网站下载，QA 请求不得污染访问数字。当前构建清单 `output/deployment/shouyulove-portfolio-lite-20261011/`。

@@ -3,6 +3,7 @@
 
 from pathlib import Path
 import hashlib
+from http.client import HTTPConnection
 import json
 import os
 import re
@@ -11,6 +12,7 @@ import subprocess
 import time
 import urllib.error
 import urllib.request
+from urllib.parse import urlsplit
 
 
 def digest(path):
@@ -92,17 +94,20 @@ def main():
         subprocess.run(["systemctl", "reload", "nginx"], check=True)
         assert digest(site) == state["old_site_sha256"], "Parent site configuration changed"
         # Reload returns before the old workers have stopped accepting requests.
+        # A newly configured route also proves the new location rules are active.
+        ready_route = '/portfolio/' if '/portfolio/' in manifest['routes'] else '/the-studio/'
+        ready_file = manifest['routes'][ready_route]
         readiness = []
         for attempt in range(40):
-            status, content = get("/the-studio/")
+            status, content = get(ready_route)
             value = hashlib.sha256(content).hexdigest()
             readiness.append({"attempt": attempt + 1, "status": status,
                               "sha256": value, "bytes": len(content)})
-            if status == 200 and value == manifest["files"]["the-studio/index.html"]["sha256"]:
+            if status == 200 and value == manifest["files"][ready_file]["sha256"]:
                 break
             time.sleep(0.25)
         else:
-            raise AssertionError({"route": "/the-studio/", "readiness": readiness})
+            raise AssertionError({"route": ready_route, "readiness": readiness})
         routes = {}
         for route in manifest["routes"]:
             status, content = get(route)
@@ -110,6 +115,18 @@ def main():
             filename = route.strip("/") + "/index.html" if route != "/" else "index.html"
             assert hashlib.sha256(content).hexdigest() == manifest["files"][filename]["sha256"], route
             routes[route] = status
+        redirects = {}
+        for route, target in manifest.get('redirects', {}).items():
+            connection = HTTPConnection('127.0.0.1', timeout=15)
+            try:
+                connection.request('GET', route, headers={'Host':'shouyulove.cn', 'User-Agent':'ShouYuLove-QA'})
+                response = connection.getresponse()
+                location = urlsplit(response.getheader('Location', ''))
+                assert response.status == 308 and location.path == target and not location.query and location.hostname in (None, 'shouyulove.cn'), (route, response.status)
+                response.read()
+                redirects[route] = target
+            finally:
+                connection.close()
         subsites = {route: get(route)[0] for route in
                     ("/signtrace/", "/chuanqinghuiyi/", "/dict/entries")}
         assert all(status == 200 for status in subsites.values()), subsites
@@ -119,7 +136,7 @@ def main():
         result = {"release": str(release), "previous_release": state["old_release"],
                   "backup": str(backup), "verified_files": len(manifest["files"]),
                   "verified_bytes": manifest["bytes"], "routes": routes,
-                  "subsites": subsites, "retired": retired,
+                  "subsites": subsites, "retired": retired, "redirects": redirects,
                   "readiness": readiness,
                   "parent_config_sha256": digest(site), "snippet_sha256": digest(snippet)}
         (backup / "release.json").write_text(json.dumps(result, indent=2) + "\n")
