@@ -20,7 +20,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-font-stability-20261011"
+RECORDS = ROOT / "output/deployment/shouyulove-portfolio-icons-20261011"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -28,11 +28,11 @@ V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
-FONT_SOURCE = ROOT / "output/deployment/shouyulove-festival-20261011/font-source"
+FONT_SOURCE = ROOT / "output/deployment/shouyulove-recap-entry-20261011/font-source"
 RUNTIME_VERSION = "syl-v1-1-jieguo"
-FONT_VERSION = "syl-v1-1-festival"
-MODULE_VERSION = "syl-v1-1-stable-fonts"
-BRIDGE_VERSION = "syl-v1-1-festival"
+FONT_VERSION = "syl-v1-1-portfolio-recap"
+MODULE_VERSION = "syl-v1-1-portfolio-recap"
+BRIDGE_VERSION = "syl-v1-1-portfolio-recap"
 SOURCE = source_path(ROOT)
 
 
@@ -47,6 +47,7 @@ def parse_content(text=None):
     projects = []
     identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary",
                    "传情绘意-手语版": "chuanqinghuiyi", "2026 手语文化节": "2026-sign-language-cultural-festival",
+                   "2026 手语分社骨干年终总结": "2026-year-end-summary",
                    "拼好课": "pinhaoke", "北大知道 PKU Know": "beida-zhidao",
                    "清华知道 THU Know": "qinghua-zhidao", "接锅": "jieguo"}
     for match in re.finditer(r"(?m)^#### ([^\n]+)\n(.*?)(?=^#### |^### |\Z)", text, re.S):
@@ -54,8 +55,9 @@ def parse_content(text=None):
         assert title in identifiers, "Unknown project: " + title
         identifier = identifiers[title]
         address = re.search(r"(?m)^地址：(.+)$", body).group(1).strip()
+        markdown_link = re.search(r"\[[^]]*\]\((https?://[^\s)]+)\)", address)
         link = re.search(r"https?://[^\s)]+", address)
-        url = link.group() if link else "https://" + address
+        url = markdown_link.group(1) if markdown_link else link.group() if link else "https://" + address
         assert re.fullmatch(r"https?://[^\s]+", url), "Invalid project address: " + address
         description = body.split("地址：", 1)[0].strip()
         designers = re.search(r"设计者：(.+)", body).group(1).strip()
@@ -103,10 +105,11 @@ def raster_assets(content):
                 ("#dde5d9", "#94a28d"), ("#dedde6", "#9b97ac"), ("#e3ded3", "#aca38b"), ("#dde8e1", "#63836f")]
     palettes = dict(zip(["signtrace", "dictionary", "chuanqinghuiyi", "pinhaoke", "beida-zhidao", "qinghua-zhidao", "jieguo"], palettes))
     palettes["2026-sign-language-cultural-festival"] = ("#f4e7de", "#b39f8e")
+    palettes["2026-year-end-summary"] = ("#e4ded1", "#94a28d")
     for project in content["projects"]:
         palette = palettes[project["id"]]
         icon = ROOT / "project-logos/20261004-轻盈版" / (project["id"] + ".png")
-        if project["id"] in {"jieguo", "2026-sign-language-cultural-festival"}:
+        if project["id"] in {"jieguo", "2026-sign-language-cultural-festival", "2026-year-end-summary"}:
             icon = ROOT / "project-logos" / (project["id"] + ".png")
         mark = Image.open(icon).convert("RGBA")
         assert mark.getchannel("A").getextrema() == (0, 255), icon
@@ -584,7 +587,7 @@ def portfolio_page(content):
     shared = "/" + str(SHARED)
     css = (ROOT / "styles/portfolio.css").read_text().replace("__SHARED__", shared).replace("__FONT_VERSION__", FONT_VERSION)
     shortcut_css = (ROOT / "styles/shouyulove-v1-1-jieguo.css").read_text().split("/* Keep the works shortcut", 1)[1]
-    css += "\n/* Keep the works shortcut" + shortcut_css + '\n#syl-home-shortcut { bottom: calc(20px + env(safe-area-inset-bottom)); }'
+    css += "\n/* Keep the works shortcut" + shortcut_css + '\n.portfolio-page #syl-home-shortcut { bottom: calc(20px + env(safe-area-inset-bottom)); }'
     native = BeautifulSoup((OUT / 'projects/index.html').read_text(), 'html.parser')
     config_script = next(s.string for s in native.find_all('script') if s.string and 'window.__NUXT__.config=' in s.string)
     config = json.loads(config_script.split('window.__NUXT__.config=', 1)[1].rstrip(';'))
@@ -608,6 +611,7 @@ def portfolio_page(content):
               '<link rel="manifest" href="' + shared + '/shouyulove/works-manifest.' + MODULE_VERSION + '.json"/>',
               '<link rel="stylesheet" href="/assets/fonts.' + MODULE_VERSION + '.css"/>',
               '<style>' + css + '</style></head><body class="portfolio-page">',
+              logo_svg_filter(),
               '<div class="portfolio-background" aria-hidden="true" data-scene="' + scene_url + '"></div>',
               '<header class="portfolio-header"><h1>' + html.escape(content['portfolio']['title']) + '</h1><a href="/">' + html.escape(content['portfolio']['home']) + '</a></header>',
               '<main id="portfolio">']
@@ -618,12 +622,18 @@ def portfolio_page(content):
             if category is not None:
                 pieces.append('</ul></section>')
             category = project['category']
-            secondary = ' portfolio-section--secondary' if category == '其他作品' else ''
-            pieces.append('<section class="portfolio-section' + secondary + '"><h2>' + html.escape(category) + '</h2><ul>')
-        credit = ('<p>设计者：' + html.escape(project['designers']) + '</p>') if category != '其他作品' or content['portfolio']['show_other_designers'] else ''
+            variant = {'其他作品': 'secondary', '心创组内部使用': 'internal'}.get(category, 'core')
+            pieces.append('<section class="portfolio-section portfolio-section--' + variant +
+                          '" aria-labelledby="portfolio-' + variant + '"><h2 id="portfolio-' + variant + '">' + html.escape(category) + '</h2><ul>')
+        designers = ' '.join('<span>' + html.escape(name) + '</span>' for name in project['designers'].split())
+        credit = ('<p class="portfolio-credit">设计者：' + designers + '</p>') if category != '其他作品' or content['portfolio']['show_other_designers'] else ''
+        icon = shared + '/shouyulove/' + project['id'] + '-square.' + RUNTIME_VERSION + '.png'
+        loading = 'lazy' if category == '其他作品' else 'eager'
         pieces.append('<li><a class="portfolio-link" href="' + html.escape(project['url'], quote=True) +
-                      '" target="_blank" rel="noopener noreferrer"><div><h3>' + html.escape(project['title']) +
-                      '</h3>' + credit + '</div>' +
+                      '" target="_blank" rel="noopener noreferrer" aria-labelledby="project-' + project['id'] + '">' +
+                      '<img class="portfolio-icon" src="' + icon + '" alt="" width="640" height="640" decoding="async" loading="' + loading + '"/>' +
+                      '<div class="portfolio-copy"><h3 id="project-' + project['id'] + '">' + html.escape(project['title']) +
+                      '</h3><p class="portfolio-description">' + html.escape(project['description']) + '</p>' + credit + '</div>' +
                       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li>')
     if category is not None:
         pieces.append('</ul></section>')

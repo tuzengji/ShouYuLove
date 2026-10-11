@@ -72,13 +72,19 @@ class LoaderBatchTests(unittest.TestCase):
     def test_project_ids_survive_insertions_and_reordering(self):
         text = (SOURCE.parents[1] / "content-source.md").read_text()
         projects = self.builder.parse_content(text)["projects"]
-        self.assertEqual(len(projects), 8)
+        self.assertEqual(len(projects), 9)
         by_id = {p["id"]: p for p in projects}
         self.assertEqual(by_id["pinhaoke"]["title"], "拼好课")
         self.assertEqual(by_id["jieguo"]["url"], "https://shouyulove.cn/catchpot/")
         festival = by_id["2026-sign-language-cultural-festival"]
         self.assertEqual(festival["designers"], "周丽敏 涂增基 黄庭逸")
         self.assertEqual(festival["category"], "核心创意")
+        recap = by_id["2026-year-end-summary"]
+        self.assertEqual(recap["url"], "https://shouyulove.cn/2026-year-end-summary/")
+        self.assertEqual(recap["designers"], "涂增基 黄庭逸 潘婧欣 王宁静 叶子涵")
+        misleading_label = text.replace("[进入 2026 手语分社骨干年终总结]", "[https://shouyulove.cn/2026-sign-language-cultural-festival/]")
+        self.assertEqual(next(p for p in self.builder.parse_content(misleading_label)["projects"]
+                              if p["id"] == recap["id"])["url"], recap["url"])
         import re
         pattern = r"(?m)^#### [^\n]+\n.*?(?=^#### |^### |\Z)"
         blocks = list(re.finditer(pattern, text, re.S))[:4]

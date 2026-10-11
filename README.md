@@ -2,9 +2,9 @@
 
 [以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-本仓库保存当前已公开的精确静态版本：245 个运行文件、16 条页面路由、5 个相对资源链接，共 110,371,364 字节。本机已绑定用户指定 MD 为正文文本源，公开文案已按最新原稿同步，第一届成员为 13 人（包含李昌昊）；七个作品图标的底色透明度为 28%，边缘保持宽幅不规则渐隐，图案完全不透明，融入浮雕背景；图片和标题居中，介绍与署名左对齐；作品目录悬停改为标题深绿色与 3px 位移，署名保持原位；接锅入口为 `/catchpot/`。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。2026-10-11 当前发布版本为 `20261011T031026Z-astra-home`。
+本仓库保存当前公开的精确静态版本：252 个运行文件、18 条页面路由、5 个相对资源链接，共 111,663,526 字节。九个作品包含五个核心创意、一个内部工具与三个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
 
-作品集独立使用轻量 HTML，正式入口为 `/portfolio/`，原 `/projects/` 自动跳转；名称、分类和设计者先显示，整行直接访问对应项目。完整原生三维程序在首次绘制至少两秒后后台加载；该页面不加载音乐。手机「添加到桌面」直接进入新入口。
+作品集独立使用轻量 HTML，正式入口为 `/portfolio/`，原 `/projects/` 自动跳转；图标、分类、名称和简介先显示；核心创意与内部工具保留设计者，整项直接访问对应项目。核心创意桌面两列、手机单列，其他作品紧凑置底。完整原生三维程序在首次绘制至少两秒后后台加载；该页面不加载音乐。手机「添加到桌面」直接进入新入口。
 
 首页继续只预载当前场景，心创组与页脚按需加载，保留现有音乐行为；版本化资源使用一年 immutable 缓存，HTML 和 payload 使用 no-cache。
 
@@ -30,13 +30,13 @@ python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 
 ## 维护源码
 
-`scripts/content_source.py` 解析本机正文源绑定，`content-source.md` 保存成功构建生成的公开文案副本；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 358 字，字体缓存名由独立 `FONT_VERSION` 管理。四个回归检查覆盖文本源绑定、批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
+`scripts/content_source.py` 解析本机正文源绑定，`content-source.md` 保存成功构建生成的公开文案副本；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 486 字，字体缓存名由独立 `FONT_VERSION` 管理。四个回归检查覆盖文本源绑定、批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
 
 维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
 
 - `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
 - `主站版本归档/20261001-120733-Astra替换前/source/home-assets/images/` 中使用的两个站点图标。
-- `output/deployment/shouyulove-home-shortcut-20261011/font-source/` 中的当前字体源、子集与中文图集。
+- `output/deployment/shouyulove-recap-entry-20261011/font-source/` 中的当前字体源、子集与中文图集。
 - 六个透明 Logo 原图、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
 - `output/deployment/shouyulove-fast-20261009/mobile-textures/` 中的两张手机纹理。重建脚本为 `scripts/prepare_mobile_textures.py`，使用固定版本 Khronos KTX-Software 4.4.2；已生成的纹理也在运行快照中。
 
@@ -114,3 +114,11 @@ python3 -B -m unittest discover -s tests -v
 ## 2026-10-11 字体加载稳定化
 
 主站与心创组、作品详情、作品集共用首屏字体样式。中文沿用狮尾四季春·加糖，英文标题沿用 PSTimes，正文及轻字重控件沿用 Helvetica Neue；保留主页现有字体文件、字库与排版层级。四个现有 WOFF2 字体内嵌于同一个版本化 CSS，字体解码期间不显示系统替代字体；移除原 HTML 和延后样式中的重复字体定义与多余预载。作品集后台场景复用已经载入的字体样式，避免重复插入和二次选择。字体样式压缩后约 159 KiB，跨页面及再次访问复用一年缓存；内容继续先于三维场景可用。模块版本 `syl-v1-1-stable-fonts`，字体和数据桥版本继续为 `syl-v1-1-festival`。
+
+## 2026-10-11 作品集图文目录与年终总结
+
+作品集展示九个项目的现有图标与原稿简介；核心创意桌面两列、手机单列，奇数末项跨列，内部工具独立成组，其他作品紧凑置底且不显示设计者。沿用中文和英文字体、图标羽化、悬停位移、完整三维背景及延后加载。手机署名按姓名换行，快捷按钮在背景就绪前后保持安全区位置。
+
+新增第五个核心创意「2026 手语分社骨干年终总结」，首页、作品集与详情页同步接入 `/2026-year-end-summary/`，简介和五位署名来自绑定 MD。图标复用原项目登录页爱心，正文链接优先读取 Markdown 目标。字体、模块和数据桥版本为 `syl-v1-1-portfolio-recap`，字体覆盖 486 字。
+
+已发布 `20261011T155351Z-astra-home`：252 个运行文件、18 条页面路由、五个相对链接，共 111,663,526 字节；70 个文件更新，182 个复用。父级配置与主页片段哈希保持。1440/390/320px、平板与横屏、键盘及减少动态效果、背景延迟/失败、无 JavaScript、滚动与布局稳定检查通过；首页与详情页的年终总结入口经独立浏览器核验。构建与验证记录在 `output/deployment/shouyulove-portfolio-icons-20261011/`。
