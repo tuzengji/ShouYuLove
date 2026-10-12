@@ -1,0 +1,113 @@
+{
+  "png": {
+    "2026-sign-language-cultural-festival.png": {
+      "size": [
+        1600,
+        1600
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "9c3c66351fdc68141e7e3c2c7b476d7c088a94218aa20b97a3d8a81b4dc183f8"
+    },
+    "2026-year-end-summary.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "6415b1899adb95299cf6aec1f15bfa9088394f0dd02ea706257a41426ee6b9ef"
+    },
+    "beida-zhidao.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "37ab8df269873a2b1af2aa48f53826c9e3348f9bab79b1705db4b483ba47ab69"
+    },
+    "chuanqinghuiyi.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "728691452edc88b0b3f139314e4816b005d4ec234625fa0377954fee3583a6f8"
+    },
+    "dictionary.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "c4f585a0f6b605fa2dca8da3aa3e391f222afb30ca83bae477624a8d675325b0"
+    },
+    "jieguo.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "4a69fe3037beed014d11d631c792ee046e6f0aa13a6efdb89d045fa24304bfd7"
+    },
+    "pinhaoke.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "5dc65d634cee4fbaad15ecadcaa6ca2abe4a7d22d0bc49fc53c1105666c22974"
+    },
+    "qinghua-zhidao.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "07ee67f1c962351cdbdb0c505fe7041d05c63eed8407fc77d11c1199e50d08b9"
+    },
+    "signtrace.png": {
+      "size": [
+        1024,
+        1024
+      ],
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "55e5927c3fcb76ea16db4b2d660aaeb3b311ab651e729d2b003262a30ad631af"
+    }
+  },
+  "outline_to_fill_contrast": {
+    "sage": 3.73,
+    "blue": 3.5,
+    "rose": 3.07,
+    "sand": 4.11,
+    "cream": 5.46,
+    "mauve": 3.19,
+    "gold": 3.85
+  },
+  "festival_original_unchanged": true
+}

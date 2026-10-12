@@ -1,0 +1,72 @@
+{
+  "status": "approved eight project directions; colored production assets",
+  "skill": "logo-design",
+  "projects": [
+    {
+      "id": "signtrace",
+      "name": "以手寻语 SignTrace",
+      "selection": "A",
+      "idea": "张开的手掌与腕部弧线，表达从动作中寻找线索。",
+      "svg": "signtrace.svg",
+      "png": "signtrace.png"
+    },
+    {
+      "id": "dictionary",
+      "name": "分社手语词典",
+      "selection": "A",
+      "idea": "用大书签留住查到的那一页，页角轻轻翘起。",
+      "svg": "dictionary.svg",
+      "png": "dictionary.png"
+    },
+    {
+      "id": "chuanqinghuiyi",
+      "name": "传情绘意 · 手语版",
+      "selection": "C",
+      "idea": "两张朝向彼此的侧脸，表示比划时的专注和默契。",
+      "svg": "chuanqinghuiyi.svg",
+      "png": "chuanqinghuiyi.png"
+    },
+    {
+      "id": "pinhaoke",
+      "name": "拼好课",
+      "selection": "A",
+      "idea": "一块课表留出位置，另一块正好嵌入。",
+      "svg": "pinhaoke.svg",
+      "png": "pinhaoke.png"
+    },
+    {
+      "id": "beida-zhidao",
+      "name": "北大知道 PKU Know",
+      "selection": "A",
+      "idea": "塔影落在一笔涟漪上，留下燕园的识别点。",
+      "svg": "beida-zhidao.svg",
+      "png": "beida-zhidao.png"
+    },
+    {
+      "id": "qinghua-zhidao",
+      "name": "清华知道 THU Know",
+      "selection": "A",
+      "idea": "校门中间留一扇敞开的门，像消息正在进来。",
+      "svg": "qinghua-zhidao.svg",
+      "png": "qinghua-zhidao.png"
+    },
+    {
+      "id": "jieguo",
+      "name": "接锅",
+      "selection": "A",
+      "idea": "锅盖抛起一点点，两边把锅稳稳接住。",
+      "svg": "jieguo.svg",
+      "png": "jieguo.png"
+    },
+    {
+      "id": "2026-year-end-summary",
+      "name": "2026 手语分社骨干年终总结",
+      "selection": "redesigned A",
+      "idea": "给一起忙碌的伙伴一枚感谢章。",
+      "svg": "2026-year-end-summary.svg",
+      "png": "2026-year-end-summary.png"
+    }
+  ],
+  "festival": "original PNG preserved byte for byte",
+  "annual_summary": "A 谢谢这一年感谢章，由用户本轮确认"
+}

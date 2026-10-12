@@ -87,3 +87,9 @@
 九个项目的图标统一为深墨绿色、收尖曲线与开阔留白，分别保留手势、书页、交流、文化节、年度回顾、课程模块、两校地标与接锅意象。全部由内置 image_gen 独立生成透明 PNG，原图和完整提示词位于 `project-logos/20261012-统一曲线/`；历史素材保留。首页与作品集共用新的版本化图像，沿用原尺寸归一、底色、羽化、排版和原生三维动效。
 
 图片、模块、数据桥版本 `syl-v1-1-unified-logos`；字体继续使用 `syl-v1-1-portfolio-recap`。已发布 `20261011T161646Z-astra-home`：252 个文件、18 条路由、五个相对链接，共 111,760,623 字节；71 个文件更新，181 个复用。桌面/390px/320px 作品集、背景延迟与失败、无 JavaScript、滚动和布局稳定、首页桌面与手机检查通过。记录位于 `output/deployment/shouyulove-logos-20261012/`。
+
+## 2026-10-12 柔和彩色图标上线
+
+发布目录 `/var/www/shouyulove-home-releases/20261012T023409Z-astra-home`。图片、场景模块和数据桥缓存版本 `syl-v1-1-soft-color-logos`；字体版本沿用现有值。252 个运行文件和 18 条路由核验通过；71 文件更新，181 复用，父级 Nginx 与主页片段哈希保持。八枚新图标及原文化节人物同时用于首页和作品集。
+
+上一版为 `20261011T161646Z-astra-home`；服务器备份 `/etc/nginx/backups/shouyulove-home-20261012T023409Z-astra-home/`。白名单、变更包、远端发布结果和公网校验保存在 `output/deployment/shouyulove-colored-logos-20261012/`。
