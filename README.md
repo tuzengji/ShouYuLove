@@ -2,11 +2,13 @@
 
 [以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-本仓库保存当前公开的精确静态版本：252 个运行文件、18 条页面路由、5 个相对资源链接，共 111,663,526 字节。九个作品包含五个核心创意、一个内部工具与三个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
+本仓库保存当前公开的精确静态版本：252 个运行文件、18 条页面路由、5 个相对资源链接，共 111,549,629 字节。九个作品包含五个核心创意、一个内部工具与三个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
 
 作品集独立使用轻量 HTML，正式入口为 `/portfolio/`，原 `/projects/` 自动跳转；图标、分类、名称和简介先显示；核心创意与内部工具保留设计者，整项直接访问对应项目。核心创意桌面两列、手机单列，其他作品紧凑置底。完整原生三维程序在首次绘制至少两秒后后台加载；该页面不加载音乐。手机「添加到桌面」直接进入新入口。
 
 首页继续只预载当前场景，心创组与页脚按需加载，保留现有音乐行为；版本化资源使用一年 immutable 缓存，HTML 和 payload 使用 no-cache。
+
+当前图标使用 [柔和彩色套件](project-logos/20261012-柔和彩色/README.md)：八枚 SVG 与透明 PNG，文化节保留原卡通人物，年终总结使用感谢章，传情绘意使用「心意小卡」。作品集底部显示 12px 小字鸣谢。完整维护约定和发布记录见 [作品集维护说明](docs/portfolio-maintenance.md)。2026-10-12 核对的运行发布为 `20261012T031847Z-astra-home`。
 
 ## 验证、恢复与本地预览
 
@@ -30,14 +32,14 @@ python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 
 ## 维护源码
 
-`scripts/content_source.py` 解析本机正文源绑定，`content-source.md` 保存成功构建生成的公开文案副本；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 486 字，字体缓存名由独立 `FONT_VERSION` 管理。四个回归检查覆盖文本源绑定、批次间字标刷新、每页共享字标和实际 HTTP 缓存响应。
+`scripts/content_source.py` 解析本机正文源绑定，`content-source.md` 保存成功构建生成的公开文案副本；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 488 字，字体缓存名由独立 `FONT_VERSION` 管理。现有回归检查覆盖文本源绑定、字标、共享字体、导航、背景加载和实际 HTTP 缓存响应。
 
 维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
 
 - `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
 - `主站版本归档/20261001-120733-Astra替换前/source/home-assets/images/` 中使用的两个站点图标。
-- `output/deployment/shouyulove-recap-entry-20261011/font-source/` 中的当前字体源、子集与中文图集。
-- 六个透明 Logo 原图、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
+- `output/deployment/shouyulove-site-icons-thanks-20261012/font-source/` 中的当前字体源、子集与中文图集。
+- `project-logos/20261012-柔和彩色/` 中的九张透明 PNG 与八枚 SVG、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
 - `output/deployment/shouyulove-fast-20261009/mobile-textures/` 中的两张手机纹理。重建脚本为 `scripts/prepare_mobile_textures.py`，使用固定版本 Khronos KTX-Software 4.4.2；已生成的纹理也在运行快照中。
 
 克隆可独立恢复现有站点。完整内容重建还需上述原始素材；构建脚本会重建固定的 `output/shouyulove-jieguo-site/`，运行前保存已有输出。
