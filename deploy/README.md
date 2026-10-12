@@ -93,3 +93,7 @@
 发布目录 `/var/www/shouyulove-home-releases/20261012T023409Z-astra-home`。图片、场景模块和数据桥缓存版本 `syl-v1-1-soft-color-logos`；字体版本沿用现有值。252 个运行文件和 18 条路由核验通过；71 文件更新，181 复用，父级 Nginx 与主页片段哈希保持。八枚新图标及原文化节人物同时用于首页和作品集。
 
 上一版为 `20261011T161646Z-astra-home`；服务器备份 `/etc/nginx/backups/shouyulove-home-20261012T023409Z-astra-home/`。白名单、变更包、远端发布结果和公网校验保存在 `output/deployment/shouyulove-colored-logos-20261012/`。
+
+## 2026-10-12 传情绘意图标替换
+
+发布 `/var/www/shouyulove-home-releases/20261012T025514Z-astra-home`，上一版 `20261012T023409Z-astra-home`。传情绘意采用用户选定的「心意小卡」，图片、模块和数据桥版本为 `syl-v1-1-charades-cards`。本次 71 文件更新、181 复用；252 文件与 18 条路由核验通过，Nginx 配置哈希保持。发布白名单、备份与结果在 `output/deployment/shouyulove-charades-cards-20261012/`。

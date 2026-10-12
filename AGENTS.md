@@ -42,3 +42,5 @@
 - 2026-10-12：九项目图标源统一为 `project-logos/20261012-统一曲线/`。替换图像后更新 `RUNTIME_VERSION` 与引用它的数据桥/场景版本；保留旧素材，首页与作品集使用同一套 Logo。
 
 - 2026-10-12：当前项目图标源为 `project-logos/20261012-柔和彩色/`：八枚 SVG 与透明 PNG，文化节保留原卡通人物。年终总结采用已选「谢谢这一年」感谢章；首页和作品集共用。修改图像需同步更新 `RUNTIME_VERSION`、模块与数据桥版本；本次为 `syl-v1-1-soft-color-logos`，构建记录 `output/deployment/shouyulove-colored-logos-20261012/`。
+
+- 2026-10-12：传情绘意·手语版使用用户选定的 B「心意小卡」，替换双人侧脸，源文件仍位于 `project-logos/20261012-柔和彩色/`。其他八枚图标保留；当前缓存版本 `syl-v1-1-charades-cards`，构建记录 `output/deployment/shouyulove-charades-cards-20261012/`。
