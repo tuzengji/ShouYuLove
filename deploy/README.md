@@ -97,3 +97,7 @@
 ## 2026-10-12 传情绘意图标替换
 
 发布 `/var/www/shouyulove-home-releases/20261012T025514Z-astra-home`，上一版 `20261012T023409Z-astra-home`。传情绘意采用用户选定的「心意小卡」，图片、模块和数据桥版本为 `syl-v1-1-charades-cards`。本次 71 文件更新、181 复用；252 文件与 18 条路由核验通过，Nginx 配置哈希保持。发布白名单、备份与结果在 `output/deployment/shouyulove-charades-cards-20261012/`。
+
+## 2026-10-12 作品集鸣谢
+
+发布目录 `/var/www/shouyulove-home-releases/20261012T031847Z-astra-home`，上一版 `20261012T025514Z-astra-home`。模块、数据桥与字体版本为 `syl-v1-1-portfolio-thanks`；项目图像版本保持。252 文件及 18 条路由核验通过，Nginx 配置哈希保持。构建与各子站图标同步记录在 `output/deployment/shouyulove-site-icons-thanks-20261012/`。

@@ -20,7 +20,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-charades-cards-20261012"
+RECORDS = ROOT / "output/deployment/shouyulove-site-icons-thanks-20261012"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -28,11 +28,11 @@ V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
-FONT_SOURCE = ROOT / "output/deployment/shouyulove-recap-entry-20261011/font-source"
+FONT_SOURCE = ROOT / "output/deployment/shouyulove-site-icons-thanks-20261012/font-source"
 RUNTIME_VERSION = "syl-v1-1-charades-cards"
-FONT_VERSION = "syl-v1-1-portfolio-recap"
-MODULE_VERSION = "syl-v1-1-charades-cards"
-BRIDGE_VERSION = "syl-v1-1-charades-cards"
+FONT_VERSION = "syl-v1-1-portfolio-thanks"
+MODULE_VERSION = "syl-v1-1-portfolio-thanks"
+BRIDGE_VERSION = "syl-v1-1-portfolio-thanks"
 SOURCE = source_path(ROOT)
 
 
@@ -77,11 +77,11 @@ def parse_content(text=None):
     shortcut = dict(line.split("：", 1) for line in section(text, "添加到桌面").splitlines() if line.strip())
     assert set(shortcut) == {"按钮", "关闭", "iPhone", "其他浏览器", "内置浏览器"} and all(shortcut.values()), "Shortcut copy"
     labels = dict(line.split("：", 1) for line in section(text, "作品集页面").splitlines() if line.strip())
-    assert set(labels) == {"标题", "首页入口", "展示顺序", "其他作品设计者"} and all(labels.values()), "Portfolio copy"
+    assert set(labels) == {"标题", "首页入口", "展示顺序", "其他作品设计者", "鸣谢"} and all(labels.values()), "Portfolio copy"
     order = labels['展示顺序'].split('、')
     assert len(order) == 3 and set(order) == {"核心创意", "其他作品", "心创组内部使用"}, "Portfolio category order"
     assert labels['其他作品设计者'] in {'显示', '不显示'}, "Other-project credit setting"
-    portfolio = dict(title=labels['标题'], home=labels['首页入口'], order=order,
+    portfolio = dict(title=labels['标题'], home=labels['首页入口'], order=order, thanks=labels['鸣谢'],
                      show_other_designers=labels['其他作品设计者'] == '显示')
     return dict(projects=projects, members=members, dream=section(text, "我们的梦想是").strip("* "),
                 shortcut=shortcut, portfolio=portfolio,
@@ -635,6 +635,7 @@ def portfolio_page(content):
                       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li>')
     if category is not None:
         pieces.append('</ul></section>')
+    pieces.append('<footer class="portfolio-thanks"><small>' + html.escape(content['portfolio']['thanks']) + '</small></footer>')
     pieces.extend(['</main>', str(home_shortcut(content)),
                    '<script defer src="/assets/home-shortcut.' + MODULE_VERSION + '.js"></script>',
                    '<script defer src="/assets/portfolio.' + MODULE_VERSION + '.js"></script></body></html>'])

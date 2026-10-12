@@ -23,6 +23,8 @@ a:focus-visible { outline: 2px solid #294c3a; outline-offset: 6px; }
 .portfolio-header h1 { margin: 0; font-size: 34px; font-weight: 400; line-height: 1.3; text-wrap: balance; }
 .portfolio-header > a { min-height: 44px; min-width: 44px; display: grid; place-items: center; font-size: 16px; }
 #portfolio { padding-bottom: calc(112px + env(safe-area-inset-bottom)); }
+.portfolio-thanks { padding-top: 40px; color: #52675a; text-align: center; }
+.portfolio-thanks small { font-size: 12px; line-height: 1.8; }
 .portfolio-section + .portfolio-section { margin-top: 48px; }
 .portfolio-section h2 { margin: 0 0 16px; font-size: 28px; font-weight: 600; line-height: 1.4; text-wrap: balance; }
 .portfolio-section ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; margin: 0; padding: 0; list-style: none; }
