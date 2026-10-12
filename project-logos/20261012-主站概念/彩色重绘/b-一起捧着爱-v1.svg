@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">以手予爱 · B 一起捧着爱</title>
+  <g stroke="#4b5d54" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M128 125 C111 113 86 97 86 76 C86 57 110 51 128 69 C146 51 170 57 170 76 C170 97 145 113 128 125 Z" fill="#c9a2a4"/>
+    <path d="M78 207 C53 190 36 170 36 146 V111 C36 98 52 97 56 110 L69 149 L94 170 C100 175 106 170 101 164 L82 144 C74 136 83 125 92 132 L119 157 C131 169 132 184 128 205 L121 219 H98 Z" fill="#d9c3a7"/>
+    <path d="M178 207 C203 190 220 170 220 146 V111 C220 98 204 97 200 110 L187 149 L162 170 C156 175 150 170 155 164 L174 144 C182 136 173 125 164 132 L137 157 C125 169 124 184 128 205 L135 219 H158 Z" fill="#d9c3a7"/>
+    <path d="M77 193 L123 211 L116 232 L70 214 Z" fill="#aec2b1"/>
+    <path d="M179 193 L133 211 L140 232 L186 214 Z" fill="#a5bac9"/>
+  </g>
+</svg>

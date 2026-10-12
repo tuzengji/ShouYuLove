@@ -32,6 +32,8 @@
 
 ## 当前图标和字体
 
+主站使用 [把爱递给你](../project-logos/20261012-主站-把爱递给你/README.md)：浅暖米色手掌、豆沙爱心与灰绿描边。18 条主站页面路由的标签页图标、Apple 触屏图标和作品集安装图标统一从该 SVG 生成，独立缓存版本为 `syl-v1-1-giving-heart`。
+
 图标源为 [柔和彩色套件](../project-logos/20261012-柔和彩色/README.md)。八个项目使用可编辑 SVG 与透明 PNG；文化节使用原卡通人物 PNG。年终总结为「谢谢这一年」感谢章，传情会意为用户选定的 B「心意小卡」。首页和作品集共用同一套图像。
 
 统一曲线版、卡通试稿、低饱和试稿和旧标识保留为历史材料，当前构建不从这些试稿选图。以手寻语、传情会意、文化节、年终总结与接锅子站已同步页面标识、浏览器图标和 Apple 触屏图标；分社手语词典的独立服务未改动。
@@ -40,6 +42,7 @@
 
 | 构建字段 | 当前值 |
 | --- | --- |
+| `BRAND_VERSION`（主站图标） | `syl-v1-1-giving-heart` |
 | `RUNTIME_VERSION`（图像） | `syl-v1-1-charades-cards` |
 | `FONT_VERSION` | `syl-v1-1-chuanqinghuiyi-rename` |
 | `MODULE_VERSION` | `syl-v1-1-chuanqinghuiyi-rename` |
@@ -64,10 +67,13 @@
 | 柔和彩色图标与感谢章 | `57cede1016d389e7f57cf7159fc268f8d33b15db` | `20261012T023409Z-astra-home` |
 | 传情会意「心意小卡」 | `028e2c9` | `20261012T025514Z-astra-home` |
 | 鸣谢与子站标识同步 | `1eb470dec5ea0fd568ab37038e4d3107a59e829f` | `20261012T031847Z-astra-home` |
-| 传情会意更名 | 见本次维护提交 | `20261012T070956Z-astra-home` |
+| 传情会意更名 | `14770c0` | `20261012T070956Z-astra-home` |
+| 主站「把爱递给你」与站点图标 | 见本次维护提交 | `20261012T142201Z-astra-home` |
 
-当前版本有 252 个运行文件、18 条页面路由、5 个相对链接，共 111,550,115 字节。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
+当前版本有 257 个运行文件、18 条页面路由、5 个相对链接，共 111,609,132 字节。本次主站标识的发布和验收记录为 `output/deployment/shouyulove-main-logo-color-match-20261012/`。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
 
 原发布记录已覆盖桌面、390px 手机、320px 窄屏、背景延迟及失败、无 JavaScript、滚动和布局稳定；最后一批子站图标有 15 项公网哈希核对。2026-10-12 接续整理时另行核对了服务器全部运行文件和相对链接，以及公网 18 条路由、9 张主站图标和 15 张子站图标；此次仅更新说明文档，未重新进行浏览器交互测试。
+
+本次主站图标上线另行完成本地及公网 1440／390／320px 作品集与桌面、手机首页检查，刷新和三维背景完成后仍使用新图标；18 页面与 5 新资源公网哈希匹配。
 
 后续改文案先改绑定 Markdown；改图标同步首页、作品集及涉及的子站，并更新对应缓存版本；改排版或加载逻辑再做桌面、手机及延迟／失败分支检查。运行版本的发布与恢复遵循 [部署说明](../deploy/README.md)。

@@ -6,9 +6,11 @@ from pathlib import Path
 import tempfile
 import unittest
 import sys
+import shutil
 from unittest.mock import patch
 
 from bs4 import BeautifulSoup
+from PIL import Image
 
 
 SOURCE = Path(__file__).resolve().parents[1] / "scripts/build_content.py"
@@ -37,7 +39,9 @@ class LoaderBatchTests(unittest.TestCase):
             "data": {"example": True},
             "pinia": {"ui": {"audio": {"isMuted": True}}, "datas": {}},
         })
-        template = ('<html><head><title>Test</title></head><body><div id="__nuxt"></div>'
+        template = ('<html><head><title>Test</title><link rel="icon" href="/old.ico"/>'
+                    '<link rel="icon" href="/old.png"/><link rel="apple-touch-icon" href="/old-apple.png"/>'
+                    '<link rel="manifest" href="/old.json"/></head><body><div id="__nuxt"></div>'
                     '<script id="__NUXT_DATA__" type="application/json">' +
                     json.dumps(payload) + '</script></body></html>')
         (self.builder.V0 / "index.html").write_text(template)
@@ -68,6 +72,31 @@ class LoaderBatchTests(unittest.TestCase):
                 self.assertNotIn('aria-hidden', soup.select_one('#__nuxt').attrs)
                 self.assertEqual(len(soup.select('link[href="/assets/fonts.' + self.builder.MODULE_VERSION + '.css"]')), 1)
                 self.assertFalse(soup.select('link[as="font"]'))
+                for relation in ['icon', 'apple-touch-icon', 'manifest']:
+                    links = soup.select(f'link[rel="{relation}"]')
+                    self.assertEqual(len(links), 1)
+                    self.assertIn(self.builder.BRAND_VERSION, links[0]['href'])
+
+    def test_brand_assets_keep_install_identity_and_icon_sizes(self):
+        name = Path('project-logos/20261012-主站-把爱递给你/shouyulove.svg')
+        target = self.builder.ROOT / name
+        target.parent.mkdir(parents=True)
+        shutil.copy2(SOURCE.parents[1] / name, target)
+        self.builder.brand_assets()
+        folder = self.builder.OUT / self.builder.SHARED / 'shouyulove'
+        for name, size in [('favicon', 64), ('apple-touch-icon', 180), ('home-icon-192', 192), ('home-icon-512', 512)]:
+            with Image.open(folder / f'{name}.{self.builder.BRAND_VERSION}.png') as icon:
+                self.assertEqual(icon.size, (size, size))
+                self.assertEqual(icon.mode, 'RGBA' if name == 'favicon' else 'RGB')
+                if name == 'favicon':
+                    self.assertEqual(icon.getchannel('A').getextrema(), (0, 255))
+        manifest = json.loads((folder / f'works-manifest.{self.builder.BRAND_VERSION}.json').read_text())
+        self.assertEqual(manifest['id'], '/projects/')
+        self.assertEqual(manifest['start_url'], '/portfolio/')
+        self.assertEqual(manifest['scope'], '/portfolio/')
+        self.assertEqual([icon['sizes'] for icon in manifest['icons']], ['192x192', '512x512'])
+        for icon in manifest['icons']:
+            self.assertTrue((self.builder.OUT / icon['src'].lstrip('/')).is_file())
 
     def test_project_ids_survive_insertions_and_reordering(self):
         text = (SOURCE.parents[1] / "content-source.md").read_text()

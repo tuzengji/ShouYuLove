@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">以手予爱 · A 把爱递给你</title>
+  <g transform="translate(2 -11)" stroke="#4b5d54" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M132 123 C115 111 88 94 88 72 C88 51 112 45 132 65 C152 45 176 51 176 72 C176 94 149 111 132 123 Z" fill="#c9a2a4"/>
+    <path d="M56 159 C75 145 84 143 97 148 C108 154 119 162 131 167 H165 C171 167 176 170 178 175 L205 154 C213 147 224 155 219 165 C216 172 199 185 188 194 L151 219 C138 227 124 226 109 221 C91 217 73 211 56 205 Z" fill="#d9c3a7"/>
+    <path d="M127 191 H165 C176 191 182 180 176 172" fill="none"/>
+    <path d="M32 151 H60 V217 H32 Z" fill="#aec2b1"/>
+  </g>
+</svg>

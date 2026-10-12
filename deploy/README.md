@@ -1,10 +1,10 @@
 # 主站运行白名单与发布约定
 
-当前运行清单为仓库根目录的 `runtime-manifest.json`。使用 `python3 -B scripts/runtime_snapshot.py export output/runtime` 可导出 252 个运行文件与 5 个相对链接；发布只上传该清单。
+当前运行清单为仓库根目录的 `runtime-manifest.json`。使用 `python3 -B scripts/runtime_snapshot.py export output/runtime` 可导出 257 个运行文件与 5 个相对链接；发布只上传该清单。
 
 ## 当前发布
 
-2026-10-12 核对的主站版本为 `20261012T070956Z-astra-home`：252 个运行文件、18 条页面路由、5 个相对链接，共 111,550,115 字节。模块、字体和数据桥版本为 `syl-v1-1-chuanqinghuiyi-rename`，项目图片版本为 `syl-v1-1-charades-cards`。图标及五个相关子站的同步边界见 [作品集维护说明](../docs/portfolio-maintenance.md)。下文带日期的版本和文件数量保留为历史记录。
+2026-10-12 当前主站版本为 `20261012T142201Z-astra-home`：257 个运行文件、18 条页面路由、5 个相对链接，共 111,609,132 字节。主站图标独立版本为 `syl-v1-1-giving-heart`。模块、字体和数据桥版本为 `syl-v1-1-chuanqinghuiyi-rename`，项目图片版本为 `syl-v1-1-charades-cards`。图标及五个相关子站的同步边界见 [作品集维护说明](../docs/portfolio-maintenance.md)。下文带日期的版本和文件数量保留为历史记录。
 
 `publish_astra.py` 保留现有受保护发布逻辑：先核对逐文件哈希、发布前状态与已有备份，再切换主站版本；失败时按已绑定的状态恢复。它依赖服务器上的独立上传目录、新生成的发布 request、原配置备份与既有权限。仓库不保存实际服务器状态或可重复执行的旧 request。
 
@@ -107,3 +107,11 @@
 ## 2026-10-12 作品集鸣谢
 
 发布目录 `/var/www/shouyulove-home-releases/20261012T031847Z-astra-home`，上一版 `20261012T025514Z-astra-home`。模块、数据桥与字体版本为 `syl-v1-1-portfolio-thanks`；项目图像版本保持。252 文件及 18 条路由核验通过，Nginx 配置哈希保持。构建与各子站图标同步记录在 `output/deployment/shouyulove-site-icons-thanks-20261012/`。
+
+## 2026-10-12 主站「把爱递给你」标识
+
+主站选定 A「把爱递给你」，手掌改为浅暖米色 `#f3dfcf`。同一源图生成标签页、Apple 触屏和作品集安装图标，采用新版本地址；页面清除旧的重复图标引用，安装 id、启动地址和范围保留。
+
+发布 `20261012T142201Z-astra-home`，上一版为 `20261012T070956Z-astra-home`。19 个 HTML 文件仅调整 head 图标引用，新增 5 个版本化资源；共更新 24 文件、复用 233 文件。257 文件与五个相对链接逐项核验，18 条页面路由、旧目录跳转与三个原有子站通过；父级配置与路由片段哈希保持。公网 18 个页面和 5 个新资源的字节哈希均与清单一致。
+
+备份位于 `/etc/nginx/backups/shouyulove-home-20261012T142201Z-astra-home/`，本机记录为 `output/deployment/shouyulove-main-logo-color-match-20261012/`。此次只更新图标，已发布正文沿用前版；绑定 MD 中其他未发布编辑保留。

@@ -2,13 +2,15 @@
 
 [以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-本仓库保存当前公开的精确静态版本：252 个运行文件、18 条页面路由、5 个相对资源链接，共 111,550,115 字节。九个作品包含五个核心创意、一个内部工具与三个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
+本仓库保存当前公开的精确静态版本：257 个运行文件、18 条页面路由、5 个相对资源链接，共 111,609,132 字节。九个作品包含五个核心创意、一个内部工具与三个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
 
 作品集独立使用轻量 HTML，正式入口为 `/portfolio/`，原 `/projects/` 自动跳转；图标、分类、名称和简介先显示；核心创意与内部工具保留设计者，整项直接访问对应项目。核心创意桌面两列、手机单列，其他作品紧凑置底。完整原生三维程序在首次绘制至少两秒后后台加载；该页面不加载音乐。手机「添加到桌面」直接进入新入口。
 
 首页继续只预载当前场景，心创组与页脚按需加载，保留现有音乐行为；版本化资源使用一年 immutable 缓存，HTML 和 payload 使用 no-cache。
 
-当前图标使用 [柔和彩色套件](project-logos/20261012-柔和彩色/README.md)：八枚 SVG 与透明 PNG，文化节保留原卡通人物，年终总结使用感谢章，传情会意使用「心意小卡」。作品集底部显示 12px 小字鸣谢。完整维护约定和发布记录见 [作品集维护说明](docs/portfolio-maintenance.md)。2026-10-12 核对的运行发布为 `20261012T070956Z-astra-home`。
+项目图标使用 [柔和彩色套件](project-logos/20261012-柔和彩色/README.md)：八枚 SVG 与透明 PNG，文化节保留原卡通人物，年终总结使用感谢章，传情会意使用「心意小卡」。作品集底部显示 12px 小字鸣谢。完整维护约定和发布记录见 [作品集维护说明](docs/portfolio-maintenance.md)。2026-10-12 当前运行发布为 `20261012T142201Z-astra-home`。
+
+主站标识采用 [把爱递给你](project-logos/20261012-主站-把爱递给你/README.md)，手掌为浅暖米色，搭配豆沙爱心与灰绿描边。主站各页标签图标、Apple 触屏图标及作品集安装图标共用这一图形，独立资源版本为 `syl-v1-1-giving-heart`。
 
 ## 验证、恢复与本地预览
 
@@ -37,7 +39,7 @@ python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
 
 - `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
-- `主站版本归档/20261001-120733-Astra替换前/source/home-assets/images/` 中使用的两个站点图标。
+- `project-logos/20261012-主站-把爱递给你/shouyulove.svg` 中的主站标识；`brand_assets()` 生成图标，`brand_links()` 同步所有页面引用。
 - `output/deployment/chuanqinghuiyi-rename-20261012/font-source/` 中的当前字体源、子集与中文图集。
 - `project-logos/20261012-柔和彩色/` 中的九张透明 PNG 与八枚 SVG、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
 - `output/deployment/shouyulove-fast-20261009/mobile-textures/` 中的两张手机纹理。重建脚本为 `scripts/prepare_mobile_textures.py`，使用固定版本 Khronos KTX-Software 4.4.2；已生成的纹理也在运行快照中。
@@ -51,7 +53,7 @@ python3 -m pip install -r requirements-build.txt
 python3 -B -m unittest discover -s tests -v
 ```
 
-回归测试自行创建临时页面与输入，不要求 V0 或完整字体。需要新增字形或重新生成音乐时，另外使用对应的 `prepare_chinese_font.py` / `prepare_music.py`；这些生成步骤依赖 fontTools/Brotli、NumPy、SciPy、FFmpeg，以及固定版本 msdfgen v1.13，不能用它们替代运行快照恢复。
+图标渲染使用 CairoSVG 和系统 Cairo 库；本机 macOS 的 Cairo 位于 `/opt/homebrew/lib`，运行构建或源码测试时加上 `DYLD_LIBRARY_PATH=/opt/homebrew/lib`。回归测试自行创建临时页面与输入，不要求 V0 或完整字体。需要新增字形或重新生成音乐时，另外使用对应的 `prepare_chinese_font.py` / `prepare_music.py`；这些生成步骤依赖 fontTools/Brotli、NumPy、SciPy、FFmpeg，以及固定版本 msdfgen v1.13，不能用它们替代运行快照恢复。
 
 ## 发布和许可
 

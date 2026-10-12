@@ -31,28 +31,28 @@
       "sha256": "53cb7752e3231ec93177285ca3cc850e9bc8a4771a243957273992ef1c2cae1e"
     },
     "index.html": {
-      "bytes": 113333,
-      "sha256": "6daa6e0af55e195243be0b7e4a37b4201d9a74cfbad5c5b9829b9362e9226ecb"
+      "bytes": 113284,
+      "sha256": "8777901c2c707d3761e92ecdb967da799717d459cee2a99108dc2120e1d18976"
     },
     "portfolio/index.html": {
-      "bytes": 21001,
-      "sha256": "93b42bf68d1f6c266ef78da62308b53a67f1037ea9434a5750d4d662bc7fddcf"
+      "bytes": 21083,
+      "sha256": "68b6976fbf108d318865ac97eeb4805542694ce85a611389ef18384be97ae261"
     },
     "projects/2026-sign-language-cultural-festival/_payload.json": {
       "bytes": 1025,
       "sha256": "69f122a1d9f611d6af9bbd497d5cd5805525b11fc3db4998d89b31508b4007f0"
     },
     "projects/2026-sign-language-cultural-festival/index.html": {
-      "bytes": 116222,
-      "sha256": "2c8b096e5ee25e0ab5ad854bcaa746e33ed4cc1273d38edb3969b5fc4bc9e947"
+      "bytes": 116173,
+      "sha256": "71152ee3ffff544aec1863baa1a37b822114eafccf8b2c8a40931adbc3e561ff"
     },
     "projects/2026-year-end-summary/_payload.json": {
       "bytes": 1037,
       "sha256": "ea298fabb087885166cee6166b0b36c00a7ea38f47e61e501516713c1914077e"
     },
     "projects/2026-year-end-summary/index.html": {
-      "bytes": 116207,
-      "sha256": "6d4b7ec24e36d545e8afd9ced54edca0323ffeb9b62763c14ae67864d57897c5"
+      "bytes": 116158,
+      "sha256": "bd65e0957c65171351aaa3eb0415f9fc5f9cc44788811f00fd16eb5a1c2112fc"
     },
     "projects/_payload.json": {
       "bytes": 350,
@@ -63,60 +63,60 @@
       "sha256": "c07346b751492c3492d101251b8fe17a4214543d9fad9fc321f717a0d69d546f"
     },
     "projects/beida-zhidao/index.html": {
-      "bytes": 116152,
-      "sha256": "1b34b4817c23c8d109048841e9213245113a73387dc1ec7c25da76426bc4ef57"
+      "bytes": 116103,
+      "sha256": "5eec4e837c733dfc9f33d08d25b08e3da8e330c0c69fbfebbc26d987cf638192"
     },
     "projects/chuanqinghuiyi/_payload.json": {
       "bytes": 912,
       "sha256": "a6c7cc32965da3f1b7a389f29dc756c471a877b3d0eb21f6dc03b5cd9250a7f7"
     },
     "projects/chuanqinghuiyi/index.html": {
-      "bytes": 116160,
-      "sha256": "d2e3806dd3b8ffa0d714d4ca06f58254f1e67eea04b97ccc47ae709d6b6c8e7d"
+      "bytes": 116111,
+      "sha256": "2070e299652c473f24660c08b9dcc72e967a2a9a92a3025af368dcc795d9c130"
     },
     "projects/dictionary/_payload.json": {
       "bytes": 878,
       "sha256": "797eed3de207b6eeb76de651a62f1d56d3397caabb5983dbf0bd001c60e05b02"
     },
     "projects/dictionary/index.html": {
-      "bytes": 116140,
-      "sha256": "f7be6d8e645a1741d94d41aae28fbf2a045812b6b31f9f4c8ae5c824f43b7e2e"
+      "bytes": 116091,
+      "sha256": "3d10a803d11682a2ae941c2d0ffdfa69d2a239e523d920601beb33cdb1a35038"
     },
     "projects/index.html": {
-      "bytes": 268,
-      "sha256": "81fb8202a16edb14ca020e271f4b3f83ec7a285a1eceb2b0cdd4fd8368f48917"
+      "bytes": 675,
+      "sha256": "3cfab3ec3b4d0d02726aed744a5f5c739e78f9856f6a3685b079db2f1f7d03d0"
     },
     "projects/jieguo/_payload.json": {
       "bytes": 779,
       "sha256": "bcdb6fec67a5e7555ce9e7dd9c8b8c9af6957290f2fa087cdd887e9c865f53bc"
     },
     "projects/jieguo/index.html": {
-      "bytes": 116104,
-      "sha256": "2c6eff6d964ff9014d683207dcbc07213c6a190e54319946b3d90f5ec0616c95"
+      "bytes": 116055,
+      "sha256": "c05da70a955c4c402720e2089f7f14872bdbd952e4a0e9ab3224f2e7c87c3522"
     },
     "projects/pinhaoke/_payload.json": {
       "bytes": 824,
       "sha256": "16c9e56d22cec5d727f6c40d747743d518b1ab8fe9794b67432432eab0fb7211"
     },
     "projects/pinhaoke/index.html": {
-      "bytes": 116116,
-      "sha256": "76be8fa5f131283f758f57464a1cd81909a09909ee4b7ed664758ee14c785fa6"
+      "bytes": 116067,
+      "sha256": "05e01d7d35f9aa9e37deac88fdc544a215b110408627683a4dfd3ca9805150fc"
     },
     "projects/qinghua-zhidao/_payload.json": {
       "bytes": 847,
       "sha256": "49d77349b4fbe89063bfe9e362aec985cf216c4f4675618ed85bf94f805c1e8a"
     },
     "projects/qinghua-zhidao/index.html": {
-      "bytes": 116158,
-      "sha256": "fc4ba33fb98e2683eb2fa9f437705a4a81d9e72f0df77166dc6a8c1a8c93a042"
+      "bytes": 116109,
+      "sha256": "6809592e602797ebe29f8b04873e5dcd00b41b2cc0f9255696225cf16e1f0cd0"
     },
     "projects/signtrace/_payload.json": {
       "bytes": 949,
       "sha256": "4a6592433ad82ef5256cfe6268953cddb9b34bb8b7d17570d25a13b45009933a"
     },
     "projects/signtrace/index.html": {
-      "bytes": 116145,
-      "sha256": "88d45fc9b5225dba7a6698a5d979cda61020a1a79142eaca2460bd9be64b1ef4"
+      "bytes": 116096,
+      "sha256": "42adb0bb8d96fa0bc218331e31181c1c0786c8946533e75bd3ad731afab1983a"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-chuanqinghuiyi-rename.css": {
       "bytes": 6114,
@@ -246,107 +246,107 @@
       "bytes": 1032,
       "sha256": "b0158ea0513ee9f69913008efd694f9a5e6b6b25782762e5c2711be10d2e1a66"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/01-\u5f53\u524d\u601d\u6e90\u5b8b\u4f53/OFL.txt": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/01-当前思源宋体/OFL.txt": {
       "bytes": 4350,
       "sha256": "5e0da210fb04058a8c0087985d2d456b931c2579811a49655721d3cf0c36b6d6"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/01-\u5f53\u524d\u601d\u6e90\u5b8b\u4f53/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/01-当前思源宋体/preview-chinese.woff2": {
       "bytes": 139844,
       "sha256": "cbc8cdf2a22934f0a10d2c40552c8c90a9d498a5a605e794a9273095888cf8c6"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/02-\u6731\u96c0\u4eff\u5b8b/LICENSE.txt": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/02-朱雀仿宋/LICENSE.txt": {
       "bytes": 4389,
       "sha256": "66cc01ad4df62fca6936431a426104cb32a52ce8da49de9a7d643e02d7659043"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/02-\u6731\u96c0\u4eff\u5b8b/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/02-朱雀仿宋/preview-chinese.woff2": {
       "bytes": 100640,
       "sha256": "a810e643947f308d29a95f1a0dc2cb8ee79043c99d2ee8b3b51862376cc0659e"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/03-\u971e\u9e5c\u65b0\u81f4\u5b8b/LICENSE.md": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/03-霞鹜新致宋/LICENSE.md": {
       "bytes": 20613,
       "sha256": "1483c7de02dcf8b9c54b3b1aacabf7d6bdf32d412ca6724c0292ea68e862d8cf"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/03-\u971e\u9e5c\u65b0\u81f4\u5b8b/LXGWNeoZhiSong.ttf": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/03-霞鹜新致宋/LXGWNeoZhiSong.ttf": {
       "bytes": 10468036,
       "sha256": "32b398f9c6278c4ed34f413077add2c2f3c84034d463af2b9cb98f12c4c2c6cd"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/03-\u971e\u9e5c\u65b0\u81f4\u5b8b/\u6062\u590d\u539f\u59cbIPA\u5b57\u4f53.md": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/03-霞鹜新致宋/恢复原始IPA字体.md": {
       "bytes": 909,
       "sha256": "29a2ba26cc5f84f61b087df8c8cdf4c3e7567eb310ac58bc9d8cf4a9d0030f03"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/04-\u5bd2\u8749\u9526\u4e66\u5b8b/LICENSE": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/04-寒蝉锦书宋/LICENSE": {
       "bytes": 4325,
       "sha256": "027f6f68aa3c651a771d3368e7d1620acaeadfd5d00d23da44332565bc151869"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/04-\u5bd2\u8749\u9526\u4e66\u5b8b/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/04-寒蝉锦书宋/preview-chinese.woff2": {
       "bytes": 68828,
       "sha256": "3837cb8d65cb6734be377ed2aafaf2d0842b49bac5a7455f4b97e98fe32cd7c7"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/05-\u6e90\u6d41\u660e\u4f53/SIL_Open_Font_License_1.1.txt": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/05-源流明体/SIL_Open_Font_License_1.1.txt": {
       "bytes": 4464,
       "sha256": "d84b652ca46586043946969a33c1dbf5a43028440825ae744a325965bec4c8fb"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/05-\u6e90\u6d41\u660e\u4f53/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/05-源流明体/preview-chinese.woff2": {
       "bytes": 62552,
       "sha256": "b2843f657019e0453fc8dbbf662c7e2b50b30ab61c17778da4ae6c03e46d463c"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/06-\u6e90\u4e91\u660e\u4f53/SIL_Open_Font_License_1.1.txt": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/06-源云明体/SIL_Open_Font_License_1.1.txt": {
       "bytes": 4464,
       "sha256": "d84b652ca46586043946969a33c1dbf5a43028440825ae744a325965bec4c8fb"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/06-\u6e90\u4e91\u660e\u4f53/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/06-源云明体/preview-chinese.woff2": {
       "bytes": 108404,
       "sha256": "d608f592a2c13c70384c80207c8a6685f7b86797f8cf74edd2522ad70b49b691"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/07-\u6e90\u6837\u660e\u4f53/SIL_Open_Font_License_1.1.txt": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/07-源样明体/SIL_Open_Font_License_1.1.txt": {
       "bytes": 4464,
       "sha256": "d84b652ca46586043946969a33c1dbf5a43028440825ae744a325965bec4c8fb"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/07-\u6e90\u6837\u660e\u4f53/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/07-源样明体/preview-chinese.woff2": {
       "bytes": 68772,
       "sha256": "cab986a7b172cd51782ea99798fc5fa7fb0634ab8712fa1f7d7eb5c7a8beff44"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/08-\u4e00\u70b9\u660e\u4f53/I.Ming-8.10.ttf": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/08-一点明体/I.Ming-8.10.ttf": {
       "bytes": 25887784,
       "sha256": "cba13b75b050d671b611d0063147262e421e14359ad4530948b070f56111f0f3"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/08-\u4e00\u70b9\u660e\u4f53/IPA_Font_License_Agreement_v1.0.md": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/08-一点明体/IPA_Font_License_Agreement_v1.0.md": {
       "bytes": 20643,
       "sha256": "70decd302f0fe2860c88f1d2c1ce4eb2d0bc6ef05e635d091074d0bf9b7ad6d1"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/08-\u4e00\u70b9\u660e\u4f53/\u6062\u590d\u539f\u59cbIPA\u5b57\u4f53.md": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/08-一点明体/恢复原始IPA字体.md": {
       "bytes": 948,
       "sha256": "45ada3c20594b4a236db8a19e17493ce853dc240fb2714cc603dd3ebd323b0cf"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/09-\u72ee\u5c3e\u56db\u5b63\u6625\u52a0\u7cd6/SIL_Open_Font_License_1.1.txt": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/09-狮尾四季春加糖/SIL_Open_Font_License_1.1.txt": {
       "bytes": 4302,
       "sha256": "e564f06d018e7b95bc3594c96a17f1d41865af4038c375e7aa974dd69df38602"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/09-\u72ee\u5c3e\u56db\u5b63\u6625\u52a0\u7cd6/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/09-狮尾四季春加糖/preview-chinese.woff2": {
       "bytes": 59340,
       "sha256": "96600f54cb0039f56f867615e8459a0d8c47333f1ff8e8d810d302b4be5592c2"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/10-\u971e\u9e5c\u6587\u6977/OFL.txt": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/10-霞鹜文楷/OFL.txt": {
       "bytes": 5171,
       "sha256": "1a25e35da1031c6c3436fde545bb9cb5aca954e9873afe510c834b8b79bd21a0"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/10-\u971e\u9e5c\u6587\u6977/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/10-霞鹜文楷/preview-chinese.woff2": {
       "bytes": 69784,
       "sha256": "12fec707bd098a2d8b53a8eebe824e7451f8634deb36d5aac64d274fed65cce2"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/11-\u7ad9\u9177\u5c0f\u8587\u4f53/OFL.txt": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/11-站酷小薇体/OFL.txt": {
       "bytes": 4400,
       "sha256": "a094514ca57cf8f9c5e8d8d1adab5d8cd3a377297ff016f9df2c05b3ecd77f0a"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/11-\u7ad9\u9177\u5c0f\u8587\u4f53/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/11-站酷小薇体/preview-chinese.woff2": {
       "bytes": 106364,
       "sha256": "0763c4946b8ecb3b1a5121beebaa11b2235c7900c63b14ea19b91fdf576e6503"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/12-\u6e90\u4e91\u660e\u4f53Medium/SIL_Open_Font_License_1.1.txt": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/12-源云明体Medium/SIL_Open_Font_License_1.1.txt": {
       "bytes": 4464,
       "sha256": "d84b652ca46586043946969a33c1dbf5a43028440825ae744a325965bec4c8fb"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/12-\u6e90\u4e91\u660e\u4f53Medium/preview-chinese.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/12-源云明体Medium/preview-chinese.woff2": {
       "bytes": 109008,
       "sha256": "d0541417080842af338e562bc49937357afffad18739e8d78f6703a1cb9b6490"
     },
@@ -366,7 +366,7 @@
       "bytes": 14486,
       "sha256": "d175c542ada47c04030ca2a75fab9588cbb827e918564b2cd55f6988ad0e85fa"
     },
-    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/\u82f1\u6587\u539f\u5b57\u4f53/PSTimes-Regular.woff2": {
+    "sites/immersive-g-com-955afd14/shared/assets/font-preview-v1-1-2/英文原字体/PSTimes-Regular.woff2": {
       "bytes": 50812,
       "sha256": "21f89b0bd1aecb3989498ec6a73c4b238312b95703d38f3d86575abd4a606d1a"
     },
@@ -987,52 +987,72 @@
       "sha256": "62a30dafde66ebbeff85abf4a340c74f47c002e594b6073218cb77bb87071e5f"
     },
     "the-studio/awards/index.html": {
-      "bytes": 80313,
-      "sha256": "43a2c9dda325c77a950896c185ffd78e82fc5e0d0b2a36331919a5f63dd61899"
+      "bytes": 80264,
+      "sha256": "81a32503bd2ec624c540d704a7c636bc20ae11ca97e5beb21a061f7b717b67b2"
     },
     "the-studio/clients/_payload.json": {
       "bytes": 987,
       "sha256": "2427c332edf206e4f96706d58acf02ad9ec420faf00782656ff565f7aa064a5c"
     },
     "the-studio/clients/index.html": {
-      "bytes": 80317,
-      "sha256": "4be16e44142ea8e5e721fdb1da6d2d234230b8e20cf67deb938ae7ee2e4e2451"
+      "bytes": 80268,
+      "sha256": "5674c84826866ef465fe89ff61e31f3beec769524a77a05a26f30aa9a0d28ba4"
     },
     "the-studio/contact-us/_payload.json": {
       "bytes": 608,
       "sha256": "b539508fe05afe384e8e6968dd44493a47583bbd8c960f9f6238fc3708074878"
     },
     "the-studio/contact-us/index.html": {
-      "bytes": 80385,
-      "sha256": "09aa96603be05b78361c5082ac94cd2d9a9193927a3620db0961da3192b890ea"
+      "bytes": 80336,
+      "sha256": "6eababbe62300e6188f90470028728bf5aaa72f99cbade70ae44bd9d4dfd8235"
     },
     "the-studio/index.html": {
-      "bytes": 80585,
-      "sha256": "1df17e994cd84ff68c7020afaf9a7b86b7801fb3a77ebf95f561d50d0d9798f5"
+      "bytes": 80536,
+      "sha256": "ec48061b6b06b2dd176809aa3f29f8a3dd7d12ff8bb35a444e745e2c21138a2a"
     },
     "the-studio/our-approach/_payload.json": {
       "bytes": 526,
       "sha256": "54fcc337c0a095dc2c3299fb1a571100a9601f205df01a83002803610fa6cb31"
     },
     "the-studio/our-approach/index.html": {
-      "bytes": 80373,
-      "sha256": "ae152e7198ef5d61d17758de443ac96136397caefcf7260bad2fcf57fe36d072"
+      "bytes": 80324,
+      "sha256": "b00b076ac1adf13545c9d94a537e5b2a1327cdc19037477cbbb34d8617844f20"
     },
     "the-studio/services/_payload.json": {
       "bytes": 2968,
       "sha256": "b51ce4b22a47b0d3d8cc172006e231a80329d9ca64efec4e78102cf688da0496"
     },
     "the-studio/services/index.html": {
-      "bytes": 80337,
-      "sha256": "73091a45904dd590186b6c7ae778fd5f24981db273fdca825f98cf80df25be1f"
+      "bytes": 80288,
+      "sha256": "361ffc2ddb0bb12f3b9c8f2911cfdf847863cbc7c1563c7cf5e5832c9be9f4a0"
     },
     "the-studio/the-studio/_payload.json": {
       "bytes": 1414,
       "sha256": "273e6dcdcba4035adc5aa146670aef7e5a63d0b333af997c444fb1833afeaeca"
     },
     "the-studio/the-studio/index.html": {
-      "bytes": 80355,
-      "sha256": "d9aabfb9556da2169dfd7d4aff478b12396624ef0a4c5cdb0cac47bb2c7f1fdd"
+      "bytes": 80306,
+      "sha256": "43c5fc1f8e207ba775a2ba8e7acc9bf0cd73994a3932066e302f2d2b9cc3cc4f"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/favicon.syl-v1-1-giving-heart.png": {
+      "bytes": 3999,
+      "sha256": "d2e4ac84b787966ee4d0cd2f70df12990238f50791c71f56a4c7bc27aa7e9bbf"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/home-icon-192.syl-v1-1-giving-heart.png": {
+      "bytes": 11755,
+      "sha256": "afe31a2fc2fea4325038b179283f0e3df6c5f0012ac86e37bbafea97d7fbf4c3"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/home-icon-512.syl-v1-1-giving-heart.png": {
+      "bytes": 31918,
+      "sha256": "d5088448d404b7a6a354d4a1fe5c397e040e5e913489d3c03c4f6a5c304aaa1c"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/apple-touch-icon.syl-v1-1-giving-heart.png": {
+      "bytes": 11155,
+      "sha256": "58dd65657200a47a19f7e0acc5a35cbe3b2a0b52c5d811b677c48e76a73ecd18"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/works-manifest.syl-v1-1-giving-heart.json": {
+      "bytes": 534,
+      "sha256": "d5400a967f4126446de0bedf366f85fa6c59a06c62441e11356737531ad07d37"
     }
   },
   "symlinks": {
@@ -1042,5 +1062,5 @@
     "sounds": "sites/immersive-g-com-955afd14/shared/sounds",
     "webgl": "sites/immersive-g-com-955afd14/shared/webgl"
   },
-  "bytes": 111550115
+  "bytes": 111609132
 }

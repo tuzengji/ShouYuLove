@@ -5,12 +5,14 @@ import base64
 import copy
 import hashlib
 import html
+import io
 import json
 import re
 import shutil
 from pathlib import Path
 
 from bs4 import BeautifulSoup
+import cairosvg
 from PIL import Image
 from fontTools.ttLib import TTFont
 from fontTools.pens.svgPathPen import SVGPathPen
@@ -20,19 +22,19 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/chuanqinghuiyi-rename-20261012"
+RECORDS = ROOT / "output/deployment/shouyulove-main-logo-color-match-20261012"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
 V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
-OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
 FONT_SOURCE = ROOT / "output/deployment/chuanqinghuiyi-rename-20261012/font-source"
 RUNTIME_VERSION = "syl-v1-1-charades-cards"
 FONT_VERSION = "syl-v1-1-chuanqinghuiyi-rename"
 MODULE_VERSION = "syl-v1-1-chuanqinghuiyi-rename"
 BRIDGE_VERSION = "syl-v1-1-chuanqinghuiyi-rename"
+BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
 
 
@@ -123,18 +125,35 @@ def raster_assets(content):
         picture.save(destination / f"{project['id']}-square.{RUNTIME_VERSION}.png", optimize=True)
     shutil.copy2(FONT_SOURCE / "swei-spring-serif.woff2", destination / ("swei-spring-serif." + FONT_VERSION + ".woff2"))
     shutil.copy2(FONT_SOURCE / "OFL-SweiSpring.txt", destination / "OFL-SweiSpring.txt")
-    for name in ["favicon.png", "apple-touch-icon.png"]:
-        shutil.copy2(OLD_ASSETS / "images" / name, destination / name)
-    icon = Image.open(destination / "apple-touch-icon.png").convert("RGB")
+    brand_assets()
+
+
+def brand_assets():
+    destination = OUT / SHARED / "shouyulove"
+    destination.mkdir(parents=True, exist_ok=True)
+    source = ROOT / "project-logos/20261012-主站-把爱递给你/shouyulove.svg"
+    mark = Image.open(io.BytesIO(cairosvg.svg2png(url=str(source), output_width=1024, output_height=1024))).convert("RGBA")
+    mark.resize((64, 64), Image.Resampling.LANCZOS).save(destination / f"favicon.{BRAND_VERSION}.png", optimize=True)
+    # Desktop launchers need an opaque tile; keep the favicon transparent.
+    icon = Image.new("RGB", mark.size, "#f6f4ee")
+    icon.paste(mark, (0, 0), mark)
+    icon.resize((180, 180), Image.Resampling.LANCZOS).save(destination / f"apple-touch-icon.{BRAND_VERSION}.png", optimize=True)
     icons = []
     for size in [192, 512]:
-        name = f"home-icon-{size}.{MODULE_VERSION}.png"
+        name = f"home-icon-{size}.{BRAND_VERSION}.png"
         icon.resize((size, size), Image.Resampling.LANCZOS).save(destination / name, optimize=True)
         icons.append(dict(src="/" + str(SHARED / "shouyulove" / name), sizes=f"{size}x{size}", type="image/png"))
     manifest = dict(id="/projects/", name="以手予爱 ShouYuLove", short_name="以手予爱", lang="zh-CN",
                     start_url="/portfolio/", scope="/portfolio/", display="standalone", icons=icons,
                     theme_color="#e8e8e8", background_color="#e8e8e8")
-    (destination / f"works-manifest.{MODULE_VERSION}.json").write_text(json.dumps(manifest, ensure_ascii=False) + "\n")
+    (destination / f"works-manifest.{BRAND_VERSION}.json").write_text(json.dumps(manifest, ensure_ascii=False) + "\n")
+
+
+def brand_links():
+    shared = "/" + str(SHARED / "shouyulove")
+    return (f'<link rel="icon" type="image/png" sizes="64x64" href="{shared}/favicon.{BRAND_VERSION}.png"/>'
+            f'<link rel="apple-touch-icon" sizes="180x180" href="{shared}/apple-touch-icon.{BRAND_VERSION}.png"/>'
+            f'<link rel="manifest" href="{shared}/works-manifest.{BRAND_VERSION}.json"/>')
 
 
 def chinese_atlases():
@@ -541,13 +560,9 @@ def html_pages(content, pages, listing, renames, wordmark=None):
             href = node.get("href", "")
             if "canonical" in node.get("rel",[]):
                 node["href"] = "https://shouyulove.cn"+page["url"]
-            if "icon" in node.get("rel",[]):
-                node["href"] = "/"+str(SHARED/"shouyulove/favicon.png")
-            if "apple-touch-icon" in node.get("rel",[]):
-                node["href"] = "/"+str(SHARED/"shouyulove/apple-touch-icon.png")
-            if "manifest" in node.get("rel", []):
+            if {"icon", "apple-touch-icon", "manifest"}.intersection(node.get("rel", [])):
                 node.decompose()
-        soup.head.append(soup.new_tag("link", rel="manifest", href="/" + str(SHARED / "shouyulove" / f"works-manifest.{MODULE_VERSION}.json")))
+        soup.head.append(BeautifulSoup(brand_links(), "html.parser"))
         soup.head.append(soup.new_tag("link", rel="stylesheet", href="/assets/fonts." + MODULE_VERSION + ".css"))
         stylesheet = soup.new_tag("link",rel="stylesheet",href="/assets/shouyulove." + MODULE_VERSION + ".css")
         soup.head.append(stylesheet)
@@ -604,9 +619,7 @@ def portfolio_page(content):
               '<title>' + html.escape(content['portfolio']['title']) + ' · 以手予爱 ShouYuLove</title>',
               '<meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="以手予爱"/>',
               '<link rel="canonical" href="https://shouyulove.cn/portfolio/"/>',
-              '<link rel="icon" href="' + shared + '/shouyulove/favicon.png"/>',
-              '<link rel="apple-touch-icon" href="' + shared + '/shouyulove/apple-touch-icon.png"/>',
-              '<link rel="manifest" href="' + shared + '/shouyulove/works-manifest.' + MODULE_VERSION + '.json"/>',
+              brand_links(),
               '<link rel="stylesheet" href="/assets/fonts.' + MODULE_VERSION + '.css"/>',
               '<style>' + css + '</style></head><body class="portfolio-page">',
               logo_svg_filter(),
