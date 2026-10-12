@@ -14,7 +14,7 @@
 | --- | --- | --- |
 | 核心创意 | 以手寻语 SignTrace | `/signtrace/` |
 | 核心创意 | 分社手语词典 | `/dict` |
-| 核心创意 | 传情绘意-手语版 | `/chuanqinghuiyi/` |
+| 核心创意 | 传情会意-手语版 | `/chuanqinghuiyi/` |
 | 核心创意 | 2026 手语文化节 | `/2026-sign-language-cultural-festival/` |
 | 核心创意 | 2026 手语分社骨干年终总结 | `/2026-year-end-summary/` |
 | 心创组内部使用 | 接锅 | `/catchpot/` |
@@ -32,18 +32,18 @@
 
 ## 当前图标和字体
 
-图标源为 [柔和彩色套件](../project-logos/20261012-柔和彩色/README.md)。八个项目使用可编辑 SVG 与透明 PNG；文化节使用原卡通人物 PNG。年终总结为「谢谢这一年」感谢章，传情绘意为用户选定的 B「心意小卡」。首页和作品集共用同一套图像。
+图标源为 [柔和彩色套件](../project-logos/20261012-柔和彩色/README.md)。八个项目使用可编辑 SVG 与透明 PNG；文化节使用原卡通人物 PNG。年终总结为「谢谢这一年」感谢章，传情会意为用户选定的 B「心意小卡」。首页和作品集共用同一套图像。
 
-统一曲线版、卡通试稿、低饱和试稿和旧标识保留为历史材料，当前构建不从这些试稿选图。以手寻语、传情绘意、文化节、年终总结与接锅子站已同步页面标识、浏览器图标和 Apple 触屏图标；分社手语词典的独立服务未改动。
+统一曲线版、卡通试稿、低饱和试稿和旧标识保留为历史材料，当前构建不从这些试稿选图。以手寻语、传情会意、文化节、年终总结与接锅子站已同步页面标识、浏览器图标和 Apple 触屏图标；分社手语词典的独立服务未改动。
 
-中文继续使用狮尾四季春·加糖，英文标题为 PSTimes，英文正文及轻字重控件为 Helvetica Neue。首屏共用一份字体 CSS，后台场景复用已加载的字体定义，刷新或背景就绪时不切换字体。当前中文子集和图集覆盖 488 字，字体源位于 `output/deployment/shouyulove-site-icons-thanks-20261012/font-source/`。
+中文继续使用狮尾四季春·加糖，英文标题为 PSTimes，英文正文及轻字重控件为 Helvetica Neue。首屏共用一份字体 CSS，后台场景复用已加载的字体定义，刷新或背景就绪时不切换字体。当前中文子集和图集覆盖 488 字，字体源位于 `output/deployment/chuanqinghuiyi-rename-20261012/font-source/`。
 
 | 构建字段 | 当前值 |
 | --- | --- |
 | `RUNTIME_VERSION`（图像） | `syl-v1-1-charades-cards` |
-| `FONT_VERSION` | `syl-v1-1-portfolio-thanks` |
-| `MODULE_VERSION` | `syl-v1-1-portfolio-thanks` |
-| `BRIDGE_VERSION` | `syl-v1-1-portfolio-thanks` |
+| `FONT_VERSION` | `syl-v1-1-chuanqinghuiyi-rename` |
+| `MODULE_VERSION` | `syl-v1-1-chuanqinghuiyi-rename` |
+| `BRIDGE_VERSION` | `syl-v1-1-chuanqinghuiyi-rename` |
 
 ## 加载和隐私规则
 
@@ -62,10 +62,11 @@
 | 九项目图文目录与年终总结 | `e685832cdaa1e2f235c28de31b591fbda9c051f9` | `20261011T155351Z-astra-home` |
 | 九项目统一曲线图标 | `58d7f3f0d4d3367e03b1b50083c7fec2c4bf1792` | `20261011T161646Z-astra-home` |
 | 柔和彩色图标与感谢章 | `57cede1016d389e7f57cf7159fc268f8d33b15db` | `20261012T023409Z-astra-home` |
-| 传情绘意「心意小卡」 | `028e2c9` | `20261012T025514Z-astra-home` |
+| 传情会意「心意小卡」 | `028e2c9` | `20261012T025514Z-astra-home` |
 | 鸣谢与子站标识同步 | `1eb470dec5ea0fd568ab37038e4d3107a59e829f` | `20261012T031847Z-astra-home` |
+| 传情会意更名 | 见本次维护提交 | `20261012T070956Z-astra-home` |
 
-当前版本有 252 个运行文件、18 条页面路由、5 个相对链接，共 111,549,629 字节。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
+当前版本有 252 个运行文件、18 条页面路由、5 个相对链接，共 111,550,115 字节。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
 
 原发布记录已覆盖桌面、390px 手机、320px 窄屏、背景延迟及失败、无 JavaScript、滚动和布局稳定；最后一批子站图标有 15 项公网哈希核对。2026-10-12 接续整理时另行核对了服务器全部运行文件和相对链接，以及公网 18 条路由、9 张主站图标和 15 张子站图标；此次仅更新说明文档，未重新进行浏览器交互测试。
 

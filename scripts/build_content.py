@@ -20,7 +20,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-site-icons-thanks-20261012"
+RECORDS = ROOT / "output/deployment/chuanqinghuiyi-rename-20261012"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -28,11 +28,11 @@ V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 OLD_ASSETS = ROOT / "主站版本归档/20261001-120733-Astra替换前/source/home-assets"
-FONT_SOURCE = ROOT / "output/deployment/shouyulove-site-icons-thanks-20261012/font-source"
+FONT_SOURCE = ROOT / "output/deployment/chuanqinghuiyi-rename-20261012/font-source"
 RUNTIME_VERSION = "syl-v1-1-charades-cards"
-FONT_VERSION = "syl-v1-1-portfolio-thanks"
-MODULE_VERSION = "syl-v1-1-portfolio-thanks"
-BRIDGE_VERSION = "syl-v1-1-portfolio-thanks"
+FONT_VERSION = "syl-v1-1-chuanqinghuiyi-rename"
+MODULE_VERSION = "syl-v1-1-chuanqinghuiyi-rename"
+BRIDGE_VERSION = "syl-v1-1-chuanqinghuiyi-rename"
 SOURCE = source_path(ROOT)
 
 
@@ -46,7 +46,7 @@ def parse_content(text=None):
     text = SOURCE.read_text(encoding='utf-8') if text is None else text
     projects = []
     identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary",
-                   "传情绘意-手语版": "chuanqinghuiyi", "2026 手语文化节": "2026-sign-language-cultural-festival",
+                   "传情会意-手语版": "chuanqinghuiyi", "2026 手语文化节": "2026-sign-language-cultural-festival",
                    "2026 手语分社骨干年终总结": "2026-year-end-summary",
                    "拼好课": "pinhaoke", "北大知道 PKU Know": "beida-zhidao",
                    "清华知道 THU Know": "qinghua-zhidao", "接锅": "jieguo"}

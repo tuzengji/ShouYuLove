@@ -2,13 +2,13 @@
 
 [以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-本仓库保存当前公开的精确静态版本：252 个运行文件、18 条页面路由、5 个相对资源链接，共 111,549,629 字节。九个作品包含五个核心创意、一个内部工具与三个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
+本仓库保存当前公开的精确静态版本：252 个运行文件、18 条页面路由、5 个相对资源链接，共 111,550,115 字节。九个作品包含五个核心创意、一个内部工具与三个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
 
 作品集独立使用轻量 HTML，正式入口为 `/portfolio/`，原 `/projects/` 自动跳转；图标、分类、名称和简介先显示；核心创意与内部工具保留设计者，整项直接访问对应项目。核心创意桌面两列、手机单列，其他作品紧凑置底。完整原生三维程序在首次绘制至少两秒后后台加载；该页面不加载音乐。手机「添加到桌面」直接进入新入口。
 
 首页继续只预载当前场景，心创组与页脚按需加载，保留现有音乐行为；版本化资源使用一年 immutable 缓存，HTML 和 payload 使用 no-cache。
 
-当前图标使用 [柔和彩色套件](project-logos/20261012-柔和彩色/README.md)：八枚 SVG 与透明 PNG，文化节保留原卡通人物，年终总结使用感谢章，传情绘意使用「心意小卡」。作品集底部显示 12px 小字鸣谢。完整维护约定和发布记录见 [作品集维护说明](docs/portfolio-maintenance.md)。2026-10-12 核对的运行发布为 `20261012T031847Z-astra-home`。
+当前图标使用 [柔和彩色套件](project-logos/20261012-柔和彩色/README.md)：八枚 SVG 与透明 PNG，文化节保留原卡通人物，年终总结使用感谢章，传情会意使用「心意小卡」。作品集底部显示 12px 小字鸣谢。完整维护约定和发布记录见 [作品集维护说明](docs/portfolio-maintenance.md)。2026-10-12 核对的运行发布为 `20261012T070956Z-astra-home`。
 
 ## 验证、恢复与本地预览
 
@@ -38,7 +38,7 @@ python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 
 - `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
 - `主站版本归档/20261001-120733-Astra替换前/source/home-assets/images/` 中使用的两个站点图标。
-- `output/deployment/shouyulove-site-icons-thanks-20261012/font-source/` 中的当前字体源、子集与中文图集。
+- `output/deployment/chuanqinghuiyi-rename-20261012/font-source/` 中的当前字体源、子集与中文图集。
 - `project-logos/20261012-柔和彩色/` 中的九张透明 PNG 与八枚 SVG、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
 - `output/deployment/shouyulove-fast-20261009/mobile-textures/` 中的两张手机纹理。重建脚本为 `scripts/prepare_mobile_textures.py`，使用固定版本 Khronos KTX-Software 4.4.2；已生成的纹理也在运行快照中。
 
@@ -146,3 +146,9 @@ python3 -B -m unittest discover -s tests -v
 作品集末尾新增居中的 12px 小字「鸣谢所有心创组成员」，文字由原稿「作品集页面／鸣谢」字段维护。补齐“鸣、谢”两个字形，中文覆盖 488 字；英文原字库和图集中的英文字形像素保持。模块、数据桥和字体版本为 `syl-v1-1-portfolio-thanks`，项目图片继续使用 `syl-v1-1-charades-cards`。
 
 发布 `20261012T031847Z-astra-home`。以手寻语、传情绘意、文化节、年终总结与接锅各子站的项目标识、浏览器图标和 Apple 触屏图标已同步；词典独立服务未修改。记录见 `output/deployment/shouyulove-site-icons-thanks-20261012/`。
+
+## 2026-10-12 传情会意更名
+
+项目正式名称统一为「传情会意-手语版」，首页、作品集、详情页、数据桥和内容源已同步。正式地址仍为 `/chuanqinghuiyi/`。中文字体与 WebGL 字库补齐「会」字，保留原英文、效果与图标。主站发布为 `20261012T070956Z-astra-home`，模块、字体和数据桥版本为 `syl-v1-1-chuanqinghuiyi-rename`。
+
+本次使用已发布的内容快照构建，仅加入项目改名；绑定原稿中其他未发布的编辑保留。运行清单核验 252 文件、18 条页面路由、5 个资源链接。电脑、390px、320px 作品集与原生背景检查通过，正式入口均可访问。

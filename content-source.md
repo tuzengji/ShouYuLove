@@ -41,11 +41,11 @@ ShouYuLove
 地址：[进入分社手语词典](https://shouyulove.cn/dict)  
 设计者：朱星晔
 
-#### 传情绘意-手语版
+#### 传情会意-手语版
 
 和伙伴轮流比划、猜词，通过不同难度的题目练习手语表达，让学习与社团活动更有趣。
 
-地址：[开始传情绘意](https://shouyulove.cn/chuanqinghuiyi/)  
+地址：[开始传情会意](https://shouyulove.cn/chuanqinghuiyi/)  
 设计者：涂增基
 
 #### 2026 手语文化节
