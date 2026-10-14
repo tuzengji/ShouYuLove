@@ -48,6 +48,13 @@ ShouYuLove
 地址：[开始传情会意](https://shouyulove.cn/chuanqinghuiyi/)  
 设计者：涂增基
 
+#### 指间趣游 SignPlay
+
+手语小游戏手册，按活动类型与难度查找玩法，并提供人数、时长和原始资料。
+
+地址：[进入指间趣游](https://shouyulove.cn/signplay/)
+设计者：伍家阳
+
 #### 2026 手语文化节
 
 服务于 2026 年手语文化节的小游戏网页～

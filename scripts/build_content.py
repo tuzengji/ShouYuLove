@@ -22,18 +22,18 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouyulove-main-logo-color-match-20261012"
+RECORDS = ROOT / "output/deployment/signplay-20261015"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
 V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
-FONT_SOURCE = ROOT / "output/deployment/chuanqinghuiyi-rename-20261012/font-source"
-RUNTIME_VERSION = "syl-v1-1-charades-cards"
-FONT_VERSION = "syl-v1-1-chuanqinghuiyi-rename"
-MODULE_VERSION = "syl-v1-1-chuanqinghuiyi-rename"
-BRIDGE_VERSION = "syl-v1-1-chuanqinghuiyi-rename"
+FONT_SOURCE = ROOT / "output/deployment/signplay-20261015/font-source"
+RUNTIME_VERSION = "syl-v1-1-signplay"
+FONT_VERSION = "syl-v1-1-signplay"
+MODULE_VERSION = "syl-v1-1-signplay"
+BRIDGE_VERSION = "syl-v1-1-signplay"
 BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
 
@@ -47,7 +47,7 @@ def section(text, heading):
 def parse_content(text=None):
     text = SOURCE.read_text(encoding='utf-8') if text is None else text
     projects = []
-    identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary",
+    identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary", "指间趣游 SignPlay": "signplay",
                    "传情会意-手语版": "chuanqinghuiyi", "2026 手语文化节": "2026-sign-language-cultural-festival",
                    "2026 手语分社骨干年终总结": "2026-year-end-summary",
                    "拼好课": "pinhaoke", "北大知道 PKU Know": "beida-zhidao",
@@ -108,9 +108,12 @@ def raster_assets(content):
     palettes = dict(zip(["signtrace", "dictionary", "chuanqinghuiyi", "pinhaoke", "beida-zhidao", "qinghua-zhidao", "jieguo"], palettes))
     palettes["2026-sign-language-cultural-festival"] = ("#f4e7de", "#b39f8e")
     palettes["2026-year-end-summary"] = ("#e4ded1", "#94a28d")
+    palettes["signplay"] = ("#f3e5d5", "#9c8c74")
     for project in content["projects"]:
         palette = palettes[project["id"]]
         icon = ROOT / "project-logos/20261012-柔和彩色" / (project["id"] + ".png")
+        if project["id"] == "signplay":
+            icon = ROOT / "project-logos/20261015-signplay/signplay.png"
         mark = Image.open(icon).convert("RGBA")
         assert mark.getchannel("A").getextrema() == (0, 255), icon
         size = 640

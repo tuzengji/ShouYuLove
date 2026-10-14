@@ -14,7 +14,7 @@ from content_source import source_path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRECTORY = ROOT / "output/deployment/chuanqinghuiyi-rename-20261012/font-source"
+DIRECTORY = ROOT / "output/deployment/signplay-20261015/font-source"
 FONT = DIRECTORY / "SweiSpringSugarCJKsc-Regular.ttf"
 MSDFGEN = ROOT / "output/tools/msdfgen-v1.13/build/msdfgen"
 LABELS = "点击了解 向下探索 作品集 作品导航 首页 返回 心创组 开启声音 关闭 静音 设计者 打开"

@@ -28,7 +28,7 @@ async (page) => {
    await p.goBack();await p.waitForURL(base+'/portfolio/');await p.locator('.portfolio-link').first().waitFor();
    await p.goForward();await p.waitForURL(base+'/');
    if(errors.length)throw new Error(errors.join('\n'));
-   results.push({width,nativeHome:true,history:true,links:7,errors});
+   results.push({width,nativeHome:true,history:true,links:10,errors});
   }finally{await context.close();}
  }
  return {base,passed:true,results};

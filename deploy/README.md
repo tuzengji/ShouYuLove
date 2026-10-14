@@ -1,5 +1,13 @@
 # 主站运行白名单与发布约定
 
+## 2026-10-15 指间趣游上线
+
+新增核心创意「指间趣游 SignPlay」，设计者为伍家阳，正式入口为 https://shouyulove.cn/signplay/ 。首页、作品集和项目详情共用新 Logo 与正文，作品集现有 10 个项目。
+
+主站发布为 `20261014T162210Z-astra-home`，运行白名单含 255 个文件、19 条页面路由和 5 个相对链接，共 111,756,084 字节。图像、模块、字体和数据桥版本为 `syl-v1-1-signplay`；主站品牌图标版本保持不变。中文覆盖 511 字，字体源位于 `output/deployment/signplay-20261015/font-source/`。
+
+部署记录保存在 `output/deployment/signplay-20261015/`。本次先更新绑定原稿的新项目条目，再从已发布内容快照追加该条目构建；原稿中其他未发布编辑保留。指间趣游由独立 Nginx 片段和版本目录维护，主站发布不接管其运行文件。
+
 当前运行清单为仓库根目录的 `runtime-manifest.json`。使用 `python3 -B scripts/runtime_snapshot.py export output/runtime` 可导出 257 个运行文件与 5 个相对链接；发布只上传该清单。
 
 ## 当前发布
