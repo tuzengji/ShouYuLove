@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """Install the owner-only collector independently of the public runtime whitelist."""
 from pathlib import Path
+import fcntl
 import hashlib
 import json
 import shutil
 import subprocess
 import time
+
+# Held through all installation checks; process exit releases it on failure.
+deployment_lock = open("/run/lock/nginx-deploy.lock", "a")
+fcntl.flock(deployment_lock, fcntl.LOCK_EX)
 
 source = Path(__file__).resolve().parent
 targets = {

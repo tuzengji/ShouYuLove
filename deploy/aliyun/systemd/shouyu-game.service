@@ -1,0 +1,30 @@
+# /etc/systemd/system/shouyu-game.service
+[Unit]
+Description=ShouYuLove 你比划我猜·手语版（静态站点，端口 8019）
+After=network.target
+
+[Service]
+Slice=system-shouyulove.slice
+Type=simple
+User=shouyu-game
+Group=shouyu-game
+WorkingDirectory=/opt/shouyu-game/current
+Environment=PORT=8019
+Environment=HOST=127.0.0.1
+Environment=SHOUYU_VISIT_STATS_DB=/var/lib/shouyu-game/访问统计.sqlite
+Environment=PYTHONDONTWRITEBYTECODE=1
+ExecStart=/usr/bin/python3 /opt/shouyu-game/current/serve.py
+Restart=on-failure
+RestartSec=3
+
+StateDirectory=shouyu-game
+StateDirectoryMode=0700
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/shouyu-game
+
+[Install]
+WantedBy=multi-user.target

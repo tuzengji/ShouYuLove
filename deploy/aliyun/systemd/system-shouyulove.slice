@@ -1,0 +1,8 @@
+[Unit]
+Description=ShouYuLove application resource budget
+
+[Slice]
+CPUQuota=200%
+CPUWeight=20
+MemoryHigh=2G
+MemoryMax=3G

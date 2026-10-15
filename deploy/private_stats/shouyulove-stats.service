@@ -1,8 +1,10 @@
+# /etc/systemd/system/shouyulove-stats.service
 [Unit]
 Description=ShouYuLove private daily visit statistics
 After=local-fs.target
 
 [Service]
+Slice=system-shouyulove.slice
 Type=simple
 User=root
 Group=www-data

@@ -2,6 +2,7 @@
 """Run on the server after uploading the isolated Astra release."""
 
 from pathlib import Path
+import fcntl
 import hashlib
 from http.client import HTTPConnection
 import json
@@ -152,4 +153,7 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    # This process owns the shared lock; callers must not hold it already.
+    with open("/run/lock/nginx-deploy.lock", "a") as deployment_lock:
+        fcntl.flock(deployment_lock, fcntl.LOCK_EX)
+        main()

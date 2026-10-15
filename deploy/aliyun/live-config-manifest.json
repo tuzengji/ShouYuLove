@@ -1,0 +1,77 @@
+[
+  {
+    "server_path": "/etc/nginx/sites-available/shouyulove",
+    "repo_path": "nginx/shouyulove.server.conf",
+    "sha256": "dad5fc1c629128c1562d13357674f55736d2eee66e5c2df90157eeb33ab508e5"
+  },
+  {
+    "server_path": "/etc/systemd/system/system-shouyulove.slice",
+    "repo_path": "systemd/system-shouyulove.slice",
+    "sha256": "ba4172a1f8f384403f4b140e7e5c0c0e9be72d001108989e8aefa934131bb081"
+  },
+  {
+    "server_path": "/etc/systemd/system/shouyu-game.service",
+    "repo_path": "systemd/shouyu-game.service",
+    "sha256": "2ef50e5ad0acf86d0b6f69242525aa754de031a221f6e75beb4465b55662988c"
+  },
+  {
+    "server_path": "/usr/local/sbin/shouyulove-cert-deploy.py",
+    "repo_path": "tls/shouyulove-cert-deploy.py",
+    "sha256": "e97bb68efdca9fa95b7f2ee224b57d10e3413da696d9d1ba4a9728427ba28a69"
+  },
+  {
+    "server_path": "/etc/nginx/conf.d/shouyulove-limits.conf",
+    "repo_path": "nginx/conf.d/shouyulove-limits.conf",
+    "sha256": "1dc54bcd774e57d28ea9721b8f721c15867f657b158f753026af964f3c0f2afe"
+  },
+  {
+    "server_path": "/etc/nginx/conf.d/shouyulove-visit-format.conf",
+    "repo_path": "nginx/conf.d/shouyulove-visit-format.conf",
+    "sha256": "c80b0c077b370ba088f4655a7a4f456a9392a9060c39e8baac59f5315b6110b5"
+  },
+  {
+    "server_path": "/etc/nginx/conf.d/shouyulove-dict-upstream.conf",
+    "repo_path": "nginx/conf.d/shouyulove-dict-upstream.conf",
+    "sha256": "65392abec4bfbab12d91af23063ce7fae7d1c67f852ee038995f9a3dd0ac24e5"
+  },
+  {
+    "server_path": "/etc/nginx/conf.d/shouyulove-migration-maps.conf",
+    "repo_path": "nginx/conf.d/shouyulove-migration-maps.conf",
+    "sha256": "9b14816daad56293156d8b19a769455077810ea78117118e1dd95d2dd8d4044b"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/shouyulove-home.conf",
+    "repo_path": "nginx/snippets/shouyulove-home.conf",
+    "sha256": "c67f30d3a82c830c117d791fd0e108865f67ee4cde0b7922cc6da8d1ba4b5e90"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/signplay.conf",
+    "repo_path": "nginx/snippets/signplay.conf",
+    "sha256": "66a1a7303408c2133709e6f2573eb4d0a70de632f28cc6c3aa36433fdc3cd1ce"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/jieguo.conf",
+    "repo_path": "nginx/snippets/jieguo.conf",
+    "sha256": "bf4b3624aea87611d9ec474f0ec619798855e7ac113a3e2a28e99565a698cf8f"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/sign-language-festival.conf",
+    "repo_path": "nginx/snippets/sign-language-festival.conf",
+    "sha256": "6902ca6a6220037104d9e558b7660bdfb87e387a01384092506658c317a67bf4"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/sign-year-end-summary.conf",
+    "repo_path": "nginx/snippets/sign-year-end-summary.conf",
+    "sha256": "206ad21b0409a9e5260389dbb356f62b5a13e577f70c5f8f07fbae4e09b827d3"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/shouyu-content-access-auth.conf",
+    "repo_path": "nginx/snippets/shouyu-content-access-auth.conf",
+    "sha256": "ad316382d8b434aad60b6030a1cc0fed37dc493537bb1a3df14f44b52a50ac2a"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/shouyu-content-access-video.conf",
+    "repo_path": "nginx/snippets/shouyu-content-access-video.conf",
+    "sha256": "27b19116038c843d6a489fd54c774fbfda30e77995650e042a17459f8ffe2f97"
+  }
+]
