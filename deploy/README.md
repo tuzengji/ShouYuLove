@@ -1,5 +1,13 @@
 # 主站运行白名单与发布约定
 
+## 当前发布目标与说明同步（2026-10-15）
+
+维护入口固定为 `shouyulove-aliyun`，主站版本 `20261014T162210Z-astra-home`；255 文件、19 路由、5 个链接、111,756,084 字节。与其他项目的边界见 [当前运维状态](../docs/operations-current.md)。
+
+主站发布器、统计安装器，以及各自项目的 SignPlay/接锅发布器已在内部持有 `/run/lock/nginx-deploy.lock`，调用它们时不要再在外层持同一锁。手动修改 Nginx 时才由操作者取得该锁，覆盖备份、修改、`nginx -t`、reload 和必要回退。
+
+只更新说明时，提交并推送经过审查的 Markdown，将同一批文件及其哈希放入服务器非公开维护目录。本次使用 `/opt/shouyulove-maintenance/20261015-docs-refresh/`；原迁移维护包保留。记录实际提交与远端回读，不切换网站版本，不把说明上传到 `/var/www`。
+
 ## 2026-10-15 阿里云迁移维护入口（流量已切换）
 
 主站及以手予爱子项目迁移后的维护入口统一为 `ssh shouyulove-aliyun`，固定连接 `root@101.37.209.227`（ECS `i-bp1hi3u3w5p3vg4owfl0`）。不要使用 `yanyuan-calendar` 发布或维护这些项目，该别名属于北大知道的独立迁移。
@@ -22,11 +30,11 @@
 
 部署记录保存在 `output/deployment/signplay-20261015/`。本次先更新绑定原稿的新项目条目，再从已发布内容快照追加该条目构建；原稿中其他未发布编辑保留。指间趣游由独立 Nginx 片段和版本目录维护，主站发布不接管其运行文件。
 
-当前运行清单为仓库根目录的 `runtime-manifest.json`。使用 `python3 -B scripts/runtime_snapshot.py export output/runtime` 可导出 257 个运行文件与 5 个相对链接；发布只上传该清单。
+当前运行清单为仓库根目录的 `runtime-manifest.json`。使用 `python3 -B scripts/runtime_snapshot.py export output/runtime` 可导出 255 个运行文件与 5 个相对链接；发布只上传该清单。
 
 ## 当前发布
 
-2026-10-12 当前主站版本为 `20261012T142201Z-astra-home`：257 个运行文件、18 条页面路由、5 个相对链接，共 111,609,132 字节。主站图标独立版本为 `syl-v1-1-giving-heart`。模块、字体和数据桥版本为 `syl-v1-1-chuanqinghuiyi-rename`，项目图片版本为 `syl-v1-1-charades-cards`。图标及五个相关子站的同步边界见 [作品集维护说明](../docs/portfolio-maintenance.md)。下文带日期的版本和文件数量保留为历史记录。
+当前主站版本为 `20261014T162210Z-astra-home`：255 个运行文件、19 条页面路由、5 个相对链接，共 111,756,084 字节。主站图标独立版本为 `syl-v1-1-giving-heart`。模块、字体、数据桥和项目图片版本为 `syl-v1-1-signplay`。图标及相关子站的同步边界见 [作品集维护说明](../docs/portfolio-maintenance.md)。下文带日期的版本和文件数量保留为历史记录。
 
 `publish_astra.py` 保留现有受保护发布逻辑：先核对逐文件哈希、发布前状态与已有备份，再切换主站版本；失败时按已绑定的状态恢复。它依赖服务器上的独立上传目录、新生成的发布 request、原配置备份与既有权限。仓库不保存实际服务器状态或可重复执行的旧 request。
 

@@ -1,5 +1,11 @@
 # 以手予爱 ShouYuLove 主站
 
+## 当前状态与说明入口（2026-10-15）
+
+当前主站部署在阿里云 `101.37.209.227`，使用 `ssh shouyulove-aliyun` 维护。运行版本为 `20261014T162210Z-astra-home`：255 文件、19 页面路由、5 个相对链接，作品集 10 项；中文字体覆盖 511 字。
+
+[当前运维状态](docs/operations-current.md) 汇总三台服务器的职责、旧机保留内容、中转端口、PKUKnow 退役结果和六仓迁移提交。[迁移与维护](迁移与维护.md) 说明数据与服务边界，[部署说明](deploy/README.md) 说明发布步骤，[验证记录](VALIDATION.md) 区分本次核查和历史验收。下文带日期的旧结果保留用于追溯。
+
 ## 2026-10-15 阿里云迁移维护入口（流量已切换）
 
 主站及以手予爱子项目迁移后的维护入口统一为 `ssh shouyulove-aliyun`，固定连接 `root@101.37.209.227`（ECS `i-bp1hi3u3w5p3vg4owfl0`）。不要使用 `yanyuan-calendar` 发布或维护这些项目，该别名属于北大知道的独立迁移。
@@ -24,13 +30,13 @@
 
 [以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-本仓库保存当前公开的精确静态版本：257 个运行文件、18 条页面路由、5 个相对资源链接，共 111,609,132 字节。九个作品包含五个核心创意、一个内部工具与三个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
+本仓库保存当前公开的精确静态版本：255 个运行文件、19 条页面路由、5 个相对资源链接，共 111,756,084 字节。十个作品包含六个核心创意、一个内部工具与三个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
 
 作品集独立使用轻量 HTML，正式入口为 `/portfolio/`，原 `/projects/` 自动跳转；图标、分类、名称和简介先显示；核心创意与内部工具保留设计者，整项直接访问对应项目。核心创意桌面两列、手机单列，其他作品紧凑置底。完整原生三维程序在首次绘制至少两秒后后台加载；该页面不加载音乐。手机「添加到桌面」直接进入新入口。
 
 首页继续只预载当前场景，心创组与页脚按需加载，保留现有音乐行为；版本化资源使用一年 immutable 缓存，HTML 和 payload 使用 no-cache。
 
-项目图标使用 [柔和彩色套件](project-logos/20261012-柔和彩色/README.md)：八枚 SVG 与透明 PNG，文化节保留原卡通人物，年终总结使用感谢章，传情会意使用「心意小卡」。作品集底部显示 12px 小字鸣谢。完整维护约定和发布记录见 [作品集维护说明](docs/portfolio-maintenance.md)。2026-10-12 当前运行发布为 `20261012T142201Z-astra-home`。
+项目图标使用 [柔和彩色套件](project-logos/20261012-柔和彩色/README.md)：八枚 SVG 与透明 PNG，文化节保留原卡通人物，年终总结使用感谢章，传情会意使用「心意小卡」，SignPlay 使用 `project-logos/20261015-signplay/` 的已选图标。作品集底部显示 12px 小字鸣谢。完整维护约定和发布记录见 [作品集维护说明](docs/portfolio-maintenance.md)。当前运行发布为 `20261014T162210Z-astra-home`。
 
 主站标识采用 [把爱递给你](project-logos/20261012-主站-把爱递给你/README.md)，手掌为浅暖米色，搭配豆沙爱心与灰绿描边。主站各页标签图标、Apple 触屏图标及作品集安装图标共用这一图形，独立资源版本为 `syl-v1-1-giving-heart`。
 
@@ -56,14 +62,14 @@ python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 
 ## 维护源码
 
-`scripts/content_source.py` 解析本机正文源绑定，`content-source.md` 保存成功构建生成的公开文案副本；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 488 字，字体缓存名由独立 `FONT_VERSION` 管理。现有回归检查覆盖文本源绑定、字标、共享字体、导航、背景加载和实际 HTTP 缓存响应。
+`scripts/content_source.py` 解析本机正文源绑定，`content-source.md` 保存成功构建生成的公开文案副本；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 511 字，字体缓存名由独立 `FONT_VERSION` 管理。现有回归检查覆盖文本源绑定、字标、共享字体、导航、背景加载和实际 HTTP 缓存响应。
 
 维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
 
 - `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
 - `project-logos/20261012-主站-把爱递给你/shouyulove.svg` 中的主站标识；`brand_assets()` 生成图标，`brand_links()` 同步所有页面引用。
-- `output/deployment/chuanqinghuiyi-rename-20261012/font-source/` 中的当前字体源、子集与中文图集。
-- `project-logos/20261012-柔和彩色/` 中的九张透明 PNG 与八枚 SVG、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
+- `output/deployment/signplay-20261015/font-source/` 中的当前字体源、子集与中文图集。
+- `project-logos/20261012-柔和彩色/` 中的原图标及 `project-logos/20261015-signplay/` 中的 SignPlay 图标、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
 - `output/deployment/shouyulove-fast-20261009/mobile-textures/` 中的两张手机纹理。重建脚本为 `scripts/prepare_mobile_textures.py`，使用固定版本 Khronos KTX-Software 4.4.2；已生成的纹理也在运行快照中。
 
 克隆可独立恢复现有站点。完整内容重建还需上述原始素材；构建脚本会重建固定的 `output/shouyulove-jieguo-site/`，运行前保存已有输出。

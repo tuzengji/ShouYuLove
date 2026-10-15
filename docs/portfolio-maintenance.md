@@ -8,7 +8,7 @@
 
 部署记录保存在 `output/deployment/signplay-20261015/`。本次先更新绑定原稿的新项目条目，再从已发布内容快照追加该条目构建；原稿中其他未发布编辑保留。指间趣游由独立 Nginx 片段和版本目录维护，主站发布不接管其运行文件。
 
-核对日期：2026-10-12。本文记录已确认的作品集布局、图标和加载规则，后续修改以这些规则及绑定 Markdown 为基础。
+核对日期：2026-10-15。服务器迁移后的运行入口及依赖见 [运维状态](operations-current.md)。本文记录已确认的作品集布局、图标和加载规则，后续修改以这些规则及绑定 Markdown 为基础。
 
 ## 页面和内容入口
 
@@ -41,13 +41,13 @@
 
 ## 当前图标和字体
 
-主站使用 [把爱递给你](../project-logos/20261012-主站-把爱递给你/README.md)：浅暖米色手掌、豆沙爱心与灰绿描边。18 条主站页面路由的标签页图标、Apple 触屏图标和作品集安装图标统一从该 SVG 生成，独立缓存版本为 `syl-v1-1-giving-heart`。
+主站使用 [把爱递给你](../project-logos/20261012-主站-把爱递给你/README.md)：浅暖米色手掌、豆沙爱心与灰绿描边。19 条主站页面路由的标签页图标、Apple 触屏图标和作品集安装图标统一从该 SVG 生成，独立缓存版本为 `syl-v1-1-giving-heart`。
 
-图标源为 [柔和彩色套件](../project-logos/20261012-柔和彩色/README.md)。八个项目使用可编辑 SVG 与透明 PNG；文化节使用原卡通人物 PNG。年终总结为「谢谢这一年」感谢章，传情会意为用户选定的 B「心意小卡」。首页和作品集共用同一套图像。
+图标源为 [柔和彩色套件](../project-logos/20261012-柔和彩色/README.md)。原八个项目使用可编辑 SVG 与透明 PNG；文化节使用原卡通人物 PNG，新增 SignPlay 使用 `project-logos/20261015-signplay/` 的已选图标。年终总结为「谢谢这一年」感谢章，传情会意为用户选定的 B「心意小卡」。首页和作品集共用同一套图像。
 
 统一曲线版、卡通试稿、低饱和试稿和旧标识保留为历史材料，当前构建不从这些试稿选图。以手寻语、传情会意、文化节、年终总结与接锅子站已同步页面标识、浏览器图标和 Apple 触屏图标；分社手语词典的独立服务未改动。
 
-中文继续使用狮尾四季春·加糖，英文标题为 PSTimes，英文正文及轻字重控件为 Helvetica Neue。首屏共用一份字体 CSS，后台场景复用已加载的字体定义，刷新或背景就绪时不切换字体。当前中文子集和图集覆盖 488 字，字体源位于 `output/deployment/chuanqinghuiyi-rename-20261012/font-source/`。
+中文继续使用狮尾四季春·加糖，英文标题为 PSTimes，英文正文及轻字重控件为 Helvetica Neue。首屏共用一份字体 CSS，后台场景复用已加载的字体定义，刷新或背景就绪时不切换字体。当前中文子集和图集覆盖 511 字，字体源位于 `output/deployment/signplay-20261015/font-source/`。
 
 | 构建字段 | 当前值 |
 | --- | --- |
@@ -67,7 +67,7 @@
 
 ## 发布记录与后续检查
 
-下列为已完成的发布；当前运行版本为最后一行。运行白名单见 [runtime-manifest.json](../runtime-manifest.json)。
+下列为已完成的发布；最后一行是当前静态版本。后续阿里云迁移及全站统计更新未改变该静态版本。运行白名单见 [runtime-manifest.json](../runtime-manifest.json)。
 
 | 工作 | 仓库提交 | 主站发布目录名称 |
 | --- | --- | --- |
@@ -78,8 +78,9 @@
 | 鸣谢与子站标识同步 | `1eb470dec5ea0fd568ab37038e4d3107a59e829f` | `20261012T031847Z-astra-home` |
 | 传情会意更名 | `14770c0` | `20261012T070956Z-astra-home` |
 | 主站「把爱递给你」与站点图标 | 见本次维护提交 | `20261012T142201Z-astra-home` |
+| 指间趣游加入首页与作品集 | `4484dd6` | `20261014T162210Z-astra-home` |
 
-当前版本有 257 个运行文件、18 条页面路由、5 个相对链接，共 111,609,132 字节。本次主站标识的发布和验收记录为 `output/deployment/shouyulove-main-logo-color-match-20261012/`。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
+当前版本有 255 个运行文件、19 条页面路由、5 个相对链接，共 111,756,084 字节；发布记录为 `output/deployment/signplay-20261015/`，迁移与桌面/手机验收见 `output/deployment/shouyulove-aliyun-migration-20261015/`。2026-10-12 主站标识的历史发布和验收记录为 `output/deployment/shouyulove-main-logo-color-match-20261012/`。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
 
 原发布记录已覆盖桌面、390px 手机、320px 窄屏、背景延迟及失败、无 JavaScript、滚动和布局稳定；最后一批子站图标有 15 项公网哈希核对。2026-10-12 接续整理时另行核对了服务器全部运行文件和相对链接，以及公网 18 条路由、9 张主站图标和 15 张子站图标；此次仅更新说明文档，未重新进行浏览器交互测试。
 

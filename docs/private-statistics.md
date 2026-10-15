@@ -1,5 +1,11 @@
 # 全站后台访问统计
 
+## 2026-10-15 迁移后的查看入口
+
+现在登录 `ssh shouyulove-aliyun`（`101.37.209.227`）后运行下方报表命令。腾讯旧采集器已停止并禁用；新机保留原密钥，将冻结的 1,528 次历史访问一次导入并继续采集。导入标记为 `tencent-to-aliyun-20261015-final-history`，不能重复回放旧库或重新开启旧采集器。
+
+迁移最终库、备份与执行记录在新机 `/var/backups/shouyulove-migration/20261015/`。下文 10:42 升级备份属于旧腾讯服务器上的历史位置，不能误当作新机当前数据库。当前主机和依赖见 [运维状态](operations-current.md)。
+
 从北京时间 2026-10-15 10:42 起，统计按页面响应自动覆盖 `shouyulove.cn` 和 `www.shouyulove.cn` 下的主站、作品集、项目详情及子站。新增静态页、反向代理页面和多层路径不需要再添加名单。独立域名上的北大知道、拼好课等不属于这个统计范围。
 
 原统计数据和去重密钥继续保留；此前没有记录的子站访问不会自动补回。调整当天的新旧统计范围有差别，比较历史数据时需注意这一点。
@@ -50,4 +56,4 @@ python3 -B -m unittest discover -s tests -p 'test_private_stats*.py' -v
 
 `install.py` 用于首次安装或核验相同版本，发现已有文件不同会停止。升级前备份脚本、格式配置和 SQLite，原密钥保留；校验新配置后重载 Nginx、重启统计服务，再检查旧数据没有减少。回退只恢复采集代码与配置，不用旧数据库覆盖升级后已收到的访问。
 
-本次升级备份为 `/var/backups/shouyulove-stats/20261015T024204Z-all-pages/`。本机执行与验收记录在 `output/deployment/shouyulove-stats-all-pages-20261015/`，不进入公共运行清单。
+10:42 升级的历史备份保留在腾讯旧机 `/var/backups/shouyulove-stats/20261015T024204Z-all-pages/`。本机执行与验收记录在 `output/deployment/shouyulove-stats-all-pages-20261015/`，不进入公共运行清单。
