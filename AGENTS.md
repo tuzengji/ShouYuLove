@@ -1,5 +1,11 @@
 # 以手予爱主站维护
 
+## 2026-10-15 全站后台访问统计
+
+访问统计已改为按 HTML 页面响应自动收集，覆盖同域名下的主站、详情页和各子站，新增页面无需维护路径名单。沿用按北京时间分天、HMAC 访客去重与服务器私有数据库，保留全部历史计数。新增 `sudo shouyulove-stats --days 30 --pages` 查看逐日逐页明细；完整口径、查看方式和维护规则见 [后台统计说明](docs/private-statistics.md)。
+
+只统计到达服务器的页面请求；浏览器内部无请求的切换不额外计数，也不测量停留时间。
+
 ## 2026-10-15 指间趣游上线
 
 新增核心创意「指间趣游 SignPlay」，设计者为伍家阳，正式入口为 https://shouyulove.cn/signplay/ 。首页、作品集和项目详情共用新 Logo 与正文，作品集现有 10 个项目。
@@ -66,3 +72,5 @@
 - 2026-10-12：项目现名为「传情会意-手语版」，线上地址保持 `/chuanqinghuiyi/`。当前构建记录 `output/deployment/chuanqinghuiyi-rename-20261012/`，中文字体与原生图集已补「会」字；其他未发布原稿编辑保留。
 
 - 主站标识为 `project-logos/20261012-主站-把爱递给你/shouyulove.svg`，手掌浅暖米色 `#f3dfcf`。`brand_assets()` 与 `brand_links()` 共用独立 `BRAND_VERSION`，同步标签页、Apple 触屏与安装图标；避免重新复制历史站点图标，保留作品集安装 id 和启动路径。
+
+- 私有统计默认覆盖同域名下所有 HTML 页面；新增页面不加路径名单。保持 server 层的私有日志继承，location 如另设 `access_log` 必须保留私有统计入口；测试 UA 使用 `ShouYuLove-QA`。统计调整先跑 Python 回归及隔离 Nginx 测试，再核对线上采集、历史数据和权限。
