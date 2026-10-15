@@ -1,6 +1,6 @@
 # 当前运维状态与记录索引
 
-核对日期：2026-10-15，北京时间。本文汇总当天迁移、旧机盘点和 PKUKnow 清理后的状态；带日期的旧发布记录继续保留，不能作为当前发布目标。
+核对日期：2026-10-15，北京时间。本文汇总当天迁移、旧机盘点、PKUKnow 清理和部署账号配置后的状态；带日期的旧发布记录继续保留，不能作为当前发布目标。
 
 ## 三台服务器的职责
 
@@ -11,6 +11,16 @@
 | 腾讯云 `49.232.193.175` | 词典转接与备用、旧地址/会话/任务兼容，以及燕园图寻、时间秘书 | `ssh ubuntu@49.232.193.175` |
 
 以手予爱目标 ECS 为杭州 `i-bp1hi3u3w5p3vg4owfl0`，公网带宽保持 5 Mbps。本轮只迁移 `shouyulove.cn` 下的项目，拼好课不在迁移范围内；主站仍保留北大知道、清华知道和拼好课的外链。
+
+## 部署协作账号
+
+2026-10-15 按用户最终确认，在阿里云 `101.37.209.227` 创建 `zhuxingye`，授予完整、免密码的 sudo 权限。登录命令为 `ssh zhuxingye@101.37.209.227`，项目目录为 `/home/zhuxingye/projects`，登录后可用 `sudo -i` 进入管理员 shell。
+
+登录沿用旧腾讯同名账号最近使用的 SSH 公钥；未复制其 CLab 和其他设备公钥。账号密码锁定，服务器继续关闭密码登录。sudo 规则位于 `/etc/sudoers.d/90-zhuxingye`，仅 root 可写。新增账号未改动原 SSH/Nginx 配置、现有发布链接或服务进程。
+
+已检查目录与公钥文件权限、`visudo -c`、`sshd -t`，并以该用户执行 `sudo -n id -u` 得到 `0`；SSH 公钥探测确认服务器接受已配置的公钥。实际签名登录需账号持有人使用自己的私钥完成，维护过程未索取私钥。
+
+后续修改共用 Nginx 时继续使用 `/run/lock/nginx-deploy.lock`，先验证配置再 reload。账号配置与验收记录在本机 `output/deployment/zhuxingye-account-20261015/`，服务器回执为 `/var/backups/shouyulove-migration/20261015/zhuxingye-account-result.json`；本次维护说明同步至 `/opt/shouyulove-maintenance/20261015-zhuxingye-account/`。
 
 ## 当前发布与服务
 
