@@ -81,12 +81,13 @@
   "public_css_without_cookie": 200,
   "unrelated_project": 200,
   "unit_tests": {
-    "passed": 4,
+    "passed": 5,
     "coverage": [
       "server-issued sessions for identical NAT clients",
       "forged/expired/duplicate cookies",
       "new-session mint throttling with existing-peer continuity",
-      "1200 distinct items in 10 min, repeat views, recovery"
+      "1200 distinct items in 10 min, repeat views, recovery",
+      "versioned symlink service startup and Unix socket health"
     ]
   }
 }

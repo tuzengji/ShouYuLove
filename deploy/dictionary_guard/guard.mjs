@@ -1,6 +1,6 @@
 import { createHash, randomBytes, timingSafeEqual } from 'node:crypto';
 import { createServer } from 'node:http';
-import { readFileSync, chmodSync } from 'node:fs';
+import { readFileSync, chmodSync, realpathSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 export const COOKIE = 'syl_dict_session';
@@ -128,7 +128,7 @@ export function start({ socket, secret }) {
   process.on('SIGTERM', () => server.close(() => process.exit(0)));
   return server;
 }
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
   const keyPath = process.env.GUARD_SECRET_FILE || `${process.env.CREDENTIALS_DIRECTORY}/signing-key`;
   const secret = readFileSync(keyPath, 'utf8').trim();
   if (!/^[a-f0-9]{64}$/.test(secret)) throw new Error('Invalid signing key file');

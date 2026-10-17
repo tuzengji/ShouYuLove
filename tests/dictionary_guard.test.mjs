@@ -1,5 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { mkdtempSync, symlinkSync, writeFileSync, existsSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { spawn } from 'node:child_process';
+import { get } from 'node:http';
 import { Guard, COOKIE, POLICY, issue, verify } from '../deploy/dictionary_guard/guard.mjs';
 
 const secret = 'a'.repeat(64);
@@ -59,4 +65,25 @@ test('sustained distinct-item scraping is stopped, repeated study and peers stil
   assert.equal(guard.check(headers(peer, '/dict/sign-image/99999')).status, 204);
   now = start + POLICY.window + 1;
   assert.equal(guard.check(headers(token, '/dict/sign-image/99999')).status, 204);
+});
+
+test('versioned current symlink starts the actual service and serves health', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'dict-guard-start-'));
+  const alias = join(root, 'current.mjs'), socket = join(root, 'guard.sock'), key = join(root, 'key');
+  symlinkSync(fileURLToPath(new URL('../deploy/dictionary_guard/guard.mjs', import.meta.url)), alias);
+  writeFileSync(key, secret, { mode: 0o600 });
+  const child = spawn(process.execPath, [alias], { env: { ...process.env, GUARD_SOCKET: socket, GUARD_SECRET_FILE: key }, stdio: 'ignore' });
+  const finished = new Promise(resolve => child.once('close', resolve));
+  try {
+    for (let i = 0; i < 100 && !existsSync(socket); i++) await new Promise(r => setTimeout(r, 20));
+    assert.ok(existsSync(socket), 'service did not start through the current symlink');
+    const status = await new Promise((resolve, reject) => {
+      get({ socketPath: socket, path: '/health' }, response => { response.resume(); resolve(response.statusCode); }).on('error', reject);
+    });
+    assert.equal(status, 204);
+  } finally {
+    child.kill('SIGTERM');
+    await finished;
+    rmSync(root, { recursive: true, force: true });
+  }
 });
