@@ -1,6 +1,10 @@
 # 当前运维状态与记录索引
 
-核对日期：2026-10-15，北京时间。本文汇总当天迁移、旧机盘点、PKUKnow 清理和部署账号配置后的状态；带日期的旧发布记录继续保留，不能作为当前发布目标。
+最近核对：2026-10-17，北京时间。当前项目与备份状态见 [服务器清理与运行项目记录](server-cleanup-20261017.md)。下文 10 月 15 日的迁移交接和历史快照继续保留，后续变化以上述新记录为准。
+
+2026-10-17 清理 43 项闲置 Docker 构建缓存，以及与完整迁移包一致的 `stage-candidate/apps`、`stage-candidate/state` 解压副本，实测释放 4,135,342,080 字节，磁盘占用从 36% 降至 33%。原始迁移包、最终增量、回滚版本、PKUKnow 迁移快照、受保护历史资源和人大最终归档保留。
+
+当前有七个本机网站后台服务，包含新增的 `signplay-bank`；主站与作品集由 Nginx 提供静态内容。词典当前使用本机 `18080/18081` 的 CLab 通道，视频优先从 `/var/lib/shouyu/videos/` 提供；`zhuxingye` 的故障切换监控、告警服务和定时检查已运行。本轮保留这些数据、服务和旧兼容隧道。
 
 ## 三台服务器的职责
 
@@ -22,7 +26,7 @@
 
 后续修改共用 Nginx 时继续使用 `/run/lock/nginx-deploy.lock`，先验证配置再 reload。账号配置与验收记录在本机 `output/deployment/zhuxingye-account-20261015/`，服务器回执为 `/var/backups/shouyulove-migration/20261015/zhuxingye-account-result.json`；本次维护说明同步至 `/opt/shouyulove-maintenance/20261015-zhuxingye-account/`。
 
-## 当前发布与服务
+## 迁移交接时的发布与服务（2026-10-15）
 
 主站 `/var/www/shouyulove-home` 指向 `20261014T162210Z-astra-home`，SignPlay `/var/www/shouyulove-signplay` 指向 `20261015T020134Z-signplay`。主站清单为 **255 个文件、19 条页面路由、5 个相对链接、111,756,084 字节**，作品集共 **10 个项目**：六个核心创意、一个内部工具、三个其他作品。
 
@@ -39,7 +43,7 @@
 - 迁移验收共 190 项最终通过；其中一项首次 TLS 连接失败，独立复验两次均通过，原始结果保留。1440px 桌面和 390px 手机的首页、作品集已验证，完整 WebGL、延后场景和导航保持。
 - 新证书覆盖根域和 www，有效至 2027-01-13。Certbot webroot、专属 hook、timer 及仅本域的续期 dry-run 均通过；后续运维命令见 [阿里云配置说明](../deploy/aliyun/README.md)。
 
-## 仍保留的腾讯中转
+## 腾讯中转交接记录（2026-10-15）
 
 下列端口均只监听阿里云回环地址，流量经同一条 SSH 反向隧道进入腾讯旧机：
 
