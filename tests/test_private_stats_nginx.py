@@ -124,13 +124,21 @@ http {
             self.assertNotIn('must-not-be-logged',raw)
             events = [json.loads(line) for line in raw.splitlines()]
             connection,key = visits.open_database(root/'private')
-            accepted = [event['path'] for event in events if visits.record(connection,key,event)]
+            accepted = [event['path'] for event in events if visits.collect_event(connection,key,event)]
             connection.close()
             self.assertCountEqual(accepted,['/','/future/new/','/rewrite/deep/page','/proxy/new/page','/xhtml','/','/brand-new.html'])
             result = visits.report(root/'private/visits.sqlite')
             self.assertEqual(result['period'],dict(views=7,visitors=1))
             self.assertEqual(len(result['pages']),6)
             self.assertNotIn('/static.css', [p['path'] for p in result['pages']])
+            projects = {p['project']:p for p in result['projects']}
+            self.assertEqual(projects['path:/future']['views'],1)
+            self.assertEqual(projects['path:/proxy']['views'],1)
+            self.assertEqual(projects['path:/brand-new.html']['views'],1)
+            self.assertEqual(sum(p['views'] for p in result['projects']),7)
+            health = {p['project']:p for p in result['project_collector']}
+            self.assertEqual(health['path:/future']['received'],2)  # Real page + excluded QA probe.
+            self.assertEqual(health['path:/future']['accepted'],1)
 
 
 if __name__ == '__main__':
