@@ -3,6 +3,15 @@ requestAnimationFrame(() => requestAnimationFrame(() => {
   performance.mark('syl-portfolio-readable');
   const background = document.querySelector('.portfolio-background');
   let started = false;
+  const visible = () => new Promise(resolve => {
+    const check = () => {
+      if (document.hidden) return;
+      document.removeEventListener('visibilitychange', check);
+      resolve();
+    };
+    document.addEventListener('visibilitychange', check);
+    check();
+  });
   const script = (src, type) => new Promise((resolve, reject) => {
     const node = document.createElement('script');
     node.src = src;
@@ -19,6 +28,7 @@ requestAnimationFrame(() => requestAnimationFrame(() => {
       const response = await fetch(background.dataset.scene, {priority:'low'});
       if (!response.ok) throw new Error('Scene boot data unavailable');
       const scene = await response.json();
+      await visible();
       // Reuse the original scene, shaders and inputs; never replace the readable list.
       window.__sylPortfolio = {
         ready(app, view) {
@@ -54,6 +64,7 @@ requestAnimationFrame(() => requestAnimationFrame(() => {
         link.onerror = reject;
         document.head.append(link);
       })));
+      await visible();
       await script(scene.entry, 'module');
     } catch (error) {
       // An unavailable enhancement must not cover or disable the directory.

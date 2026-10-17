@@ -7,6 +7,31 @@ from urllib.parse import quote
 LOGO_BACKGROUND_OPACITY = .72
 
 
+def queue_scene_downloads(text):
+    """Gate actual network operations; parsing and nested decoders hold no slots."""
+    changes = [
+        ('l=this.responseType;fetch(o).then(c=>{',
+         'l=this.responseType;__sylSceneDownloads.run(()=>fetch(o,{priority:"low"}).then(c=>{'),
+        ('}}}).then(c=>{uf.add(e,c);const h=Ya[e];',
+         '}}}),e).then(c=>{uf.add(e,c);const h=Ya[e];'),
+        ('v.enqueue(E),x()}})}}});return new Response(A)',
+         'v.enqueue(E),x()}}).catch(error=>v.error(error))}}});return new Response(A)'),
+        ('r.manager.itemStart(e),a.src=e,a}}class kN',
+         'r.manager.itemStart(e),__sylQueueImage(a,e),a}}class kN'),
+        ('return l.src=o,c}}])', 'return __sylQueueImage(l,o),c}}])'),
+        ('a.headers=this.requestHeader,fetch(e,a).then(function(l){return l.blob()}).then(function(l){',
+         'a.headers=this.requestHeader,__sylSceneDownloads.run(()=>fetch(e,{...a,priority:"low"}).then(function(l){return l.blob()}),e).then(function(l){'),
+        ('h.open("GET",o),h.send()})}}])',
+         'h.open("GET",o),__sylQueueXHR(h,o)})}}])'),
+        ('r.open("GET",e),r.send()})}parse(e){return new Gme()',
+         'r.open("GET",e),__sylQueueXHR(r,e)})}parse(e){return new Gme()'),
+    ]
+    for old, new in changes:
+        assert text.count(old) == 1, old
+        text = text.replace(old, new, 1)
+    return (Path(__file__).with_name('background_resources.js').read_text() + '\n' + text)
+
+
 def logo_edge_mask():
     svg = (Path(__file__).resolve().parents[1] / 'styles/project-logo-mask.svg').read_text()
     return 'data:image/svg+xml,' + quote(svg, safe='')
@@ -165,4 +190,4 @@ function __sylAfterReady(app){
 const __sylAudioInit=Fde.prototype.init;
 Fde.prototype.init=function(){if(!window.__sylPortfolio)return __sylAudioInit.call(this);};
 '''
-    return text
+    return queue_scene_downloads(text)
