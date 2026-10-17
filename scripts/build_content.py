@@ -33,6 +33,7 @@ FONT_SOURCE = ROOT / "output/deployment/signplay-20261015/font-source"
 RUNTIME_VERSION = "syl-v1-1-signplay"
 FONT_VERSION = "syl-v1-1-signplay"
 MODULE_VERSION = "syl-v1-1-signplay"
+PORTFOLIO_CLICKS_VERSION = "syl-v1-1-20261017"
 BRIDGE_VERSION = "syl-v1-1-signplay"
 BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
@@ -643,7 +644,7 @@ def portfolio_page(content):
         credit = ('<p class="portfolio-credit">设计者：' + designers + '</p>') if category != '其他作品' or content['portfolio']['show_other_designers'] else ''
         icon = shared + '/shouyulove/' + project['id'] + '-square.' + RUNTIME_VERSION + '.png'
         loading = 'lazy' if category == '其他作品' else 'eager'
-        pieces.append('<li><a class="portfolio-link" href="' + html.escape(project['url'], quote=True) +
+        pieces.append('<li><a class="portfolio-link" data-project="' + project['id'] + '" href="' + html.escape(project['url'], quote=True) +
                       '" target="_blank" rel="noopener noreferrer" aria-labelledby="project-' + project['id'] + '">' +
                       '<img class="portfolio-icon" src="' + icon + '" alt="" width="640" height="640" decoding="async" loading="' + loading + '"/>' +
                       '<div class="portfolio-copy"><h3 id="project-' + project['id'] + '">' + html.escape(project['title']) +
@@ -654,9 +655,12 @@ def portfolio_page(content):
     pieces.append('<footer class="portfolio-thanks"><small>' + html.escape(content['portfolio']['thanks']) + '</small></footer>')
     pieces.extend(['</main>', str(home_shortcut(content)),
                    '<script defer src="/assets/home-shortcut.' + MODULE_VERSION + '.js"></script>',
+                   '<script defer src="/assets/portfolio-clicks.' + PORTFOLIO_CLICKS_VERSION + '.js"></script>',
                    '<script defer src="/assets/portfolio.' + MODULE_VERSION + '.js"></script></body></html>'])
     destination = OUT / 'portfolio/index.html'; destination.parent.mkdir(parents=True)
     destination.write_text(''.join(pieces))
+    (destination.parent / 'projects.json').write_text(json.dumps(
+        {p['id']: p['title'] for p in content['projects']}, ensure_ascii=False, indent=2) + '\n')
     # Static exports retain a lightweight redirect even without an Nginx configuration.
     (OUT / 'projects/index.html').write_text('<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/><meta http-equiv="refresh" content="0;url=/portfolio/"/><link rel="canonical" href="https://shouyulove.cn/portfolio/"/><title>作品集</title></head><body><a href="/portfolio/">作品集</a></body></html>')
 
@@ -706,6 +710,7 @@ def main():
     shutil.copy2(ROOT/'scripts/fast_bootstrap.js', OUT/SHARED/('assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
     shutil.copy2(ROOT/'scripts/home_shortcut.js', OUT/SHARED/('assets/home-shortcut.' + MODULE_VERSION + '.js'))
     shutil.copy2(ROOT/'scripts/portfolio.js', OUT/SHARED/('assets/portfolio.' + MODULE_VERSION + '.js'))
+    shutil.copy2(ROOT/'scripts/portfolio_clicks.js', OUT/SHARED/('assets/portfolio-clicks.' + PORTFOLIO_CLICKS_VERSION + '.js'))
     shutil.copytree(MOBILE_TEXTURES, OUT/SHARED/'webgl/about/model/textures/ktx2/mobile')
     sounds = OUT / SHARED / "sounds/general"
     for name in ["IG_HomePage_v5_v4.mp3", "IG_FocusPage_v5_v8.mp3", "IG_AboutPage_v5_v5.mp3"]:

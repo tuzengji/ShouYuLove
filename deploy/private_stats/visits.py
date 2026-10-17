@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Private daily page-request counts; no HTTP server and no plaintext visitor storage."""
 import argparse
+from contextlib import closing
 from datetime import datetime, timedelta, timezone
 import hashlib
 import hmac
@@ -17,6 +18,7 @@ from urllib.parse import unquote
 
 DIRECTORY = Path('/var/lib/shouyulove-stats')
 SOCKET = Path('/run/shouyulove-stats/collector.sock')
+PORTFOLIO_CATALOG = Path('/var/www/shouyulove-home/portfolio/projects.json')
 BEIJING = timezone(timedelta(hours=8))
 BOT = re.compile(r'bot|spider|crawler|headless|ShouYuLove-QA|curl|wget|python|healthcheck', re.I)
 HTML_TYPES = {'text/html', 'application/xhtml+xml'}
@@ -35,6 +37,26 @@ PROJECT_NAMES = {
     'shouyu': '手语论坛历史资料',
     'loveheart': '爱心社论坛历史资料',
 }
+
+
+def portfolio_catalog():
+    # Read the current release so adding a work needs no collector restart.
+    try:
+        catalog = json.loads(PORTFOLIO_CATALOG.read_text())
+        return {k: v for k, v in catalog.items()
+                if re.fullmatch(r'[a-z0-9][a-z0-9-]{0,79}', k)
+                and isinstance(v, str) and 0 < len(v) <= 200}
+    except (OSError, ValueError, AttributeError, TypeError):
+        return {}
+
+
+def visitor_day(key, event):
+    stamp = datetime.fromisoformat(event['time'])
+    if stamp.tzinfo is None:
+        raise ValueError('Missing event timezone')
+    day = stamp.astimezone(BEIJING).date().isoformat()
+    address = str(ipaddress.ip_address(event['address']))
+    return day, hmac.new(key, address.encode(), hashlib.sha256).hexdigest()
 
 
 def project_key(path):
@@ -106,6 +128,12 @@ def open_database(directory=DIRECTORY):
     connection.execute('''CREATE TABLE IF NOT EXISTS project_health (
         project TEXT PRIMARY KEY, received INTEGER NOT NULL, accepted INTEGER NOT NULL,
         first_received TEXT NOT NULL, last_received TEXT NOT NULL, last_accepted TEXT)''')
+    connection.execute('''CREATE TABLE IF NOT EXISTS portfolio_clicks (
+        day TEXT, visitor TEXT, project TEXT, count INTEGER NOT NULL,
+        PRIMARY KEY(day,visitor,project))''')
+    connection.execute('''CREATE TABLE IF NOT EXISTS portfolio_click_health (
+        project TEXT PRIMARY KEY, received INTEGER NOT NULL, accepted INTEGER NOT NULL,
+        first_received TEXT NOT NULL, last_received TEXT NOT NULL, last_accepted TEXT)''')
     connection.commit()
     return connection, key
 
@@ -116,19 +144,43 @@ def record(connection, key, event):
     path = page_path(event)
     if path is None:
         return False
-    stamp = datetime.fromisoformat(event['time'])
-    if stamp.tzinfo is None:
+    if datetime.fromisoformat(event['time']).tzinfo is None:
         return False
-    day = stamp.astimezone(BEIJING).date().isoformat()
-    address = str(ipaddress.ip_address(event['address']))
-    visitor = hmac.new(key, address.encode(), hashlib.sha256).hexdigest()
+    day, visitor = visitor_day(key, event)
     with connection:
         connection.execute('INSERT INTO visits VALUES(?,?,?,1) ON CONFLICT(day,visitor,path) DO UPDATE SET count=count+1', (day, visitor, path))
     return True
 
 
+def record_portfolio_click(connection, key, event):
+    project = event.get('project', '')
+    if (event.get('method') != 'POST' or event.get('status') != 204 or
+            event.get('portfolio_source') != '1' or event.get('same_origin') != '1' or
+            event.get('host') not in {'shouyulove.cn', 'www.shouyulove.cn'} or
+            event.get('path') != '/__syl/portfolio-click/' + project or
+            event.get('destination', '') not in {'', '-', 'empty'} or
+            'prefetch' in (event.get('purpose', '') + ' ' + event.get('sec_purpose', '')).lower() or
+            project not in portfolio_catalog()):
+        return False
+    day, visitor = visitor_day(key, event)
+    accepted = not BOT.search(event.get('ua', ''))
+    now = datetime.now(timezone.utc).isoformat()
+    with connection:
+        if accepted:
+            connection.execute('''INSERT INTO portfolio_clicks VALUES(?,?,?,1)
+                ON CONFLICT(day,visitor,project) DO UPDATE SET count=count+1''', (day, visitor, project))
+        connection.execute('''INSERT INTO portfolio_click_health VALUES(?,1,?,?,?,?)
+            ON CONFLICT(project) DO UPDATE SET received=received+1, accepted=accepted+excluded.accepted,
+            last_received=excluded.last_received,
+            last_accepted=COALESCE(excluded.last_accepted,last_accepted)''',
+            (project, int(accepted), now, now, now if accepted else None))
+    return bool(accepted)
+
+
 def collect_event(connection, key, event):
     """Observe HTML delivery per project without counting QA/bots as visits."""
+    if event.get('kind') == 'portfolio_click':
+        return record_portfolio_click(connection, key, event)
     accepted = record(connection, key, event)
     if event.get('method') != 'GET' or event.get('status') not in (200, 304):
         return accepted
@@ -145,6 +197,32 @@ def collect_event(connection, key, event):
     return accepted
 
 
+def click_report(connection, since, today):
+    names = portfolio_catalog()
+    result = {'period': {'clicks': 0, 'visitors': 0}, 'days': [], 'project_days': [],
+              'projects': [{'project': k, 'name': v, 'clicks': 0, 'visitors': 0} for k, v in names.items()],
+              'first_recorded_date': None, 'collector': []}
+    if connection is None or not connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type='table' AND name='portfolio_clicks'").fetchone():
+        return result
+    period = connection.execute('SELECT COALESCE(SUM(count),0),COUNT(DISTINCT visitor) FROM portfolio_clicks WHERE day BETWEEN ? AND ?', (since, today)).fetchone()
+    result['period'] = {'clicks': period[0], 'visitors': period[1]}
+    result['first_recorded_date'] = connection.execute('SELECT MIN(day) FROM portfolio_clicks').fetchone()[0]
+    rows = connection.execute('SELECT day,SUM(count),COUNT(DISTINCT visitor) FROM portfolio_clicks WHERE day BETWEEN ? AND ? GROUP BY day ORDER BY day DESC', (since, today))
+    result['days'] = [{'date': d, 'clicks': c, 'visitors': u} for d, c, u in rows]
+    totals = {r['project']: r for r in result['projects']}
+    for k, c, u in connection.execute('SELECT project,SUM(count),COUNT(DISTINCT visitor) FROM portfolio_clicks WHERE day BETWEEN ? AND ? GROUP BY project', (since, today)):
+        totals[k] = {'project': k, 'name': names.get(k, k), 'clicks': c, 'visitors': u}
+    result['projects'] = sorted(totals.values(), key=lambda r: (-r['clicks'], r['project']))
+    rows = connection.execute('SELECT day,project,SUM(count),COUNT(DISTINCT visitor) FROM portfolio_clicks WHERE day BETWEEN ? AND ? GROUP BY day,project ORDER BY day DESC,project', (since, today))
+    result['project_days'] = [{'date': d, 'project': k, 'name': names.get(k, k), 'clicks': c, 'visitors': u} for d, k, c, u in rows]
+    if connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='portfolio_click_health'").fetchone():
+        rows = connection.execute('SELECT project,received,accepted,first_received,last_received,last_accepted FROM portfolio_click_health ORDER BY project')
+        result['collector'] = [{'project': k, 'name': names.get(k, k), 'received': r, 'accepted': a,
+                                'first_received': f, 'last_received': l, 'last_accepted': v} for k, r, a, f, l, v in rows]
+    return result
+
+
 def report(database, days=30):
     today = datetime.now(BEIJING).date().isoformat()
     since = (datetime.now(BEIJING).date() - timedelta(days=days-1)).isoformat()
@@ -154,10 +232,11 @@ def report(database, days=30):
                           for k, v in PROJECT_NAMES.items()],
              'coverage': {'requested_start': since, 'requested_end': today,
                           'first_recorded_date': None, 'last_recorded_date': None},
+             'portfolio_clicks': click_report(None, since, today),
              'project_collector': [], 'collector': {'received': 0, 'last_received': None}}
     if not database.exists():
         return empty
-    with sqlite3.connect('file:' + str(database) + '?mode=ro', uri=True) as connection:
+    with closing(sqlite3.connect('file:' + str(database) + '?mode=ro', uri=True)) as connection:
         connection.create_function('project_key', 1, project_key, deterministic=True)
         rows = connection.execute('SELECT day,SUM(count),COUNT(DISTINCT visitor) FROM visits WHERE day BETWEEN ? AND ? GROUP BY day ORDER BY day DESC', (since, today)).fetchall()
         total = connection.execute('SELECT COALESCE(SUM(count),0),COUNT(DISTINCT visitor) FROM visits').fetchone()
@@ -168,6 +247,7 @@ def report(database, days=30):
         dates = connection.execute('SELECT MIN(day),MAX(day) FROM visits').fetchone()
         health = connection.execute('SELECT received,last_received FROM collector_health WHERE id=1').fetchone()
         project_health = []
+        clicks = click_report(connection, since, today)
         if connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='project_health'").fetchone():
             project_health = connection.execute('SELECT project,received,accepted,first_received,last_received,last_accepted FROM project_health ORDER BY project').fetchall()
     project_totals = {r['project']: r for r in empty['projects']}
@@ -183,6 +263,7 @@ def report(database, days=30):
             'coverage': {'requested_start':since,'requested_end':today,
                          'first_recorded_date':dates[0],'last_recorded_date':dates[1]},
             'collector': {'received':health[0], 'last_received':health[1]},
+            'portfolio_clicks': clicks,
             'project_collector': [{'project':k,'name':project_name(k),'received':r,'accepted':a,
                                    'first_received':f,'last_received':l,'last_accepted':v}
                                   for k,r,a,f,l,v in project_health]}
@@ -218,6 +299,7 @@ if __name__ == '__main__':
     parser.add_argument('--json', action='store_true')
     parser.add_argument('--pages', action='store_true', help='Show per-day page totals in text reports')
     parser.add_argument('--projects', action='store_true', help='Show project totals and per-day project counts')
+    parser.add_argument('--clicks', action='store_true', help='Show portfolio outbound activations separately from page views')
     parser.add_argument('--health', action='store_true', help='Show per-project HTML delivery observations, including QA/bots')
     args = parser.parse_args()
     if args.command == 'serve':
@@ -248,6 +330,20 @@ if __name__ == '__main__':
                 print('\n项目采集观测（含测试和机器人候选；从升级后开始，不是历史访问量）')
                 for row in result['project_collector']:
                     print(f"{row['name']}  候选 {row['received']}  计入 {row['accepted']}  最近接收 {row['last_received']}")
+                print('\n作品集跳转采集观测（含 QA，不是页面访问量）')
+                for row in result['portfolio_clicks']['collector']:
+                    print(f"{row['name']}  候选 {row['received']}  计入 {row['accepted']}  最近接收 {row['last_received']}")
+            if args.clicks:
+                clicks = result['portfolio_clicks']
+                print('\n作品集入口跳转（点击次数，不代表目标网页成功加载）')
+                print(f"近{args.days}天：{clicks['period']['clicks']} 次，{clicks['period']['visitors']} 位估算访客")
+                print(f"最早保存的跳转日期：{clicks['first_recorded_date'] or '暂无记录'}；上线前的跳转无法补回。")
+                print('跳转次数  访客数  作品')
+                for row in clicks['projects']:
+                    print(f"{row['clicks']:8d}  {row['visitors']:6d}  {row['name']}")
+                print('\n日期         跳转次数  访客数  作品')
+                for row in clicks['project_days']:
+                    print(f"{row['date']}  {row['clicks']:8d}  {row['visitors']:6d}  {row['name']}")
             if args.pages:
                 print('\n日期         访问次数  访客数  页面')
                 for row in result['pages']:

@@ -1,5 +1,9 @@
 # 阿里云部署与兼容配置
 
+## 2026-10-17 作品集跳转统计配置
+
+本次更新 `shouyulove-visit-format.conf`、`shouyulove-home.conf`，新增 `shouyulove-portfolio-click.conf`；对应清单项已更新哈希并标注日期。其余条目仍是下文所述迁移快照，不能作为全机当前配置整体恢复。新片段提供只写的跳转接收入口，报表仍只经 SSH 查看。详见 [后台统计说明](../../docs/private-statistics.md)。
+
 ## 2026-10-15 配置快照与共用设施
 
 [当前运维状态](../../docs/operations-current.md) 是本目录的使用索引。`live-config-manifest.json` 保存的是迁移完成时的 15 份本站配置哈希，本次说明刷新核对这些文件后保留原快照；它不包含其他项目的 vhost，也不是全机恢复包。

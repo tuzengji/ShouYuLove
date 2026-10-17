@@ -36,8 +36,8 @@
       "sha256": "195f3e2eb070cf378d3c7aba2092c650d27c142c29a35a90a8319c1b65602ce2"
     },
     "portfolio/index.html": {
-      "bytes": 21709,
-      "sha256": "77b14edb11076d542b8cf3f1c8e2c4e6a5891869c5a82be3de74092c15b149d3"
+      "bytes": 22082,
+      "sha256": "eeea3fe373c682d49d049ad2bd80adb0bc722a98261c8f5e64b4b446082b19d5"
     },
     "projects/2026-sign-language-cultural-festival/_payload.json": {
       "bytes": 1025,
@@ -1046,6 +1046,14 @@
     "the-studio/the-studio/index.html": {
       "bytes": 82952,
       "sha256": "643ecff9a746647207d0082681dccc9571e34368c92861dade21c25a966dc37c"
+    },
+    "portfolio/projects.json": {
+      "bytes": 436,
+      "sha256": "1e7e158c9d78d5ab4250c75c7d5bba022b57c60a38e568d664005ef8e6aa14f7"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio-clicks.syl-v1-1-20261017.js": {
+      "bytes": 922,
+      "sha256": "fca2799ba08f58c33e4578f2305c7e22066fe4b04715d0e912bdc961aee93f86"
     }
   },
   "symlinks": {
@@ -1055,5 +1063,5 @@
     "sounds": "sites/immersive-g-com-955afd14/shared/sounds",
     "webgl": "sites/immersive-g-com-955afd14/shared/webgl"
   },
-  "bytes": 111756084
+  "bytes": 111757815
 }

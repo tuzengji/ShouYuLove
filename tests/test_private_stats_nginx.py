@@ -11,6 +11,7 @@ import tempfile
 from threading import Thread
 import time
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('visits', ROOT / 'deploy/private_stats/visits.py')
@@ -39,11 +40,17 @@ class NginxStatisticsTests(unittest.TestCase):
             root.chmod(0o755)
             web = root / 'www'
             web.mkdir()
+            web.chmod(0o755)
             for name, body in [('index.html', '<html>Home</html>'), ('future/new/index.html', '<html>Future</html>'),
                                ('static.css', 'body{}'), ('data.json', '{}')]:
                 path = web / name
                 path.parent.mkdir(parents=True, exist_ok=True)
                 path.write_text(body)
+                path.chmod(0o644)
+                for parent in path.parents:
+                    if parent == root:
+                        break
+                    parent.chmod(0o755)
             upstream = ThreadingHTTPServer(('127.0.0.1', 0), Upstream)
             thread = Thread(target=upstream.serve_forever, daemon=True)
             thread.start()
@@ -65,7 +72,8 @@ http {
         listen 127.0.0.1:''' + str(port) + ''';
         server_name shouyulove.cn;
         root "''' + str(web) + '''";
-        access_log "''' + str(root/'events.log') + '''" syl_private_visits if=$syl_visit_html;
+        access_log "''' + str(root/'events.log') + '''" syl_private_visits if=$syl_collect_event;
+        include "''' + str(ROOT/'deploy/private_stats/nginx-click-location.conf') + '''";
         location /rewrite/ { try_files $uri /index.html; }
         location /proxy/ { proxy_pass http://127.0.0.1:''' + str(upstream.server_port) + '''/; }
         location = /xhtml { default_type application/xhtml+xml; return 200 '<html>XHTML</html>'; }
@@ -116,18 +124,38 @@ http {
                 request('/',method='HEAD')
                 # New files need neither a code change nor a configuration reload.
                 (web/'brand-new.html').write_text('<html>Added after startup</html>')
+                (web/'brand-new.html').chmod(0o644)
                 self.assertEqual(request('/brand-new.html')[0],200)
+                click_headers = {'Origin':'https://shouyulove.cn',
+                                 'Referer':'https://shouyulove.cn/portfolio/?private=not-logged',
+                                 'Sec-Fetch-Dest':'empty'}
+                click_path = '/__syl/portfolio-click/beida-zhidao'
+                self.assertEqual(request(click_path,click_headers,'POST')[0],204)
+                self.assertEqual(request(click_path,{**click_headers,'User-Agent':'ShouYuLove-QA'},'POST')[0],204)
+                self.assertEqual(request(click_path,click_headers)[0],405)
+                for changes in [{'Origin':'https://other.example'}, {'Referer':'https://shouyulove.cn/'},
+                                {'Referer':'https://shouyuloveXcn/portfolio/'},
+                                {'Referer':'https://shouyulove.cn/portfolio/other-page'}]:
+                    self.assertEqual(request(click_path,{**click_headers,**changes},'POST')[0],403)
+                self.assertEqual(request('/__syl/portfolio-click/bad/name',click_headers,'POST')[0],404)
+                self.assertEqual(request('/__syl/portfolio-click/unknown',click_headers,'POST')[0],204)
             finally:
                 process.terminate()
                 process.communicate(timeout=10)
             raw = (root/'events.log').read_text()
             self.assertNotIn('must-not-be-logged',raw)
+            self.assertNotIn('not-logged',raw)
             events = [json.loads(line) for line in raw.splitlines()]
             connection,key = visits.open_database(root/'private')
-            accepted = [event['path'] for event in events if visits.collect_event(connection,key,event)]
+            catalog = root/'catalog.json'
+            catalog.write_text(json.dumps({'beida-zhidao':'北大知道'}))
+            with patch.object(visits, 'PORTFOLIO_CATALOG', catalog):
+                accepted = [event['path'] for event in events if visits.collect_event(connection,key,event)]
             connection.close()
-            self.assertCountEqual(accepted,['/','/future/new/','/rewrite/deep/page','/proxy/new/page','/xhtml','/','/brand-new.html'])
+            self.assertCountEqual(accepted,['/','/future/new/','/rewrite/deep/page','/proxy/new/page','/xhtml','/','/brand-new.html',click_path])
             result = visits.report(root/'private/visits.sqlite')
+            self.assertEqual(result['portfolio_clicks']['period'],dict(clicks=1,visitors=1))
+            self.assertEqual(result['portfolio_clicks']['collector'][0]['received'],2)
             self.assertEqual(result['period'],dict(views=7,visitors=1))
             self.assertEqual(len(result['pages']),6)
             self.assertNotIn('/static.css', [p['path'] for p in result['pages']])

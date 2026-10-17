@@ -27,7 +27,8 @@
   {
     "server_path": "/etc/nginx/conf.d/shouyulove-visit-format.conf",
     "repo_path": "nginx/conf.d/shouyulove-visit-format.conf",
-    "sha256": "c80b0c077b370ba088f4655a7a4f456a9392a9060c39e8baac59f5315b6110b5"
+    "sha256": "88e1f9d8879af54400f2bcac4ed05461a03df55bb0b0e78607eb182ca31f9d4d",
+    "updated_at": "2026-10-17"
   },
   {
     "server_path": "/etc/nginx/conf.d/shouyulove-dict-upstream.conf",
@@ -42,7 +43,8 @@
   {
     "server_path": "/etc/nginx/snippets/shouyulove-home.conf",
     "repo_path": "nginx/snippets/shouyulove-home.conf",
-    "sha256": "c67f30d3a82c830c117d791fd0e108865f67ee4cde0b7922cc6da8d1ba4b5e90"
+    "sha256": "e6f509bf4fff951e71ae0d859268e9cbf168ea7dfb769004769e98b446e69257",
+    "updated_at": "2026-10-17"
   },
   {
     "server_path": "/etc/nginx/snippets/signplay.conf",
@@ -73,5 +75,11 @@
     "server_path": "/etc/nginx/snippets/shouyu-content-access-video.conf",
     "repo_path": "nginx/snippets/shouyu-content-access-video.conf",
     "sha256": "27b19116038c843d6a489fd54c774fbfda30e77995650e042a17459f8ffe2f97"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/shouyulove-portfolio-click.conf",
+    "repo_path": "nginx/snippets/shouyulove-portfolio-click.conf",
+    "sha256": "b070a3f49d21255e063c83ed8fccda18db364a0e91a4807700631dafaf3b1c3c",
+    "updated_at": "2026-10-17"
   }
 ]

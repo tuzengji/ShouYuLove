@@ -1,5 +1,21 @@
 # 全站后台访问统计
 
+## 2026-10-17 作品集跳转统计
+
+作品集的全部十个入口新增独立跳转统计，包括「其他作品」中的北大知道、清华知道和拼好课。按北京时间分天、按作品汇总点击次数和估算访客；该数据与原有页面访问量分开，表示从作品集发起打开作品，不能证明目标网页已经加载成功，也不包含外部网站从其他来源获得的访问。
+
+点击、手机触摸、键盘 Enter 和鼠标中键打开各计一次；刷新作品集、打开右键菜单、机器人与 QA 请求不计入。统计脚本通过 `sendBeacon` 发送一个无正文的同源 POST，失败时不阻塞原链接；不改变目的地址、另开标签页、字体或三维场景。浏览器禁止脚本、拦截统计、离线，或从右键菜单选择另开页面时可能无法收集。上线前没有保存跳转记录，不能回补历史数字。
+
+`scripts/build_content.py` 自动生成链接的 `data-project` 标识和 `portfolio/projects.json` 作品名称表；新作品随主站正常构建发布后自动加入。采集器读取当前发布的名称表，只接受已公布的作品，不需要重启或为作品添加 Nginx 配置。该名称表只有页面上已公开的作品 ID 和名称，不含统计数据。
+
+Nginx 的 `/__syl/portfolio-click/<作品 ID>` 仅接收来自作品集、Origin 与当前域名一致的 POST，返回空的 204；GET 不提供报表。事件继续通过原 Unix 数据报进入私有 SQLite，新增 `portfolio_clicks` 和 `portfolio_click_health`，保留原访问表和固定去重密钥。跳转记录只保存日期、HMAC 访客标识、作品 ID 与次数，不保存请求正文或查询参数。前后端源码分别在 `scripts/portfolio_clicks.js` 与 `deploy/private_stats/`。
+
+登录服务器后用 `sudo shouyulove-stats --days 30 --clicks` 查看作品合计与逐日明细。`--json` 的 `portfolio_clicks` 含查询期合计、每天合计、作品合计、逐日作品明细和采集观测；`--health` 增加跳转候选接收状态。候选包含 QA，不能当作真实点击。访客继续按网络地址的 HMAC 估算，不能把各作品访客直接相加。
+
+部署记录和回滚备份在阿里云 `/var/backups/shouyulove-stats/20261017-portfolio-clicks/`，本机为 `output/deployment/portfolio-clicks-20261017/`。回滚恢复旧采集代码、三个统计相关 Nginx 文件与原主站发布链接；保留升级后的数据库，不能拿旧库覆盖新访问。
+
+正式版本于北京时间 10:45 上线，最终回执在备份目录的 `attempt-3/`。10 项后台回归与七类本地／公网浏览器情形通过；公网 19 个 QA 事件在后台逐作品读回，计入真实点击为 0。详细证据及两次验收误判后的自动回退见 [验证记录](../VALIDATION.md)。
+
 ## 2026-10-17 项目汇总与采集观测
 
 统计范围按用户确认，覆盖当前服务器上 `shouyulove.cn` 的全部项目；不合并其他服务器上的北大／清华知道或拼好课。新增按项目汇总、逐日项目明细和每个项目的采集状态。原访问记录和 HMAC 去重密钥保持，升级前已有的页面记录也能直接汇总到项目。
@@ -26,6 +42,7 @@
 sudo shouyulove-stats --days 30
 sudo shouyulove-stats --days 30 --pages
 sudo shouyulove-stats --days 30 --projects
+sudo shouyulove-stats --days 30 --clicks
 sudo shouyulove-stats --days 30 --health
 sudo shouyulove-stats --days 30 --json
 ```
