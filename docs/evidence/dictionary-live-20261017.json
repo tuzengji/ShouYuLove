@@ -1,0 +1,55 @@
+{
+  "deployed_at": "2026-10-17T23:35:29+08:00",
+  "code_commit": "62b26918f8db33f88abf58d5a8b61aeab2a8e663",
+  "release": "20261017T153525Z",
+  "guard_health": 204,
+  "browser_tests": [
+    {
+      "viewport": 1440,
+      "responses": 171,
+      "images": 25,
+      "signed_session": true,
+      "original_cookie_preserved": true,
+      "pagination": true,
+      "entry_and_reload": true,
+      "http_429_or_5xx": 0,
+      "javascript_errors": 0
+    },
+    {
+      "viewport": 390,
+      "responses": 143,
+      "images": 25,
+      "signed_session": true,
+      "original_cookie_preserved": true,
+      "pagination": true,
+      "entry_and_reload": true,
+      "http_429_or_5xx": 0,
+      "javascript_errors": 0
+    }
+  ],
+  "routes": {
+    "/": 200,
+    "/portfolio/": 200,
+    "/signtrace/": 200,
+    "/chuanqinghuiyi/": 200,
+    "/catchpot/": 200,
+    "/2026-sign-language-cultural-festival/": 200,
+    "/2026-year-end-summary/": 200,
+    "/signplay/": 200,
+    "/dict/reports/": 200
+  },
+  "unchanged_service_pids": [
+    "signtrace",
+    "shouyu-game",
+    "jieguo",
+    "sign-language-festival",
+    "sign-year-end-summary",
+    "signplay-bank",
+    "shouyulove-stats"
+  ],
+  "unchanged_home_release": "20261017T024553Z-astra-home",
+  "nginx_scope": "Only the dictionary section and an additional timing log in the existing vhost changed; other existing config hashes identical.",
+  "guard_memory_bytes": 17723392,
+  "guard_restarts": 0,
+  "rollback_directory": "/var/backups/shouyulove-maintenance/dict-campus-20261017/"
+}
