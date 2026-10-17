@@ -51,5 +51,14 @@
   "nginx_scope": "Only the dictionary section and an additional timing log in the existing vhost changed; other existing config hashes identical.",
   "guard_memory_bytes": 17723392,
   "guard_restarts": 0,
-  "rollback_directory": "/var/backups/shouyulove-maintenance/dict-campus-20261017/"
+  "rollback_directory": "/var/backups/shouyulove-maintenance/dict-campus-20261017/",
+  "live_guard_checks": {
+    "signed_image": 200,
+    "image_without_session": 429,
+    "public_css_without_session": 200,
+    "rejection_reason_in_private_log": "session_required",
+    "internal_guard_and_content_gate": 404,
+    "diagnostic_file_mode": "0600",
+    "diagnostic_directory_mode": "0700"
+  }
 }
