@@ -1,5 +1,11 @@
 # 主站运行白名单与发布约定
 
+## 当前发布（2026-10-18）
+
+主站版本为 `20261017T162339Z-astra-home`，296 文件、19 路由、5 个链接、115,058,644 字节；模块为 `syl-v1-1-queued-scenes`，含上一版 39 个兼容资源。通过 `scripts/runtime_snapshot.py` 导出当前白名单，模型、图片和字体文件无需重新生成。三维下载规则见 [后台资源加载](../docs/background-loading.md)。以下带日期的发布记录为历史状态。
+
+`publish_astra.py` 的页面探测携带 `Accept: text/html` 和 `ShouYuLove-QA`，符合词典首次页面导航的会话初始化条件。不要移除词典健康检查，也不要为通过部署探测而放宽会话保护。现场回执位于 `/var/backups/shouyulove-maintenance/resource-loading-20261018/20261017T162339Z-astra-home/`，上一版和配置备份保留。当前父级 Nginx 与路由片段内容未修改。
+
 ## 当前发布目标与说明同步（2026-10-15）
 
 维护入口固定为 `shouyulove-aliyun`，主站版本 `20261014T162210Z-astra-home`；255 文件、19 路由、5 个链接、111,756,084 字节。与其他项目的边界见 [当前运维状态](../docs/operations-current.md)。
@@ -32,9 +38,9 @@
 
 当前运行清单为仓库根目录的 `runtime-manifest.json`。使用 `python3 -B scripts/runtime_snapshot.py export output/runtime` 可导出 255 个运行文件与 5 个相对链接；发布只上传该清单。
 
-## 当前发布
+## 2026-10-15 发布基线
 
-当前主站版本为 `20261014T162210Z-astra-home`：255 个运行文件、19 条页面路由、5 个相对链接，共 111,756,084 字节。主站图标独立版本为 `syl-v1-1-giving-heart`。模块、字体、数据桥和项目图片版本为 `syl-v1-1-signplay`。图标及相关子站的同步边界见 [作品集维护说明](../docs/portfolio-maintenance.md)。下文带日期的版本和文件数量保留为历史记录。
+当时主站版本为 `20261014T162210Z-astra-home`：255 个运行文件、19 条页面路由、5 个相对链接，共 111,756,084 字节。主站图标独立版本为 `syl-v1-1-giving-heart`。模块、字体、数据桥和项目图片版本为 `syl-v1-1-signplay`。图标及相关子站的同步边界见 [作品集维护说明](../docs/portfolio-maintenance.md)。下文带日期的版本和文件数量保留为历史记录。
 
 `publish_astra.py` 保留现有受保护发布逻辑：先核对逐文件哈希、发布前状态与已有备份，再切换主站版本；失败时按已绑定的状态恢复。它依赖服务器上的独立上传目录、新生成的发布 request、原配置备份与既有权限。仓库不保存实际服务器状态或可重复执行的旧 request。
 

@@ -8,7 +8,7 @@
 
 部署记录保存在 `output/deployment/signplay-20261015/`。本次先更新绑定原稿的新项目条目，再从已发布内容快照追加该条目构建；原稿中其他未发布编辑保留。指间趣游由独立 Nginx 片段和版本目录维护，主站发布不接管其运行文件。
 
-核对日期：2026-10-15。服务器迁移后的运行入口及依赖见 [运维状态](operations-current.md)。本文记录已确认的作品集布局、图标和加载规则，后续修改以这些规则及绑定 Markdown 为基础。
+核对日期：2026-10-18。服务器迁移后的运行入口及依赖见 [运维状态](operations-current.md)。本文记录已确认的作品集布局、图标和加载规则，后续修改以这些规则及绑定 Markdown 为基础。
 
 ## 页面和内容入口
 
@@ -54,12 +54,14 @@
 | `BRAND_VERSION`（主站图标） | `syl-v1-1-giving-heart` |
 | `RUNTIME_VERSION`（图像） | `syl-v1-1-signplay` |
 | `FONT_VERSION` | `syl-v1-1-signplay` |
-| `MODULE_VERSION` | `syl-v1-1-signplay` |
+| `MODULE_VERSION` | `syl-v1-1-queued-scenes` |
 | `BRIDGE_VERSION` | `syl-v1-1-signplay` |
 
 ## 加载和隐私规则
 
 作品集的正式 HTML 先可读、可点击；首次绘制至少两秒后，后台加载完整的 Nuxt/WebGL 场景及原模型、鼠标跟随和流体交互。加载失败或关闭 JavaScript 时，正式目录仍可访问；场景不能覆盖列表、重置滚动或改变地址。作品集不初始化、不下载音乐。
+
+三维网络资源通过共用队列限制为两路下载；页面隐藏后暂停新增请求，已开始的请求继续完成，返回后续载。原生解码器也走同一队列，具体接入与验证见 [后台资源加载](background-loading.md)。
 
 首页、心创组和作品详情保留原生 0–100 加载界面。已移除的临时巨型文字页不恢复。首页只预载当前场景，其他场景按需加载；版本化公共资源缓存一年，HTML 和 payload 使用 no-cache。
 
@@ -67,7 +69,7 @@
 
 ## 发布记录与后续检查
 
-下列为已完成的发布；最后一行是当前静态版本。后续阿里云迁移及全站统计更新未改变该静态版本。运行白名单见 [runtime-manifest.json](../runtime-manifest.json)。
+下列为已完成的发布；最后一行是当前静态版本。运行白名单见 [runtime-manifest.json](../runtime-manifest.json)。
 
 | 工作 | 仓库提交 | 主站发布目录名称 |
 | --- | --- | --- |
@@ -79,8 +81,10 @@
 | 传情会意更名 | `14770c0` | `20261012T070956Z-astra-home` |
 | 主站「把爱递给你」与站点图标 | 见本次维护提交 | `20261012T142201Z-astra-home` |
 | 指间趣游加入首页与作品集 | `4484dd6` | `20261014T162210Z-astra-home` |
+| 作品集跳转统计 | 见统计维护提交 | `20261017T024553Z-astra-home` |
+| 三维下载队列、隐藏暂停与续载 | `e6b884e`、`e02b838` | `20261017T162339Z-astra-home` |
 
-当前版本有 255 个运行文件、19 条页面路由、5 个相对链接，共 111,756,084 字节；发布记录为 `output/deployment/signplay-20261015/`，迁移与桌面/手机验收见 `output/deployment/shouyulove-aliyun-migration-20261015/`。2026-10-12 主站标识的历史发布和验收记录为 `output/deployment/shouyulove-main-logo-color-match-20261012/`。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
+当前版本有 296 个运行文件（含 39 个上一版兼容资源）、19 条页面路由、5 个相对链接，共 115,058,644 字节；发布记录为 `output/deployment/resource-loading-20261018/`，迁移与桌面/手机验收见 `output/deployment/shouyulove-aliyun-migration-20261015/`。2026-10-12 主站标识的历史发布和验收记录为 `output/deployment/shouyulove-main-logo-color-match-20261012/`。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
 
 原发布记录已覆盖桌面、390px 手机、320px 窄屏、背景延迟及失败、无 JavaScript、滚动和布局稳定；最后一批子站图标有 15 项公网哈希核对。2026-10-12 接续整理时另行核对了服务器全部运行文件和相对链接，以及公网 18 条路由、9 张主站图标和 15 张子站图标；此次仅更新说明文档，未重新进行浏览器交互测试。
 

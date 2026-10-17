@@ -1,0 +1,500 @@
+{
+  "background-final": {
+    "base": "http://127.0.0.1:8039",
+    "passed": true,
+    "results": [
+      {
+        "width": 1440,
+        "passed": true,
+        "visibility": "simulated document.hidden",
+        "maxHeldDownloads": 2,
+        "queuedWhileHidden": 12,
+        "webglRequests": 14,
+        "resumed": true,
+        "audioRequests": 0,
+        "ready": {
+          "components": [
+            "fishScene",
+            "bgSimulation",
+            "footer",
+            "title"
+          ],
+          "frame": 87,
+          "active": 0,
+          "pending": 0,
+          "scroll": 439,
+          "overflow": false
+        }
+      },
+      {
+        "width": 390,
+        "passed": true,
+        "visibility": "simulated document.hidden",
+        "maxHeldDownloads": 2,
+        "queuedWhileHidden": 12,
+        "webglRequests": 14,
+        "resumed": true,
+        "audioRequests": 0,
+        "ready": {
+          "components": [
+            "fishScene",
+            "bgSimulation",
+            "footer",
+            "title"
+          ],
+          "frame": 87,
+          "active": 0,
+          "pending": 0,
+          "scroll": 1135,
+          "overflow": false
+        }
+      }
+    ]
+  },
+  "portfolio_scene": {
+    "base": "http://127.0.0.1:8038",
+    "passed": true,
+    "results": [
+      {
+        "width": 1440,
+        "links": 10,
+        "blockedModelLinksUsable": true,
+        "scrollPreserved": true,
+        "geometryPreserved": true,
+        "audioRequests": 0,
+        "hierarchy": {
+          "categories": [
+            "核心创意",
+            "心创组内部使用",
+            "其他作品"
+          ],
+          "headingSize": 28,
+          "primarySize": 23,
+          "secondarySize": 16,
+          "primaryRow": 177.125,
+          "secondaryRow": 114.265625
+        },
+        "scene": {
+          "marks": [
+            {
+              "name": "syl-portfolio-readable",
+              "time": 43.89999997615814
+            },
+            {
+              "name": "syl-portfolio-scene-start",
+              "time": 2054.100000023842
+            },
+            {
+              "name": "syl-portfolio-background-ready",
+              "time": 4662
+            }
+          ],
+          "frame": 240,
+          "components": [
+            "fishScene",
+            "bgSimulation",
+            "footer",
+            "title"
+          ],
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 1440,
+            "height": 900,
+            "top": 0,
+            "right": 1440,
+            "bottom": 900,
+            "left": 0
+          },
+          "font": "PSTimes, ShouYuSerif, serif",
+          "visible": "1",
+          "linkColor": "rgb(23, 45, 35)"
+        },
+        "errors": []
+      },
+      {
+        "width": 390,
+        "links": 10,
+        "blockedModelLinksUsable": true,
+        "scrollPreserved": true,
+        "geometryPreserved": true,
+        "audioRequests": 0,
+        "hierarchy": {
+          "categories": [
+            "核心创意",
+            "心创组内部使用",
+            "其他作品"
+          ],
+          "headingSize": 24,
+          "primarySize": 20,
+          "secondarySize": 16,
+          "primaryRow": 180.890625,
+          "secondaryRow": 108.890625
+        },
+        "scene": {
+          "marks": [
+            {
+              "name": "syl-portfolio-readable",
+              "time": 50.69999998807907
+            },
+            {
+              "name": "syl-portfolio-scene-start",
+              "time": 2066.600000023842
+            },
+            {
+              "name": "syl-portfolio-background-ready",
+              "time": 4623.699999988079
+            }
+          ],
+          "frame": 240,
+          "components": [
+            "fishScene",
+            "bgSimulation",
+            "footer",
+            "title"
+          ],
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 900,
+            "top": 0,
+            "right": 390,
+            "bottom": 900,
+            "left": 0
+          },
+          "font": "PSTimes, ShouYuSerif, serif",
+          "visible": "1",
+          "linkColor": "rgb(23, 45, 35)"
+        },
+        "errors": []
+      },
+      {
+        "width": 320,
+        "links": 10,
+        "blockedModelLinksUsable": true,
+        "scrollPreserved": true,
+        "geometryPreserved": true,
+        "audioRequests": 0,
+        "hierarchy": {
+          "categories": [
+            "核心创意",
+            "心创组内部使用",
+            "其他作品"
+          ],
+          "headingSize": 24,
+          "primarySize": 19,
+          "secondarySize": 16,
+          "primaryRow": 199.875,
+          "secondaryRow": 131.640625
+        },
+        "scene": {
+          "marks": [
+            {
+              "name": "syl-portfolio-readable",
+              "time": 53.90000003576279
+            },
+            {
+              "name": "syl-portfolio-scene-start",
+              "time": 2070.199999988079
+            },
+            {
+              "name": "syl-portfolio-background-ready",
+              "time": 4623.199999988079
+            }
+          ],
+          "frame": 239,
+          "components": [
+            "fishScene",
+            "bgSimulation",
+            "footer",
+            "title"
+          ],
+          "canvas": {
+            "x": 0,
+            "y": 0,
+            "width": 320,
+            "height": 900,
+            "top": 0,
+            "right": 320,
+            "bottom": 900,
+            "left": 0
+          },
+          "font": "PSTimes, ShouYuSerif, serif",
+          "visible": "1",
+          "linkColor": "rgb(23, 45, 35)"
+        },
+        "errors": []
+      },
+      {
+        "mode": "no-js",
+        "links": 10,
+        "scroll": true
+      },
+      {
+        "mode": "failed-scene",
+        "links": 10,
+        "scroll": true
+      }
+    ]
+  },
+  "project_navigation": {
+    "base": "http://127.0.0.1:8038",
+    "passed": true,
+    "results": [
+      {
+        "width": 1440,
+        "nativeHome": true,
+        "history": true,
+        "links": 10,
+        "errors": []
+      },
+      {
+        "width": 390,
+        "nativeHome": true,
+        "history": true,
+        "links": 10,
+        "errors": []
+      }
+    ]
+  },
+  "dictionary": {
+    "changed_this_task": false,
+    "existing_live_thumbnails": true,
+    "images": 10376,
+    "source_bytes": 629972319,
+    "thumbnail_bytes": 136069768,
+    "reduction_percent": 78.4,
+    "mobile": {
+      "viewport": [
+        390,
+        850
+      ],
+      "images": 24,
+      "initial_loaded": 6,
+      "last_image_loaded_after_scroll": true
+    },
+    "desktop": {
+      "viewport": [
+        1440,
+        850
+      ],
+      "initial_loaded": 24,
+      "native_lazy_prefetch": true
+    }
+  },
+  "runtime": {
+    "files": 296,
+    "routes": 19,
+    "symlinks": 5,
+    "bytes": 115058644,
+    "unchanged_media_font_audio_files": 106
+  },
+  "background-live": {
+    "base": "https://shouyulove.cn",
+    "passed": true,
+    "results": [
+      {
+        "width": 1440,
+        "passed": true,
+        "visibility": "simulated document.hidden",
+        "maxHeldDownloads": 2,
+        "queuedWhileHidden": 12,
+        "webglRequests": 14,
+        "resumed": true,
+        "audioRequests": 0,
+        "ready": {
+          "components": [
+            "fishScene",
+            "bgSimulation",
+            "footer",
+            "title"
+          ],
+          "frame": 460,
+          "active": 0,
+          "pending": 0,
+          "scroll": 439,
+          "overflow": false
+        }
+      },
+      {
+        "width": 390,
+        "passed": true,
+        "visibility": "simulated document.hidden",
+        "maxHeldDownloads": 2,
+        "queuedWhileHidden": 12,
+        "webglRequests": 14,
+        "resumed": true,
+        "audioRequests": 0,
+        "ready": {
+          "components": [
+            "fishScene",
+            "bgSimulation",
+            "footer",
+            "title"
+          ],
+          "frame": 456,
+          "active": 0,
+          "pending": 0,
+          "scroll": 1135,
+          "overflow": false
+        }
+      }
+    ]
+  },
+  "navigation-live": {
+    "base": "https://shouyulove.cn",
+    "passed": true,
+    "results": [
+      {
+        "width": 1440,
+        "nativeHome": true,
+        "history": true,
+        "links": 10,
+        "errors": []
+      },
+      {
+        "width": 390,
+        "nativeHome": true,
+        "history": true,
+        "links": 10,
+        "errors": []
+      }
+    ]
+  },
+  "public_checks": [
+    {
+      "route": "/projects/signtrace/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/projects/dictionary/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/projects/chuanqinghuiyi/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/projects/signplay/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/projects/2026-sign-language-cultural-festival/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/projects/2026-year-end-summary/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/projects/pinhaoke/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/projects/beida-zhidao/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/projects/qinghua-zhidao/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/projects/jieguo/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/the-studio/the-studio/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/the-studio/our-approach/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/the-studio/services/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/the-studio/awards/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/the-studio/clients/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/the-studio/contact-us/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/the-studio/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "route": "/portfolio/",
+      "status": 200,
+      "hash_match": true,
+      "cache": "no-cache"
+    },
+    {
+      "asset": "entry.DyxL_KXi.syl-v1-1-queued-scenes.js",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable"
+    },
+    {
+      "asset": "entry.DyxL_KXi.syl-v1-1-signplay.js",
+      "status": 200,
+      "cache": "public, max-age=31536000, immutable"
+    }
+  ],
+  "deployment": {
+    "release": "20261017T162339Z-astra-home",
+    "previous": "20261017T024553Z-astra-home",
+    "verified_files": 296,
+    "nginx_configs_unchanged": 24,
+    "service_pids_unchanged": 8,
+    "attempts": 2,
+    "first_attempt": "Automatic rollback: page probe lacked Accept: text/html; corrected without changing dictionary guard"
+  }
+}
