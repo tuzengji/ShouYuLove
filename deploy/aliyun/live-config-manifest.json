@@ -2,7 +2,8 @@
   {
     "server_path": "/etc/nginx/sites-available/shouyulove",
     "repo_path": "nginx/shouyulove.server.conf",
-    "sha256": "dad5fc1c629128c1562d13357674f55736d2eee66e5c2df90157eeb33ab508e5"
+    "sha256": "27451a4db489b315ca4e13cb349fd54ea5866cedc3b573e2563ad0801df65aa0",
+    "updated_at": "2026-10-17"
   },
   {
     "server_path": "/etc/systemd/system/system-shouyulove.slice",
@@ -80,6 +81,48 @@
     "server_path": "/etc/nginx/snippets/shouyulove-portfolio-click.conf",
     "repo_path": "nginx/snippets/shouyulove-portfolio-click.conf",
     "sha256": "b070a3f49d21255e063c83ed8fccda18db364a0e91a4807700631dafaf3b1c3c",
+    "updated_at": "2026-10-17"
+  },
+  {
+    "server_path": "/etc/nginx/conf.d/shouyulove-dictionary-limits.conf",
+    "repo_path": "nginx/conf.d/shouyulove-dictionary-limits.conf",
+    "sha256": "f9bf6d7b17518ff487c5e9392100a18b0ab670544288c9450108125fd03abebf",
+    "updated_at": "2026-10-17"
+  },
+  {
+    "server_path": "/etc/nginx/conf.d/shouyulove-diagnostics.conf",
+    "repo_path": "nginx/conf.d/shouyulove-diagnostics.conf",
+    "sha256": "56ce3adbf95685e94ed59f9ee6eb89c0a02a0699491509dad43b98d765340a12",
+    "updated_at": "2026-10-17"
+  },
+  {
+    "server_path": "/etc/systemd/system/shouyulove-dict-guard.service",
+    "repo_path": "systemd/shouyulove-dict-guard.service",
+    "sha256": "a8b9dd0331321c005df1b841d24f60fb5e1f94ad79c9fe39e8795a64ba04706d",
+    "updated_at": "2026-10-17"
+  },
+  {
+    "server_path": "/etc/logrotate.d/shouyulove-diagnostics",
+    "repo_path": "logrotate/shouyulove-diagnostics",
+    "sha256": "fe921e4604d19077d4bb12c1aabf0c1d5a78825c0aeeaf5ee6aba21f11cf3aed",
+    "updated_at": "2026-10-17"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/shouyulove-dict-guard.conf",
+    "repo_path": "nginx/snippets/shouyulove-dict-guard.conf",
+    "sha256": "65eb282f1da132077a1229e11e0db54e50ce8788a7a4cd139d754dbd02bb9936",
+    "updated_at": "2026-10-17"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/shouyulove-dict-limits.conf",
+    "repo_path": "nginx/snippets/shouyulove-dict-limits.conf",
+    "sha256": "15549a1c226e2441a54c773d2baef8f8fe7c43bf1911c9f76efc46377c5eaa30",
+    "updated_at": "2026-10-17"
+  },
+  {
+    "server_path": "/etc/nginx/snippets/shouyulove-dict-video-guard.conf",
+    "repo_path": "nginx/snippets/shouyulove-dict-video-guard.conf",
+    "sha256": "738aa849aba18a6b6b639c2f27f6b74760b4ca4b94eed868563e1963fec6c9ce",
     "updated_at": "2026-10-17"
   }
 ]

@@ -2,6 +2,7 @@
 
 ## 当前运行与运维记录（2026-10-17）
 
+- 词典校园网访问采用独立签名会话限流，维护入口和验证记录见 [词典访问保护](docs/dictionary-campus-access.md)。普通请求不再使用共享 `syl_req/syl_conn`，不要恢复每 IP 24 并发。保留当前 CLab 直连、本地视频、报告入口和主备监控；只按现场差异修改 Nginx，私钥及生成的签名片段不得进 Git。
 - 作品集跳转使用独立的 `portfolio_clicks` 统计表；不与页面 PV 相加。`scripts/build_content.py` 随作品生成 `data-project` 和 `portfolio/projects.json`。保留链接直达、异步记录和私有报表；新增作品无需单独改统计服务。详见 [后台统计说明](docs/private-statistics.md)。
 - 先读 [当前运维状态](docs/operations-current.md)。主站使用 `shouyulove-aliyun` → `101.37.209.227`；`yanyuan-calendar` 已指向 PKUKnow 新机 `121.43.143.226`，不能用于主站发布。
 - 当前静态版本 `20261017T024553Z-astra-home`：257 文件、19 页面路由、5 个链接，10 个项目，字体覆盖 511 字。图像/模块/字体/数据桥为 `syl-v1-1-signplay`；品牌图标版本独立保留。

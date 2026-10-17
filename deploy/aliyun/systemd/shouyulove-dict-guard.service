@@ -1,0 +1,28 @@
+[Unit]
+Description=ShouYuLove dictionary browser-session guard
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+Group=www-data
+LoadCredential=signing-key:/var/lib/shouyulove-dict-guard/signing-key
+RuntimeDirectory=shouyulove-dict-guard
+RuntimeDirectoryMode=0750
+ExecStart=/usr/bin/node /opt/shouyulove-dict-guard/current/guard.mjs
+Restart=on-failure
+RestartSec=2
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+RestrictAddressFamilies=AF_UNIX
+MemoryMax=256M
+CPUQuota=100%
+TasksMax=32
+LimitNOFILE=16384
+
+[Install]
+WantedBy=multi-user.target

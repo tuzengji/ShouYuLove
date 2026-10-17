@@ -1,0 +1,16 @@
+/var/log/shouyulove-private/requests.jsonl {
+    daily
+    rotate 14
+    maxsize 20M
+    missingok
+    notifempty
+    compress
+    delaycompress
+    create 0600 root root
+    sharedscripts
+    postrotate
+        if [ -f /run/nginx.pid ]; then
+            /bin/kill -USR1 "$(cat /run/nginx.pid)"
+        fi
+    endscript
+}

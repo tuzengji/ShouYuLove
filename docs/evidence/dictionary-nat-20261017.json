@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-17",
+  "environment": "Aliyun loopback-only isolated Nginx 1.28.3, HTTP/2, auto workers, worker_connections=768, max_concurrent_streams=32; synthetic upstream, 1 CPU / 768 MiB test cgroup",
+  "limitations": "Simulates quota isolation and request concurrency; does not measure campus Wi-Fi, 5 Mbps public egress, CLab query execution, or real AI model capacity.",
+  "scenarios": [
+    {
+      "users": 30,
+      "requests": 2130,
+      "statuses": {
+        "200": 2130
+      },
+      "p95_ms": 2303,
+      "max_ms": 2558
+    },
+    {
+      "users": 50,
+      "requests": 3550,
+      "statuses": {
+        "200": 3550
+      },
+      "p95_ms": 2886,
+      "max_ms": 3385
+    },
+    {
+      "users": 100,
+      "requests": 7100,
+      "statuses": {
+        "200": 7100
+      },
+      "p95_ms": 3492,
+      "max_ms": 3893
+    }
+  ],
+  "old_shared_24": {
+    "requests": 96,
+    "statuses": {
+      "200": 24,
+      "429": 72
+    }
+  },
+  "per_session_64": {
+    "requests": 96,
+    "statuses": {
+      "200": 64,
+      "429": 32
+    }
+  },
+  "per_session_rate": {
+    "requests": 160,
+    "statuses": {
+      "200": 124,
+      "429": 36
+    }
+  },
+  "cookie_rotation": {
+    "requests": 330,
+    "statuses": {
+      "200": 60,
+      "429": 270
+    }
+  },
+  "forged_cookie": 429,
+  "restricted_local_and_fallback_video": 403,
+  "range": 206,
+  "fallback_video": 200,
+  "simultaneous_sensitive_starts": {
+    "requests": 100,
+    "statuses": {
+      "200": 100
+    },
+    "mock_only": true
+  },
+  "sensitive_abuse": {
+    "requests": 10,
+    "statuses": {
+      "200": 6,
+      "429": 4
+    }
+  },
+  "valid_peer_after_abuse": 200,
+  "public_css_without_cookie": 200,
+  "unrelated_project": 200,
+  "unit_tests": {
+    "passed": 4,
+    "coverage": [
+      "server-issued sessions for identical NAT clients",
+      "forged/expired/duplicate cookies",
+      "new-session mint throttling with existing-peer continuity",
+      "1200 distinct items in 10 min, repeat views, recovery"
+    ]
+  }
+}

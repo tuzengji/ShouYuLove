@@ -1,5 +1,11 @@
 # 阿里云部署与兼容配置
 
+## 2026-10-17 词典校园网会话限流
+
+`shouyulove.server.conf` 已从当晚现场配置更新，保留已有 CLab 直连、视频本地优先和独立报告入口。本次发布只修改词典区块并增加私有耗时日志，不替换主备 upstream 文件。新增会话限流片段、守卫服务和测试见 [词典访问保护](../../docs/dictionary-campus-access.md)。原 `shouyulove-limits.conf` 保持不变，继续供其他路由使用。
+
+密钥及生成的 `/etc/shouyulove/dict-guard-signing.conf` 不在仓库内；不能直接用本目录覆盖全机配置。
+
 ## 2026-10-17 作品集跳转统计配置
 
 本次更新 `shouyulove-visit-format.conf`、`shouyulove-home.conf`，新增 `shouyulove-portfolio-click.conf`；对应清单项已更新哈希并标注日期。其余条目仍是下文所述迁移快照，不能作为全机当前配置整体恢复。新片段提供只写的跳转接收入口，报表仍只经 SSH 查看。详见 [后台统计说明](../../docs/private-statistics.md)。
