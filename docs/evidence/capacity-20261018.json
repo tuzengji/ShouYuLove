@@ -1,0 +1,544 @@
+{
+  "date": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "release": "20261017T162339Z-astra-home",
+  "conditions": {
+    "browser": "Chromium / HTTP2 / 390x850 mobile emulation",
+    "origin_test": "Local loopback HTTPS/HTTP1.1+gzip, load generator on the same server, 3 bursts per tier",
+    "html_test": "Public HTTPS/HTTP1.1+gzip, 1 burst per tier; HTML only",
+    "browser_cache": "Each cold user has a fresh isolated context; warm reload retains the same browser cache",
+    "browser_stage_limit_seconds": 60,
+    "browser_stage_transfer_limit_mib": 64,
+    "origin_stop_threshold": "Any non-200/hash mismatch, p95 >1s, or combined host CPU >70%",
+    "scope": "Main homepage and portfolio only; no AI API or dictionary load test"
+  },
+  "browser_tests": [
+    {
+      "name": "home-1",
+      "route": "/",
+      "concurrency": 1,
+      "start": "2026-10-18T14:35:05.765000+08:00",
+      "elapsed_seconds": 17.705,
+      "browser_received_bytes": 12834449,
+      "aggregate_browser_mbps": 5.799,
+      "users": [
+        {
+          "user": 1,
+          "ready_seconds": 17.682,
+          "directory_readable_seconds": null,
+          "statuses": {
+            "200": 82,
+            "206": 1
+          },
+          "browser_errors": []
+        }
+      ],
+      "monitor": {
+        "samples": 18,
+        "cpu_mean_percent": 12.5,
+        "cpu_peak_percent": 13.66,
+        "minimum_available_mb": 13522,
+        "nic_tx_mean_mbps": 6.25,
+        "non_qa_statuses": {}
+      }
+    },
+    {
+      "name": "home-2",
+      "route": "/",
+      "concurrency": 2,
+      "start": "2026-10-18T14:38:34.673000+08:00",
+      "elapsed_seconds": 36.681,
+      "browser_received_bytes": 26477043,
+      "aggregate_browser_mbps": 5.775,
+      "users": [
+        {
+          "user": 1,
+          "ready_seconds": 29.773,
+          "directory_readable_seconds": null,
+          "statuses": {
+            "200": 72,
+            "206": 1
+          },
+          "browser_errors": []
+        },
+        {
+          "user": 2,
+          "ready_seconds": 36.666,
+          "directory_readable_seconds": null,
+          "statuses": {
+            "200": 85,
+            "206": 1
+          },
+          "browser_errors": []
+        }
+      ],
+      "monitor": {
+        "samples": 37,
+        "cpu_mean_percent": 0.364,
+        "cpu_peak_percent": 1.75,
+        "minimum_available_mb": 13634,
+        "nic_tx_mean_mbps": 6.504,
+        "non_qa_statuses": {}
+      },
+      "warm_reload": {
+        "aggregate_received_bytes": 97309,
+        "users": [
+          {
+            "i": 0,
+            "elapsed_ms": 3400,
+            "error": null,
+            "ready_ms": 3381.800000011921,
+            "nav": [
+              {
+                "transfer": 300,
+                "encoded": 29778
+              }
+            ],
+            "resource_transfer": 600,
+            "cached_resources": 77
+          },
+          {
+            "i": 1,
+            "elapsed_ms": 3465,
+            "error": null,
+            "ready_ms": 3455.699999988079,
+            "nav": [
+              {
+                "transfer": 300,
+                "encoded": 29778
+              }
+            ],
+            "resource_transfer": 52944,
+            "cached_resources": 74
+          }
+        ]
+      }
+    },
+    {
+      "name": "home-3",
+      "route": "/",
+      "concurrency": 3,
+      "start": "2026-10-18T14:36:10.583000+08:00",
+      "elapsed_seconds": 55.681,
+      "browser_received_bytes": 39504153,
+      "aggregate_browser_mbps": 5.676,
+      "users": [
+        {
+          "user": 1,
+          "ready_seconds": 39.429,
+          "directory_readable_seconds": null,
+          "statuses": {
+            "200": 72,
+            "206": 1
+          },
+          "browser_errors": []
+        },
+        {
+          "user": 2,
+          "ready_seconds": 44.293,
+          "directory_readable_seconds": null,
+          "statuses": {
+            "200": 82,
+            "206": 1
+          },
+          "browser_errors": []
+        },
+        {
+          "user": 3,
+          "ready_seconds": 55.65,
+          "directory_readable_seconds": null,
+          "statuses": {
+            "200": 85,
+            "206": 1
+          },
+          "browser_errors": []
+        }
+      ],
+      "monitor": {
+        "samples": 56,
+        "cpu_mean_percent": 0.572,
+        "cpu_peak_percent": 9.52,
+        "minimum_available_mb": 13608,
+        "nic_tx_mean_mbps": 6.248,
+        "non_qa_statuses": {}
+      }
+    },
+    {
+      "name": "portfolio-1",
+      "route": "/portfolio/",
+      "concurrency": 1,
+      "start": "2026-10-18T14:37:43.495000+08:00",
+      "elapsed_seconds": 12.126,
+      "browser_received_bytes": 7439244,
+      "aggregate_browser_mbps": 4.908,
+      "users": [
+        {
+          "user": 1,
+          "ready_seconds": 12.111,
+          "directory_readable_seconds": 0.383,
+          "statuses": {
+            "200": 62
+          },
+          "browser_errors": []
+        }
+      ],
+      "monitor": {
+        "samples": 12,
+        "cpu_mean_percent": 0.398,
+        "cpu_peak_percent": 0.88,
+        "minimum_available_mb": 13628,
+        "nic_tx_mean_mbps": 6.326,
+        "non_qa_statuses": {}
+      }
+    },
+    {
+      "name": "portfolio-5",
+      "route": "/portfolio/",
+      "concurrency": 5,
+      "start": "2026-10-18T14:39:38.055000+08:00",
+      "elapsed_seconds": 53.055,
+      "browser_received_bytes": 37196238,
+      "aggregate_browser_mbps": 5.609,
+      "users": [
+        {
+          "user": 1,
+          "ready_seconds": 45.111,
+          "directory_readable_seconds": 1.127,
+          "statuses": {
+            "200": 62
+          },
+          "browser_errors": []
+        },
+        {
+          "user": 2,
+          "ready_seconds": 53.035,
+          "directory_readable_seconds": 2.213,
+          "statuses": {
+            "200": 62
+          },
+          "browser_errors": []
+        },
+        {
+          "user": 3,
+          "ready_seconds": 51.784,
+          "directory_readable_seconds": 3.282,
+          "statuses": {
+            "200": 62
+          },
+          "browser_errors": []
+        },
+        {
+          "user": 4,
+          "ready_seconds": 41.477,
+          "directory_readable_seconds": 2.247,
+          "statuses": {
+            "200": 62
+          },
+          "browser_errors": []
+        },
+        {
+          "user": 5,
+          "ready_seconds": 39.403,
+          "directory_readable_seconds": 2.819,
+          "statuses": {
+            "200": 62
+          },
+          "browser_errors": []
+        }
+      ],
+      "monitor": {
+        "samples": 53,
+        "cpu_mean_percent": 5.664,
+        "cpu_peak_percent": 19.55,
+        "minimum_available_mb": 13527,
+        "nic_tx_mean_mbps": 6.42,
+        "non_qa_statuses": {}
+      }
+    }
+  ],
+  "origin_html_bursts": [
+    {
+      "concurrency": 1,
+      "route": "/",
+      "requests": 3,
+      "status": {
+        "200": 3
+      },
+      "invalid": 0,
+      "peak_inflight": 1,
+      "p50_seconds": 0.04890307900495827,
+      "p95_seconds": 0.05190569697879255,
+      "max_seconds": 0.05190569697879255,
+      "compressed_bytes_per_response": 29778,
+      "cpu_percent_including_generator": 3.2786885245901676,
+      "elapsed_seconds": 0.15287447004811838
+    },
+    {
+      "concurrency": 1,
+      "route": "/portfolio/",
+      "requests": 3,
+      "status": {
+        "200": 3
+      },
+      "invalid": 0,
+      "peak_inflight": 1,
+      "p50_seconds": 0.0466980779892765,
+      "p95_seconds": 0.04729393497109413,
+      "max_seconds": 0.04729393497109413,
+      "compressed_bytes_per_response": 6603,
+      "cpu_percent_including_generator": 1.7699115044247815,
+      "elapsed_seconds": 0.14228167897090316
+    },
+    {
+      "concurrency": 10,
+      "route": "/",
+      "requests": 30,
+      "status": {
+        "200": 30
+      },
+      "invalid": 0,
+      "peak_inflight": 10,
+      "p50_seconds": 0.057757226983085275,
+      "p95_seconds": 0.06517772801453248,
+      "max_seconds": 0.06639662804082036,
+      "compressed_bytes_per_response": 29778,
+      "cpu_percent_including_generator": 23.27044025157232,
+      "elapsed_seconds": 0.20330742601072416
+    },
+    {
+      "concurrency": 10,
+      "route": "/portfolio/",
+      "requests": 30,
+      "status": {
+        "200": 30
+      },
+      "invalid": 0,
+      "peak_inflight": 10,
+      "p50_seconds": 0.054052526014856994,
+      "p95_seconds": 0.05856067797867581,
+      "max_seconds": 0.058758292987477034,
+      "compressed_bytes_per_response": 6603,
+      "cpu_percent_including_generator": 21.7687074829932,
+      "elapsed_seconds": 0.1862636639853008
+    },
+    {
+      "concurrency": 50,
+      "route": "/",
+      "requests": 150,
+      "status": {
+        "200": 150
+      },
+      "invalid": 0,
+      "peak_inflight": 50,
+      "p50_seconds": 0.102688793966081,
+      "p95_seconds": 0.12259161099791527,
+      "max_seconds": 0.12460973398992792,
+      "compressed_bytes_per_response": 29778,
+      "cpu_percent_including_generator": 63.125,
+      "elapsed_seconds": 0.4103863020427525
+    },
+    {
+      "concurrency": 50,
+      "route": "/portfolio/",
+      "requests": 150,
+      "status": {
+        "200": 150
+      },
+      "invalid": 0,
+      "peak_inflight": 50,
+      "p50_seconds": 0.09149803000036627,
+      "p95_seconds": 0.10688649100484326,
+      "max_seconds": 0.10915603704052046,
+      "compressed_bytes_per_response": 6603,
+      "cpu_percent_including_generator": 53.02491103202846,
+      "elapsed_seconds": 0.3676260139909573
+    },
+    {
+      "concurrency": 100,
+      "route": "/",
+      "requests": 300,
+      "status": {
+        "200": 300
+      },
+      "invalid": 0,
+      "peak_inflight": 100,
+      "p50_seconds": 0.203416162985377,
+      "p95_seconds": 0.2227944500045851,
+      "max_seconds": 0.22976045095128939,
+      "compressed_bytes_per_response": 29778,
+      "cpu_percent_including_generator": 69.81757877280266,
+      "elapsed_seconds": 0.7648976140189916
+    },
+    {
+      "concurrency": 100,
+      "route": "/portfolio/",
+      "requests": 300,
+      "status": {
+        "200": 300
+      },
+      "invalid": 0,
+      "peak_inflight": 100,
+      "p50_seconds": 0.15001256699906662,
+      "p95_seconds": 0.17230010696221143,
+      "max_seconds": 0.18595349497627467,
+      "compressed_bytes_per_response": 6603,
+      "cpu_percent_including_generator": 64.34262948207171,
+      "elapsed_seconds": 0.6443478899891488
+    },
+    {
+      "concurrency": 200,
+      "route": "/",
+      "requests": 600,
+      "status": {
+        "200": 600
+      },
+      "invalid": 0,
+      "peak_inflight": 200,
+      "p50_seconds": 0.3958331299945712,
+      "p95_seconds": 0.44253757497062907,
+      "max_seconds": 0.4552632470149547,
+      "compressed_bytes_per_response": 29778,
+      "cpu_percent_including_generator": 73.5,
+      "elapsed_seconds": 1.5188659119885415
+    },
+    {
+      "stopped": "error, p95 > 1s, or CPU >70%",
+      "last": {
+        "concurrency": 200,
+        "route": "/",
+        "requests": 600,
+        "status": {
+          "200": 600
+        },
+        "invalid": 0,
+        "peak_inflight": 200,
+        "p50_seconds": 0.3958331299945712,
+        "p95_seconds": 0.44253757497062907,
+        "max_seconds": 0.4552632470149547,
+        "compressed_bytes_per_response": 29778,
+        "cpu_percent_including_generator": 73.5,
+        "elapsed_seconds": 1.5188659119885415
+      }
+    }
+  ],
+  "public_portfolio_html_bursts": [
+    {
+      "route": "/portfolio/",
+      "concurrent_html_requests": 1,
+      "start_ms": 1792305499672,
+      "end_ms": 1792305499845,
+      "statuses": {
+        "200": 1
+      },
+      "p50_seconds": 0.1732432089629583,
+      "p95_seconds": 0.1732432089629583,
+      "max_seconds": 0.1732432089629583,
+      "bytes": 6603,
+      "errors": []
+    },
+    {
+      "route": "/portfolio/",
+      "concurrent_html_requests": 10,
+      "start_ms": 1792305500346,
+      "end_ms": 1792305500536,
+      "statuses": {
+        "200": 10
+      },
+      "p50_seconds": 0.17212137498427182,
+      "p95_seconds": 0.1888030000263825,
+      "max_seconds": 0.1888030000263825,
+      "bytes": 66030,
+      "errors": []
+    },
+    {
+      "route": "/portfolio/",
+      "concurrent_html_requests": 30,
+      "start_ms": 1792305501036,
+      "end_ms": 1792305501268,
+      "statuses": {
+        "200": 30
+      },
+      "p50_seconds": 0.2011772079858929,
+      "p95_seconds": 0.22202783299144357,
+      "max_seconds": 0.2239640419720672,
+      "bytes": 198090,
+      "errors": []
+    },
+    {
+      "route": "/portfolio/",
+      "concurrent_html_requests": 50,
+      "start_ms": 1792305501769,
+      "end_ms": 1792305501993,
+      "statuses": {
+        "200": 50
+      },
+      "p50_seconds": 0.07481675001326948,
+      "p95_seconds": 0.21363637497415766,
+      "max_seconds": 0.21773758303606883,
+      "bytes": 330150,
+      "errors": []
+    }
+  ],
+  "postcheck": {
+    "release_unchanged": true,
+    "nginx_config_hashes_unchanged": 24,
+    "service_pids_unchanged": 8,
+    "health": [
+      {
+        "path": "/",
+        "status": 200,
+        "seconds": 0.014185447013005614
+      },
+      {
+        "path": "/portfolio/",
+        "status": 200,
+        "seconds": 0.0010489000123925507
+      },
+      {
+        "path": "/signtrace/",
+        "status": 200,
+        "seconds": 0.007857561984565109
+      },
+      {
+        "path": "/chuanqinghuiyi/",
+        "status": 200,
+        "seconds": 0.002512359991669655
+      },
+      {
+        "path": "/dict/entries",
+        "status": 200,
+        "seconds": 0.1983592130127363
+      },
+      {
+        "path": "/catchpot/",
+        "status": 200,
+        "seconds": 0.019387305015698075
+      },
+      {
+        "path": "/2026-sign-language-cultural-festival/",
+        "status": 200,
+        "seconds": 0.0025277130189351737
+      },
+      {
+        "path": "/2026-year-end-summary/",
+        "status": 200,
+        "seconds": 0.015738039975985885
+      },
+      {
+        "path": "/signplay/",
+        "status": 200,
+        "seconds": 0.002680677978787571
+      }
+    ]
+  },
+  "monitor_totals": {
+    "samples": 475,
+    "qa_statuses": {
+      "200": 2467,
+      "206": 8,
+      "304": 6,
+      "308": 2
+    },
+    "non_qa_statuses": {}
+  }
+}
