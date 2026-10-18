@@ -2,10 +2,12 @@
 
 ## 当前运行与运维记录（2026-10-18）
 
+- 主站静态资源已接入 CDN + 私有 OSS，维护入口见 [CDN 说明](docs/cdn-oss.md)。以后资源更新使用新的 `/v/<版本>/`，先运行 `prepare_cdn.py`、上传及 `verify_cdn.py`，再发布 HTML；同步两份清单。保留原站静态字节、同源 Worker/安装清单、HTML/API/统计与子项目边界。`assets.shouyulove.cn` 专用证书到期日为 2027-01-16，目前手动续签与上传，不能当作已自动续期。
+
 - 词典校园网访问采用独立签名会话限流，维护入口和验证记录见 [词典访问保护](docs/dictionary-campus-access.md)。普通请求不再使用共享 `syl_req/syl_conn`，不要恢复每 IP 24 并发。保留当前 CLab 直连、本地视频、报告入口和主备监控；只按现场差异修改 Nginx，私钥及生成的签名片段不得进 Git。
 - 作品集跳转使用独立的 `portfolio_clicks` 统计表；不与页面 PV 相加。`scripts/build_content.py` 随作品生成 `data-project` 和 `portfolio/projects.json`。保留链接直达、异步记录和私有报表；新增作品无需单独改统计服务。详见 [后台统计说明](docs/private-statistics.md)。
 - 先读 [当前运维状态](docs/operations-current.md)。主站使用 `shouyulove-aliyun` → `101.37.209.227`；`yanyuan-calendar` 已指向 PKUKnow 新机 `121.43.143.226`，不能用于主站发布。
-- 当前静态版本 `20261017T162339Z-astra-home`：296 文件（含 39 个上一版兼容模块/样式/场景文件）、19 页面路由、5 个链接，10 个项目，字体覆盖 511 字。模块为 `syl-v1-1-queued-scenes`；图像、字体和数据桥仍为 `syl-v1-1-signplay`，品牌图标独立保留。
+- 当前静态版本 `20261018T084902Z-astra-home`：296 文件（含 39 个上一版兼容模块/样式/场景文件）、19 页面路由、5 个链接，10 个项目，字体覆盖 511 字。模块为 `syl-v1-1-queued-scenes`；图像、字体和数据桥仍为 `syl-v1-1-signplay`，品牌图标独立保留。
 - 原生三维下载共用两个并发名额；隐藏页面暂停新增网络请求，返回后续载，保留完整场景。队列接入、词典现有缩略图核查及回归方式见 [后台资源加载](docs/background-loading.md)。更新时保留上一版 immutable 模块地址，避免已打开页面的延迟请求 404。
 - 旧阿里云 PKUKnow vhost 已退役，不能恢复其旧反代或业务任务。本站仍复用现有 SSH 身份和 ACME 账户，不能随其他项目一起删除。
 - 腾讯旧机仍承载词典转接与备用、旧会话/任务/地址兼容、燕园图寻和时间秘书；不是可整机关闭的闲置备份。三个闲置转发端口仍与词典共用隧道，未执行退役。

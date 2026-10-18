@@ -32,28 +32,28 @@
       "sha256": "c8061f640d707b248c63b53f89d804853c228c6ba92cc5e04a815bab4fa698a6"
     },
     "index.html": {
-      "bytes": 116028,
-      "sha256": "65648199bf25955cb31a04b454b9bfd6cfac04275881ce2ba8d02d71cf34c98e"
+      "bytes": 118190,
+      "sha256": "fde5d74bea99a2369a715c43d8e23ac4c477e73980aaad95b10cb6f47afa07a5"
     },
     "portfolio/index.html": {
-      "bytes": 22102,
-      "sha256": "f1fddd86309bf706185ce329d6758a069e8c1e5e05e88c228928a49d7fad6592"
+      "bytes": 23061,
+      "sha256": "4002a0b620615c6f9f36f0dbf29ad2377a1e079e5d4deff1b9ad1acd20f8a590"
     },
     "projects/2026-sign-language-cultural-festival/_payload.json": {
       "bytes": 1025,
       "sha256": "69f122a1d9f611d6af9bbd497d5cd5805525b11fc3db4998d89b31508b4007f0"
     },
     "projects/2026-sign-language-cultural-festival/index.html": {
-      "bytes": 118894,
-      "sha256": "bb75544739a6eb0fac85291e446e36455d22aea66e07a637ae840c4380a72ea9"
+      "bytes": 121214,
+      "sha256": "7360ea4294ea446a12144b800fd35bd809988d6171acb71e38a38d407904d1c8"
     },
     "projects/2026-year-end-summary/_payload.json": {
       "bytes": 1037,
       "sha256": "ea298fabb087885166cee6166b0b36c00a7ea38f47e61e501516713c1914077e"
     },
     "projects/2026-year-end-summary/index.html": {
-      "bytes": 118879,
-      "sha256": "551cd9fc7d5aa6e828203d657101990c618e3c62d685692cfeb1f85ac59bb025"
+      "bytes": 121199,
+      "sha256": "0a35fe40c070af1a71cdbf0ec8db70d551192646fcbc553d73d1c8f6ac632e26"
     },
     "projects/_payload.json": {
       "bytes": 350,
@@ -64,68 +64,68 @@
       "sha256": "c07346b751492c3492d101251b8fe17a4214543d9fad9fc321f717a0d69d546f"
     },
     "projects/beida-zhidao/index.html": {
-      "bytes": 118824,
-      "sha256": "0a89748114c99d7ce55bb5837577eb4f10383cf6a3f8fde8e4c18c953ac7863b"
+      "bytes": 121144,
+      "sha256": "9fc1ae7a0274aba8e82787df7e63574d71277e545bac4bd1e18ef733e361e137"
     },
     "projects/chuanqinghuiyi/_payload.json": {
       "bytes": 912,
       "sha256": "a6c7cc32965da3f1b7a389f29dc756c471a877b3d0eb21f6dc03b5cd9250a7f7"
     },
     "projects/chuanqinghuiyi/index.html": {
-      "bytes": 118832,
-      "sha256": "3ee945daf826fbb3808a1c6d837835ceb45c6895a0115e28b55aa4279c63e1d4"
+      "bytes": 121152,
+      "sha256": "8a7d6c80d9e12bb5a77160f94a2d69d0e896ff2989b1fd7137a7a9a539a81463"
     },
     "projects/dictionary/_payload.json": {
       "bytes": 878,
       "sha256": "797eed3de207b6eeb76de651a62f1d56d3397caabb5983dbf0bd001c60e05b02"
     },
     "projects/dictionary/index.html": {
-      "bytes": 118812,
-      "sha256": "09918d8d500eeb1a29322b248b490268230bb48a7d355b9baf343726aa60330f"
+      "bytes": 121132,
+      "sha256": "d8fc8d88d5d7d4afdac36150bbe721e22a790aeaa9732d0459d79afd8eadb49a"
     },
     "projects/index.html": {
-      "bytes": 268,
-      "sha256": "81fb8202a16edb14ca020e271f4b3f83ec7a285a1eceb2b0cdd4fd8368f48917"
+      "bytes": 340,
+      "sha256": "7c3e10731c40d490577783bad03c2f428288e3b632fc8ecee676be73ab60c78f"
     },
     "projects/jieguo/_payload.json": {
       "bytes": 779,
       "sha256": "bcdb6fec67a5e7555ce9e7dd9c8b8c9af6957290f2fa087cdd887e9c865f53bc"
     },
     "projects/jieguo/index.html": {
-      "bytes": 118776,
-      "sha256": "30b0e63563c0fd269aa802846b6c5c5ddaeaac18197cef21de3385b89a2863ce"
+      "bytes": 121096,
+      "sha256": "bbd3fd6f2927e152d20e6b6bd4c01b01f3dae017a51662cbf2cd3927a5cf7067"
     },
     "projects/pinhaoke/_payload.json": {
       "bytes": 824,
       "sha256": "16c9e56d22cec5d727f6c40d747743d518b1ab8fe9794b67432432eab0fb7211"
     },
     "projects/pinhaoke/index.html": {
-      "bytes": 118788,
-      "sha256": "46e5a8e4f3ad23a168bb8a955a01b4e416723506137e678ab21d3ffcc1877893"
+      "bytes": 121108,
+      "sha256": "bf3d527ae25a0a577186ec3ef0eca46531a0fe39ad18263c23b3696e01022329"
     },
     "projects/qinghua-zhidao/_payload.json": {
       "bytes": 847,
       "sha256": "49d77349b4fbe89063bfe9e362aec985cf216c4f4675618ed85bf94f805c1e8a"
     },
     "projects/qinghua-zhidao/index.html": {
-      "bytes": 118830,
-      "sha256": "7d3d44f86073eca320a6bc831b05885c4406ff4880ee242491c1eefc4dd7032b"
+      "bytes": 121150,
+      "sha256": "c4f6936a71e29bcc6071866be269a86c1e6bbf5a19e28a9dfb40bfdd5a3266a8"
     },
     "projects/signplay/_payload.json": {
       "bytes": 862,
       "sha256": "cf2e9b9c23f78782c12b07fd31125589d96a4cdeffcc5a2be012c8c4e942f58d"
     },
     "projects/signplay/index.html": {
-      "bytes": 118812,
-      "sha256": "1ef6195e574d49536ad887fedce813579e9f1166432225d5df8f020590c8ed8d"
+      "bytes": 121132,
+      "sha256": "97495a8b50a7c3b42e23004d429ab8e05429d7148987fce04a2860533b4e4e68"
     },
     "projects/signtrace/_payload.json": {
       "bytes": 949,
       "sha256": "4a6592433ad82ef5256cfe6268953cddb9b34bb8b7d17570d25a13b45009933a"
     },
     "projects/signtrace/index.html": {
-      "bytes": 118817,
-      "sha256": "df4be4f97e5bec46557a11433af5c57739a851c2c088cb5c1a5e58e54e8df4d4"
+      "bytes": 121137,
+      "sha256": "7cd668aca819a44dd35ef7201515340dfa705d94a8bba742981a0345e305edce"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-queued-scenes.css": {
       "bytes": 6114,
@@ -1000,52 +1000,52 @@
       "sha256": "62a30dafde66ebbeff85abf4a340c74f47c002e594b6073218cb77bb87071e5f"
     },
     "the-studio/awards/index.html": {
-      "bytes": 82985,
-      "sha256": "c3cced93932ce0605e7eae6861dd35db463268be2a2617e34670ee23901c863a"
+      "bytes": 85305,
+      "sha256": "384475040658c472b40bcae1fd9d00b15c647de10c93267d5e25559070e2414f"
     },
     "the-studio/clients/_payload.json": {
       "bytes": 987,
       "sha256": "2427c332edf206e4f96706d58acf02ad9ec420faf00782656ff565f7aa064a5c"
     },
     "the-studio/clients/index.html": {
-      "bytes": 82990,
-      "sha256": "ef1dcaa17427fe9e2840d8b9bba461f651b8ecd3b0e38de40f3abe574dbd7948"
+      "bytes": 85310,
+      "sha256": "641e77424d03b59c7f2cc1df366a4b15e7d2a62f80cbbb48d78a7434080aa01c"
     },
     "the-studio/contact-us/_payload.json": {
       "bytes": 608,
       "sha256": "b539508fe05afe384e8e6968dd44493a47583bbd8c960f9f6238fc3708074878"
     },
     "the-studio/contact-us/index.html": {
-      "bytes": 83058,
-      "sha256": "184e0fc5a206551a95c9ab3ed606c03bd59656ea37be7c3c38bb5326eb8077aa"
+      "bytes": 85378,
+      "sha256": "7ece235b833cd22e4dbd3376f5de64409fdaad2f4895e744442f95cd9f815131"
     },
     "the-studio/index.html": {
-      "bytes": 83265,
-      "sha256": "ce413d51e2014da5525529868dc72312cdfe0fdb0f047c05bcc40048a2aa266a"
+      "bytes": 85506,
+      "sha256": "1dd7e9a03ce6f06d63b9afb12e4ce3ce7b7917cfd7da0713d5da2dd62e4d6e8f"
     },
     "the-studio/our-approach/_payload.json": {
       "bytes": 526,
       "sha256": "54fcc337c0a095dc2c3299fb1a571100a9601f205df01a83002803610fa6cb31"
     },
     "the-studio/our-approach/index.html": {
-      "bytes": 83045,
-      "sha256": "0d530dd2575490a33301fea51f18e65d17dc65f08dde0ba10d9e9f86a37805fb"
+      "bytes": 85365,
+      "sha256": "ec7f88f0182809a5b60c6cee53b960bbe84d90b84e935d55941ffb1590dab646"
     },
     "the-studio/services/_payload.json": {
       "bytes": 3428,
       "sha256": "33df44dc84c056a32923d5715675e6f46b2268e2bbd676e3b0e053a3307f5f36"
     },
     "the-studio/services/index.html": {
-      "bytes": 83009,
-      "sha256": "2713c13ef0fba5c9f96984a37fc6a03e57cffb69057a1073e6cd49f2efeff701"
+      "bytes": 85329,
+      "sha256": "6321a135587658aa27820087c63df8c02e54f3ce8c5260499af03534a3f677f3"
     },
     "the-studio/the-studio/_payload.json": {
       "bytes": 1414,
       "sha256": "273e6dcdcba4035adc5aa146670aef7e5a63d0b333af997c444fb1833afeaeca"
     },
     "the-studio/the-studio/index.html": {
-      "bytes": 83027,
-      "sha256": "9377d0951b8227761c7574f640805161e668a77c8cd8a0495159b2404d96f80a"
+      "bytes": 85347,
+      "sha256": "6cb72cdf9082712810678be9aaa11823cf88170c9593d5998473d16b72ebbcc0"
     },
     "portfolio/projects.json": {
       "bytes": 436,
@@ -1219,5 +1219,5 @@
     "sounds": "sites/immersive-g-com-955afd14/shared/sounds",
     "webgl": "sites/immersive-g-com-955afd14/shared/webgl"
   },
-  "bytes": 115058644
+  "bytes": 115101198
 }

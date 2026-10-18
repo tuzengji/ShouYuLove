@@ -2,9 +2,9 @@
 
 ## 当前发布（2026-10-18）
 
-主站版本为 `20261017T162339Z-astra-home`，296 文件、19 路由、5 个链接、115,058,644 字节；模块为 `syl-v1-1-queued-scenes`，含上一版 39 个兼容资源。通过 `scripts/runtime_snapshot.py` 导出当前白名单，模型、图片和字体文件无需重新生成。三维下载规则见 [后台资源加载](../docs/background-loading.md)。以下带日期的发布记录为历史状态。
+主站版本为 `20261018T084902Z-astra-home`，296 文件、19 路由、5 个链接、115,101,198 字节；静态资源经 CDN + 私有 OSS 提供，模块仍为 `syl-v1-1-queued-scenes`，含上一版 39 个兼容资源。重建后的 CDN 上传、逐对象校验、证书续签和回滚流程见 [CDN 维护说明](../docs/cdn-oss.md)。不覆盖旧版本资源，不把 HTML、统计、API 或子项目后台迁进 CDN。
 
-`publish_astra.py` 的页面探测携带 `Accept: text/html` 和 `ShouYuLove-QA`，符合词典首次页面导航的会话初始化条件。不要移除词典健康检查，也不要为通过部署探测而放宽会话保护。现场回执位于 `/var/backups/shouyulove-maintenance/resource-loading-20261018/20261017T162339Z-astra-home/`，上一版和配置备份保留。当前父级 Nginx 与路由片段内容未修改。
+`publish_astra.py` 的页面探测携带 `Accept: text/html` 和 `ShouYuLove-QA`，符合词典首次页面导航的会话初始化条件。不要移除词典健康检查，也不要为通过部署探测而放宽会话保护。最新回执在 `/opt/shouyulove-maintenance/20261018-cdn-oss/`，上一运行版为 `20261017T162339Z-astra-home`。本次 24 份 Nginx 配置哈希与 8 个后台服务 PID 保持。以下带日期的发布记录继续作为历史证据保留。
 
 ## 当前发布目标与说明同步（2026-10-15）
 
