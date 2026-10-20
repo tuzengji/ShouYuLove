@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title">
+  <title id="title">飞手传书 · 掌心送出的纸飞机</title>
+  <g stroke="#4b5d54" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M45 37 217 62 138 125 111 84Z" fill="#a5bac9"/>
+    <path d="m111 84 106-22-79 63Z" fill="#c9a2a4"/>
+    <path d="M48 172 83 205Q115 235 151 211L213 168C226 157 212 141 199 150L160 173C169 163 161 151 150 149L112 139Q92 136 79 151L66 163Z" fill="#f3dfcf"/>
+    <path d="m111 167 35 12q15 5 21-11" fill="none"/>
+    <path d="m30 162 22-18 39 48-22 19Z" fill="#aec2b1"/>
+  </g>
+</svg>

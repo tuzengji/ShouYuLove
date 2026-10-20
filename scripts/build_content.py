@@ -22,19 +22,19 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/signplay-20261015"
+RECORDS = ROOT / "output/deployment/flyinghands-20261020"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
 V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
-FONT_SOURCE = ROOT / "output/deployment/signplay-20261015/font-source"
-RUNTIME_VERSION = "syl-v1-1-signplay"
-FONT_VERSION = "syl-v1-1-signplay"
-MODULE_VERSION = "syl-v1-1-queued-scenes"
+FONT_SOURCE = ROOT / "output/deployment/flyinghands-20261020/font-source"
+RUNTIME_VERSION = "syl-v1-1-flyinghands"
+FONT_VERSION = "syl-v1-1-flyinghands"
+MODULE_VERSION = "syl-v1-1-flyinghands"
 PORTFOLIO_CLICKS_VERSION = "syl-v1-1-20261017"
-BRIDGE_VERSION = "syl-v1-1-signplay"
+BRIDGE_VERSION = "syl-v1-1-flyinghands"
 BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
 
@@ -48,7 +48,7 @@ def section(text, heading):
 def parse_content(text=None):
     text = SOURCE.read_text(encoding='utf-8') if text is None else text
     projects = []
-    identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary", "指间趣游 SignPlay": "signplay",
+    identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary", "指间趣游 SignPlay": "signplay", "飞手传书": "flyinghands",
                    "传情会意-手语版": "chuanqinghuiyi", "2026 手语文化节": "2026-sign-language-cultural-festival",
                    "2026 手语分社骨干年终总结": "2026-year-end-summary",
                    "拼好课": "pinhaoke", "北大知道 PKU Know": "beida-zhidao",
@@ -80,11 +80,11 @@ def parse_content(text=None):
     shortcut = dict(line.split("：", 1) for line in section(text, "添加到桌面").splitlines() if line.strip())
     assert set(shortcut) == {"按钮", "关闭", "iPhone", "其他浏览器", "内置浏览器"} and all(shortcut.values()), "Shortcut copy"
     labels = dict(line.split("：", 1) for line in section(text, "作品集页面").splitlines() if line.strip())
-    assert set(labels) == {"标题", "首页入口", "展示顺序", "其他作品设计者", "鸣谢"} and all(labels.values()), "Portfolio copy"
+    assert set(labels) - {"鸣谢"} == {"标题", "首页入口", "展示顺序", "其他作品设计者"} and all(labels.values()), "Portfolio copy"
     order = labels['展示顺序'].split('、')
     assert len(order) == 3 and set(order) == {"核心创意", "其他作品", "心创组内部使用"}, "Portfolio category order"
     assert labels['其他作品设计者'] in {'显示', '不显示'}, "Other-project credit setting"
-    portfolio = dict(title=labels['标题'], home=labels['首页入口'], order=order, thanks=labels['鸣谢'],
+    portfolio = dict(title=labels['标题'], home=labels['首页入口'], order=order, thanks=labels.get('鸣谢', ''),
                      show_other_designers=labels['其他作品设计者'] == '显示')
     return dict(projects=projects, members=members, dream=section(text, "我们的梦想是").strip("* "),
                 shortcut=shortcut, portfolio=portfolio,
@@ -110,11 +110,14 @@ def raster_assets(content):
     palettes["2026-sign-language-cultural-festival"] = ("#f4e7de", "#b39f8e")
     palettes["2026-year-end-summary"] = ("#e4ded1", "#94a28d")
     palettes["signplay"] = ("#f3e5d5", "#9c8c74")
+    palettes["flyinghands"] = ("#e3e7dd", "#94a28d")
     for project in content["projects"]:
         palette = palettes[project["id"]]
         icon = ROOT / "project-logos/20261012-柔和彩色" / (project["id"] + ".png")
         if project["id"] == "signplay":
             icon = ROOT / "project-logos/20261015-signplay/signplay.png"
+        if project["id"] == "flyinghands":
+            icon = ROOT / "project-logos/20261020-flyinghands/flyinghands.png"
         mark = Image.open(icon).convert("RGBA")
         assert mark.getchannel("A").getextrema() == (0, 255), icon
         size = 640
@@ -169,7 +172,7 @@ def chinese_atlases():
         destination = OUT / SHARED / "webgl/msdf" / folder
         data = json.loads((source / (font_name + ".json")).read_text())
         # Preserve all original Latin glyph pixels, metrics and kerning; append the Chinese glyphs.
-        atlas = Image.new("RGB", (2048, 2048))
+        atlas = Image.new("RGB", (2048, max(2048, texture.height)))
         atlas.paste(Image.open(source / (name + ".png")).convert("RGB"), (0, 0))
         atlas.paste(texture, (256, 0))
         existing = {x["id"] for x in data["chars"]}
@@ -180,7 +183,8 @@ def chinese_atlases():
             item["x"] += 256
             item["yoffset"] += data["common"]["base"] - chinese["common"]["base"]
             data["chars"].append(item)
-        data["common"].update(scaleW=2048, scaleH=2048)
+        data["common"].update(scaleW=atlas.width, scaleH=atlas.height)
+        assert all(c["x"] + c["width"] <= atlas.width and c["y"] + c["height"] <= atlas.height for c in data["chars"]), "Glyph outside atlas"
         data["info"]["charset"] = [x["char"] for x in data["chars"]]
         data["pages"] = [name + "." + FONT_VERSION + ".png"]
         atlas.save(destination / (name + "." + FONT_VERSION + ".png"), optimize=True)
@@ -652,7 +656,8 @@ def portfolio_page(content):
                       '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li>')
     if category is not None:
         pieces.append('</ul></section>')
-    pieces.append('<footer class="portfolio-thanks"><small>' + html.escape(content['portfolio']['thanks']) + '</small></footer>')
+    if content['portfolio']['thanks']:
+        pieces.append('<footer class="portfolio-thanks"><small>' + html.escape(content['portfolio']['thanks']) + '</small></footer>')
     pieces.extend(['</main>', str(home_shortcut(content)),
                    '<script defer src="/assets/home-shortcut.' + MODULE_VERSION + '.js"></script>',
                    '<script defer src="/assets/portfolio-clicks.' + PORTFOLIO_CLICKS_VERSION + '.js"></script>',

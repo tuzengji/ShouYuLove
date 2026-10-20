@@ -14,7 +14,7 @@ from content_source import source_path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-DIRECTORY = ROOT / "output/deployment/signplay-20261015/font-source"
+DIRECTORY = ROOT / "output/deployment/flyinghands-20261020/font-source"
 FONT = DIRECTORY / "SweiSpringSugarCJKsc-Regular.ttf"
 MSDFGEN = ROOT / "output/tools/msdfgen-v1.13/build/msdfgen"
 LABELS = "点击了解 向下探索 作品集 作品导航 首页 返回 心创组 开启声音 关闭 静音 设计者 打开"
@@ -48,7 +48,8 @@ def main():
         browser_font.save(browser_path)
     assert MSDFGEN.exists(), "Build the pinned msdfgen v1.13 tool; see README.md"
     small = ImageFont.truetype(str(FONT), 42)
-    atlas = Image.new("RGB", (1024, 2048))
+    atlas_height = max(2048, 1 << (((len(characters) + 15) // 16 * 64 - 1).bit_length()))
+    atlas = Image.new("RGB", (1024, atlas_height))
     chars = []
     glyph_directory = DIRECTORY / "glyphs"
     glyph_directory.mkdir(exist_ok=True)
@@ -81,7 +82,7 @@ def main():
             assert np.any(pixels[:, :, 0] != pixels[:, :, 1]), "Not a multi-channel distance field: " + job[0]
             atlas.paste(image, (item["x"], item["y"]))
     result = dict(pages=["chinese-atlas-0.png"],chars=chars,info=dict(size=42),
-                  common=dict(lineHeight=42,base=37,scaleW=1024,scaleH=2048,pages=1),
+                  common=dict(lineHeight=42,base=37,scaleW=1024,scaleH=atlas.height,pages=1),
                   distanceField=dict(fieldType="msdf",distanceRange=4),kernings=[])
     atlas.save(DIRECTORY/"chinese-atlas-0.png",optimize=True)
     (DIRECTORY/"chinese-font.json").write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n")

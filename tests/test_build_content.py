@@ -101,11 +101,15 @@ class LoaderBatchTests(unittest.TestCase):
     def test_project_ids_survive_insertions_and_reordering(self):
         text = (SOURCE.parents[1] / "content-source.md").read_text()
         projects = self.builder.parse_content(text)["projects"]
-        self.assertEqual(len(projects), 10)
+        self.assertEqual(len(projects), 11)
         by_id = {p["id"]: p for p in projects}
         self.assertEqual(by_id["signplay"]["url"], "https://shouyulove.cn/signplay/")
         self.assertEqual(by_id["signplay"]["designers"], "伍家阳")
         self.assertEqual(by_id["signplay"]["category"], "核心创意")
+        self.assertEqual(by_id["flyinghands"]["url"], "https://shouyulove.cn/flyinghands/")
+        self.assertEqual(by_id["flyinghands"]["designers"], "王宁静")
+        self.assertEqual(by_id["flyinghands"]["category"], "核心创意")
+        self.assertEqual(self.builder.parse_content(text)["portfolio"]["thanks"], "")
         self.assertEqual(by_id["pinhaoke"]["title"], "拼好课")
         self.assertEqual(by_id["jieguo"]["url"], "https://shouyulove.cn/catchpot/")
         festival = by_id["2026-sign-language-cultural-festival"]

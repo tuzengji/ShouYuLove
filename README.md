@@ -1,5 +1,9 @@
 # 以手予爱 ShouYuLove 主站
 
+## 2026-10-20 飞手传书上线
+
+「飞手传书」（王宁静设计）已加入核心创意，地址为 https://shouyulove.cn/flyinghands/ 。主站版本 `20261020T123649Z-astra-home`，354 个文件、20 条页面路由、11 个项目；资源使用 CDN 新前缀 `/v/20261020-flyinghands/`。发布与回滚信息见 [当前运维状态](docs/operations-current.md)。
+
 ## 2026-10-18 CDN 与 OSS 已上线
 
 主站公开静态资源现由 `assets.shouyulove.cn` 加速，OSS 保持私有；页面、接口和私有访问统计继续由原 ECS 提供。完整三维、两个后台下载并发及作品集静音规则保留。资源发布、100 GB 流量包、证书手动续签与实测结果见 [CDN 维护说明](docs/cdn-oss.md)。

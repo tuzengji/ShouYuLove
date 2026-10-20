@@ -1,5 +1,17 @@
 # 当前运维状态与记录索引
 
+## 2026-10-20 飞手传书上线
+
+新增核心创意「飞手传书」，设计者为王宁静，正式地址为 https://shouyulove.cn/flyinghands/ 。首页、作品集和项目详情共用手掌送出纸飞机的彩色图标。正文先更新绑定 MD，再同步构建快照；原稿没有的作品集鸣谢不再额外生成。
+
+主站发布为 `20261020T123649Z-astra-home`，运行白名单 354 个文件、20 条页面路由、5 个相对链接，共 121,884,115 字节，作品集共 11 个项目。CDN 前缀为 `https://assets.shouyulove.cn/v/20261020-flyinghands/`，311 个对象已通过逐项哈希、大小、CORS、缓存和脚本类型检查。原站保留上一版资源，旧页面的延后请求仍可使用。
+
+图片、字体、模块和数据桥版本为 `syl-v1-1-flyinghands`，主站品牌图标版本保持。中文覆盖 539 字，超出原 512 字图集容量，字体图集改为随字符数扩展，并检查全部字形都在纹理范围内。构建素材保存在本机 `output/deployment/flyinghands-20261020/font-source/`。
+
+飞手传书由独立 `flyinghands.service` 提供服务，运行在 `127.0.0.1:8766`，使用独立 Node.js 24.22.0；代码在 `/opt/flyinghands/current`，数据库在 `/var/lib/flyinghands/materials.sqlite`。按用户要求保留公开共建功能，不增加账号或管理口令。子站维护规则见其 `deploy/README.md`。
+
+主站回滚目录为 `20261018T084902Z-astra-home`。本次发布证据在本机 `output/deployment/flyinghands-20261020/` 和服务器私有目录 `/opt/shouyulove-maintenance/20261020-flyinghands/`；备份、数据库和验证记录不放入网站目录。
+
 ## 2026-10-20 DeepSeek 配置与密钥轮换
 
 核对作品集十个项目后，当前在线使用 DeepSeek 的项目为 SignTrace、北大知道和清华知道。两校共用的网站后台与独立公众号处理服务分别持有私有凭据；三处服务器配置已替换为本次用户提供的新密钥，均通过官方鉴权检查，并确认可用模型为 `deepseek-flash`。SignTrace 本机私有配置同步更新。

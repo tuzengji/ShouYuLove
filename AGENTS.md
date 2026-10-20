@@ -1,5 +1,9 @@
 # 以手予爱主站维护
 
+## 2026-10-20 飞手传书上线
+
+「飞手传书」（王宁静设计）已加入核心创意，地址为 https://shouyulove.cn/flyinghands/ 。主站版本 `20261020T123649Z-astra-home`，354 个文件、20 条页面路由、11 个项目；资源使用 CDN 新前缀 `/v/20261020-flyinghands/`。发布与回滚信息见 [当前运维状态](docs/operations-current.md)。
+
 ## 当前运行与运维记录（2026-10-18）
 
 - 主站静态资源已接入 CDN + 私有 OSS，维护入口见 [CDN 说明](docs/cdn-oss.md)。以后资源更新使用新的 `/v/<版本>/`，先运行 `prepare_cdn.py`、上传及 `verify_cdn.py`，再发布 HTML；同步两份清单。保留原站静态字节、同源 Worker/安装清单、HTML/API/统计与子项目边界。`assets.shouyulove.cn` 专用证书到期日为 2027-01-16，目前手动续签与上传，不能当作已自动续期。
