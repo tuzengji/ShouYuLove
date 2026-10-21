@@ -1,5 +1,15 @@
 # 当前运维状态与记录索引
 
+## 2026-10-21 站点所有者密码登录账号
+
+按用户确认新增 `wishingcat` 管理员账号，可在其他电脑执行 `ssh wishingcat@101.37.209.227`，端口为 22。账号加入现有 `sudo` 组，执行 `sudo -i` 时使用该账号自己的密码；工作目录为 `/home/wishingcat/projects`。
+
+新增 `/etc/ssh/sshd_config.d/90-wishingcat-password.conf`，通过 `Match User wishingcat` 仅为新账号开启密码登录。45 个原有账号的有效 SSH 配置逐一比对一致，原有 SSH 文件、公钥文件和账号密码状态保持。没有修改 `root` 或 `zhuxingye` 的登录方式。
+
+密码认证登录、需密码的 sudo 提权、原有 root 密钥重新登录均已通过；`sshd -t` 和 `visudo -c` 通过。仅重载 SSH，十个既有网站相关服务的 PID 与运行状态未变，首页与作品集返回 200，主站发布仍为 `20261020T123649Z-astra-home`。
+
+凭据仅私下交付，不进入仓库或网页。服务器验收回执位于 `/var/backups/shouyulove-maintenance/wishingcat-account-20261021/20261021T022241Z/`；非秘密说明同步至 `/opt/shouyulove-maintenance/20261021-wishingcat-account/`。撤销此入口时先移除该账号专用 SSH 片段、验证并重载 SSH，再锁定该账号及撤销其 sudo 组成员资格；保留既有账号和工作数据。
+
 ## 2026-10-20 飞手传书上线
 
 新增核心创意「飞手传书」，设计者为王宁静，正式地址为 https://shouyulove.cn/flyinghands/ 。首页、作品集和项目详情共用手掌送出纸飞机的彩色图标。正文先更新绑定 MD，再同步构建快照；原稿没有的作品集鸣谢不再额外生成。
