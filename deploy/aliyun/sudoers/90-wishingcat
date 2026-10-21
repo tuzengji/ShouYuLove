@@ -1,0 +1,2 @@
+# Site owner: full administration without a second password prompt.
+wishingcat ALL=(ALL:ALL) NOPASSWD: ALL

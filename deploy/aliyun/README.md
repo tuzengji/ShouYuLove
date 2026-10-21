@@ -4,6 +4,8 @@
 
 `ssh/90-wishingcat-password.conf` 是新增所有者账号 `wishingcat` 的 SSH 片段，仅开放该账号的密码认证。原有账号与密钥登录保持；账号和密码在服务器私下创建，仓库不保存凭据。完整验收与撤销方式见[当前运维状态](../../docs/operations-current.md)。
 
+`sudoers/90-wishingcat` 是随后按用户要求追加的完整免密码 sudo 规则，安装到 `/etc/sudoers.d/90-wishingcat` 时使用 root:root、0440，并验证 `visudo -c`。账号同时加入 `docker` 组；已有会话需重新登录。SSH 和 Docker 服务配置不随此规则变更。
+
 ## 2026-10-17 词典校园网会话限流
 
 `shouyulove.server.conf` 已从当晚现场配置更新，保留已有 CLab 直连、视频本地优先和独立报告入口。本次发布只修改词典区块并增加私有耗时日志，不替换主备 upstream 文件。新增会话限流片段、守卫服务和测试见 [词典访问保护](../../docs/dictionary-campus-access.md)。原 `shouyulove-limits.conf` 保持不变，继续供其他路由使用。

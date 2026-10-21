@@ -1,6 +1,16 @@
 # 当前运维状态与记录索引
 
-## 2026-10-21 站点所有者密码登录账号
+## 2026-10-21 wishingcat 完整管理员与 Docker 权限
+
+按用户追加要求，`wishingcat` 现有完整的免密码 sudo 权限：`wishingcat ALL=(ALL:ALL) NOPASSWD: ALL`，规则位于 `/etc/sudoers.d/90-wishingcat`，属主 root、权限 0440。执行 `sudo -i` 可进入 root 登录 shell；无需再次输入账号密码。
+
+该账号已加入 `docker` 组，可直接管理 Docker。已有 SSH 会话需要退出后重新登录，才能取得新增组权限。实际以密码新建 SSH 会话后，`sudo -n -i id -u` 返回 0，直接执行 `docker info`、`docker ps` 均成功；原有 root 密钥登录也通过。
+
+本次只追加该账号的 sudo 规则与 Docker 组成员资格。SSH 配置、各账号登录密码、其他组成员，以及十一个网站与 Docker 服务的 PID 和运行状态保持。没有重启 Docker 或网站服务。
+
+服务器回执位于 `/var/backups/shouyulove-maintenance/wishingcat-admin-20261021/20261021T023359Z/`；非秘密维护记录位于 `/opt/shouyulove-maintenance/20261021-wishingcat-admin/`。撤销本次追加权限时，移除该 sudoers 片段并验证 `visudo -c`，再撤销账号的 Docker 组成员资格；账号原有 sudo 组权限和 SSH 登录入口仍保留。
+
+## 2026-10-21 站点所有者密码登录账号（首次开通）
 
 按用户确认新增 `wishingcat` 管理员账号，可在其他电脑执行 `ssh wishingcat@101.37.209.227`，端口为 22。账号加入现有 `sudo` 组，执行 `sudo -i` 时使用该账号自己的密码；工作目录为 `/home/wishingcat/projects`。
 
