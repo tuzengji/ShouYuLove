@@ -1,5 +1,11 @@
 # 当前运维状态与记录索引
 
+## 2026-10-23 DeepSeek 主用和备用凭据
+
+SignTrace、北大知道 / 清华知道、公众号文章处理、海王求职、Poetalent-v2、HAICA 和时间秘书已更新主用凭据，并加入备用凭据。模型继续使用官方 `deepseek-flash`。HAICA 与时间秘书旧 Key 已失效，按所有者确认使用 SignTrace 的有效旧 Key 备用；其余服务器服务保留各自有效旧 Key。真实主用调用和模拟主用被拒绝后的备用调用均已核验。
+
+HAICA 保留线上 V2.1、现有静态页面、账号和历史数据。部署、测试和回滚边界见 [本次记录](deepseek-key-failover-20261023.md)。本节替代下方 2026-10-20 记录中的当前密钥状态，历史记录保留。
+
 ## 2026-10-21 wishingcat 完整管理员与 Docker 权限
 
 按用户追加要求，`wishingcat` 现有完整的免密码 sudo 权限：`wishingcat ALL=(ALL:ALL) NOPASSWD: ALL`，规则位于 `/etc/sudoers.d/90-wishingcat`，属主 root、权限 0440。执行 `sudo -i` 可进入 root 登录 shell；无需再次输入账号密码。
