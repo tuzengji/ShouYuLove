@@ -2,8 +2,8 @@
   {
     "server_path": "/etc/nginx/sites-available/shouyulove",
     "repo_path": "nginx/shouyulove.server.conf",
-    "sha256": "27451a4db489b315ca4e13cb349fd54ea5866cedc3b573e2563ad0801df65aa0",
-    "updated_at": "2026-10-17"
+    "sha256": "092c54ca29b544d6937d31334b857515c57ab2e3c44b1444fb31215e5a2c205f",
+    "updated_at": "2026-10-28"
   },
   {
     "server_path": "/etc/systemd/system/system-shouyulove.slice",
@@ -39,7 +39,8 @@
   {
     "server_path": "/etc/nginx/conf.d/shouyulove-migration-maps.conf",
     "repo_path": "nginx/conf.d/shouyulove-migration-maps.conf",
-    "sha256": "9b14816daad56293156d8b19a769455077810ea78117118e1dd95d2dd8d4044b"
+    "sha256": "96bd545299c9c9f4a8f587f2baad57609397bca34f41be9b111152598f568c68",
+    "updated_at": "2026-10-28"
   },
   {
     "server_path": "/etc/nginx/snippets/shouyulove-home.conf",
