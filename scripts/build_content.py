@@ -22,19 +22,19 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/flyinghands-20261020"
+RECORDS = ROOT / "output/deployment/quna-study-20261110"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
 V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
-FONT_SOURCE = ROOT / "output/deployment/flyinghands-20261020/font-source"
-RUNTIME_VERSION = "syl-v1-1-flyinghands"
-FONT_VERSION = "syl-v1-1-flyinghands"
-MODULE_VERSION = "syl-v1-1-flyinghands"
+FONT_SOURCE = ROOT / "output/deployment/quna-study-20261110/font-source"
+RUNTIME_VERSION = "syl-v1-1-quna-study"
+FONT_VERSION = "syl-v1-1-quna-study"
+MODULE_VERSION = "syl-v1-1-quna-study"
 PORTFOLIO_CLICKS_VERSION = "syl-v1-1-20261017"
-BRIDGE_VERSION = "syl-v1-1-flyinghands"
+BRIDGE_VERSION = "syl-v1-1-quna-study"
 BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
 
@@ -51,7 +51,7 @@ def parse_content(text=None):
     identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary", "指间趣游 SignPlay": "signplay", "飞手传书": "flyinghands",
                    "传情会意-手语版": "chuanqinghuiyi", "2026 手语文化节": "2026-sign-language-cultural-festival",
                    "2026 手语分社骨干年终总结": "2026-year-end-summary",
-                   "拼好课": "pinhaoke", "北大知道 PKU Know": "beida-zhidao",
+                   "去哪自习": "quna-study", "拼好课": "pinhaoke", "北大知道 PKU Know": "beida-zhidao",
                    "清华知道 THU Know": "qinghua-zhidao", "接锅": "jieguo"}
     for match in re.finditer(r"(?m)^#### ([^\n]+)\n(.*?)(?=^#### |^### |\Z)", text, re.S):
         title, body = match.groups()
@@ -67,6 +67,7 @@ def parse_content(text=None):
         label = re.search(r"地址：\[([^]]+)\]", body)
         projects.append(dict(id=identifier, title=title, description=description, url=url, designers=designers,
                              label=label.group(1) if label else "打开" + title,
+                             show_portfolio_credit=bool(re.search(r"(?m)^作品集署名：显示\s*$", body)),
                              category=re.findall(r"(?m)^### ([^\n]+)$", text[:match.start()])[-1]))
     assert {p["id"] for p in projects} == set(identifiers.values()) and len(projects) == len(identifiers), "Missing or duplicate project"
     members = [line.strip() for line in section(text, "心创组第一届成员").splitlines() if line.strip()]
@@ -111,6 +112,7 @@ def raster_assets(content):
     palettes["2026-year-end-summary"] = ("#e4ded1", "#94a28d")
     palettes["signplay"] = ("#f3e5d5", "#9c8c74")
     palettes["flyinghands"] = ("#e3e7dd", "#94a28d")
+    palettes["quna-study"] = ("#e0e7e3", "#94a28d")
     for project in content["projects"]:
         palette = palettes[project["id"]]
         icon = ROOT / "project-logos/20261012-柔和彩色" / (project["id"] + ".png")
@@ -118,6 +120,8 @@ def raster_assets(content):
             icon = ROOT / "project-logos/20261015-signplay/signplay.png"
         if project["id"] == "flyinghands":
             icon = ROOT / "project-logos/20261020-flyinghands/flyinghands.png"
+        if project["id"] == "quna-study":
+            icon = ROOT / "project-logos/20261110-quna-study/quna-study.png"
         mark = Image.open(icon).convert("RGBA")
         assert mark.getchannel("A").getextrema() == (0, 255), icon
         size = 640
@@ -645,7 +649,7 @@ def portfolio_page(content):
             pieces.append('<section class="portfolio-section portfolio-section--' + variant +
                           '" aria-labelledby="portfolio-' + variant + '"><h2 id="portfolio-' + variant + '">' + html.escape(category) + '</h2><ul>')
         designers = ' '.join('<span>' + html.escape(name) + '</span>' for name in project['designers'].split())
-        credit = ('<p class="portfolio-credit">设计者：' + designers + '</p>') if category != '其他作品' or content['portfolio']['show_other_designers'] else ''
+        credit = ('<p class="portfolio-credit">设计者：' + designers + '</p>') if category != '其他作品' or content['portfolio']['show_other_designers'] or project.get('show_portfolio_credit') else ''
         icon = shared + '/shouyulove/' + project['id'] + '-square.' + RUNTIME_VERSION + '.png'
         loading = 'lazy' if category == '其他作品' else 'eager'
         pieces.append('<li><a class="portfolio-link" data-project="' + project['id'] + '" href="' + html.escape(project['url'], quote=True) +

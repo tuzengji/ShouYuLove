@@ -1,0 +1,147 @@
+{
+  "source_sha256": "459104d3352c59dc7e4571101f25b74872d599771c704a4b1804fca6eadf7c4d",
+  "small_source_sha256": "b02c4f2b7366060a552e07fc7f465fa54882e840e6b69de37ffe05ba594e340f",
+  "artwork_bounds_at_1024": [
+    118,
+    90,
+    906,
+    902
+  ],
+  "small_bounds_at_1024": [
+    96,
+    44,
+    928,
+    960
+  ],
+  "app_background": "#f6f4ee",
+  "app_icon_purpose": "any",
+  "files": {
+    "apple-touch-icon.png": {
+      "bytes": 11464,
+      "sha256": "b89048b64765cb86d8f0ae62e328704e608c713378a9ec6e71b8f31f0e449aab",
+      "size": [
+        180,
+        180
+      ],
+      "mode": "RGB"
+    },
+    "favicon-16.png": {
+      "bytes": 799,
+      "sha256": "e0d4fd8baef7d5b02554088604b92028276f7468f38f7a8391d35295799ab601",
+      "size": [
+        16,
+        16
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    "favicon-32.png": {
+      "bytes": 1929,
+      "sha256": "2c088d70fad88ac37345211db580c34e43520755f97cab3784f9f1da2015845f",
+      "size": [
+        32,
+        32
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    "favicon-64.png": {
+      "bytes": 4188,
+      "sha256": "81b75cbba8d5266202cbba628011feb1aeec7cae5ad513a4870638f7f61b0b11",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    "favicon.ico": {
+      "bytes": 9687,
+      "sha256": "c58719611990bdacd23adf2d870fec5150ab16ab8ef526e7fb1492b4b513a8c2",
+      "size": [
+        64,
+        64
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ],
+      "embedded_sizes": [
+        [
+          16,
+          16
+        ],
+        [
+          32,
+          32
+        ],
+        [
+          48,
+          48
+        ],
+        [
+          64,
+          64
+        ]
+      ]
+    },
+    "icon-1024.png": {
+      "bytes": 42433,
+      "sha256": "76f52253bc7f4da9b369d46d1087d7420bd403051901118eafdcf19697506054",
+      "size": [
+        1024,
+        1024
+      ],
+      "mode": "RGBA",
+      "alpha_range": [
+        0,
+        255
+      ]
+    },
+    "icon-192.png": {
+      "bytes": 12290,
+      "sha256": "58f8c57e68b1cc14a7dac2f564351721d84868176e8d77a22e84ec74fb5c17c6",
+      "size": [
+        192,
+        192
+      ],
+      "mode": "RGB"
+    },
+    "icon-512.png": {
+      "bytes": 33601,
+      "sha256": "10aeca94b2a78e7f6d0d3c1f0f366790edb606c5a389ffa43f1b8cd83183024b",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGB"
+    },
+    "icon-small.svg": {
+      "bytes": 560,
+      "sha256": "b02c4f2b7366060a552e07fc7f465fa54882e840e6b69de37ffe05ba594e340f"
+    },
+    "icon.svg": {
+      "bytes": 833,
+      "sha256": "459104d3352c59dc7e4571101f25b74872d599771c704a4b1804fca6eadf7c4d"
+    },
+    "preview.png": {
+      "bytes": 51997,
+      "sha256": "ea0d6dd5c136b8dbef3a9ff7960ed04fd19aedb64fe333e5a37f35426808bb01",
+      "size": [
+        768,
+        600
+      ],
+      "mode": "RGB"
+    }
+  }
+}
