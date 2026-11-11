@@ -30,16 +30,16 @@
   },
   "files": {
     "_payload.json": {
-      "bytes": 12967,
-      "sha256": "e0693310d1735851d0b92c82175ddbe738746ac72903c4f4e7862d60803effa4"
+      "bytes": 12982,
+      "sha256": "7922f850b2e7a5e21e21633c9dc0d7bbb963302ef2ef265d8c15ccc5f558ece4"
     },
     "index.html": {
-      "bytes": 122501,
-      "sha256": "b3697441de487f8f3f448acf6e2d90425b9cb4c410a2118b116f9451ef4ab9fd"
+      "bytes": 122610,
+      "sha256": "a24ddb96a43b21444d9cc9eb64eaeb26f9369878f987ee5662decf0c3445af03"
     },
     "portfolio/index.html": {
-      "bytes": 23853,
-      "sha256": "877120fc9de9dc152b0f336b0401928df6b273a9a47722ef58bc069323a406f7"
+      "bytes": 23872,
+      "sha256": "5abd9ab17076a4bb14222a100d71e1e9698abfe2acfa3a1baf62e18f53633aaa"
     },
     "portfolio/projects.json": {
       "bytes": 501,
@@ -50,16 +50,16 @@
       "sha256": "69f122a1d9f611d6af9bbd497d5cd5805525b11fc3db4998d89b31508b4007f0"
     },
     "projects/2026-sign-language-cultural-festival/index.html": {
-      "bytes": 125382,
-      "sha256": "1206917357eff126c90b324f3670b709e4899c607d863b876521b436db281166"
+      "bytes": 125491,
+      "sha256": "1fd96b2671efab834d041068a57e348910845bb082a019883373a87e427983a8"
     },
     "projects/2026-year-end-summary/_payload.json": {
       "bytes": 1037,
       "sha256": "ea298fabb087885166cee6166b0b36c00a7ea38f47e61e501516713c1914077e"
     },
     "projects/2026-year-end-summary/index.html": {
-      "bytes": 125367,
-      "sha256": "a8305cd04b147906991631a5b9288b9161b870e952c901e72324037fbc232c5e"
+      "bytes": 125476,
+      "sha256": "7d6090143e5b6b43c34f443874e6406d74741e228a98db2fa00a09325248a4ed"
     },
     "projects/_payload.json": {
       "bytes": 350,
@@ -70,32 +70,32 @@
       "sha256": "c07346b751492c3492d101251b8fe17a4214543d9fad9fc321f717a0d69d546f"
     },
     "projects/beida-zhidao/index.html": {
-      "bytes": 125312,
-      "sha256": "a86efa1881b86ae0ec790ef3515bad0cad0c401642ce4a20177b57a8552398a6"
+      "bytes": 125421,
+      "sha256": "2fbe55f1ede6b7cc58c35d26ac837ad74ffa07163171a911c92d9f3d9ae2ecd9"
     },
     "projects/chuanqinghuiyi/_payload.json": {
       "bytes": 912,
       "sha256": "a6c7cc32965da3f1b7a389f29dc756c471a877b3d0eb21f6dc03b5cd9250a7f7"
     },
     "projects/chuanqinghuiyi/index.html": {
-      "bytes": 125320,
-      "sha256": "439256aab46877b78457303eba90d8a161527ad0b64e662e3e001563046eb4eb"
+      "bytes": 125429,
+      "sha256": "2840c75f720ff638bc6d84b6ab2613d9ef962d25e623744c2d0a0f5881478a03"
     },
     "projects/dictionary/_payload.json": {
       "bytes": 878,
       "sha256": "797eed3de207b6eeb76de651a62f1d56d3397caabb5983dbf0bd001c60e05b02"
     },
     "projects/dictionary/index.html": {
-      "bytes": 125300,
-      "sha256": "7a8ab3d58fffb2a118c316729d84db49583187b8a6cf8cf36b415a8998f064c2"
+      "bytes": 125409,
+      "sha256": "16f7d1b8724add2e02bb7b686b14fd4980a0c9fcb7b68b0dd0e9e3f3b44f199a"
     },
     "projects/flyinghands/_payload.json": {
       "bytes": 883,
       "sha256": "708539f2c64f864653a0a36791fa66676db59220e38bd986a0ccfd746b90912a"
     },
     "projects/flyinghands/index.html": {
-      "bytes": 125291,
-      "sha256": "fade83985b650e9f2d7c8a158b616598750c9e2584127711534be095c3f742de"
+      "bytes": 125400,
+      "sha256": "7ffcfc4f0d297f9ef659ff4a6e49e49f6ab715a503a12a6664ff0d236098e5c2"
     },
     "projects/index.html": {
       "bytes": 268,
@@ -106,48 +106,48 @@
       "sha256": "bcdb6fec67a5e7555ce9e7dd9c8b8c9af6957290f2fa087cdd887e9c865f53bc"
     },
     "projects/jieguo/index.html": {
-      "bytes": 125264,
-      "sha256": "62f4a892dff35c421f5244bb8681ddbef774305ec9cbaef6faf15ecf6cd14a78"
+      "bytes": 125373,
+      "sha256": "da16065af35f1ff47160d4de6811d40c6b2edc83322c53b1421e37169a6a15d3"
     },
     "projects/pinhaoke/_payload.json": {
       "bytes": 824,
       "sha256": "16c9e56d22cec5d727f6c40d747743d518b1ab8fe9794b67432432eab0fb7211"
     },
     "projects/pinhaoke/index.html": {
-      "bytes": 125276,
-      "sha256": "f52b96cc44dbec9f306eae2afe16bfe61f014ca418bc0c33b3eaaddd6e524738"
+      "bytes": 125385,
+      "sha256": "b62f33052177008b4abf42d985d64bb3c2a944eeae5d7cef7024de0581baaa6e"
     },
     "projects/qinghua-zhidao/_payload.json": {
       "bytes": 847,
       "sha256": "49d77349b4fbe89063bfe9e362aec985cf216c4f4675618ed85bf94f805c1e8a"
     },
     "projects/qinghua-zhidao/index.html": {
-      "bytes": 125318,
-      "sha256": "05f9b815ec118daf59c28d45468c9553f354191617d4b7aac2cec66ee6c87e59"
+      "bytes": 125427,
+      "sha256": "e1665888136a21b440bae391196e570e227c51e059aba0971392c89aa368f0a6"
     },
     "projects/quna-study/_payload.json": {
-      "bytes": 786,
-      "sha256": "dab395bc207a16f450a9a7a06c9ff5b656da0a745c73a9ad903aef08011077ab"
+      "bytes": 816,
+      "sha256": "b2e762127a0a2db03402c5b4f683f1935b5510f75e10b45762929845749c30f8"
     },
     "projects/quna-study/index.html": {
-      "bytes": 125288,
-      "sha256": "24fd3dffd9841aa79a6e04151f7cf241a88dc83bc905667d3f5108f3c36c993b"
+      "bytes": 125397,
+      "sha256": "64fc11ab9fd53d5a7746b3abf2c624c8c4692459c98debcbf2493dc164fc5337"
     },
     "projects/signplay/_payload.json": {
       "bytes": 862,
       "sha256": "cf2e9b9c23f78782c12b07fd31125589d96a4cdeffcc5a2be012c8c4e942f58d"
     },
     "projects/signplay/index.html": {
-      "bytes": 125300,
-      "sha256": "6c060506c3e813e38425b0781d1f439dbc8308c3534cc777e59806cad1eb7d7d"
+      "bytes": 125409,
+      "sha256": "f61ef4cad8c9cce60fc096a39d9cdc6ab717e46a2a157dc3ed064e133dd9430c"
     },
     "projects/signtrace/_payload.json": {
       "bytes": 949,
       "sha256": "4a6592433ad82ef5256cfe6268953cddb9b34bb8b7d17570d25a13b45009933a"
     },
     "projects/signtrace/index.html": {
-      "bytes": 125305,
-      "sha256": "ef872944d36dec6ca729dd75c7735c308ad2bdcb23ca5b2a6b2a2befa14f4464"
+      "bytes": 125414,
+      "sha256": "92a4ef88ad1067f179ca21866ea7dbad77c6c2a6dac89f31d3315adf31064e9c"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-quna-study.css": {
       "bytes": 6114,
@@ -1030,56 +1030,56 @@
       "sha256": "e17a8cc504585da8648a2e7a3efea94c2d4885b2a580adcbf413bcdd59b975ba"
     },
     "the-studio/awards/_payload.json": {
-      "bytes": 2213,
-      "sha256": "91a517b0db96522e43d6ee73acc364b82ec0e1bb4d70a3251380281d3da9b89b"
+      "bytes": 2228,
+      "sha256": "0ec79151f4bd8938276d3abc234fa63c82e7b47bb208605c66750abc7a6c6ca4"
     },
     "the-studio/awards/index.html": {
-      "bytes": 89474,
-      "sha256": "c4f10fcfeba9126af0f9ea312d06ec4194ee8fedff4452cbd898e099f894740f"
+      "bytes": 89583,
+      "sha256": "a0ae1228903ac096d9b19d8526d483b410f5822800de6fd062b42969933bd1a7"
     },
     "the-studio/clients/_payload.json": {
       "bytes": 987,
       "sha256": "2427c332edf206e4f96706d58acf02ad9ec420faf00782656ff565f7aa064a5c"
     },
     "the-studio/clients/index.html": {
-      "bytes": 89478,
-      "sha256": "7264d521917da788104c0a12fe422e44cb8213f16b0408712d42df355c91d4c9"
+      "bytes": 89587,
+      "sha256": "5db53cbff7482b9abcbde6cc03f28256a0d24876ac938904328ac087b3199f40"
     },
     "the-studio/contact-us/_payload.json": {
       "bytes": 608,
       "sha256": "b539508fe05afe384e8e6968dd44493a47583bbd8c960f9f6238fc3708074878"
     },
     "the-studio/contact-us/index.html": {
-      "bytes": 89546,
-      "sha256": "341b4a1d9448c49befb214411ca9c500ffa1b51c791fecc08c6fe60b368289c1"
+      "bytes": 89655,
+      "sha256": "052672162124db7f9a3b25ba7775bbca0ec55e384d1e7b04f51f48055374848f"
     },
     "the-studio/index.html": {
-      "bytes": 89719,
-      "sha256": "dfcc00a97691fed183c04730efd5814e4db5e49dbced135a86cecb3dfd02662c"
+      "bytes": 89828,
+      "sha256": "7ab6f4facaeadf234a0a136c235a25a547811048a7dea694060239bd1727576e"
     },
     "the-studio/our-approach/_payload.json": {
       "bytes": 526,
       "sha256": "54fcc337c0a095dc2c3299fb1a571100a9601f205df01a83002803610fa6cb31"
     },
     "the-studio/our-approach/index.html": {
-      "bytes": 89533,
-      "sha256": "8213bb950dd479eb9c0944131de77aefa5b41a10e2976b503e323fffb1b2419f"
+      "bytes": 89642,
+      "sha256": "a4d833d9078377345987d1fd465b9941cf4e4efb01e3f9814ef6e31bfd817685"
     },
     "the-studio/services/_payload.json": {
       "bytes": 3904,
       "sha256": "4688522581c81aa03629b2b28795a99c6aed2c16cf91d120541828ce2f52e838"
     },
     "the-studio/services/index.html": {
-      "bytes": 89498,
-      "sha256": "2369e499c08c6f83492b37fd8ee4c94733fed7de4278935d65b2644b01549cbb"
+      "bytes": 89607,
+      "sha256": "79d9943f0a69b66070082abccff966ea7c42ca26538c9cefa8f09f2cc388b809"
     },
     "the-studio/the-studio/_payload.json": {
       "bytes": 1414,
       "sha256": "273e6dcdcba4035adc5aa146670aef7e5a63d0b333af997c444fb1833afeaeca"
     },
     "the-studio/the-studio/index.html": {
-      "bytes": 89515,
-      "sha256": "055879d60bc1f6fba278456ee3f083561e088dab044838489f2b0f2dd1cf5046"
+      "bytes": 89624,
+      "sha256": "3e0d56616c28d5e000bb51acc9b72d634ac6c807c6c721cc2c96d7dd31d8d652"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-flyinghands.css": {
       "bytes": 6114,
@@ -1680,6 +1680,14 @@
     "sites/immersive-g-com-955afd14/shared/assets/vue3-lottie.es.B1QeRuZw.syl-v1-1-signplay.js": {
       "bytes": 314199,
       "sha256": "29042bdd3ad018c26bae1b42871fb0a0f0894e1446f6ac2a9ddfef2e76561848"
+    },
+    "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-where-to-study.js": {
+      "bytes": 31047,
+      "sha256": "473254a7c9ed632ddfd6a08aba343d6140deaec2da82c5fae8548e555a8f6e81"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-where-to-study.json": {
+      "bytes": 82957,
+      "sha256": "0618c62bd5bf193f8a9fb2ade8703e854f88f4fd8ac4971a2034f90b20cf0854"
     }
   },
   "symlinks": {
@@ -1689,5 +1697,9 @@
     "sounds": "sites/immersive-g-com-955afd14/shared/sounds",
     "webgl": "sites/immersive-g-com-955afd14/shared/webgl"
   },
-  "bytes": 128693840
+  "bytes": 128810103,
+  "external_redirects": {
+    "/where-to-study": "https://39.96.206.228/",
+    "/where-to-study/": "https://39.96.206.228/"
+  }
 }

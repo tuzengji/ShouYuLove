@@ -129,6 +129,18 @@ def main():
                 redirects[route] = target
             finally:
                 connection.close()
+        external_redirects = {}
+        for route, target in manifest.get('external_redirects', {}).items():
+            for query in ('', '?qa=where-to-study'):
+                connection = HTTPConnection('127.0.0.1', timeout=15)
+                try:
+                    connection.request('GET', route + query, headers={'Host': 'shouyulove.cn', 'User-Agent': 'ShouYuLove-QA'})
+                    response = connection.getresponse()
+                    assert response.status == 302 and response.getheader('Location') == target + query, (route, query, response.status)
+                    response.read()
+                finally:
+                    connection.close()
+            external_redirects[route] = target
         subsites = {route: get(route)[0] for route in
                     ("/signtrace/", "/chuanqinghuiyi/", "/dict/entries")}
         assert all(status == 200 for status in subsites.values()), subsites
@@ -139,6 +151,7 @@ def main():
                   "backup": str(backup), "verified_files": len(manifest["files"]),
                   "verified_bytes": manifest["bytes"], "routes": routes,
                   "subsites": subsites, "retired": retired, "redirects": redirects,
+                  "external_redirects": external_redirects,
                   "readiness": readiness,
                   "parent_config_sha256": digest(site), "snippet_sha256": digest(snippet)}
         (backup / "release.json").write_text(json.dumps(result, indent=2) + "\n")

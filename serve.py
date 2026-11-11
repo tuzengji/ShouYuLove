@@ -2,6 +2,7 @@
 """Preview the exported Astra frontend without changing its files."""
 
 import argparse
+import json
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -9,6 +10,7 @@ import re
 from urllib.parse import urlsplit
 
 VERSIONED_RESOURCE = re.compile(r'\.(?:syl-v[0-9A-Za-z._-]+|[A-Za-z0-9_-]{8,})\.(?:js|css|woff2?|png|webp|ktx2|glb|json|mp3)$', re.I)
+PROJECT_REDIRECTS = json.loads((Path(__file__).resolve().parent / 'deploy/project-redirects.json').read_text())
 
 
 class Server(ThreadingHTTPServer):
@@ -18,6 +20,12 @@ class Server(ThreadingHTTPServer):
 class Handler(SimpleHTTPRequestHandler):
     def redirect_directory(self):
         url = urlsplit(self.path)
+        if url.path in PROJECT_REDIRECTS:
+            self.send_response(302)
+            self.send_header('Location', PROJECT_REDIRECTS[url.path] + ('?' + url.query if url.query else ''))
+            self.send_header('Content-Length', '0')
+            self.end_headers()
+            return True
         if url.path not in ('/projects', '/projects/', '/projects/index.html', '/portfolio'):
             return False
         self.send_response(308)

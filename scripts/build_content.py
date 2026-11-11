@@ -22,7 +22,7 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/quna-study-20261110"
+RECORDS = ROOT / "output/deployment/where-to-study-20261111"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
@@ -34,7 +34,8 @@ RUNTIME_VERSION = "syl-v1-1-quna-study"
 FONT_VERSION = "syl-v1-1-quna-study"
 MODULE_VERSION = "syl-v1-1-quna-study"
 PORTFOLIO_CLICKS_VERSION = "syl-v1-1-20261017"
-BRIDGE_VERSION = "syl-v1-1-quna-study"
+BRIDGE_VERSION = "syl-v1-1-where-to-study"
+PORTFOLIO_SCENE_VERSION = BRIDGE_VERSION
 BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
 
@@ -624,7 +625,7 @@ def portfolio_page(content):
     scene = dict(data=json.dumps(flatten(boot), ensure_ascii=False, separators=(',', ':')), config=config, pages=pages,
                  styles=[link['href'] for link in native.select('link[rel="stylesheet"]')],
                  entry=native.select_one('script[type="module"][src]')['src'])
-    scene_url = '/assets/portfolio-scene.' + MODULE_VERSION + '.json'
+    scene_url = '/assets/portfolio-scene.' + PORTFOLIO_SCENE_VERSION + '.json'
     (OUT / SHARED / scene_url.removeprefix('/')).write_text(json.dumps(scene, ensure_ascii=False, separators=(',', ':')))
     pieces = ['<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/>',
               '<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>',
@@ -733,6 +734,7 @@ def main():
     routes = {page["url"]: (route+"/" if route else "")+"index.html" for route,page in pages.items() if route != 'projects'}
     routes['/portfolio/'] = 'portfolio/index.html'
     manifest = dict(routes=routes,redirects={'/projects':'/portfolio/','/projects/':'/portfolio/','/projects/index.html':'/portfolio/','/portfolio':'/portfolio/'},files={},symlinks={},bytes=0)
+    manifest['external_redirects'] = json.loads((ROOT / 'deploy/project-redirects.json').read_text())
     for path in sorted(OUT.rglob("*")):
         name = str(path.relative_to(OUT))
         if path.is_symlink():

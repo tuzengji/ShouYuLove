@@ -4,4 +4,4 @@
 
 `quna-study.svg` 为可编辑主图，`quna-study-small.svg` 用于小尺寸。`export-v1/` 包含透明 PNG、favicon、ICO、Apple 触屏和桌面图标；`series-comparison.png` 为同系列对照。主站首页和作品集共用 `quna-study.png` 生成页面配图。
 
-项目名：去哪自习。设计者：王宁静。正式地址：https://39.96.206.228/ 。
+项目名：去哪自习。设计者：王宁静。正式地址：https://shouyulove.cn/where-to-study/ 。

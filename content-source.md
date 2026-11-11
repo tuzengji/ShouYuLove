@@ -86,7 +86,7 @@ ShouYuLove
 
 查询空闲教室，按时间和教学楼安排自习。
 
-地址：[进入去哪自习](https://39.96.206.228/)
+地址：[进入去哪自习](https://shouyulove.cn/where-to-study/)
 设计者：王宁静
 作品集署名：显示
 
