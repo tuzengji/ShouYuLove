@@ -4,9 +4,9 @@
 
 正式入口为 https://shouyulove.cn/where-to-study/ 。带斜杠和不带斜杠两种写法均通过 302 直接跳转至 https://39.96.206.228/ ，查询参数保留，响应不缓存。首页、作品集、项目详情和绑定原稿使用新入口；项目仍在原服务器运行。
 
-主站版本 `20261111T012805Z-astra-home`，运行白名单 415 个文件、21 条页面路由及两条外部跳转。图标、字体与运行模块沿用上一版；页面数据更新为 `syl-v1-1-where-to-study`，两份新数据文件由现有 ECS 提供，既有 CDN 与旧资源保留。
+主站版本 `20261111T013217Z-astra-home`，运行白名单 415 个文件、21 条页面路由及两条外部跳转。图标、字体与运行模块沿用上一版；页面数据更新为 `syl-v1-1-where-to-study`，两份新数据文件由现有 ECS 提供，既有 CDN 与旧资源保留。
 
-跳转目标记录在 `deploy/project-redirects.json`，本地预览和发布核验读取该文件；线上 Nginx 规则位于 `deploy/nginx-home.locations.conf`，修改目标时须同步两处。发布器在切换后检查普通请求与含参数请求，失败时恢复上一版。
+跳转目标记录在 `deploy/project-redirects.json`，本地预览和发布核验读取该文件；线上 Nginx 规则位于 `deploy/nginx-home.locations.conf`，修改目标时须同步两处。发布器在切换后检查普通请求与含参数请求，失败时恢复上一版。Nginx 重载期间可能由旧进程短暂处理请求，发布检查会等待新跳转规则就绪，再严格核对目标地址。
 
 上一版本为 `20261110T155641Z-astra-home`。证据位于 `output/deployment/where-to-study-20261111/`，服务器维护目录为 `/opt/shouyulove-maintenance/20261111-where-to-study/`。
 

@@ -48,6 +48,26 @@ def get(path):
         return error.code, error.read()
 
 
+def wait_for_external_redirect(route, target, attempts=40):
+    observations = []
+    for attempt in range(attempts):
+        connection = HTTPConnection('127.0.0.1', timeout=15)
+        try:
+            connection.request('GET', route, headers={'Host': 'shouyulove.cn', 'User-Agent': 'ShouYuLove-QA'})
+            response = connection.getresponse()
+            observed = {'status': response.status, 'location': response.getheader('Location')}
+            response.read()
+        finally:
+            connection.close()
+        observations.append(observed)
+        if observed == {'status': 302, 'location': target}:
+            return observations
+        # Static pages can see the new symlink while an old worker still owns routes.
+        if attempt + 1 < attempts:
+            time.sleep(0.25)
+    raise AssertionError({'route': route, 'expected': target, 'observed': observations})
+
+
 def main():
     stage = Path(__file__).resolve().parent
     state = json.loads((stage / "request.json").read_text())
@@ -130,16 +150,10 @@ def main():
             finally:
                 connection.close()
         external_redirects = {}
+        external_readiness = {}
         for route, target in manifest.get('external_redirects', {}).items():
             for query in ('', '?qa=where-to-study'):
-                connection = HTTPConnection('127.0.0.1', timeout=15)
-                try:
-                    connection.request('GET', route + query, headers={'Host': 'shouyulove.cn', 'User-Agent': 'ShouYuLove-QA'})
-                    response = connection.getresponse()
-                    assert response.status == 302 and response.getheader('Location') == target + query, (route, query, response.status)
-                    response.read()
-                finally:
-                    connection.close()
+                external_readiness[route + query] = wait_for_external_redirect(route + query, target + query)
             external_redirects[route] = target
         subsites = {route: get(route)[0] for route in
                     ("/signtrace/", "/chuanqinghuiyi/", "/dict/entries")}
@@ -152,6 +166,7 @@ def main():
                   "verified_bytes": manifest["bytes"], "routes": routes,
                   "subsites": subsites, "retired": retired, "redirects": redirects,
                   "external_redirects": external_redirects,
+                  "external_readiness": external_readiness,
                   "readiness": readiness,
                   "parent_config_sha256": digest(site), "snippet_sha256": digest(snippet)}
         (backup / "release.json").write_text(json.dumps(result, indent=2) + "\n")
