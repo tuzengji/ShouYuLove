@@ -36,7 +36,7 @@ try:
         source / 'snippets/shouyulove-dict-guard.conf',
         source / 'snippets/shouyulove-dict-limits.conf',
         source / 'snippets/shouyulove-dict-video-guard.conf',
-        Path('/etc/nginx/snippets/shouyu-content-access-auth.conf'),
+        source / 'snippets/shouyu-content-access-auth.conf',
     ]
     def translate(text):
         return (text.replace('/etc/shouyulove/dict-guard-signing.conf', str(root / 'signing.conf'))

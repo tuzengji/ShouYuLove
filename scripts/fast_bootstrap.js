@@ -11,7 +11,12 @@ document.addEventListener('click', event => {
 }, true);
 window.__sylFast = {
   ready(scroll, isReady) {
+    let attempts = 0;
     const timer = setInterval(() => {
+      if (++attempts > 1200) {
+        clearInterval(timer);
+        return;
+      }
       if (!isReady()) return;
       const page = document.querySelector('#__nuxt .page');
       if (page && Number(getComputedStyle(page).opacity) < .95) return;

@@ -7,9 +7,14 @@ import hashlib
 import html
 import io
 import json
+import os
 import re
 import shutil
+import sys
 from pathlib import Path
+
+if sys.platform == "darwin" and Path("/opt/homebrew/lib/libcairo.2.dylib").exists():
+    os.environ.setdefault("DYLD_FALLBACK_LIBRARY_PATH", "/opt/homebrew/lib")
 
 from bs4 import BeautifulSoup
 import cairosvg

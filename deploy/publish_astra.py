@@ -10,6 +10,7 @@ import os
 import re
 import shutil
 import subprocess
+import tempfile
 import time
 import urllib.error
 import urllib.request
@@ -25,16 +26,29 @@ def digest(path):
 
 
 def replace_file(path, content):
-    temporary = path.with_name(path.name + ".astra-new")
-    temporary.write_bytes(content)
-    temporary.chmod(0o644)
-    os.replace(temporary, path)
+    path.with_name(path.name + ".astra-new").unlink(missing_ok=True)
+    fd, raw = tempfile.mkstemp(prefix=path.name + ".", suffix=".astra-new", dir=path.parent)
+    temporary = Path(raw)
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            stream.write(content)
+        temporary.chmod(0o644)
+        os.replace(temporary, path)
+    except BaseException:
+        temporary.unlink(missing_ok=True)
+        raise
 
 
 def switch(home, release):
-    temporary = home.with_name(home.name + ".astra-new")
-    temporary.symlink_to(release)
-    os.replace(temporary, home)
+    home.with_name(home.name + ".astra-new").unlink(missing_ok=True)
+    temporary = home.with_name(f"{home.name}.{os.getpid()}.astra-new")
+    temporary.unlink(missing_ok=True)
+    try:
+        temporary.symlink_to(release)
+        os.replace(temporary, home)
+    except BaseException:
+        temporary.unlink(missing_ok=True)
+        raise
 
 
 def get(path):

@@ -1,6 +1,6 @@
 import { createHash, randomBytes, timingSafeEqual } from 'node:crypto';
 import { createServer } from 'node:http';
-import { readFileSync, chmodSync, realpathSync } from 'node:fs';
+import { readFileSync, chmodSync, realpathSync, existsSync, lstatSync, unlinkSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
 export const COOKIE = 'syl_dict_session';
@@ -44,8 +44,9 @@ export class Guard {
     this.items = 0;
     this.lastSweep = 0;
   }
-  sweep(now) {
-    if (now - this.lastSweep < 30) return;
+  sweep(now, force = false) {
+    if (!force && now - this.lastSweep < 30) return;
+    if (force && now - this.lastSweep < 1) return;
     this.lastSweep = now;
     for (const [key, value] of this.sessions) {
       if (now - value.start >= POLICY.window) {
@@ -75,8 +76,11 @@ export class Guard {
         return { status: 401, reason: 'session_required', retry: 1 };
       const ip = headers['x-real-ip'];
       if (!ip) return { status: 403, reason: 'missing_peer' };
-      if (!this.issuers.has(ip) && this.issuers.size >= POLICY.maxSessions)
-        return { status: 401, reason: 'issuer_capacity', retry: 30 };
+      if (!this.issuers.has(ip) && this.issuers.size >= POLICY.maxSessions) {
+        this.sweep(now, true);
+        if (this.issuers.size >= POLICY.maxSessions)
+          return { status: 401, reason: 'issuer_capacity', retry: 30 };
+      }
       const bucket = this.issuers.get(ip) || { tokens: POLICY.mintBurst, time: now };
       bucket.tokens = Math.min(POLICY.mintBurst, bucket.tokens + (now - bucket.time) * POLICY.mintRate);
       bucket.time = now;
@@ -90,8 +94,11 @@ export class Guard {
     }
     let state = this.sessions.get(sid);
     if (!state || now - state.start >= POLICY.window) {
-      if (!state && this.sessions.size >= POLICY.maxSessions)
-        return { status: 401, reason: 'session_capacity', retry: 30 };
+      if (!state && this.sessions.size >= POLICY.maxSessions) {
+        this.sweep(now, true);
+        if (this.sessions.size >= POLICY.maxSessions)
+          return { status: 401, reason: 'session_capacity', retry: 30 };
+      }
       if (state) this.items -= state.seen.size;
       state = { start: now, seen: new Set() };
       this.sessions.set(sid, state);
@@ -121,6 +128,10 @@ export function start({ socket, secret }) {
     res.writeHead(result.status, headers);
     res.end();
   });
+  if (existsSync(socket)) {
+    if (!lstatSync(socket).isSocket()) throw new Error(`Refusing to unlink non-socket path: ${socket}`);
+    unlinkSync(socket);
+  }
   server.headersTimeout = 5000;
   server.requestTimeout = 5000;
   server.keepAliveTimeout = 1000;
@@ -129,7 +140,9 @@ export function start({ socket, secret }) {
   return server;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
-  const keyPath = process.env.GUARD_SECRET_FILE || `${process.env.CREDENTIALS_DIRECTORY}/signing-key`;
+  const keyPath = process.env.GUARD_SECRET_FILE
+    || (process.env.CREDENTIALS_DIRECTORY ? `${process.env.CREDENTIALS_DIRECTORY}/signing-key` : '');
+  if (!keyPath) throw new Error('Missing GUARD_SECRET_FILE or CREDENTIALS_DIRECTORY');
   const secret = readFileSync(keyPath, 'utf8').trim();
   if (!/^[a-f0-9]{64}$/.test(secret)) throw new Error('Invalid signing key file');
   start({ socket: process.env.GUARD_SOCKET || '/run/shouyulove-dict-guard/guard.sock', secret });

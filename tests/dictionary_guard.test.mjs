@@ -5,8 +5,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
-import { get } from 'node:http';
-import { Guard, COOKIE, POLICY, issue, verify } from '../deploy/dictionary_guard/guard.mjs';
+import { get, createServer } from 'node:http';
+import { Guard, COOKIE, POLICY, issue, verify, start as startGuard } from '../deploy/dictionary_guard/guard.mjs';
 
 const secret = 'a'.repeat(64);
 const start = 1792240000;
@@ -86,4 +86,34 @@ test('versioned current symlink starts the actual service and serves health', as
     await finished;
     rmSync(root, { recursive: true, force: true });
   }
+});
+
+test('start unlinks stale unix socket and capacity pressure sweeps expired entries', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'dict-guard-stale-'));
+  const socket = join(root, 'guard.sock');
+  try {
+    const stale = createServer();
+    await new Promise(resolve => stale.listen(socket, resolve));
+    stale.unref();
+    // Simulate an uncleaned socket file left on disk after crash: close fd without unlinking by hard-creating socket first, then closing and re-binding via dummy unix dgram/socket or leaving stale unix socket via spawn crash.
+    await new Promise(resolve => stale.close(resolve));
+    // Re-create a bound+abandoned socket file using python so the path is an actual stale AF_UNIX socket inode on disk.
+    const py = spawn('python3', ['-c', `import socket; s=socket.socket(socket.AF_UNIX); s.bind(${JSON.stringify(socket)})`]);
+    await new Promise(resolve => py.once('close', resolve));
+    assert.ok(existsSync(socket));
+    const server = startGuard({ socket, secret });
+    await new Promise(resolve => server.once('listening', resolve));
+    await new Promise(resolve => server.close(resolve));
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+
+  let now = start;
+  const guard = new Guard(secret, () => now);
+  guard.lastSweep = now;
+  for (let i = 0; i < POLICY.maxSessions; i++) {
+    guard.issuers.set(`198.51.100.${i}`, { tokens: 1, time: now - POLICY.window - 1 });
+  }
+  now += 2; // < 30s since lastSweep, so normal sweep skips, but capacity sweep reclaims expired issuers.
+  assert.equal(guard.check(page).status, 204);
 });

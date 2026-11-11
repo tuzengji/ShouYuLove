@@ -29,7 +29,8 @@ PROJECT_NAMES = {
     'portfolio': '心创组作品集',
     'signtrace': '以手寻语 SignTrace',
     'dict': '分社手语词典',
-    'chuanqinghuiyi': '传情会意·手语版',
+    'chuanqinghuiyi': '传情会意-手语版',
+    'flyinghands': '飞手传书',
     'catchpot': '接锅',
     '2026-sign-language-cultural-festival': '2026 手语文化节',
     '2026-year-end-summary': '手语分社骨干年终总结',
@@ -37,15 +38,23 @@ PROJECT_NAMES = {
     'shouyu': '手语论坛历史资料',
     'loveheart': '爱心社论坛历史资料',
 }
+_CATALOG_CACHE = {'key': None, 'value': {}}
 
 
 def portfolio_catalog():
     # Read the current release so adding a work needs no collector restart.
     try:
+        st = PORTFOLIO_CATALOG.stat()
+        cache_key = (str(PORTFOLIO_CATALOG), st.st_dev, st.st_ino, st.st_mtime_ns, st.st_size)
+        if _CATALOG_CACHE['key'] == cache_key:
+            return _CATALOG_CACHE['value']
         catalog = json.loads(PORTFOLIO_CATALOG.read_text())
-        return {k: v for k, v in catalog.items()
-                if re.fullmatch(r'[a-z0-9][a-z0-9-]{0,79}', k)
-                and isinstance(v, str) and 0 < len(v) <= 200}
+        parsed = {k: v for k, v in catalog.items()
+                  if re.fullmatch(r'[a-z0-9][a-z0-9-]{0,79}', k)
+                  and isinstance(v, str) and 0 < len(v) <= 200}
+        _CATALOG_CACHE['key'] = cache_key
+        _CATALOG_CACHE['value'] = parsed
+        return parsed
     except (OSError, ValueError, AttributeError, TypeError):
         return {}
 
@@ -138,21 +147,29 @@ def open_database(directory=DIRECTORY):
     return connection, key
 
 
-def record(connection, key, event):
+def _record_in_tx(connection, key, event, path=None):
     if event.get('method') != 'GET' or event.get('status') not in (200, 304) or BOT.search(event.get('ua', '')):
         return False
-    path = page_path(event)
+    if path is None:
+        path = page_path(event)
     if path is None:
         return False
-    if datetime.fromisoformat(event['time']).tzinfo is None:
+    stamp = datetime.fromisoformat(event['time'])
+    if stamp.tzinfo is None:
         return False
-    day, visitor = visitor_day(key, event)
-    with connection:
-        connection.execute('INSERT INTO visits VALUES(?,?,?,1) ON CONFLICT(day,visitor,path) DO UPDATE SET count=count+1', (day, visitor, path))
+    day = stamp.astimezone(BEIJING).date().isoformat()
+    address = str(ipaddress.ip_address(event['address']))
+    visitor = hmac.new(key, address.encode(), hashlib.sha256).hexdigest()
+    connection.execute('INSERT INTO visits VALUES(?,?,?,1) ON CONFLICT(day,visitor,path) DO UPDATE SET count=count+1', (day, visitor, path))
     return True
 
 
-def record_portfolio_click(connection, key, event):
+def record(connection, key, event):
+    with connection:
+        return _record_in_tx(connection, key, event)
+
+
+def _record_portfolio_click_in_tx(connection, key, event, now=None):
     project = event.get('project', '')
     if (event.get('method') != 'POST' or event.get('status') != 204 or
             event.get('portfolio_source') != '1' or event.get('same_origin') != '1' or
@@ -164,37 +181,46 @@ def record_portfolio_click(connection, key, event):
         return False
     day, visitor = visitor_day(key, event)
     accepted = not BOT.search(event.get('ua', ''))
-    now = datetime.now(timezone.utc).isoformat()
-    with connection:
-        if accepted:
-            connection.execute('''INSERT INTO portfolio_clicks VALUES(?,?,?,1)
-                ON CONFLICT(day,visitor,project) DO UPDATE SET count=count+1''', (day, visitor, project))
-        connection.execute('''INSERT INTO portfolio_click_health VALUES(?,1,?,?,?,?)
-            ON CONFLICT(project) DO UPDATE SET received=received+1, accepted=accepted+excluded.accepted,
-            last_received=excluded.last_received,
-            last_accepted=COALESCE(excluded.last_accepted,last_accepted)''',
-            (project, int(accepted), now, now, now if accepted else None))
+    now = now or datetime.now(timezone.utc).isoformat()
+    if accepted:
+        connection.execute('''INSERT INTO portfolio_clicks VALUES(?,?,?,1)
+            ON CONFLICT(day,visitor,project) DO UPDATE SET count=count+1''', (day, visitor, project))
+    connection.execute('''INSERT INTO portfolio_click_health VALUES(?,1,?,?,?,?)
+        ON CONFLICT(project) DO UPDATE SET received=received+1, accepted=accepted+excluded.accepted,
+        last_received=excluded.last_received,
+        last_accepted=COALESCE(excluded.last_accepted,last_accepted)''',
+        (project, int(accepted), now, now, now if accepted else None))
     return bool(accepted)
+
+
+def record_portfolio_click(connection, key, event):
+    with connection:
+        return _record_portfolio_click_in_tx(connection, key, event)
+
+
+def _collect_event_in_tx(connection, key, event, now=None):
+    if event.get('kind') == 'portfolio_click':
+        return _record_portfolio_click_in_tx(connection, key, event, now=now)
+    if event.get('method') != 'GET' or event.get('status') not in (200, 304):
+        return False
+    path = page_path(event)
+    if path is None:
+        return False
+    accepted = _record_in_tx(connection, key, event, path=path)
+    now = now or datetime.now(timezone.utc).isoformat()
+    connection.execute('''INSERT INTO project_health VALUES(?,1,?,?,?,?)
+        ON CONFLICT(project) DO UPDATE SET
+        received=received+1, accepted=accepted+excluded.accepted,
+        last_received=excluded.last_received,
+        last_accepted=COALESCE(excluded.last_accepted,last_accepted)''',
+        (project_key(path), int(accepted), now, now, now if accepted else None))
+    return accepted
 
 
 def collect_event(connection, key, event):
     """Observe HTML delivery per project without counting QA/bots as visits."""
-    if event.get('kind') == 'portfolio_click':
-        return record_portfolio_click(connection, key, event)
-    accepted = record(connection, key, event)
-    if event.get('method') != 'GET' or event.get('status') not in (200, 304):
-        return accepted
-    path = page_path(event)
-    if path is not None:
-        now = datetime.now(timezone.utc).isoformat()
-        with connection:
-            connection.execute('''INSERT INTO project_health VALUES(?,1,?,?,?,?)
-                ON CONFLICT(project) DO UPDATE SET
-                received=received+1, accepted=accepted+excluded.accepted,
-                last_received=excluded.last_received,
-                last_accepted=COALESCE(excluded.last_accepted,last_accepted)''',
-                (project_key(path), int(accepted), now, now, now if accepted else None))
-    return accepted
+    with connection:
+        return _collect_event_in_tx(connection, key, event)
 
 
 def click_report(connection, since, today):
@@ -281,15 +307,21 @@ def serve():
         SOCKET.chmod(0o660)
         while True:
             raw = receiver.recv(65535)
-            with connection:
-                connection.execute('UPDATE collector_health SET received=received+1,last_received=? WHERE id=1', (datetime.now(timezone.utc).isoformat(),))
+            now = datetime.now(timezone.utc).isoformat()
             start = raw.find(b'{')
-            if start < 0:
-                continue
-            try:
-                collect_event(connection, key, json.loads(raw[start:]))
-            except (ValueError, KeyError, TypeError, AttributeError):
-                continue
+            event = None
+            if start >= 0:
+                try:
+                    event = json.loads(raw[start:])
+                except ValueError:
+                    event = None
+            with connection:
+                connection.execute('UPDATE collector_health SET received=received+1,last_received=? WHERE id=1', (now,))
+                if isinstance(event, dict):
+                    try:
+                        _collect_event_in_tx(connection, key, event, now=now)
+                    except (ValueError, KeyError, TypeError, AttributeError):
+                        pass
 
 
 if __name__ == '__main__':

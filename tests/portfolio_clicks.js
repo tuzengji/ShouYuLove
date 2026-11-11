@@ -1,6 +1,7 @@
 // Run with Playwright CLI after opening the candidate or live portfolio.
 async (page) => {
   const base = new URL(page.url()).origin;
+  const expectedWorks = Object.keys(await (await fetch(base + '/portfolio/projects.json')).json()).length;
   const live = base === 'https://shouyulove.cn';
   const results = [];
   for (const mode of ['desktop', 'mobile', 'narrow', 'fallback', 'blocked', 'no-js', 'full-scene']) {
@@ -36,7 +37,7 @@ async (page) => {
       p.on('pageerror', e => errors.push(e.message));
       await p.goto(base + '/portfolio/', {waitUntil: 'domcontentloaded'});
       const links = p.locator('#portfolio .portfolio-link');
-      if (await links.count() !== 10) throw new Error('Missing works');
+      if (await links.count() !== expectedWorks) throw new Error('Missing works');
       await p.evaluate(() => document.fonts.ready);
       if (mode === 'full-scene') {
         await p.waitForFunction(() => performance.getEntriesByName('syl-portfolio-background-ready').length, null, {timeout: 90000})
@@ -45,7 +46,8 @@ async (page) => {
       }
       if (requests.length) throw new Error('Page load counted as a click');
       if (await p.evaluate(() => document.documentElement.scrollWidth > innerWidth)) throw new Error('Overflow');
-      const indices = mode === 'desktop' ? [...Array(10).keys()] : mode === 'mobile' ? [0, 7, 8, 9] : [9];
+      const last = expectedWorks - 1;
+      const indices = mode === 'desktop' ? [...Array(expectedWorks).keys()] : mode === 'mobile' ? [0, Math.max(0, last - 2), Math.max(0, last - 1), last] : [last];
       const activate = async (index, action) => {
         await p.bringToFront();
         const link = links.nth(index), href = await link.getAttribute('href');

@@ -1,6 +1,7 @@
 // Actual-browser checks for progressive, original WebGL enhancement.
 async (page) => {
  const base=new URL(page.url()).origin,results=[];
+ const expectedWorks=Object.keys(await(await fetch(base+'/portfolio/projects.json')).json()).length;
  for (const width of [1440,390,320]) {
   const c=await page.context().browser().newContext({viewport:{width,height:900},isMobile:width<500,hasTouch:width<500,userAgent:'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 '+(width<500?'Mobile ':'')+'Safari/537.36 ShouYuLove-QA'});
   let release;
@@ -13,9 +14,9 @@ async (page) => {
    await p.waitForFunction(()=>performance.getEntriesByName('syl-portfolio-readable').length);
    await p.evaluate(()=>document.fonts.ready);
    const initial=await p.locator('.portfolio-link').evaluateAll(nodes=>nodes.map(e=>({href:e.href,top:e.getBoundingClientRect().top,title:e.querySelector('h3').textContent})));
-   if(initial.length!==10||initial[0].top>300)throw new Error('Initial links unavailable');
-   if(await p.locator('.portfolio-icon').count()!==10||await p.locator('.portfolio-description').count()!==10)throw new Error('Project icons or descriptions missing');
-   if(await p.locator('.portfolio-section--secondary .portfolio-credit').count())throw new Error('Secondary credits unexpectedly visible');
+   if(initial.length!==expectedWorks||initial[0].top>300)throw new Error('Initial links unavailable');
+   if(await p.locator('.portfolio-icon').count()!==expectedWorks||await p.locator('.portfolio-description').count()!==expectedWorks)throw new Error('Project icons or descriptions missing');
+   if(await p.locator('.portfolio-section--secondary .portfolio-link:not([data-project="quna-study"]) .portfolio-credit').count())throw new Error('Secondary credits unexpectedly visible');
    const hierarchy=await p.evaluate(()=>({categories:[...document.querySelectorAll('.portfolio-section h2')].map(e=>e.textContent),headingSize:parseFloat(getComputedStyle(document.querySelector('.portfolio-section h2')).fontSize),primarySize:parseFloat(getComputedStyle(document.querySelector('.portfolio-link h3')).fontSize),secondarySize:parseFloat(getComputedStyle(document.querySelector('.portfolio-section--secondary h3')).fontSize),primaryRow:document.querySelector('.portfolio-link').getBoundingClientRect().height,secondaryRow:document.querySelector('.portfolio-section--secondary .portfolio-link').getBoundingClientRect().height}));
    if(hierarchy.categories.join(',')!=='核心创意,心创组内部使用,其他作品'||hierarchy.headingSize<=hierarchy.primarySize||hierarchy.secondarySize>=hierarchy.primarySize||hierarchy.secondaryRow>=hierarchy.primaryRow)throw new Error('Directory hierarchy');
    if(requests.some(r=>/entry\..*\.js|\/webgl\//.test(r.url)))throw new Error('Scene requested before content paint');
@@ -32,7 +33,7 @@ async (page) => {
    await p.waitForTimeout(1200);
    if(new URL(p.url()).pathname!=='/portfolio/')throw new Error('Scene changed canonical URL');
    if(Math.abs(await p.evaluate(()=>scrollY)-y)>2)throw new Error('Scene reset document scroll '+JSON.stringify({before:y,after:await p.evaluate(()=>scrollY)}));
-   if(await p.locator('.portfolio-link').count()!==10)throw new Error('Scene replaced directory');
+   if(await p.locator('.portfolio-link').count()!==expectedWorks)throw new Error('Scene replaced directory');
    if(await p.locator('.portfolio-header').count()!==1||await p.locator('#portfolio').count()!==1)throw new Error('Scene duplicated directory');
    if(await p.locator('.portfolio-icon').evaluateAll(nodes=>nodes.some(img=>!img.complete||!img.naturalWidth)))throw new Error('Project icon unavailable');
    await p.evaluate(()=>scrollTo(0,0));
@@ -47,12 +48,12 @@ async (page) => {
    if(requests.some(r=>/\.mp3|\/sounds\//.test(r.url)))throw new Error('Directory downloaded sound');
    await p.screenshot({path:'output/playwright/portfolio-icons/'+width+'.png',fullPage:true});
    if(errors.length)throw new Error(errors.join('\n'));
-   results.push({width,links:10,blockedModelLinksUsable:true,scrollPreserved:true,geometryPreserved:true,audioRequests:0,hierarchy,scene,errors});
+   results.push({width,links:expectedWorks,blockedModelLinksUsable:true,scrollPreserved:true,geometryPreserved:true,audioRequests:0,hierarchy,scene,errors});
   }finally{release?.();await c.close();}
  }
  for(const mode of ['no-js','failed-scene']) {
   const c=await page.context().browser().newContext({viewport:{width:390,height:900},javaScriptEnabled:mode!=='no-js',userAgent:'Mozilla/5.0 ShouYuLove-QA'});
-  try{const p=await c.newPage();if(mode==='failed-scene')await p.route('**/portfolio-scene.*.json',r=>r.abort());await p.goto(base+'/portfolio/');if(mode==='failed-scene')await p.waitForFunction(()=>performance.getEntriesByName('syl-portfolio-scene-error').length);if(await p.locator('.portfolio-link').count()!==10)throw new Error('Fallback links lost');await p.locator('.portfolio-link').last().scrollIntoViewIfNeeded();results.push({mode,links:10,scroll:true});}finally{await c.close();}
+  try{const p=await c.newPage();if(mode==='failed-scene')await p.route('**/portfolio-scene.*.json',r=>r.abort());await p.goto(base+'/portfolio/');if(mode==='failed-scene')await p.waitForFunction(()=>performance.getEntriesByName('syl-portfolio-scene-error').length);if(await p.locator('.portfolio-link').count()!==expectedWorks)throw new Error('Fallback links lost');await p.locator('.portfolio-link').last().scrollIntoViewIfNeeded();results.push({mode,links:expectedWorks,scroll:true});}finally{await c.close();}
  }
  return {base,passed:true,results};
 }

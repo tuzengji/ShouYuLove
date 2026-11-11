@@ -1,5 +1,9 @@
 # 作品集维护说明
 
+## 2026-11-11 当前作品集与构建状态
+
+作品集现有 12 个项目（7 个核心创意、1 个心创组内部使用、4 个其他作品）。2026-10-20 新增核心创意「飞手传书」（`/flyinghands/`，王宁静设计），2026-11-10 新增其他作品「去哪自习」（王宁静设计，2026-11-11 改为站内固定入口 `/where-to-study/` 302 跳转至 `https://39.96.206.228/`，并通过条目 `作品集署名：显示` 保留设计者）。当前运行版本 `20261111T013217Z-astra-home`：415 个文件、21 条页面路由、5 个相对链接、2 条外部跳转，共 128,810,103 字节；中文字体覆盖 545 字（字体源 `output/deployment/quna-study-20261110/font-source/`）。详见 [当前运维状态](operations-current.md)。
+
 ## 2026-10-15 指间趣游上线
 
 新增核心创意「指间趣游 SignPlay」，设计者为伍家阳，正式入口为 https://shouyulove.cn/signplay/ 。首页、作品集和项目详情共用新 Logo 与正文，作品集现有 10 个项目。
@@ -16,7 +20,7 @@
 
 `scripts/build_content.py` 的 `portfolio_page` 生成正式 HTML，`styles/portfolio.css` 维护排版，`scripts/portfolio.js` 后台载入原生三维场景。作品名称、简介、设计者、链接、分类顺序及鸣谢来自绑定 Markdown，`content-source.md` 为构建后的公开副本。
 
-十个项目分为六个核心创意、一个心创组内部工具和三个其他作品：
+十二个项目分为七个核心创意、一个心创组内部工具和四个其他作品：
 
 | 分类 | 项目 | 正式入口 |
 | --- | --- | --- |
@@ -24,9 +28,11 @@
 | 核心创意 | 分社手语词典 | `/dict` |
 | 核心创意 | 传情会意-手语版 | `/chuanqinghuiyi/` |
 | 核心创意 | 指间趣游 SignPlay | `/signplay/` |
+| 核心创意 | 飞手传书 | `/flyinghands/` |
 | 核心创意 | 2026 手语文化节 | `/2026-sign-language-cultural-festival/` |
 | 核心创意 | 2026 手语分社骨干年终总结 | `/2026-year-end-summary/` |
 | 心创组内部使用 | 接锅 | `/catchpot/` |
+| 其他作品 | 去哪自习 | `/where-to-study/` |
 | 其他作品 | 拼好课 | `https://pinhaoke.love` |
 | 其他作品 | 北大知道 PKU Know | `https://pkuknow.cn` |
 | 其他作品 | 清华知道 THU Know | `https://pkuknow.cn/thu` |
@@ -52,10 +58,10 @@
 | 构建字段 | 当前值 |
 | --- | --- |
 | `BRAND_VERSION`（主站图标） | `syl-v1-1-giving-heart` |
-| `RUNTIME_VERSION`（图像） | `syl-v1-1-signplay` |
-| `FONT_VERSION` | `syl-v1-1-signplay` |
-| `MODULE_VERSION` | `syl-v1-1-queued-scenes` |
-| `BRIDGE_VERSION` | `syl-v1-1-signplay` |
+| `RUNTIME_VERSION`（图像） | `syl-v1-1-quna-study` |
+| `FONT_VERSION` | `syl-v1-1-quna-study` |
+| `MODULE_VERSION` | `syl-v1-1-quna-study` |
+| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-where-to-study` |
 
 ## 加载和隐私规则
 
@@ -83,8 +89,11 @@
 | 指间趣游加入首页与作品集 | `4484dd6` | `20261014T162210Z-astra-home` |
 | 作品集跳转统计 | 见统计维护提交 | `20261017T024553Z-astra-home` |
 | 三维下载队列、隐藏暂停与续载 | `e6b884e`、`e02b838` | `20261017T162339Z-astra-home` |
+| CDN + 私有 OSS 加速上线 | `c85210a` | `20261018T084902Z-astra-home` |
+| 飞手传书加入首页与作品集 | `c61c2fb` | `20261020T123649Z-astra-home` |
+| 去哪自习接入与站内固定入口 | `53fc7fa`、`eb56f34` | `20261111T013217Z-astra-home` |
 
-当前版本有 296 个运行文件（含 39 个上一版兼容资源）、19 条页面路由、5 个相对链接，共 115,058,644 字节；发布记录为 `output/deployment/resource-loading-20261018/`，迁移与桌面/手机验收见 `output/deployment/shouyulove-aliyun-migration-20261015/`。2026-10-12 主站标识的历史发布和验收记录为 `output/deployment/shouyulove-main-logo-color-match-20261012/`。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
+当前运行版本为 `20261111T013217Z-astra-home`（415 个文件、21 条页面路由、5 个相对链接、2 条外部跳转，共 128,810,103 字节）；10 月 18 日历史版本有 296 个运行文件（含 39 个上一版兼容资源）、19 条页面路由、5 个相对链接，共 115,058,644 字节，发布记录为 `output/deployment/resource-loading-20261018/`，迁移与桌面/手机验收见 `output/deployment/shouyulove-aliyun-migration-20261015/`。2026-10-12 主站标识的历史发布和验收记录为 `output/deployment/shouyulove-main-logo-color-match-20261012/`。构建和验收资料分别保存在 `output/deployment/shouyulove-portfolio-icons-20261011/`、`shouyulove-colored-logos-20261012/`、`shouyulove-charades-cards-20261012/` 与 `shouyulove-site-icons-thanks-20261012/`。
 
 原发布记录已覆盖桌面、390px 手机、320px 窄屏、背景延迟及失败、无 JavaScript、滚动和布局稳定；最后一批子站图标有 15 项公网哈希核对。2026-10-12 接续整理时另行核对了服务器全部运行文件和相对链接，以及公网 18 条路由、9 张主站图标和 15 张子站图标；此次仅更新说明文档，未重新进行浏览器交互测试。
 

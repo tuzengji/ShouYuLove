@@ -74,7 +74,12 @@ requestAnimationFrame(() => requestAnimationFrame(() => {
   };
   setTimeout(() => {
     const schedule = () => {
+      if (started) {
+        document.removeEventListener('visibilitychange', schedule);
+        return;
+      }
       if (document.hidden) return;
+      document.removeEventListener('visibilitychange', schedule);
       if (window.requestIdleCallback) requestIdleCallback(load, {timeout:5000});
       else load();
     };

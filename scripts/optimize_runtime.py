@@ -170,7 +170,9 @@ Fde.prototype.playTheme=function(theme){
 function __sylAfterReady(app){
   setTimeout(()=>{
     if(window.__sylPortfolio){
+      let attempts=0;
       const timer=setInterval(()=>{
+        if(++attempts>1200){clearInterval(timer);return;}
         const view=app.viewManager.get("projects")?.instance;
         if(!dh().ready||!as().mainLoader.progressComplete||!view?._components?.bgSimulation)return;
         clearInterval(timer);

@@ -1,6 +1,7 @@
 // Playwright CLI run-code, on a main-site preview or deployment.
 async (page) => {
   const base = new URL(page.url()).origin, results = [];
+  const expectedWorks = Object.keys(await (await fetch(base + '/portfolio/projects.json')).json()).length;
   for (const width of [1440, 390]) {
     const context = await page.context().browser().newContext({
       viewport: {width, height: 900}, isMobile: width < 500, hasTouch: width < 500,
@@ -29,7 +30,7 @@ async (page) => {
       });
       await p.goto(base + '/portfolio/', {waitUntil: 'domcontentloaded'});
       await p.waitForTimeout(2500);
-      if (await p.locator('.portfolio-link').count() !== 10) throw new Error('Directory unavailable');
+      if (await p.locator('.portfolio-link').count() !== expectedWorks) throw new Error('Directory unavailable');
       if (requests.some(url => /entry\..*\.js|\/webgl\//.test(url))) throw new Error('Hidden scene booted');
       await p.evaluate(() => __qaSetHidden(false));
       await p.waitForFunction(() => window.__sylSceneDownloads?.active === 2 && __sylSceneDownloads.pending > 0);

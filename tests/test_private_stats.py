@@ -127,7 +127,7 @@ class PrivateStatisticsTests(unittest.TestCase):
             event = dict(time=datetime.now(timezone.utc).isoformat(), address='192.0.2.1',
                          method='GET', status=200, ua='ShouYuLove-QA', content_type='text/html')
             for path in ['/', '/portfolio/', '/signtrace/', '/dict/entries', '/chuanqinghuiyi/',
-                         '/catchpot/', '/2026-sign-language-cultural-festival/',
+                         '/flyinghands/', '/catchpot/', '/2026-sign-language-cultural-festival/',
                          '/2026-year-end-summary/', '/signplay/', '/shouyu/html/', '/loveheart/html/']:
                 self.assertFalse(visits.collect_event(connection, key, {**event, 'path':path}))
             self.assertFalse(visits.collect_event(connection, key, {**event, 'path':'/api/items', 'content_type':'application/json'}))
@@ -138,6 +138,8 @@ class PrivateStatisticsTests(unittest.TestCase):
             self.assertEqual(result['period'], {'views':2,'visitors':1})
             health = {r['project']:r for r in result['project_collector']}
             self.assertEqual(set(health), set(visits.PROJECT_NAMES) | {'path:/new-project'})
+            self.assertEqual(health['flyinghands']['name'], '飞手传书')
+            self.assertEqual(health['chuanqinghuiyi']['name'], '传情会意-手语版')
             self.assertEqual((health['dict']['received'], health['dict']['accepted']), (2, 1))
             self.assertIsNone(health['portfolio']['last_accepted'])
             self.assertIsNotNone(health['portfolio']['first_received'])

@@ -37,8 +37,26 @@ class CachePolicyTests(unittest.TestCase):
                         response = client.getresponse()
                         self.assertEqual(response.status, 404 if name.startswith('missing') else 200)
                         self.assertEqual(response.getheader('Cache-Control'), age)
+                        self.assertEqual(response.getheader('X-Content-Type-Options'), 'nosniff')
+                        if name == 'index.html':
+                            self.assertEqual(response.getheader('Referrer-Policy'), 'strict-origin-when-cross-origin')
                         response.read()
                         client.close()
+                host = f'127.0.0.1:{server.server_port}'
+                for method, path, headers, expected in [
+                    ('POST', '/__syl/portfolio-click/signtrace', {'Host': host, 'Origin': f'http://{host}', 'Referer': f'http://{host}/portfolio/'}, 204),
+                    ('POST', '/__syl/portfolio-click/signtrace', {'Host': host, 'Origin': 'https://evil.example', 'Referer': f'http://{host}/portfolio/'}, 403),
+                    ('POST', '/__syl/portfolio-click/signtrace', {'Host': host, 'Origin': f'http://{host}', 'Referer': f'http://{host}/'}, 403),
+                    ('POST', '/__syl/portfolio-click/INVALID_ID', {'Host': host, 'Origin': f'http://{host}', 'Referer': f'http://{host}/portfolio/'}, 404),
+                    ('GET', '/__syl/portfolio-click/signtrace', {'Host': host}, 405),
+                ]:
+                    client = HTTPConnection('127.0.0.1', server.server_port)
+                    client.request(method, path, headers=headers)
+                    response = client.getresponse()
+                    self.assertEqual(response.status, expected)
+                    self.assertEqual(response.getheader('Cache-Control'), 'no-store')
+                    response.read()
+                    client.close()
             finally:
                 server.shutdown()
                 server.server_close()

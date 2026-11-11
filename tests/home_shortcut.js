@@ -1,6 +1,7 @@
 // Run with playwright-cli run-code "$(cat tests/home_shortcut.js)" on a site page.
 async (page) => {
   const base = new URL(page.url()).origin;
+  const expectedWorks = Object.keys(await (await fetch(base + '/portfolio/projects.json')).json()).length;
   const browser = page.context().browser();
   const results = [];
   const assert = (value, message) => { if (!value) throw new Error(message); };
@@ -20,7 +21,7 @@ async (page) => {
     await mobile.waitForFunction(() => !document.getElementById('syl-early'), null, {timeout:90000});
     const box = await button.boundingBox();
     assert(box.height >= 44 && box.y + box.height <= 880, 'Shortcut safe-area or touch size');
-    assert(await mobile.locator('.portfolio-link').count() === 7, 'Works changed');
+    assert(await mobile.locator('.portfolio-link').count() === expectedWorks, 'Works changed');
     await mobile.screenshot({path:'output/playwright/home-shortcut/mobile-390.png'});
     await button.click();
     assert((await guide.innerText()).includes('打开浏览器菜单'), 'Android instructions');

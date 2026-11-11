@@ -23,12 +23,13 @@ async (page) => {
     await cdp.detach();await target.click();
    }
    await p.waitForURL(base+'/portfolio/');await p.locator('.portfolio-link').first().waitFor();
+   const linkCount=await p.locator('.portfolio-link').count();
    if(new URL(p.url()).pathname!=='/portfolio/')throw new Error('Native home link changed address');
    await p.locator('.portfolio-header a[href="/"]').click();await p.waitForURL(base+'/');
    await p.goBack();await p.waitForURL(base+'/portfolio/');await p.locator('.portfolio-link').first().waitFor();
    await p.goForward();await p.waitForURL(base+'/');
    if(errors.length)throw new Error(errors.join('\n'));
-   results.push({width,nativeHome:true,history:true,links:10,errors});
+   results.push({width,nativeHome:true,history:true,links:linkCount,errors});
   }finally{await context.close();}
  }
  return {base,passed:true,results};

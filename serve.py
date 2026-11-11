@@ -10,6 +10,7 @@ import re
 from urllib.parse import urlsplit
 
 VERSIONED_RESOURCE = re.compile(r'\.(?:syl-v[0-9A-Za-z._-]+|[A-Za-z0-9_-]{8,})\.(?:js|css|woff2?|png|webp|ktx2|glb|json|mp3)$', re.I)
+PORTFOLIO_CLICK = re.compile(r'^/__syl/portfolio-click/([a-z0-9][a-z0-9-]{0,79})$')
 PROJECT_REDIRECTS = json.loads((Path(__file__).resolve().parent / 'deploy/project-redirects.json').read_text())
 
 
@@ -20,6 +21,9 @@ class Server(ThreadingHTTPServer):
 class Handler(SimpleHTTPRequestHandler):
     def redirect_directory(self):
         url = urlsplit(self.path)
+        if url.path.startswith('/__syl/portfolio-click/'):
+            self.send_error(405)
+            return True
         if url.path in PROJECT_REDIRECTS:
             self.send_response(302)
             self.send_header('Location', PROJECT_REDIRECTS[url.path] + ('?' + url.query if url.query else ''))
@@ -57,10 +61,41 @@ class Handler(SimpleHTTPRequestHandler):
         else:
             cache = 'public, max-age=3600'
         self.send_header('Cache-Control', cache)
+        self.send_header('X-Content-Type-Options', 'nosniff')
+        if path.endswith('.html') or path.endswith('/'):
+            self.send_header('Referrer-Policy', 'strict-origin-when-cross-origin')
         super().end_headers()
 
     def do_POST(self):
-        if self.path.split("?", 1)[0] != "/api/local-newsletter":
+        route = urlsplit(self.path).path
+        if PORTFOLIO_CLICK.fullmatch(route):
+            try:
+                length = int(self.headers.get('Content-Length', '0'))
+            except ValueError:
+                self.send_error(400)
+                return
+            if length < 0 or length > 1024:
+                self.send_error(413 if length > 1024 else 400)
+                return
+            if length:
+                self.rfile.read(length)
+            host = self.headers.get('Host', '')
+            origin = self.headers.get('Origin', '')
+            referer = self.headers.get('Referer', '')
+            expected_origins = {f'http://{host}', f'https://{host}'} if host else set()
+            same_origin = origin in expected_origins
+            from_portfolio = any(referer.startswith(base + '/portfolio/') for base in expected_origins)
+            if not (same_origin and from_portfolio):
+                self.send_error(403)
+                return
+            self.send_response(204)
+            self.send_header('Content-Length', '0')
+            self.end_headers()
+            return
+        if route.startswith('/__syl/portfolio-click/'):
+            self.send_error(404)
+            return
+        if route != "/api/local-newsletter":
             self.send_error(405)
             return
         body = b'{"message":"Newsletter subscriptions are unavailable in this local preview."}'

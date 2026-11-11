@@ -1,5 +1,9 @@
 # 主站 CDN 与 OSS（2026-10-18）
 
+## 2026-11-11 去哪自习固定入口
+
+正式入口 https://shouyulove.cn/where-to-study/ 通过 ECS 302 跳转至原项目，主站版本更新为 `20261111T013217Z-astra-home`；两份 `syl-v1-1-where-to-study` 数据文件由现有 ECS 提供，CDN 对象保持 `/v/20261020-flyinghands/`（308 文件，119,656,162 字节）。详见[当前运维状态](operations-current.md)。
+
 ## 2026-11-10 去哪自习入口
 
 「去哪自习」（王宁静设计）已接入首页和作品集，直达 https://39.96.206.228/ 。主站版本 `20261110T155641Z-astra-home`；新增资源由现有 ECS 提供，既有资源继续使用 CDN。发布清单与回滚信息见[当前运维状态](operations-current.md)。
@@ -17,8 +21,8 @@
 | OSS | `shouyulove-static-20261018`，杭州、标准存储、LRS |
 | 访问控制 | 私有 Bucket，阻止公共访问开启 |
 | 回源 | OSS 域名类型、HTTPS 443、同账号 STS 回源 |
-| 资源前缀 | `https://assets.shouyulove.cn/v/20261018-1/` |
-| 资源规模 | 255 文件，113,135,193 字节；见根目录 `cdn-manifest.json` |
+| 资源前缀 | `https://assets.shouyulove.cn/v/20261020-flyinghands/`（去哪自习新增 59 个文件暂由 ECS 提供） |
+| 资源规模 | 308 文件，119,656,162 字节；见根目录 `cdn-manifest.json` |
 | 缓存 | `/v/` 缓存 365 天，客户端跟随；实测 `Cache-Control: max-age=31536000` |
 | 传输 | HTTPS、HTTP/2、TLS 1.2/1.3、Gzip、Brotli |
 | 跨域 | `Access-Control-Allow-Origin: *`；仅公开静态文件，无凭据请求 |

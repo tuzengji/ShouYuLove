@@ -2,7 +2,7 @@
 
 ## 2026-11-11 去哪自习固定入口
 
-正式入口 https://shouyulove.cn/where-to-study/ 已同步首页和作品集，通过 302 跳转至原项目。主站版本 `20261111T013217Z-astra-home`；配置与回滚记录见[当前运维状态](../docs/operations-current.md)。
+正式入口 https://shouyulove.cn/where-to-study/ 已同步首页和作品集，通过 302 跳转至原项目。当前主站版本 `20261111T013217Z-astra-home`（415 文件、21 条页面路由、5 个相对链接、2 条外部跳转，共 128,810,103 字节；上一版本 `20261110T155641Z-astra-home`）；腾讯旧机过渡路由已于 2026-10-28 退役，配置与回滚记录见[当前运维状态](../docs/operations-current.md)。
 
 ## 2026-11-10 去哪自习入口
 
