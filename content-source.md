@@ -121,6 +121,12 @@ ShouYuLove
 地址：https://shouyulove.cn/catchpot/
 设计者：心创组
 
+#### 手语分社统一通行证
+
+分社统一账号与单点登录服务，支持手机号验证码自动注册与各项目自助接入。
+地址：[进入手语分社统一通行证](https://shouyulove.cn/auth/dev)
+设计者：涂增基
+
 
 ### 边界
 

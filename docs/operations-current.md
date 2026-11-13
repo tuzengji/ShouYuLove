@@ -1,5 +1,17 @@
 # 当前运维状态与记录索引
 
+## 2026-11-13 手语分社统一通行证上线并接入作品集（`shouyulove-auth`）
+
+手语分社独立账号与单点登录基础设施已上线 `shouyulove-aliyun`（`101.37.209.227`）：用户通行证登录页 `https://shouyulove.cn/auth/`，开发者自助接入台 `https://shouyulove.cn/auth/dev`，接入文档《手语分社统一通行证接入指南》位于 `/auth/手语分社统一通行证接入指南.md`（兼容 `/auth/guide.md`）。
+
+- **主站与作品集联动**：主站发布 `20261113T044411Z-astra-home`（477 个运行文件、22 条页面路由、5 个相对链接、2 条外部跳转，共 137,472,614 字节；上一版本 `20261111T013217Z-astra-home`）。在首页与作品集「心创组内部使用」分区新增「手语分社统一通行证」（设计者涂增基，柔和彩色图标位于 `project-logos/20261113-shouyu-pass/`），桌面与「接锅」两列并排展示、窄屏单列排列；新增资源版本为 `syl-v1-1-shouyu-pass`（中文覆盖 551 字），由 ECS 提供，既有 CDN 资源 `/v/20261020-flyinghands/` 保留。
+- **应用与账号数据边界**：本机源码位于 `心创组内部使用/手语分社账号/`，服务器发布位于 `/opt/shouyulove-auth/releases/20261113T041013Z` → `/opt/shouyulove-auth/current`，`shouyulove-auth.service` 监听 `127.0.0.1:8767`（纳入 `system-shouyulove.slice`）；独立加密账号库 `accounts.sqlite`（手机号 AES-256-GCM 加密 + HMAC 索引、密码 scrypt 哈希）、主密钥与 JWT 密钥位于 `/var/lib/shouyulove-auth/`（`0700`/`0600`），`shouyulove-auth-backup.timer` 每日两次热备至 `/var/backups/shouyulove-auth/`。
+- **短信认证与自助接入**：短信验证复用阿里云 `dypnsapi` 与 ECS 实例 RAM 角色 `ShouYuLoveSmsVerifyRole` 免密钥方案（配置于 `/etc/shouyulove-auth/sms.json`），支持未注册手机号验证码登录时自动完成注册；开发者经口令解锁 `/auth/dev` 后可自助签发、轮换与删除本人名下 OAuth 2.0 / OIDC 接入凭证。
+
+## 2026-11-11 拼好课迁入 `shouyulove-aliyun`（`101.37.209.227`）
+
+按用户授权，将「拼好课 Pinhaoke」（`https://www.pinhaoke.love/`、`https://pinhaoke.love/`）从 `8.140.215.49`（`i-2zeci8v2bkvj5dyy4yr9`）零停机迁入 `shouyulove-aliyun`（`101.37.209.227`）。代码与只读课表库位于 `/opt/pinhaoke`，`pinhaoke.service` 监听 `127.0.0.1:8000`；三份可写 SQLite 库位于 `/var/lib/pinhaoke/`，`pinhaoke-backup.timer` 每日两次快照至 `/var/backups/pinhaoke/`。独立虚拟主机 `/etc/nginx/sites-available/pinhaoke` 接入本机 Certbot 自动续期，DNS 的 `@` 与 `www` 已切至 `101.37.209.227`；源机 `8.140.215.49` 已停止本地业务与定时任务，仅保留过渡反代与磁盘冻结备份。
+
 ## 2026-11-11 去哪自习固定入口
 
 正式入口为 https://shouyulove.cn/where-to-study/ 。带斜杠和不带斜杠两种写法均通过 302 直接跳转至 https://39.96.206.228/ ，查询参数保留，响应不缓存。首页、作品集、项目详情和绑定原稿使用新入口；项目仍在原服务器运行。

@@ -1,5 +1,9 @@
 # 以手予爱 ShouYuLove 主站
 
+## 2026-11-13 手语分社统一通行证上线作品集
+
+「手语分社统一通行证」（涂增基设计）已加入首页与作品集「心创组内部使用」分区，与「接锅」并列展示，直达开发者自助接入台 https://shouyulove.cn/auth/dev 。主站版本 `20261113T044411Z-astra-home`（477 文件、22 条页面路由、13 个项目，中文字体覆盖 551 字）；新增 `syl-v1-1-shouyu-pass` 资源由 ECS 提供，既有大体积资源继续使用 CDN。详见 [当前运维状态](docs/operations-current.md)。
+
 ## 2026-11-11 去哪自习固定入口
 
 正式入口 https://shouyulove.cn/where-to-study/ 已同步首页和作品集，通过 302 跳转至原项目。主站版本 `20261111T013217Z-astra-home`；配置与回滚记录见[当前运维状态](docs/operations-current.md)。

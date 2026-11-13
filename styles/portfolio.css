@@ -49,7 +49,7 @@ a:focus-visible { outline: 2px solid #294c3a; outline-offset: 6px; }
 .portfolio-link .portfolio-credit { margin-top: 12px; font-size: 13px; line-height: 1.65; color: #52675a; }
 .portfolio-credit span { white-space: nowrap; }
 .portfolio-link > svg { margin-top: 8px; width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
-.portfolio-section--internal ul { grid-template-columns: 1fr; }
+.portfolio-section--internal li:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .portfolio-section--internal .portfolio-link { grid-template-columns: 80px minmax(0, 1fr) 18px; min-height: 128px; }
 .portfolio-section--internal .portfolio-description { margin-top: 6px; }
 .portfolio-section--internal .portfolio-credit { margin-top: 8px; }

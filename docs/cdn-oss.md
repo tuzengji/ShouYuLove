@@ -1,5 +1,9 @@
 # 主站 CDN 与 OSS（2026-10-18）
 
+## 2026-11-13 手语分社统一通行证更新
+
+主站版本更新为 `20261113T044411Z-astra-home`；新增 `syl-v1-1-shouyu-pass` 资源（含上一版兼容文件共 119 项，见 `origin-asset-manifest.json`）由现有 ECS 提供，既有大体积三维与音频对象继续使用 CDN `/v/20261020-flyinghands/`（308 文件，119,656,162 字节）。详见 [当前运维状态](operations-current.md)。
+
 ## 2026-11-11 去哪自习固定入口
 
 正式入口 https://shouyulove.cn/where-to-study/ 通过 ECS 302 跳转至原项目，主站版本更新为 `20261111T013217Z-astra-home`；两份 `syl-v1-1-where-to-study` 数据文件由现有 ECS 提供，CDN 对象保持 `/v/20261020-flyinghands/`（308 文件，119,656,162 字节）。详见[当前运维状态](operations-current.md)。

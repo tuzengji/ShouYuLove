@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">手语分社统一通行证 · 一证通行</title>
+  <g stroke="#4b5d54" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M38 78 H172 V188 Q172 210 150 210 H60 Q38 210 38 188 Z" fill="#ece2cf" stroke="none"/>
+    <path d="M60 34 H150 Q172 34 172 56 V78 H38 V56 Q38 34 60 34 Z" fill="#aec2b1" stroke="none"/>
+    <path d="M60 34 H150 Q172 34 172 56 V188 Q172 210 150 210 H60 Q38 210 38 188 V56 Q38 34 60 34 Z M38 78 H172 M92 56 H118" fill="none"/>
+    <path d="M105 151 C80 134 73 117 82 106 C89 98 99 102 105 111 C111 102 121 98 128 106 C137 117 130 134 105 151 Z" fill="#c9a2a4" stroke-width="11"/>
+    <path d="M70 177 H106" fill="none"/>
+    <g transform="rotate(-30 174 178)">
+      <circle cx="146" cy="184" r="31" fill="#d4be88"/>
+      <circle cx="146" cy="184" r="10" fill="#ece2cf" stroke-width="10"/>
+      <path d="M177 184 H224 M202 184 V203 M220 184 V207" fill="none"/>
+    </g>
+  </g>
+</svg>
