@@ -1,5 +1,13 @@
 # 当前运维状态与记录索引
 
+## 2026-11-14 心创云盘上线、扩至 100 GB 并接入作品集（`shouyulove-drive`）
+
+心创组内部共享网盘与智能协作空间已上线 `shouyulove-aliyun`（`101.37.209.227`）：门户与白名单控制台 `https://shouyulove.cn/drive/`，基于开源高星项目 `filebrowser/filebrowser v2.63.23`（`/opt/shouyulove-drive/bin/filebrowser`）的网页文件工作台 `https://shouyulove.cn/drive/files/`。
+
+- **主站与作品集联动**：主站发布 `20261114T051119Z-astra-home`（538 个运行文件、23 条页面路由、5 个相对链接、2 条外部跳转，共 144,466,376 字节；上一版本 `20261113T044411Z-astra-home`）。在首页与作品集「心创组内部使用」分区新增「心创云盘」（设计者涂增基，柔和彩色图标位于 `project-logos/20261114-xinchuang-drive/`），共 14 个作品；新增资源版本为 `syl-v1-1-xinchuang-drive`（中文覆盖 556 字），由 ECS 提供，既有 CDN 资源 `/v/20261020-flyinghands/` 保留。
+- **共享存储池与在线扩容边界**：独立稀疏可扩容 ext4 磁盘镜像 `/var/lib/shouyulove-drive/volume.img` 初始划分 `60 GB` 并已在线零停机扩容至 `100 GB`（实际宿主机仅占写入体积，挂载 `/srv/shouyulove-drive`，共享读写目录 `/srv/shouyulove-drive/files` / 软链 `/srv/drive` 与 `/home/{wishingcat,zhuxingye}/projects/drive`）。宿主机系统盘 `/dev/vda3`（`118G`）与存储卷解耦，支持控制台或 `shouyulove-drive-cli resize <GB>` 经 `/usr/local/sbin/shouyulove-drive-resize` 在线持续扩容。
+- **服务架构与认证边界**：本机源码位于 `心创组内部使用/心创云盘/`，服务器发布位于 `/opt/shouyulove-drive/current`。`shouyulove-drive.service` 监听 `127.0.0.1:8768`，`shouyulove-drive-fb.service` 监听 `127.0.0.1:8769`，均归属 `system-shouyulove.slice`。Web 请求经 `/etc/nginx/snippets/shouyulove-drive.conf` 调用 `shouyulove-auth` `auth_request /_syl_auth_optional`，由 `X-Shouyu-User-Phone-Hash` 判定白名单（`/var/lib/shouyulove-drive/state.json` 仅存哈希与脱敏号，不存明文手机号）；本机回环 `/drive/api/agent/*` 与服务器同属组 `shouyulove-drive`（`2775` + ACL）可直接读写，远程协作支持签发 Bearer Token。
+
 ## 2026-11-13 手语分社统一通行证上线并接入作品集（`shouyulove-auth`）
 
 手语分社独立账号与单点登录基础设施已上线 `shouyulove-aliyun`（`101.37.209.227`）：用户通行证登录页 `https://shouyulove.cn/auth/`，开发者自助接入台 `https://shouyulove.cn/auth/dev`，接入文档《手语分社统一通行证接入指南》位于 `/auth/手语分社统一通行证接入指南.md`（兼容 `/auth/guide.md`）。

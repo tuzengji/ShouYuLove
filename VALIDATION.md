@@ -1,5 +1,13 @@
 # 2026-10-18 CDN 与 OSS 上线
 
+## 2026-11-14 心创云盘上线、100 GB 扩容与主站联动核验
+
+发布主站版本 `20261114T051119Z-astra-home` 与内部网盘服务 `shouyulove-drive`（搭配 `shouyulove-auth` 手机哈希透传发布 `20261114T043747Z`），在作品集「心创组内部使用」分区新增「心创云盘」（设计者涂增基），入口直达 `https://shouyulove.cn/drive/`。
+
+- `shouyulove-auth` 7 项测试与 `shouyulove-drive` 4 项单元测试（含白名单哈希、路径穿越防逃逸、CLI 热重载、`filebrowser` 代理注入与扩容校验）全部通过；主站 20 项有效测试（1 项 Nginx 本地跳过）与 `runtime_snapshot.py verify` 通过；中文字体子集与 RGB MSDF 图集更新至 556 字。
+- 服务器存储卷 `/var/lib/shouyulove-drive/volume.img` 验证在线无损扩容流程（60 GB → 62 GB → 恢复 60 GB → 按用户需求正式在线扩至 100 GB），`/srv/shouyulove-drive`（`/srv/drive`）可用空间 99G/100G、宿主机稀疏实占 264M；`/srv/drive` 本地直写、回环 `/api/agent/*`、CLI `token create` 公网 Bearer 鉴权及撤销、未登录跳转 `/auth/` 与 `filebrowser` 代理登录 JWT 全部实测通过。
+- 服务器 `publish_astra.py` 核验 538 个运行文件、23 条页面路由、5 个相对链接、2 条外部跳转、共 144,466,376 字节与既有子站全部返回预期状态。
+
 ## 2026-11-13 手语分社统一通行证与作品集并列验收
 
 发布主站版本 `20261113T044411Z-astra-home` 与认证中心版本 `20261113T041013Z`，新增心创组内部使用项目「手语分社统一通行证」（设计者涂增基），桌面端在作品集与「接锅」左右并排展示，直达开发者自助接入台 `https://shouyulove.cn/auth/dev`。

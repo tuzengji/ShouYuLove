@@ -1,5 +1,9 @@
 # 作品集维护说明
 
+## 2026-11-14 心创云盘上线并扩至 100 GB
+
+作品集现有 14 个项目（7 个核心创意、3 个心创组内部使用、4 个其他作品）。在「心创组内部使用」分区新增「心创云盘」（正式入口 `https://shouyulove.cn/drive/`，涂增基设计），与「接锅」「手语分社统一通行证」共同排版（桌面端首行两列、末项跨列居中展示）；同系列柔和彩色图标位于 `project-logos/20261114-xinchuang-drive/`。当前运行版本 `20261114T051119Z-astra-home`：538 个文件、23 条页面路由、5 个相对链接、2 条外部跳转，共 144,466,376 字节；中文字体覆盖 556 字（版本 `syl-v1-1-xinchuang-drive`）。详见 [当前运维状态](operations-current.md)。
+
 ## 2026-11-13 手语分社统一通行证并列展示
 
 作品集现有 13 个项目（7 个核心创意、2 个心创组内部使用、4 个其他作品）。在「心创组内部使用」分区新增「手语分社统一通行证」（正式入口 `https://shouyulove.cn/auth/dev`，涂增基设计），桌面端与「接锅」两列并排展示、窄屏单列排列；同系列柔和彩色图标位于 `project-logos/20261113-shouyu-pass/`。当前运行版本 `20261113T044411Z-astra-home`：477 个文件、22 条页面路由、5 个相对链接、2 条外部跳转，共 137,472,614 字节；中文字体覆盖 551 字（版本 `syl-v1-1-shouyu-pass`）。详见 [当前运维状态](operations-current.md)。
@@ -24,7 +28,7 @@
 
 `scripts/build_content.py` 的 `portfolio_page` 生成正式 HTML，`styles/portfolio.css` 维护排版，`scripts/portfolio.js` 后台载入原生三维场景。作品名称、简介、设计者、链接、分类顺序及鸣谢来自绑定 Markdown，`content-source.md` 为构建后的公开副本。
 
-十三个项目分为七个核心创意、两个心创组内部工具和四个其他作品：
+十四个项目分为七个核心创意、三个心创组内部工具和四个其他作品：
 
 | 分类 | 项目 | 正式入口 |
 | --- | --- | --- |
@@ -37,6 +41,7 @@
 | 核心创意 | 2026 手语分社骨干年终总结 | `/2026-year-end-summary/` |
 | 心创组内部使用 | 接锅 | `/catchpot/` |
 | 心创组内部使用 | 手语分社统一通行证 | `/auth/dev` |
+| 心创组内部使用 | 心创云盘 | `/drive/` |
 | 其他作品 | 去哪自习 | `/where-to-study/` |
 | 其他作品 | 拼好课 | `https://pinhaoke.love` |
 | 其他作品 | 北大知道 PKU Know | `https://pkuknow.cn` |
@@ -63,10 +68,10 @@
 | 构建字段 | 当前值 |
 | --- | --- |
 | `BRAND_VERSION`（主站图标） | `syl-v1-1-giving-heart` |
-| `RUNTIME_VERSION`（图像） | `syl-v1-1-quna-study` |
-| `FONT_VERSION` | `syl-v1-1-quna-study` |
-| `MODULE_VERSION` | `syl-v1-1-quna-study` |
-| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-where-to-study` |
+| `RUNTIME_VERSION`（图像） | `syl-v1-1-xinchuang-drive` |
+| `FONT_VERSION` | `syl-v1-1-xinchuang-drive` |
+| `MODULE_VERSION` | `syl-v1-1-xinchuang-drive` |
+| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-xinchuang-drive` |
 
 ## 加载和隐私规则
 

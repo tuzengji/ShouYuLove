@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">心创云盘 · 共享云端存储与智能协作空间</title>
+  <g stroke="#4b5d54" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 雾蓝云顶 -->
+    <path d="M76 154 H182 C207 154 224 137 224 115 C224 96 210 81 191 78 C184 51 160 34 131 34 C99 34 73 56 68 85 C46 89 32 106 32 126 C32 142 48 154 76 154 Z" fill="#a5bac9" stroke="none"/>
+    <!-- 暖米云底高光面 -->
+    <path d="M56 154 H196 C214 154 222 140 222 122 C222 108 214 96 200 91 C192 74 174 62 150 62 C118 62 92 84 82 112 C62 114 48 126 48 140 C48 148 51 154 56 154 Z" fill="#ece2cf" stroke="none"/>
+    <!-- 灰绿共享托盘盒 -->
+    <path d="M44 154 H212 Q222 154 222 164 V196 Q222 216 202 216 H54 Q34 216 34 196 V164 Q34 154 44 154 Z" fill="#aec2b1" stroke="none"/>
+    <!-- 外轮廓与托盘线 -->
+    <path d="M64 154 C44 154 32 141 32 123 C32 103 48 87 68 84 C74 55 100 34 131 34 C161 34 185 52 192 79 C210 82 224 97 224 116 C224 138 208 154 184 154" fill="none"/>
+    <path d="M44 154 H212 Q222 154 222 164 V196 Q222 216 202 216 H54 Q34 216 34 196 V164 Q34 154 44 154 Z" fill="none"/>
+    <!-- 托盘指示槽 -->
+    <path d="M72 185 H124" fill="none"/>
+    <circle cx="172" cy="185" r="10" fill="#d4be88" stroke-width="7"/>
+    <!-- 云中豆沙爱心 -->
+    <path d="M128 131 C106 116 100 101 108 91 C114 84 123 87 128 95 C133 87 142 84 148 91 C156 101 150 116 128 131 Z" fill="#c9a2a4" stroke-width="8"/>
+    <!-- 右上暖金智能协作星点 -->
+    <path d="M210 34 L216 48 L230 54 L216 60 L210 74 L204 60 L190 54 L204 48 Z" fill="#d4be88" stroke-width="6"/>
+  </g>
+</svg>
