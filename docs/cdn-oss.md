@@ -2,7 +2,7 @@
 
 ## 2026-11-14 手小语上线更新
 
-主站版本更新为 `20261114T063603Z-astra-home`；新增 `syl-v1-1-shouxiaoyu` 资源（`origin-asset-manifest.json` 共 238 项，保留历史兼容版本资源）由现有 ECS 提供，既有大体积三维与音频对象继续使用 CDN `/v/20261020-flyinghands/`（308 文件，119,656,162 字节）。详见 [当前运维状态](operations-current.md)。
+主站版本更新为 `20261114T075210Z-astra-home`；新增 `syl-v1-1-shouxiaoyu-v2` 资源（`origin-asset-manifest.json` 共 298 项，保留历史兼容版本资源）由现有 ECS 提供，既有大体积三维、图像与音频对象继续使用 CDN `/v/20261020-flyinghands/`（`cdn-manifest.json` 共 311 项）。详见 [当前运维状态](operations-current.md)。
 
 ## 2026-11-14 心创云盘更新
 

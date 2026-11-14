@@ -2,7 +2,7 @@
 
 ## 2026-11-14 手小语展示页上线作品集
 
-「手小语」（涂增基设计）已同步首页和作品集「核心创意」分区，入口为 `https://shouyulove.cn/shouxiaoyu/`。当前主站版本 `20261114T063603Z-astra-home`（600 文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 151,602,868 字节；上一版本 `20261114T051119Z-astra-home`）；新增 `syl-v1-1-shouxiaoyu` 资源由 ECS 提供，既有 CDN 资源保留。手小语展示页由独立 Nginx 片段 `/etc/nginx/snippets/shouxiaoyu.conf` 指向 `/var/www/shouyulove-showcase` 承载，不与主站静态发布目录混用，且仅发布经脱敏核验的 `site/` 运行白名单。详见 [当前运维状态](../docs/operations-current.md)。
+「手小语」（涂增基设计）已同步首页和作品集「核心创意」分区，入口为 `https://shouyulove.cn/shouxiaoyu/`。当前主站版本 `20261114T075210Z-astra-home`（660 文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,501,224 字节；上一版本 `20261114T063603Z-astra-home`）；新增 `syl-v1-1-shouxiaoyu-v2` 资源由 ECS 提供，既有 CDN 资源保留。手小语展示页（发布版本 `20261114T075251Z-shouxiaoyu`）由独立 Nginx 片段 `/etc/nginx/snippets/shouxiaoyu.conf` 指向 `/var/www/shouyulove-showcase` 承载，直接采用手小语微信头像作为 Logo，通过五个主题集合展示 38 张脱敏群聊与桌面截图（无天气播报、无逐图解读），不与主站静态发布目录混用，且仅发布经脱敏核验的 `site/` 运行白名单。详见 [当前运维状态](../docs/operations-current.md)。
 
 ## 2026-11-14 心创云盘上线作品集
 

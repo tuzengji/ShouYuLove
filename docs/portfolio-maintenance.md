@@ -2,7 +2,7 @@
 
 ## 2026-11-14 手小语展示页上线
 
-作品集现有 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）。在「核心创意」分区新增「手小语」（正式入口 `https://shouyulove.cn/shouxiaoyu/`，涂增基设计），桌面端「核心创意」共 4 行两列平衡展示；同系列柔和彩色图标位于 `project-logos/20261114-shouxiaoyu/`。当前运行版本 `20261114T063603Z-astra-home`：600 个文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 151,602,868 字节；中文字体覆盖 570 字（版本 `syl-v1-1-shouxiaoyu`）。详见 [当前运维状态](operations-current.md)。
+作品集现有 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）。在「核心创意」分区新增「手小语」（正式入口 `https://shouyulove.cn/shouxiaoyu/`，涂增基设计；聚焦微信群日常陪伴、水群接梗与看图猜手语），桌面端「核心创意」共 4 行两列平衡展示；同系列柔和彩色图标位于 `project-logos/20261114-shouxiaoyu/`。当前运行版本 `20261114T075210Z-astra-home`：660 个文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,501,224 字节；中文字体覆盖 565 字（版本 `syl-v1-1-shouxiaoyu-v2`）。详见 [当前运维状态](operations-current.md)。
 
 ## 2026-11-14 心创云盘上线并扩至 100 GB
 
@@ -73,10 +73,10 @@
 | 构建字段 | 当前值 |
 | --- | --- |
 | `BRAND_VERSION`（主站图标） | `syl-v1-1-giving-heart` |
-| `RUNTIME_VERSION`（图像） | `syl-v1-1-shouxiaoyu` |
-| `FONT_VERSION` | `syl-v1-1-shouxiaoyu` |
-| `MODULE_VERSION` | `syl-v1-1-shouxiaoyu` |
-| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-shouxiaoyu` |
+| `RUNTIME_VERSION`（图像） | `syl-v1-1-shouxiaoyu-v2` |
+| `FONT_VERSION` | `syl-v1-1-shouxiaoyu-v2` |
+| `MODULE_VERSION` | `syl-v1-1-shouxiaoyu-v2` |
+| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-shouxiaoyu-v2` |
 
 ## 加载和隐私规则
 

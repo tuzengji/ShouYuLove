@@ -27,19 +27,19 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/shouxiaoyu-20261114"
+RECORDS = ROOT / "output/deployment/shouxiaoyu-v2-20261114"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
 V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
-FONT_SOURCE = ROOT / "output/deployment/shouxiaoyu-20261114/font-source"
-RUNTIME_VERSION = "syl-v1-1-shouxiaoyu"
-FONT_VERSION = "syl-v1-1-shouxiaoyu"
-MODULE_VERSION = "syl-v1-1-shouxiaoyu"
+FONT_SOURCE = ROOT / "output/deployment/shouxiaoyu-v2-20261114/font-source"
+RUNTIME_VERSION = "syl-v1-1-shouxiaoyu-v2"
+FONT_VERSION = "syl-v1-1-shouxiaoyu-v2"
+MODULE_VERSION = "syl-v1-1-shouxiaoyu-v2"
 PORTFOLIO_CLICKS_VERSION = "syl-v1-1-20261017"
-BRIDGE_VERSION = "syl-v1-1-shouxiaoyu"
+BRIDGE_VERSION = "syl-v1-1-shouxiaoyu-v2"
 PORTFOLIO_SCENE_VERSION = BRIDGE_VERSION
 BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
