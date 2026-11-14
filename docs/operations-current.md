@@ -4,8 +4,8 @@
 
 手语分社微信群陪伴伙伴「手小语」展示页已上线 `shouyulove-aliyun`（`101.37.209.227`）：正式入口 `https://shouyulove.cn/shouxiaoyu/`，聚焦微信群日常陪伴、聊天水群、接梗斗图与看图猜手语（不含天气播报）。
 
-- **主站与作品集联动**：主站发布 `20261114T075210Z-astra-home`（660 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,501,224 字节；上一版本 `20261114T063603Z-astra-home`）。在首页与作品集「核心创意」分区新增「手小语」（设计者涂增基，柔和彩色图标位于 `project-logos/20261114-shouxiaoyu/`），共 15 个作品（桌面「核心创意」8 项呈 4 行两列平衡排布）；新增资源版本为 `syl-v1-1-shouxiaoyu-v2`（中文覆盖 565 字），由 ECS 提供，既有 CDN 资源 `/v/20261020-flyinghands/` 保留。
-- **静态子站与隐私边界**：本机源码位于 `核心创意/手小语/`，线上仅同步纯静态 `site/` 目录至 `/var/www/shouyulove-shouxiaoyu-releases/20261114T075251Z-shouxiaoyu/shouxiaoyu/`（符号链 `/var/www/shouyulove-showcase`），由 `/etc/nginx/snippets/shouxiaoyu.conf` 直接托管（同步移除此前的 `/projects/shouxiaoyu*` 404 临时拦截）。展示页直接使用手小语微信头像作为 Logo，通过五个主题集合展示 38 张脱敏微信群/桌面截图（无逐图解读，已剔除私聊图、移除二维码及群友实名备注），原始设计文档、`qa/` 与 `tools/` 不进入线上发布目录。
+- **主站与作品集联动**：主站发布 `20261114T123404Z-astra-home`（662 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,632,740 字节；上一版本 `20261114T075210Z-astra-home`）。作品集共 15 个作品，桌面端「核心创意」4 行两列中第 3 行并列展示「手小语」（设计者涂增基，柔和彩色图标位于 `project-logos/20261114-shouxiaoyu/`）与「传情会意-手语版」；数据桥与作品集场景版本为 `syl-v1-1-shouxiaoyu-v3`，图像、字体（中文覆盖 565 字）与运行模块保持 `syl-v1-1-shouxiaoyu-v2`，由 ECS 提供，既有 CDN 资源 `/v/20261020-flyinghands/` 保留。
+- **静态子站与隐私边界**：本机源码位于 `核心创意/手小语/`，线上仅同步纯静态 `site/` 目录至 `/var/www/shouyulove-shouxiaoyu-releases/20261114T123437Z-shouxiaoyu/shouxiaoyu/`（符号链 `/var/www/shouyulove-showcase`），由 `/etc/nginx/snippets/shouxiaoyu.conf` 直接托管（同步移除此前的 `/projects/shouxiaoyu*` 404 临时拦截）。展示页直接使用手小语微信头像作为 Logo，通过五个主题集合展示 34 张纯深色手机端脱敏群聊截图（已剔除私聊图与白色桌面截图、移除张数角标及「福瑞庭审」顶部多余按钮并遮盖二维码及群友实名备注），原始设计文档、`qa/` 与 `tools/` 不进入线上发布目录。
 
 ## 2026-11-14 心创云盘上线、扩至 100 GB 并接入作品集（`shouyulove-drive`）
 

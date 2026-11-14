@@ -2,7 +2,7 @@
 
 ## 2026-11-14 手小语展示页上线
 
-作品集现有 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）。在「核心创意」分区新增「手小语」（正式入口 `https://shouyulove.cn/shouxiaoyu/`，涂增基设计；聚焦微信群日常陪伴、水群接梗与看图猜手语），桌面端「核心创意」共 4 行两列平衡展示；同系列柔和彩色图标位于 `project-logos/20261114-shouxiaoyu/`。当前运行版本 `20261114T075210Z-astra-home`：660 个文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,501,224 字节；中文字体覆盖 565 字（版本 `syl-v1-1-shouxiaoyu-v2`）。详见 [当前运维状态](operations-current.md)。
+作品集现有 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）。桌面端「核心创意」共 4 行两列平衡展示，第 3 行并列展示「手小语」（正式入口 `https://shouyulove.cn/shouxiaoyu/`，涂增基设计；聚焦微信群日常陪伴、水群接梗与看图猜手语）与「传情会意-手语版」；同系列柔和彩色图标位于 `project-logos/20261114-shouxiaoyu/`。当前运行版本 `20261114T123404Z-astra-home`：662 个文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,632,740 字节；中文字体覆盖 565 字（数据桥与作品集场景 `syl-v1-1-shouxiaoyu-v3`，图像/字体/模块保持 `syl-v1-1-shouxiaoyu-v2`）。详见 [当前运维状态](operations-current.md)。
 
 ## 2026-11-14 心创云盘上线并扩至 100 GB
 
@@ -38,10 +38,10 @@
 | --- | --- | --- |
 | 核心创意 | 以手寻语 SignTrace | `/signtrace/` |
 | 核心创意 | 分社手语词典 | `/dict` |
-| 核心创意 | 手小语 | `/shouxiaoyu/` |
-| 核心创意 | 传情会意-手语版 | `/chuanqinghuiyi/` |
 | 核心创意 | 指间趣游 SignPlay | `/signplay/` |
 | 核心创意 | 飞手传书 | `/flyinghands/` |
+| 核心创意 | 手小语 | `/shouxiaoyu/` |
+| 核心创意 | 传情会意-手语版 | `/chuanqinghuiyi/` |
 | 核心创意 | 2026 手语文化节 | `/2026-sign-language-cultural-festival/` |
 | 核心创意 | 2026 手语分社骨干年终总结 | `/2026-year-end-summary/` |
 | 心创组内部使用 | 接锅 | `/catchpot/` |
@@ -76,7 +76,7 @@
 | `RUNTIME_VERSION`（图像） | `syl-v1-1-shouxiaoyu-v2` |
 | `FONT_VERSION` | `syl-v1-1-shouxiaoyu-v2` |
 | `MODULE_VERSION` | `syl-v1-1-shouxiaoyu-v2` |
-| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-shouxiaoyu-v2` |
+| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-shouxiaoyu-v3` |
 
 ## 加载和隐私规则
 

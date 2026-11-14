@@ -1,5 +1,5 @@
 {
-  "release": "20261114T075210Z-astra-home",
+  "release": "20261114T123404Z-astra-home",
   "cdn_base_retained": "https://assets.shouyulove.cn/v/20261020-flyinghands",
   "files": {
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-quna-study.css": {
@@ -630,6 +630,10 @@
       "bytes": 95627,
       "sha256": "f789379bb9c9873cd2c1b7d3622fdc7ab02f6f93815a5cc5a6636a5431df649c"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-shouxiaoyu-v3.json": {
+      "bytes": 95627,
+      "sha256": "92b5642f692ec9a28227bbf90b22f5f9c0f219ea521c3320e31e5a98dfe31292"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-shouxiaoyu.json": {
       "bytes": 95789,
       "sha256": "3e3563b62e4402015935377007a0813e5f2a4524fbee9befb6ca91d4a5816bad"
@@ -793,6 +797,10 @@
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-shouxiaoyu-v2.js": {
       "bytes": 35889,
       "sha256": "bef35c48c9732b99c650fae6a5fd59e395abf4b8743ee87d60ad909275a317e5"
+    },
+    "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-shouxiaoyu-v3.js": {
+      "bytes": 35889,
+      "sha256": "8c2b326dfe4b9b9a6b77f3bf84af757ddd1a1e41e5b9461aa7967566ab551d97"
     },
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-shouxiaoyu.js": {
       "bytes": 36006,
@@ -1195,5 +1203,5 @@
       "sha256": "0804cb963d3da1a84a29f08ad262ad96b12c7ff774855142f03ec42df589318a"
     }
   },
-  "bytes": 35911570
+  "bytes": 36043086
 }
