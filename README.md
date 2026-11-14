@@ -1,5 +1,9 @@
 # 以手予爱 ShouYuLove 主站
 
+## 2026-11-14 手小语展示页上线并接入作品集
+
+「手小语」（涂增基设计）已加入首页与作品集「核心创意」分区，入口为 https://shouyulove.cn/shouxiaoyu/ 。主站版本更新为 `20261114T063603Z-astra-home`（600 文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 151,602,868 字节，15 个项目，中文字体覆盖 570 字；版本标识 `syl-v1-1-shouxiaoyu`），新增 ECS 静态资源与既往 CDN 对象共存。手小语展示页源码位于 `核心创意/手小语/`，线上由 `shouyulove-aliyun` `/var/www/shouyulove-showcase` 提供纯静态访问，汇集 38 张脱敏真实群聊与桌面截图、互动盲盒与福瑞庭审连续剧辑。详见 [当前运维状态](docs/operations-current.md)。
+
 ## 2026-11-14 心创云盘上线并接入作品集
 
 「心创云盘」（涂增基设计）已加入首页与作品集「心创组内部使用」分区，入口为 https://shouyulove.cn/drive/ 。主站版本更新为 `20261114T051119Z-astra-home`（538 文件、23 条页面路由、5 个相对链接、2 条外部跳转，共 144,466,376 字节，14 个项目，中文字体覆盖 556 字；版本标识 `syl-v1-1-xinchuang-drive`），新增 ECS 静态资源与既往 CDN 对象共存。网盘服务部署在 `shouyulove-aliyun`（`127.0.0.1:8768` + FileBrowser `8769`），提供 100 GB 可随时在线扩容的共享稀疏存储池（`/srv/drive`），支持统一通行证白名单访问与 Agent 协同读写。详见 [当前运维状态](docs/operations-current.md)。

@@ -27,19 +27,19 @@ from content_source import source_path, sync_snapshot
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE_RECORDS = ROOT / "output/deployment/shouyulove-content-v1"
-RECORDS = ROOT / "output/deployment/xinchuang-drive-20261114"
+RECORDS = ROOT / "output/deployment/shouxiaoyu-20261114"
 MOBILE_TEXTURES = ROOT / "output/deployment/shouyulove-fast-20261009/mobile-textures"
 # Keep historical manifests unchanged; locate their version inside this project.
 V0_VERSION = Path(json.loads((BASE_RECORDS / "v0-backup.json").read_text())["local_backup"]).name
 V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
-FONT_SOURCE = ROOT / "output/deployment/xinchuang-drive-20261114/font-source"
-RUNTIME_VERSION = "syl-v1-1-xinchuang-drive"
-FONT_VERSION = "syl-v1-1-xinchuang-drive"
-MODULE_VERSION = "syl-v1-1-xinchuang-drive"
+FONT_SOURCE = ROOT / "output/deployment/shouxiaoyu-20261114/font-source"
+RUNTIME_VERSION = "syl-v1-1-shouxiaoyu"
+FONT_VERSION = "syl-v1-1-shouxiaoyu"
+MODULE_VERSION = "syl-v1-1-shouxiaoyu"
 PORTFOLIO_CLICKS_VERSION = "syl-v1-1-20261017"
-BRIDGE_VERSION = "syl-v1-1-xinchuang-drive"
+BRIDGE_VERSION = "syl-v1-1-shouxiaoyu"
 PORTFOLIO_SCENE_VERSION = BRIDGE_VERSION
 BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
@@ -54,7 +54,8 @@ def section(text, heading):
 def parse_content(text=None):
     text = SOURCE.read_text(encoding='utf-8') if text is None else text
     projects = []
-    identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary", "指间趣游 SignPlay": "signplay", "飞手传书": "flyinghands",
+    identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary", "手小语": "shouxiaoyu",
+                   "指间趣游 SignPlay": "signplay", "飞手传书": "flyinghands",
                    "传情会意-手语版": "chuanqinghuiyi", "2026 手语文化节": "2026-sign-language-cultural-festival",
                    "2026 手语分社骨干年终总结": "2026-year-end-summary",
                    "去哪自习": "quna-study", "拼好课": "pinhaoke", "北大知道 PKU Know": "beida-zhidao",
@@ -122,6 +123,7 @@ def raster_assets(content):
     palettes["quna-study"] = ("#e0e7e3", "#94a28d")
     palettes["shouyu-pass"] = ("#eae4d7", "#948c78")
     palettes["xinchuang-drive"] = ("#e2ebe5", "#869c90")
+    palettes["shouxiaoyu"] = ("#dce7df", "#88a192")
     for project in content["projects"]:
         palette = palettes[project["id"]]
         icon = ROOT / "project-logos/20261012-柔和彩色" / (project["id"] + ".png")
@@ -135,6 +137,8 @@ def raster_assets(content):
             icon = ROOT / "project-logos/20261113-shouyu-pass/shouyu-pass.png"
         if project["id"] == "xinchuang-drive":
             icon = ROOT / "project-logos/20261114-xinchuang-drive/xinchuang-drive.png"
+        if project["id"] == "shouxiaoyu":
+            icon = ROOT / "project-logos/20261114-shouxiaoyu/shouxiaoyu.png"
         mark = Image.open(icon).convert("RGBA")
         assert mark.getchannel("A").getextrema() == (0, 255), icon
         size = 640

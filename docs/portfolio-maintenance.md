@@ -1,5 +1,9 @@
 # 作品集维护说明
 
+## 2026-11-14 手小语展示页上线
+
+作品集现有 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）。在「核心创意」分区新增「手小语」（正式入口 `https://shouyulove.cn/shouxiaoyu/`，涂增基设计），桌面端「核心创意」共 4 行两列平衡展示；同系列柔和彩色图标位于 `project-logos/20261114-shouxiaoyu/`。当前运行版本 `20261114T063603Z-astra-home`：600 个文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 151,602,868 字节；中文字体覆盖 570 字（版本 `syl-v1-1-shouxiaoyu`）。详见 [当前运维状态](operations-current.md)。
+
 ## 2026-11-14 心创云盘上线并扩至 100 GB
 
 作品集现有 14 个项目（7 个核心创意、3 个心创组内部使用、4 个其他作品）。在「心创组内部使用」分区新增「心创云盘」（正式入口 `https://shouyulove.cn/drive/`，涂增基设计），与「接锅」「手语分社统一通行证」共同排版（桌面端首行两列、末项跨列居中展示）；同系列柔和彩色图标位于 `project-logos/20261114-xinchuang-drive/`。当前运行版本 `20261114T051119Z-astra-home`：538 个文件、23 条页面路由、5 个相对链接、2 条外部跳转，共 144,466,376 字节；中文字体覆盖 556 字（版本 `syl-v1-1-xinchuang-drive`）。详见 [当前运维状态](operations-current.md)。
@@ -28,12 +32,13 @@
 
 `scripts/build_content.py` 的 `portfolio_page` 生成正式 HTML，`styles/portfolio.css` 维护排版，`scripts/portfolio.js` 后台载入原生三维场景。作品名称、简介、设计者、链接、分类顺序及鸣谢来自绑定 Markdown，`content-source.md` 为构建后的公开副本。
 
-十四个项目分为七个核心创意、三个心创组内部工具和四个其他作品：
+十五个项目分为八个核心创意、三个心创组内部工具和四个其他作品：
 
 | 分类 | 项目 | 正式入口 |
 | --- | --- | --- |
 | 核心创意 | 以手寻语 SignTrace | `/signtrace/` |
 | 核心创意 | 分社手语词典 | `/dict` |
+| 核心创意 | 手小语 | `/shouxiaoyu/` |
 | 核心创意 | 传情会意-手语版 | `/chuanqinghuiyi/` |
 | 核心创意 | 指间趣游 SignPlay | `/signplay/` |
 | 核心创意 | 飞手传书 | `/flyinghands/` |
@@ -68,10 +73,10 @@
 | 构建字段 | 当前值 |
 | --- | --- |
 | `BRAND_VERSION`（主站图标） | `syl-v1-1-giving-heart` |
-| `RUNTIME_VERSION`（图像） | `syl-v1-1-xinchuang-drive` |
-| `FONT_VERSION` | `syl-v1-1-xinchuang-drive` |
-| `MODULE_VERSION` | `syl-v1-1-xinchuang-drive` |
-| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-xinchuang-drive` |
+| `RUNTIME_VERSION`（图像） | `syl-v1-1-shouxiaoyu` |
+| `FONT_VERSION` | `syl-v1-1-shouxiaoyu` |
+| `MODULE_VERSION` | `syl-v1-1-shouxiaoyu` |
+| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-shouxiaoyu` |
 
 ## 加载和隐私规则
 

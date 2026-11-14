@@ -1,5 +1,9 @@
 # 主站运行白名单与发布约定
 
+## 2026-11-14 手小语展示页上线作品集
+
+「手小语」（涂增基设计）已同步首页和作品集「核心创意」分区，入口为 `https://shouyulove.cn/shouxiaoyu/`。当前主站版本 `20261114T063603Z-astra-home`（600 文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 151,602,868 字节；上一版本 `20261114T051119Z-astra-home`）；新增 `syl-v1-1-shouxiaoyu` 资源由 ECS 提供，既有 CDN 资源保留。手小语展示页由独立 Nginx 片段 `/etc/nginx/snippets/shouxiaoyu.conf` 指向 `/var/www/shouyulove-showcase` 承载，不与主站静态发布目录混用，且仅发布经脱敏核验的 `site/` 运行白名单。详见 [当前运维状态](../docs/operations-current.md)。
+
 ## 2026-11-14 心创云盘上线作品集
 
 「心创云盘」（涂增基设计）已同步首页和作品集「心创组内部使用」分区，入口为 `https://shouyulove.cn/drive/`。当前主站版本 `20261114T051119Z-astra-home`（538 文件、23 条页面路由、5 个相对链接、2 条外部跳转，共 144,466,376 字节；上一版本 `20261113T044411Z-astra-home`）；新增 `syl-v1-1-xinchuang-drive` 资源由 ECS 提供，既有 CDN 资源保留。网盘后端由独立 Nginx 片段 `/etc/nginx/snippets/shouyulove-drive.conf`、`shouyulove-drive.service`（8768）与 `shouyulove-drive-fb.service`（8769）承载，不与主站静态发布目录混用。详见 [当前运维状态](../docs/operations-current.md)。

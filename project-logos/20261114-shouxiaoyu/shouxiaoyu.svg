@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">手小语 · 掌心对话与晨星</title>
+  <g stroke="#4b5d54" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 主暖米对话气泡 -->
+    <path d="M36 74 Q36 40 70 40 H166 Q200 40 200 74 V138 Q200 172 166 172 H98 L62 199 V172 Q36 168 36 138 Z" fill="#f5e6d6"/>
+    <!-- 豆沙爱心（略向上微调，与托手及前景气泡保持呼吸感） -->
+    <path d="M118 111 C97 97 91 81 99 72 C105 64 114 68 118 76 C122 68 131 64 137 72 C145 81 139 97 118 111 Z" fill="#cfa5a7" stroke-width="10"/>
+    <!-- 温柔托手弧线（完整无遮挡） -->
+    <path d="M79 124 Q118 141 157 124" fill="none" stroke-width="11"/>
+    <!-- 右下叠合灰绿回应小气泡（整体右移下沉，与托手弧线完全错开） -->
+    <path d="M124 168 Q124 148 144 148 H202 Q222 148 222 168 V194 Q222 214 202 214 H190 L198 231 L169 214 H144 Q124 214 124 194 Z" fill="#bdd0c1"/>
+    <circle cx="154" cy="181" r="5" fill="#4b5d54" stroke="none"/>
+    <circle cx="173" cy="181" r="5" fill="#4b5d54" stroke="none"/>
+    <circle cx="192" cy="181" r="5" fill="#4b5d54" stroke="none"/>
+    <!-- 右上角暖金晨星 -->
+    <path d="M214 24 Q216 42 234 44 Q216 46 214 64 Q212 46 194 44 Q212 42 214 24 Z" fill="#e7c589" stroke-width="9"/>
+  </g>
+</svg>

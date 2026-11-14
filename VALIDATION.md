@@ -1,5 +1,13 @@
 # 2026-10-18 CDN 与 OSS 上线
 
+## 2026-11-14 手小语展示页上线与主站联动核验
+
+发布主站版本 `20261114T063603Z-astra-home` 与独立静态展示页 `/shouxiaoyu/`（发布目录 `/var/www/shouyulove-shouxiaoyu-releases/20261114T063719Z-shouxiaoyu`），在作品集「核心创意」分区新增「手小语」（设计者涂增基），入口直达 `https://shouyulove.cn/shouxiaoyu/`。
+
+- 对 34 张微信水大群手机实录截图与 4 张桌面截图完成 Vision OCR + 条码识别 + 隐私核查，确认已剔除两张私聊截图（`IMG_2805`、`IMG_2806`）、裁去顶部群聊/状态栏并遮盖群二维码与群友实名院系备注（`barcodes=0`、`real_name_leaks=0`），仅将白名单 `site/` 上传至服务器。
+- 主站 20 项有效单元测试（1 项 Nginx 本地跳过）与 `runtime_snapshot.py verify` 通过；中文字体子集与 RGB MSDF 图集更新至 570 字。
+- 服务器 `publish_astra.py` 核验 600 个运行文件、24 条页面路由（含 `/projects/shouxiaoyu/`）、5 个相对链接、2 条外部跳转、共 151,602,868 字节与既有子站全部返回预期状态；11 个后台 systemd 服务 `MainPID` 保持不变。
+
 ## 2026-11-14 心创云盘上线、100 GB 扩容与主站联动核验
 
 发布主站版本 `20261114T051119Z-astra-home` 与内部网盘服务 `shouyulove-drive`（搭配 `shouyulove-auth` 手机哈希透传发布 `20261114T043747Z`），在作品集「心创组内部使用」分区新增「心创云盘」（设计者涂增基），入口直达 `https://shouyulove.cn/drive/`。

@@ -1,28 +1,29 @@
 {
   "routes": {
-    "/": "index.html",
-    "/portfolio/": "portfolio/index.html",
+    "/projects/signtrace/": "projects/signtrace/index.html",
+    "/projects/dictionary/": "projects/dictionary/index.html",
+    "/projects/shouxiaoyu/": "projects/shouxiaoyu/index.html",
+    "/projects/chuanqinghuiyi/": "projects/chuanqinghuiyi/index.html",
+    "/projects/signplay/": "projects/signplay/index.html",
+    "/projects/flyinghands/": "projects/flyinghands/index.html",
     "/projects/2026-sign-language-cultural-festival/": "projects/2026-sign-language-cultural-festival/index.html",
     "/projects/2026-year-end-summary/": "projects/2026-year-end-summary/index.html",
-    "/projects/beida-zhidao/": "projects/beida-zhidao/index.html",
-    "/projects/chuanqinghuiyi/": "projects/chuanqinghuiyi/index.html",
-    "/projects/dictionary/": "projects/dictionary/index.html",
-    "/projects/flyinghands/": "projects/flyinghands/index.html",
-    "/projects/jieguo/": "projects/jieguo/index.html",
-    "/projects/pinhaoke/": "projects/pinhaoke/index.html",
-    "/projects/qinghua-zhidao/": "projects/qinghua-zhidao/index.html",
     "/projects/quna-study/": "projects/quna-study/index.html",
+    "/projects/pinhaoke/": "projects/pinhaoke/index.html",
+    "/projects/beida-zhidao/": "projects/beida-zhidao/index.html",
+    "/projects/qinghua-zhidao/": "projects/qinghua-zhidao/index.html",
+    "/projects/jieguo/": "projects/jieguo/index.html",
     "/projects/shouyu-pass/": "projects/shouyu-pass/index.html",
-    "/projects/signplay/": "projects/signplay/index.html",
-    "/projects/signtrace/": "projects/signtrace/index.html",
     "/projects/xinchuang-drive/": "projects/xinchuang-drive/index.html",
-    "/the-studio/": "the-studio/index.html",
+    "/": "index.html",
+    "/the-studio/the-studio/": "the-studio/the-studio/index.html",
+    "/the-studio/our-approach/": "the-studio/our-approach/index.html",
+    "/the-studio/services/": "the-studio/services/index.html",
     "/the-studio/awards/": "the-studio/awards/index.html",
     "/the-studio/clients/": "the-studio/clients/index.html",
     "/the-studio/contact-us/": "the-studio/contact-us/index.html",
-    "/the-studio/our-approach/": "the-studio/our-approach/index.html",
-    "/the-studio/services/": "the-studio/services/index.html",
-    "/the-studio/the-studio/": "the-studio/the-studio/index.html"
+    "/the-studio/": "the-studio/index.html",
+    "/portfolio/": "portfolio/index.html"
   },
   "redirects": {
     "/projects": "/portfolio/",
@@ -32,36 +33,36 @@
   },
   "files": {
     "_payload.json": {
-      "bytes": 14671,
-      "sha256": "096ee233e4ba4dd7d568ed638c791d52e732b1c4dd9761e3d4701b98746d9c63"
+      "bytes": 15452,
+      "sha256": "6e71c191606a519decccf50fadd9f96da27d2c3c509cdab94639ebbb6f232497"
     },
     "index.html": {
-      "bytes": 127276,
-      "sha256": "01bfbdeb276df794f3c563b35ac02a16e01194c665d987e00997fb905475be3f"
+      "bytes": 130650,
+      "sha256": "929f09120a8d2df75fb8aff9b03bbd0518f4225cc25f98cd897e1acaef9ffcab"
     },
     "portfolio/index.html": {
-      "bytes": 25207,
-      "sha256": "6a20de76d1a0af61b5de20aa052d59c6a22b0fc353e200050d82d75b562f00cc"
+      "bytes": 26214,
+      "sha256": "5118157235a06b8d1da533155c72cc867ac9ec07dbb130e641e027c1308b80bc"
     },
     "portfolio/projects.json": {
-      "bytes": 586,
-      "sha256": "48a005a8ca4b2799732e91ac48d20235d04375525f5091ad9fb5b12398e50d83"
+      "bytes": 615,
+      "sha256": "2425ca4eb505a9fe81310b8a2572072e95d837cb3a3f29e6fe262026f637c14a"
     },
     "projects/2026-sign-language-cultural-festival/_payload.json": {
       "bytes": 1025,
       "sha256": "69f122a1d9f611d6af9bbd497d5cd5805525b11fc3db4998d89b31508b4007f0"
     },
     "projects/2026-sign-language-cultural-festival/index.html": {
-      "bytes": 130147,
-      "sha256": "a3a1ef9bbc530ebc794aa69f3c8ffd1912fc5221d7780b0d5d060c86532ade30"
+      "bytes": 133417,
+      "sha256": "9aac0747483bf226878ce90118517b8285f6f9647dd7f794262a170f513cef48"
     },
     "projects/2026-year-end-summary/_payload.json": {
       "bytes": 1037,
       "sha256": "ea298fabb087885166cee6166b0b36c00a7ea38f47e61e501516713c1914077e"
     },
     "projects/2026-year-end-summary/index.html": {
-      "bytes": 130132,
-      "sha256": "d0b17d8a0844ee56cfbad7768687d3da4216c2712aeb1eed3cb6d598e6f65ced"
+      "bytes": 133402,
+      "sha256": "2dfdd90ef879f22adf2ddd4da93ae33b4dffc2a0a602f6eb1faa2be601884e81"
     },
     "projects/_payload.json": {
       "bytes": 350,
@@ -72,100 +73,108 @@
       "sha256": "c07346b751492c3492d101251b8fe17a4214543d9fad9fc321f717a0d69d546f"
     },
     "projects/beida-zhidao/index.html": {
-      "bytes": 130077,
-      "sha256": "3c200de1651bd86bab4bf607fdbe19a19a89b165cdc6e5be9f41112b29bf2804"
+      "bytes": 133347,
+      "sha256": "cf08a31937126470e2b3a3677282420107c3619612b4af25cf375427e9fcb2d0"
     },
     "projects/chuanqinghuiyi/_payload.json": {
       "bytes": 912,
       "sha256": "a6c7cc32965da3f1b7a389f29dc756c471a877b3d0eb21f6dc03b5cd9250a7f7"
     },
     "projects/chuanqinghuiyi/index.html": {
-      "bytes": 130085,
-      "sha256": "04ba70f3b367482f67ba11a4dad4861b78e3652957746cc05c7aebcf5b184b0c"
+      "bytes": 133355,
+      "sha256": "31dcaef94f72c97cefd29185d2181dc2369c6d55b9737ac3671f517ec2302d6d"
     },
     "projects/dictionary/_payload.json": {
       "bytes": 878,
       "sha256": "797eed3de207b6eeb76de651a62f1d56d3397caabb5983dbf0bd001c60e05b02"
     },
     "projects/dictionary/index.html": {
-      "bytes": 130065,
-      "sha256": "9b382ce59ea7bfeae3fc42ac49e41abe3ff1bba7bb082f1089e68931b808188e"
+      "bytes": 133335,
+      "sha256": "64c788fafef07821670876683bc8f011db56e46be5d62dc01d1f22386d717c08"
     },
     "projects/flyinghands/_payload.json": {
       "bytes": 883,
       "sha256": "708539f2c64f864653a0a36791fa66676db59220e38bd986a0ccfd746b90912a"
     },
     "projects/flyinghands/index.html": {
-      "bytes": 130056,
-      "sha256": "ab68051a61165c9783b886850651ec998de37c1a321ee3392264806dd2309cb3"
+      "bytes": 133326,
+      "sha256": "1b5931ed533b7ef74c7c7731a4eeb67ff85bf3cf31e7b01e9dd9671257ab1d00"
     },
     "projects/index.html": {
-      "bytes": 268,
-      "sha256": "81fb8202a16edb14ca020e271f4b3f83ec7a285a1eceb2b0cdd4fd8368f48917"
+      "bytes": 340,
+      "sha256": "7c3e10731c40d490577783bad03c2f428288e3b632fc8ecee676be73ab60c78f"
     },
     "projects/jieguo/_payload.json": {
       "bytes": 779,
       "sha256": "bcdb6fec67a5e7555ce9e7dd9c8b8c9af6957290f2fa087cdd887e9c865f53bc"
     },
     "projects/jieguo/index.html": {
-      "bytes": 130029,
-      "sha256": "d0c6d4c3c17fd2255aa2300d420f342d2675ae577bbd84d0747b1728afa736ef"
+      "bytes": 133299,
+      "sha256": "c5f469d0353ff00b5a6f5ce63c96cc9af3e00d5e82a4bed20f96c6aa14b4a770"
     },
     "projects/pinhaoke/_payload.json": {
       "bytes": 824,
       "sha256": "16c9e56d22cec5d727f6c40d747743d518b1ab8fe9794b67432432eab0fb7211"
     },
     "projects/pinhaoke/index.html": {
-      "bytes": 130041,
-      "sha256": "662b913ccd0fcdfb9b2abea8c9fbcc26e5743d6b964dd81546ad57d6b7be1a4a"
+      "bytes": 133311,
+      "sha256": "14b413dda6bb17c84ee2f4f1249f0780c67ecaa60ca86facef9a856a39b1a8c0"
     },
     "projects/qinghua-zhidao/_payload.json": {
       "bytes": 847,
       "sha256": "49d77349b4fbe89063bfe9e362aec985cf216c4f4675618ed85bf94f805c1e8a"
     },
     "projects/qinghua-zhidao/index.html": {
-      "bytes": 130083,
-      "sha256": "ed27ef4dda81d7258eed5644abad55e9d29db5b3df91e45fdaf8b2ed707988df"
+      "bytes": 133353,
+      "sha256": "641f97dfbd37391f17f38d7ac24f149d62d8945ef4b87f9f0cba7fef941592b3"
     },
     "projects/quna-study/_payload.json": {
       "bytes": 816,
       "sha256": "b2e762127a0a2db03402c5b4f683f1935b5510f75e10b45762929845749c30f8"
     },
     "projects/quna-study/index.html": {
-      "bytes": 130053,
-      "sha256": "09c2631be1dbae7320f25404e2d817be65131b1fd3a278895f38f8975d823a58"
+      "bytes": 133323,
+      "sha256": "093fadadedf1d6ef3cf4b2e87051b8917440073439f1e7df1441695c94403661"
+    },
+    "projects/shouxiaoyu/_payload.json": {
+      "bytes": 925,
+      "sha256": "66da40e3795771542689440f41f6cecb5fa6a5414f7e880cb90bcd320df5467f"
+    },
+    "projects/shouxiaoyu/index.html": {
+      "bytes": 133317,
+      "sha256": "952a273d6c0b7e0fab1694615eb65fe3fabbda2f061a9371ffbb6b9a549e6bec"
     },
     "projects/shouyu-pass/_payload.json": {
       "bytes": 908,
       "sha256": "78261c325fba74025d4185eddf1dd5b23bec8b66b51beb6446c442c973d3096d"
     },
     "projects/shouyu-pass/index.html": {
-      "bytes": 130086,
-      "sha256": "2d4fa2951a7e7e3317b2f93a087c286a84fb76da99cd64caf93ee51209736a40"
+      "bytes": 133356,
+      "sha256": "8011c19bd5c9256d177d971f64bf0955a62b1bdccec219bd2fd9e2270e3d82ad"
     },
     "projects/signplay/_payload.json": {
       "bytes": 862,
       "sha256": "cf2e9b9c23f78782c12b07fd31125589d96a4cdeffcc5a2be012c8c4e942f58d"
     },
     "projects/signplay/index.html": {
-      "bytes": 130065,
-      "sha256": "b0823dd5ebbefe75795b756c78834b4588852072885a05a2272600c7eda934bf"
+      "bytes": 133335,
+      "sha256": "1ccd8afe6bf8d614dd4f21704e8304274eda7ea63f6cf304b70540da5e5a9d45"
     },
     "projects/signtrace/_payload.json": {
       "bytes": 949,
       "sha256": "4a6592433ad82ef5256cfe6268953cddb9b34bb8b7d17570d25a13b45009933a"
     },
     "projects/signtrace/index.html": {
-      "bytes": 130070,
-      "sha256": "4e8b491c84df7698448d13f1d7c5dfa06e9c02a4fc1ff96273674342967aaf11"
+      "bytes": 133340,
+      "sha256": "b91cd00eaedebecce36400e0939f87e49e123c5738678b499af0baa7aaa279ba"
     },
     "projects/xinchuang-drive/_payload.json": {
       "bytes": 899,
       "sha256": "ebda18a14cf0a56926275361911e8910b94e26e133c840ca3bd13e04cf7d4aff"
     },
     "projects/xinchuang-drive/index.html": {
-      "bytes": 130068,
-      "sha256": "7c5cb2cdfc8b762b7b1d075b4e51f7565a894ac2532bd5cb03c8eb1ef5ca9f5e"
+      "bytes": 133338,
+      "sha256": "18d8f43c273da79e8f0612594d406f7bfe97be713f2c41a4482956fe9ee504ed"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-flyinghands.css": {
       "bytes": 6114,
@@ -176,6 +185,10 @@
       "sha256": "e25925392c87b8b2bb361880c87e276a49e18139bfb966132a7d80c4f1a1c4dd"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-quna-study.css": {
+      "bytes": 6114,
+      "sha256": "e25925392c87b8b2bb361880c87e276a49e18139bfb966132a7d80c4f1a1c4dd"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-shouxiaoyu.css": {
       "bytes": 6114,
       "sha256": "e25925392c87b8b2bb361880c87e276a49e18139bfb966132a7d80c4f1a1c4dd"
     },
@@ -203,6 +216,10 @@
       "bytes": 6275,
       "sha256": "7bcdb144f8417ed21dd94bfb818f2ffa37bd91c4937ac6e871bf2bc98be0575a"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/AboutPage.DgUWXiAT.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 6275,
+      "sha256": "11f335f1c3e75234c5272bc08aecfc2bf952b5bf092852478831c660e6ff61a2"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.DgUWXiAT.syl-v1-1-shouyu-pass.js": {
       "bytes": 6279,
       "sha256": "d346c87eee18cc18635e56ed3b5aac8fd248407811383aa05aebefa634fddb83"
@@ -227,6 +244,10 @@
       "bytes": 20055,
       "sha256": "c29b5e325cf090b418c2171251c0ce0004e6848aab89a33a9acebd58b7039299"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.BJXpRcDM.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 20055,
+      "sha256": "dcc720cd85ec4b2e11c5d17110559ebea39ffe5718452a44a4ff73e8e6064ada"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.BJXpRcDM.syl-v1-1-shouyu-pass.js": {
       "bytes": 20057,
       "sha256": "66722c9013fccb49955cf127d4287f9a1c731e5941cb0e51048229707a4d2418"
@@ -248,6 +269,10 @@
       "sha256": "5ee72eeb9a2b14faab6b3cfeed42f6f0f157d90c4fe90a7e9e8da73c130307af"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.C3T5QDcr.syl-v1-1-quna-study.css": {
+      "bytes": 14442,
+      "sha256": "5ee72eeb9a2b14faab6b3cfeed42f6f0f157d90c4fe90a7e9e8da73c130307af"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.C3T5QDcr.syl-v1-1-shouxiaoyu.css": {
       "bytes": 14442,
       "sha256": "5ee72eeb9a2b14faab6b3cfeed42f6f0f157d90c4fe90a7e9e8da73c130307af"
     },
@@ -275,6 +300,10 @@
       "bytes": 5903,
       "sha256": "4ded1ec21100e58da162705b1897be14f92502702f29ffb31e7fbd881ca79db8"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/BasicButton.D91CLqAw.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 5903,
+      "sha256": "c91f432368a10acbd7e48b2b64a3f374a65212f783dd8cd89120847d9d407eea"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/BasicButton.D91CLqAw.syl-v1-1-shouyu-pass.js": {
       "bytes": 5904,
       "sha256": "f180d71cf11e7215891147ff1cbb3cbfbd1b260190ae84ee9c68906d28698f90"
@@ -296,6 +325,10 @@
       "sha256": "468d0b4e3da662827820e62ec6554852df753f565b415b057cc0e71c3a380602"
     },
     "sites/immersive-g-com-955afd14/shared/assets/BasicButton.Dorc8BWb.syl-v1-1-quna-study.css": {
+      "bytes": 766,
+      "sha256": "468d0b4e3da662827820e62ec6554852df753f565b415b057cc0e71c3a380602"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/BasicButton.Dorc8BWb.syl-v1-1-shouxiaoyu.css": {
       "bytes": 766,
       "sha256": "468d0b4e3da662827820e62ec6554852df753f565b415b057cc0e71c3a380602"
     },
@@ -323,6 +356,10 @@
       "bytes": 1636,
       "sha256": "814c344cbb6e4749161d23293082eaa67bbb49ea59d97b19c386299eac3428b1"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.Bs5C7G0C.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 1636,
+      "sha256": "3dce0c510d45ba576f6cf8cab4d7d22790802584f004c1549d1968ef55aeb559"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.Bs5C7G0C.syl-v1-1-shouyu-pass.js": {
       "bytes": 1637,
       "sha256": "e29839621e91802332a35c41eff94f6d585029f405cac086fc8f5fbc63b5b455"
@@ -344,6 +381,10 @@
       "sha256": "736867c9a2d6a080de6b13012857688e57475e53097c64ed1e70ea3efdbf576a"
     },
     "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.DY5DOHtB.syl-v1-1-quna-study.css": {
+      "bytes": 753,
+      "sha256": "736867c9a2d6a080de6b13012857688e57475e53097c64ed1e70ea3efdbf576a"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.DY5DOHtB.syl-v1-1-shouxiaoyu.css": {
       "bytes": 753,
       "sha256": "736867c9a2d6a080de6b13012857688e57475e53097c64ed1e70ea3efdbf576a"
     },
@@ -387,6 +428,10 @@
       "bytes": 25531,
       "sha256": "3aaeeaca62d498d129e43382683d56afc869490cea654614193639aabd704465"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.BetzaiHB.syl-v1-1-shouxiaoyu.css": {
+      "bytes": 25531,
+      "sha256": "3aaeeaca62d498d129e43382683d56afc869490cea654614193639aabd704465"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.BetzaiHB.syl-v1-1-shouyu-pass.css": {
       "bytes": 25531,
       "sha256": "3aaeeaca62d498d129e43382683d56afc869490cea654614193639aabd704465"
@@ -411,6 +456,10 @@
       "bytes": 10728,
       "sha256": "36c4129ede28749d077380d6fedbcb8395310d9a03c20fc3df59ce77c3bcc2fa"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.DoznkBHg.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 10728,
+      "sha256": "4b8e7ba78438c5c4eded94a22a69fda1ffc05fe80ad7550fbf72df16140e0180"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.DoznkBHg.syl-v1-1-shouyu-pass.js": {
       "bytes": 10731,
       "sha256": "0f516e2d695aec0676f5c4f9a809a010cd05750bc30f6a71f7f2343f26a573a9"
@@ -434,6 +483,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/HomePage.ClaPmn7U.syl-v1-1-quna-study.js": {
       "bytes": 6406,
       "sha256": "bce8b8927c54727a848812ad8c7e6b441a18804e334683495b562dd2c37d7d96"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/HomePage.ClaPmn7U.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 6406,
+      "sha256": "4a1ddd700801a8c1a5243741d271af48a6b54d584cbf9910b83c27f8f076840f"
     },
     "sites/immersive-g-com-955afd14/shared/assets/HomePage.ClaPmn7U.syl-v1-1-shouyu-pass.js": {
       "bytes": 6410,
@@ -471,6 +524,10 @@
       "bytes": 2977,
       "sha256": "a4f07d6056f2d82eb6ae2c01d94cba986883758043df7c4aa4da34827ae5401b"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.B66t4y4U.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 2977,
+      "sha256": "0771f3fc4e6698cf61d872528ef2ab9eaaee2dd32e173a272482d5272ac63391"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.B66t4y4U.syl-v1-1-shouyu-pass.js": {
       "bytes": 2979,
       "sha256": "c47c9f6613d8ed06c6d5554ba9786297cbbc9105900bf33f5784f6bfd43c0ffd"
@@ -492,6 +549,10 @@
       "sha256": "befbc0b374c5d4841f88d8c3d7278a4d7cadcdae41b03e4141fb9c800250607b"
     },
     "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.BLAoBKI3.syl-v1-1-quna-study.css": {
+      "bytes": 1247,
+      "sha256": "befbc0b374c5d4841f88d8c3d7278a4d7cadcdae41b03e4141fb9c800250607b"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.BLAoBKI3.syl-v1-1-shouxiaoyu.css": {
       "bytes": 1247,
       "sha256": "befbc0b374c5d4841f88d8c3d7278a4d7cadcdae41b03e4141fb9c800250607b"
     },
@@ -519,6 +580,10 @@
       "bytes": 5196,
       "sha256": "71a07597d8d91994ab012d4573fb7f33aa64572f75f739e4c92d0f206f443f30"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.BGFPg47w.syl-v1-1-shouxiaoyu.css": {
+      "bytes": 5196,
+      "sha256": "71a07597d8d91994ab012d4573fb7f33aa64572f75f739e4c92d0f206f443f30"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.BGFPg47w.syl-v1-1-shouyu-pass.css": {
       "bytes": 5196,
       "sha256": "71a07597d8d91994ab012d4573fb7f33aa64572f75f739e4c92d0f206f443f30"
@@ -543,6 +608,10 @@
       "bytes": 3184,
       "sha256": "9be4ec06ffe7a105bb06457ce5b99974f6cbdfaad7bb7f6be0fb0c57f670229a"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.Bh_iOA_x.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 3184,
+      "sha256": "f9c3edf587255988e79aa9264caa0f9e0d775650cae0cdb9ab77a7567045642b"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.Bh_iOA_x.syl-v1-1-shouyu-pass.js": {
       "bytes": 3186,
       "sha256": "d10e32c066739bbf962f438f2486f50fde8023cbd11766530adc79d08b3d999f"
@@ -564,6 +633,10 @@
       "sha256": "7e4c47664fdab6fcd08de854d7c596062da2d124b1f879598faf56b08274e2af"
     },
     "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.CazkSH89.syl-v1-1-quna-study.css": {
+      "bytes": 14516,
+      "sha256": "7e4c47664fdab6fcd08de854d7c596062da2d124b1f879598faf56b08274e2af"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.CazkSH89.syl-v1-1-shouxiaoyu.css": {
       "bytes": 14516,
       "sha256": "7e4c47664fdab6fcd08de854d7c596062da2d124b1f879598faf56b08274e2af"
     },
@@ -591,6 +664,10 @@
       "bytes": 13773,
       "sha256": "8941751b68904952bbc11f81a195e4cc994c7448a790aeacac6aa20c70bbea90"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.Cv0OM6xq.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 13773,
+      "sha256": "a7bcb9200c5ea6dcb2938a78f35f5ca3dc0d949bde74e2c33ed048329d452f81"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.Cv0OM6xq.syl-v1-1-shouyu-pass.js": {
       "bytes": 13778,
       "sha256": "445459d98e646f3ef0ad8115129a010c1331cb75a4fc4c76b89a764870cf1215"
@@ -614,6 +691,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/asyncData.B6IxwMmT.syl-v1-1-quna-study.js": {
       "bytes": 2618,
       "sha256": "f3302388bffecfd238d3bc4a6b40b3496eb10faf5f78c1b548b3ac01d9464e52"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/asyncData.B6IxwMmT.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 2618,
+      "sha256": "a7912cd740e050b5575229edc85a880284fc2b5942b4d9b82e0c45dec8aea668"
     },
     "sites/immersive-g-com-955afd14/shared/assets/asyncData.B6IxwMmT.syl-v1-1-shouyu-pass.js": {
       "bytes": 2619,
@@ -643,6 +724,10 @@
       "bytes": 33,
       "sha256": "49751e83c2dabf8a8ead01b84ca4a250f0f305b4845f33a0cd4ffe880e409d63"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/component-stub.FmFgRqLi.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 33,
+      "sha256": "49751e83c2dabf8a8ead01b84ca4a250f0f305b4845f33a0cd4ffe880e409d63"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/component-stub.FmFgRqLi.syl-v1-1-shouyu-pass.js": {
       "bytes": 33,
       "sha256": "49751e83c2dabf8a8ead01b84ca4a250f0f305b4845f33a0cd4ffe880e409d63"
@@ -664,6 +749,10 @@
       "sha256": "ef487696b0c40192c7af5ec98e799e8c6cae8bbe9e23b8c95d68bd8349548af0"
     },
     "sites/immersive-g-com-955afd14/shared/assets/default.C99tf3EK.syl-v1-1-quna-study.css": {
+      "bytes": 12052,
+      "sha256": "ef487696b0c40192c7af5ec98e799e8c6cae8bbe9e23b8c95d68bd8349548af0"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/default.C99tf3EK.syl-v1-1-shouxiaoyu.css": {
       "bytes": 12052,
       "sha256": "ef487696b0c40192c7af5ec98e799e8c6cae8bbe9e23b8c95d68bd8349548af0"
     },
@@ -691,6 +780,10 @@
       "bytes": 18149,
       "sha256": "a23bbc60e1b7fcb0c51c6431b85d15f051d1485e7893289152f0a398c28c700a"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/default.CxpTjDRZ.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 18073,
+      "sha256": "4a4c40b1aecf1932d60ba59838ae1590c8e1cc4e8aa9da38b62fcab412ccc254"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/default.CxpTjDRZ.syl-v1-1-shouyu-pass.js": {
       "bytes": 18080,
       "sha256": "05bac16f91432c245fba1b8f26f4f036e5bbe5157bd3ef2e96e777452d0e0821"
@@ -712,6 +805,10 @@
       "sha256": "4de6528880c524a937a13b122dc78adb6a124a9da2b74eaa763e64ea6862e319"
     },
     "sites/immersive-g-com-955afd14/shared/assets/entry.CU8H-nqP.syl-v1-1-quna-study.css": {
+      "bytes": 10480,
+      "sha256": "4de6528880c524a937a13b122dc78adb6a124a9da2b74eaa763e64ea6862e319"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/entry.CU8H-nqP.syl-v1-1-shouxiaoyu.css": {
       "bytes": 10480,
       "sha256": "4de6528880c524a937a13b122dc78adb6a124a9da2b74eaa763e64ea6862e319"
     },
@@ -739,6 +836,10 @@
       "bytes": 2458298,
       "sha256": "a2de4f743529904434e1f0736cd02b86efab917c25dea6a6623afb22107d02ad"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/entry.DyxL_KXi.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 2457770,
+      "sha256": "09bed29e73fd18675e5f23f68aca29560b4ec07ece9b6c6adc9bcdeac4fdf332"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/entry.DyxL_KXi.syl-v1-1-shouyu-pass.js": {
       "bytes": 2457855,
       "sha256": "5cc5a22df8608d5f08bc2915249f5f9dd58dc54e9c6ff84f514b6b482f67cc3e"
@@ -762,6 +863,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/fast-bootstrap.syl-v1-1-quna-study.js": {
       "bytes": 1032,
       "sha256": "b0158ea0513ee9f69913008efd694f9a5e6b6b25782762e5c2711be10d2e1a66"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/fast-bootstrap.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 1139,
+      "sha256": "521df458f34ee8c297247f84a5eb5b9bd0703227dee428f19b9b7b7b34404fce"
     },
     "sites/immersive-g-com-955afd14/shared/assets/fast-bootstrap.syl-v1-1-shouyu-pass.js": {
       "bytes": 1139,
@@ -911,6 +1016,10 @@
       "bytes": 242008,
       "sha256": "2ae93511b3ef09bc9520d92a6c12583aa420dc19feb974894f45ed769f99c089"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/fonts.syl-v1-1-shouxiaoyu.css": {
+      "bytes": 248508,
+      "sha256": "58efa330b4ef3664c467a9f4a82cdb8c9520fd8734aa0fc00fa86af7e5bc67e8"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/fonts.syl-v1-1-shouyu-pass.css": {
       "bytes": 243392,
       "sha256": "db89d5d125f960d2454b472d80cff8f39b358dd266be754eb8d2c6fec4082597"
@@ -932,6 +1041,10 @@
       "sha256": "00801cbd1e11c095eda8feae8358807f2541f6fab02299c53eae02a08e230957"
     },
     "sites/immersive-g-com-955afd14/shared/assets/home-shortcut.syl-v1-1-quna-study.js": {
+      "bytes": 3082,
+      "sha256": "00801cbd1e11c095eda8feae8358807f2541f6fab02299c53eae02a08e230957"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/home-shortcut.syl-v1-1-shouxiaoyu.js": {
       "bytes": 3082,
       "sha256": "00801cbd1e11c095eda8feae8358807f2541f6fab02299c53eae02a08e230957"
     },
@@ -963,6 +1076,10 @@
       "bytes": 891,
       "sha256": "19716ce913a89e239729914c0a9b510a77f8be459de1c581e45240e4d2008b3a"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/index.C0GRCNhC.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 891,
+      "sha256": "ab20f097df0d23124f149ea4e55f633d3bd97c74f084948122d07560b8e38ce5"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/index.C0GRCNhC.syl-v1-1-shouyu-pass.js": {
       "bytes": 896,
       "sha256": "b57d8024ddec7ae482ae573522172098c14468dab5d14ef3208f582337361bbc"
@@ -984,6 +1101,10 @@
       "sha256": "2706eb119376411a968d509d79eb2b93aec096df1b8ca4b5c7fb08d9c67c6d7d"
     },
     "sites/immersive-g-com-955afd14/shared/assets/index.CZfKaD6V.syl-v1-1-quna-study.css": {
+      "bytes": 5106,
+      "sha256": "2706eb119376411a968d509d79eb2b93aec096df1b8ca4b5c7fb08d9c67c6d7d"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/index.CZfKaD6V.syl-v1-1-shouxiaoyu.css": {
       "bytes": 5106,
       "sha256": "2706eb119376411a968d509d79eb2b93aec096df1b8ca4b5c7fb08d9c67c6d7d"
     },
@@ -1010,6 +1131,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/index.CeH_ahVV.syl-v1-1-quna-study.js": {
       "bytes": 9497,
       "sha256": "717966bba2894b624a73466c71e66f6b6e03465a6206e7ac388a4c8861da418c"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/index.CeH_ahVV.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 9497,
+      "sha256": "1059570581241eb20124a988ec18024e2f268e584920af50cf84c05f3fd69c9e"
     },
     "sites/immersive-g-com-955afd14/shared/assets/index.CeH_ahVV.syl-v1-1-shouyu-pass.js": {
       "bytes": 9504,
@@ -1039,6 +1164,10 @@
       "bytes": 745,
       "sha256": "bb2e51d3442727844fa0d0e3952bda27ee5eb354d27926b875d4654d0cfff51b"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/index.D4TZz6rT.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 745,
+      "sha256": "551394c065d88d225e31d5d21fb942e6fb6896169ac5328b0957e05da88f34d9"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/index.D4TZz6rT.syl-v1-1-shouyu-pass.js": {
       "bytes": 752,
       "sha256": "3f43bf46237df49a23c92c01491760863516d0d60189c79ed382aa20befadd47"
@@ -1062,6 +1191,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/index.D7bwnB0L.syl-v1-1-quna-study.js": {
       "bytes": 1095,
       "sha256": "a0542fe547972d7816137bf38f04cd2b8e9f64b58c43dd0fb1805d8e5c34530d"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/index.D7bwnB0L.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 1095,
+      "sha256": "460b82496622c72b0f10cbbca1d2eb029dcee5032b4f496fc5b68f616236b6e0"
     },
     "sites/immersive-g-com-955afd14/shared/assets/index.D7bwnB0L.syl-v1-1-shouyu-pass.js": {
       "bytes": 1103,
@@ -1091,6 +1224,10 @@
       "bytes": 82807,
       "sha256": "25705a05e12093757d26fe0845823532d7d6bfcaf86a834c10a0a9aa5748e164"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-shouxiaoyu.json": {
+      "bytes": 95789,
+      "sha256": "3e3563b62e4402015935377007a0813e5f2a4524fbee9befb6ca91d4a5816bad"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-shouyu-pass.json": {
       "bytes": 86675,
       "sha256": "5679dfad56b56ae3bd9eaca87ef6a3716ee173164796738689ec286f5230b4a2"
@@ -1118,6 +1255,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/portfolio.syl-v1-1-quna-study.js": {
       "bytes": 3139,
       "sha256": "5aa1e95ede801976dd961adb27ce2cd7407d65edac22909978c5bbdc029594c4"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 3318,
+      "sha256": "48664df8f784f9f5dfe4251b4b0525e09842ee4a205f24662e130bfac0b12770"
     },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio.syl-v1-1-shouyu-pass.js": {
       "bytes": 3318,
@@ -1147,6 +1288,10 @@
       "bytes": 1660,
       "sha256": "0a60fc3f25eef023ec55ad9ac2e12d93722e37b4b02dfa3d61614c516b725ca5"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/preview.qrRKLGJD.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 1660,
+      "sha256": "55d67bc91b7798e0794e94cc4196fab599bba1ef58239065a84b80e24016612d"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/preview.qrRKLGJD.syl-v1-1-shouyu-pass.js": {
       "bytes": 1671,
       "sha256": "c2c1877f9803dc15d4eaefaa750f031aa528ff98c0d181c21aa0eee8d8708ae6"
@@ -1175,6 +1320,10 @@
       "bytes": 289,
       "sha256": "48094c666a5d177a5d976d946c6258173e7310bd902bed3e4fe86392cc1eec24"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/proto.DuMH9e-J.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 289,
+      "sha256": "99fb7fe33afdba8273885b2074e34c8127293ced3dfc848b6f0b15f4250ab079"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/proto.DuMH9e-J.syl-v1-1-shouyu-pass.js": {
       "bytes": 290,
       "sha256": "8c1b1e86e3ce338ceb93ce43be116abb0b63a1bff8b0582d17d887d30ea74387"
@@ -1196,6 +1345,10 @@
       "sha256": "f03ec90be26906550810230129b76009352fba83d0708a65d5035dabed4e97bf"
     },
     "sites/immersive-g-com-955afd14/shared/assets/shouyulove.syl-v1-1-quna-study.css": {
+      "bytes": 15645,
+      "sha256": "f03ec90be26906550810230129b76009352fba83d0708a65d5035dabed4e97bf"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/shouyulove.syl-v1-1-shouxiaoyu.css": {
       "bytes": 15645,
       "sha256": "f03ec90be26906550810230129b76009352fba83d0708a65d5035dabed4e97bf"
     },
@@ -1223,6 +1376,10 @@
       "bytes": 867,
       "sha256": "1970c5db108f440528e6d8fd041319462fea506488658e6e089b50d862d8593d"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/sortGeometryVertices-CjfG_b7R.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 867,
+      "sha256": "1970c5db108f440528e6d8fd041319462fea506488658e6e089b50d862d8593d"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/sortGeometryVertices-CjfG_b7R.syl-v1-1-shouyu-pass.js": {
       "bytes": 867,
       "sha256": "1970c5db108f440528e6d8fd041319462fea506488658e6e089b50d862d8593d"
@@ -1247,6 +1404,10 @@
       "bytes": 245,
       "sha256": "149f8730a40ddf397edd4542622e700095b30fe462444e63e5e3f6ceeebb3665"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/useTimeRaf.CEtG5dZ4.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 245,
+      "sha256": "6e39ffb266ebdb1615a6b81c0d1421bff61bdd07396714827be11fac7f427627"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/useTimeRaf.CEtG5dZ4.syl-v1-1-shouyu-pass.js": {
       "bytes": 246,
       "sha256": "e547cfbcf6a17e703313a1fb26ff29d9405653a6c0a239342494b97341eb156e"
@@ -1270,6 +1431,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/vue3-lottie.es.B1QeRuZw.syl-v1-1-quna-study.js": {
       "bytes": 314201,
       "sha256": "add3d9b0eb3e64e2a2e65e9f6d56cd576e54922b99cb56e17589ce0b2278f404"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/vue3-lottie.es.B1QeRuZw.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 314201,
+      "sha256": "ee32d9afd0e2d61f58df0fe98aa4cbf9f3cea57d7f959bdf51803f5727417446"
     },
     "sites/immersive-g-com-955afd14/shared/assets/vue3-lottie.es.B1QeRuZw.syl-v1-1-shouyu-pass.js": {
       "bytes": 314202,
@@ -1379,6 +1544,10 @@
       "bytes": 30987,
       "sha256": "f3142ef84614783af80cf6e001756b52b4a0004d0311c4926a0eb68fd4612271"
     },
+    "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-shouxiaoyu.js": {
+      "bytes": 36006,
+      "sha256": "1f609efcfc3bb05c3b14bd196236f7d0b60052021b0f84667fc2d6e2c0a6897e"
+    },
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-shouyu-pass.js": {
       "bytes": 32530,
       "sha256": "eea5616ad660607d5fff2d4491e75abb3c33b70e7d50560654d8fec728084f60"
@@ -1451,6 +1620,10 @@
       "bytes": 91856,
       "sha256": "e689dc57c1d0eb7c79c9eb689d256ba4a28c41c46e875bd19e1708ab5e950e2e"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/2026-sign-language-cultural-festival-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 91856,
+      "sha256": "e689dc57c1d0eb7c79c9eb689d256ba4a28c41c46e875bd19e1708ab5e950e2e"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/2026-sign-language-cultural-festival-square.syl-v1-1-shouyu-pass.png": {
       "bytes": 91856,
       "sha256": "e689dc57c1d0eb7c79c9eb689d256ba4a28c41c46e875bd19e1708ab5e950e2e"
@@ -1468,6 +1641,10 @@
       "sha256": "7f64fada5eb069611a43d6dbc403df6a93f7dc83bc2f9de9e3e5c31f7962b3a1"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/2026-year-end-summary-square.syl-v1-1-quna-study.png": {
+      "bytes": 45571,
+      "sha256": "7f64fada5eb069611a43d6dbc403df6a93f7dc83bc2f9de9e3e5c31f7962b3a1"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/2026-year-end-summary-square.syl-v1-1-shouxiaoyu.png": {
       "bytes": 45571,
       "sha256": "7f64fada5eb069611a43d6dbc403df6a93f7dc83bc2f9de9e3e5c31f7962b3a1"
     },
@@ -1499,6 +1676,10 @@
       "bytes": 30170,
       "sha256": "e9e8beab3983f3ce10ec7c967caf320dc19225ec4f9abf475bd9dfd2e213fb0a"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/beida-zhidao-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 30170,
+      "sha256": "e9e8beab3983f3ce10ec7c967caf320dc19225ec4f9abf475bd9dfd2e213fb0a"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/beida-zhidao-square.syl-v1-1-shouyu-pass.png": {
       "bytes": 30170,
       "sha256": "e9e8beab3983f3ce10ec7c967caf320dc19225ec4f9abf475bd9dfd2e213fb0a"
@@ -1519,6 +1700,10 @@
       "bytes": 48399,
       "sha256": "b585851c95bb258b67607382cf47bf730f5a444dec4a533fb96a39e4a6ee8049"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/chuanqinghuiyi-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 48399,
+      "sha256": "b585851c95bb258b67607382cf47bf730f5a444dec4a533fb96a39e4a6ee8049"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/chuanqinghuiyi-square.syl-v1-1-shouyu-pass.png": {
       "bytes": 48399,
       "sha256": "b585851c95bb258b67607382cf47bf730f5a444dec4a533fb96a39e4a6ee8049"
@@ -1536,6 +1721,10 @@
       "sha256": "1bfdadca58400f761a83b4471df65df25cbca3db5bd3eb1c09405bf429258e09"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/dictionary-square.syl-v1-1-quna-study.png": {
+      "bytes": 28970,
+      "sha256": "1bfdadca58400f761a83b4471df65df25cbca3db5bd3eb1c09405bf429258e09"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/dictionary-square.syl-v1-1-shouxiaoyu.png": {
       "bytes": 28970,
       "sha256": "1bfdadca58400f761a83b4471df65df25cbca3db5bd3eb1c09405bf429258e09"
     },
@@ -1563,6 +1752,10 @@
       "bytes": 50992,
       "sha256": "31c5af91a58b8e46c2f1338643d9cfca229a918835689d0e3bab32917886a7de"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/flyinghands-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 50992,
+      "sha256": "31c5af91a58b8e46c2f1338643d9cfca229a918835689d0e3bab32917886a7de"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/flyinghands-square.syl-v1-1-shouyu-pass.png": {
       "bytes": 50992,
       "sha256": "31c5af91a58b8e46c2f1338643d9cfca229a918835689d0e3bab32917886a7de"
@@ -1587,6 +1780,10 @@
       "bytes": 23514,
       "sha256": "42248e494a567c49ca16f66f63523bfdc29384137da5e9b00fa924ee8c6845eb"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/jieguo-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 23514,
+      "sha256": "42248e494a567c49ca16f66f63523bfdc29384137da5e9b00fa924ee8c6845eb"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/jieguo-square.syl-v1-1-shouyu-pass.png": {
       "bytes": 23514,
       "sha256": "42248e494a567c49ca16f66f63523bfdc29384137da5e9b00fa924ee8c6845eb"
@@ -1604,6 +1801,10 @@
       "sha256": "674b1b58143233aae325c1402f0045096b524be893c57b60db7663fd4dc0cab5"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/pinhaoke-square.syl-v1-1-quna-study.png": {
+      "bytes": 17437,
+      "sha256": "674b1b58143233aae325c1402f0045096b524be893c57b60db7663fd4dc0cab5"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/pinhaoke-square.syl-v1-1-shouxiaoyu.png": {
       "bytes": 17437,
       "sha256": "674b1b58143233aae325c1402f0045096b524be893c57b60db7663fd4dc0cab5"
     },
@@ -1627,6 +1828,10 @@
       "bytes": 13961,
       "sha256": "f5fd5ec7746b3b94541daadd3147bbb618b6e321c4e0f86ed9b159e1fe0e02cd"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/qinghua-zhidao-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 13961,
+      "sha256": "f5fd5ec7746b3b94541daadd3147bbb618b6e321c4e0f86ed9b159e1fe0e02cd"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/qinghua-zhidao-square.syl-v1-1-shouyu-pass.png": {
       "bytes": 13961,
       "sha256": "f5fd5ec7746b3b94541daadd3147bbb618b6e321c4e0f86ed9b159e1fe0e02cd"
@@ -1643,6 +1848,10 @@
       "bytes": 33516,
       "sha256": "679ad5cfd85bc13f4407ab07ad7c68d7f8f62cc1226447b9392456facf234d07"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/quna-study-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 33516,
+      "sha256": "679ad5cfd85bc13f4407ab07ad7c68d7f8f62cc1226447b9392456facf234d07"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/quna-study-square.syl-v1-1-shouyu-pass.png": {
       "bytes": 33516,
       "sha256": "679ad5cfd85bc13f4407ab07ad7c68d7f8f62cc1226447b9392456facf234d07"
@@ -1650,6 +1859,14 @@
     "sites/immersive-g-com-955afd14/shared/shouyulove/quna-study-square.syl-v1-1-xinchuang-drive.png": {
       "bytes": 33516,
       "sha256": "679ad5cfd85bc13f4407ab07ad7c68d7f8f62cc1226447b9392456facf234d07"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/shouxiaoyu-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 36557,
+      "sha256": "898e2eedb253c21717ec3421fbe12c5ca8e1cbce914e0fe48591847b052e797c"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/shouyu-pass-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 33723,
+      "sha256": "c4458343799df8971b7f1e729f0f4e637485c8038cfdbd6e28e92433126be8de"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/shouyu-pass-square.syl-v1-1-shouyu-pass.png": {
       "bytes": 33723,
@@ -1664,6 +1881,10 @@
       "sha256": "ec34093326b779b65a8b9832dc32da8e64802c499bacadd2f04e1615ca40204f"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/signplay-square.syl-v1-1-quna-study.png": {
+      "bytes": 40508,
+      "sha256": "ec34093326b779b65a8b9832dc32da8e64802c499bacadd2f04e1615ca40204f"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/signplay-square.syl-v1-1-shouxiaoyu.png": {
       "bytes": 40508,
       "sha256": "ec34093326b779b65a8b9832dc32da8e64802c499bacadd2f04e1615ca40204f"
     },
@@ -1687,6 +1908,10 @@
       "bytes": 45810,
       "sha256": "3d8525518d2a64a2fe719b950e8e5f415654f8df3af9e1e8a2cb501d00a78062"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/signtrace-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 45810,
+      "sha256": "3d8525518d2a64a2fe719b950e8e5f415654f8df3af9e1e8a2cb501d00a78062"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/signtrace-square.syl-v1-1-shouyu-pass.png": {
       "bytes": 45810,
       "sha256": "3d8525518d2a64a2fe719b950e8e5f415654f8df3af9e1e8a2cb501d00a78062"
@@ -1707,6 +1932,10 @@
       "bytes": 101344,
       "sha256": "d0e0a0c75e128a6dc5bb3f284ddb125981d505d85968eab65b72f652f9d1ac35"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-shouxiaoyu.woff2": {
+      "bytes": 106220,
+      "sha256": "515bf948a7ae30833e00ea97e917a090db86e40c7b0876f885925e50467b03eb"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-shouyu-pass.woff2": {
       "bytes": 102384,
       "sha256": "3e9cda99506ecc5e387278d70a5971086f3195771daf0163e3c98a611c8abb65"
@@ -1722,6 +1951,10 @@
     "sites/immersive-g-com-955afd14/shared/shouyulove/works-manifest.syl-v1-1-giving-heart.json": {
       "bytes": 534,
       "sha256": "d5400a967f4126446de0bedf366f85fa6c59a06c62441e11356737531ad07d37"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/xinchuang-drive-square.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 42538,
+      "sha256": "fcc4854cfce027dca5e5f66990e22ed9f0f78ba7b539d2f107a19b5868a99e45"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/xinchuang-drive-square.syl-v1-1-xinchuang-drive.png": {
       "bytes": 42538,
@@ -2031,6 +2264,10 @@
       "bytes": 108553,
       "sha256": "5f24fa240661f3ab40f8f141b7504787517309447b464d54c4c34adf94bfd188"
     },
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf.syl-v1-1-shouxiaoyu.json": {
+      "bytes": 112830,
+      "sha256": "0d57210058654f313c643e06508d8fa159837821a3786c0b39c16c0709076574"
+    },
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf.syl-v1-1-shouyu-pass.json": {
       "bytes": 109580,
       "sha256": "80d769f759d78b1d6a5f7222c2b5cd19ce91f0f584a099543495a68fdf61af58"
@@ -2054,6 +2291,10 @@
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue.syl-v1-1-quna-study.png": {
       "bytes": 1176359,
       "sha256": "ff3e19fa0312c88ceb0d9a51539acea0de69fff56dbc182a4b0b76e60c8b44bd"
+    },
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 1230116,
+      "sha256": "33ad9e9597b55351742f12935cc2c2b25020f98c9b0bec9fc6007b9a6c16bbc4"
     },
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue.syl-v1-1-shouyu-pass.png": {
       "bytes": 1190319,
@@ -2090,6 +2331,14 @@
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-quna-study.png": {
       "bytes": 1188171,
       "sha256": "d88dd15bf86fb5398bb2ca5a7597f6432e95800ad0fcb39e1e712ffe7de32dea"
+    },
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-shouxiaoyu.json": {
+      "bytes": 276277,
+      "sha256": "6121e5652364a2b34213204eb4e5320e6400f5f52e2ce06ddedd7fd3ed60820e"
+    },
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-shouxiaoyu.png": {
+      "bytes": 1240211,
+      "sha256": "c0ed4f0d37d8c105b1307344b64c28b05ff7cb3b21dc1b5958b5b6b9f716dab6"
     },
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-shouyu-pass.json": {
       "bytes": 273008,
@@ -2136,52 +2385,52 @@
       "sha256": "0ec79151f4bd8938276d3abc234fa63c82e7b47bb208605c66750abc7a6c6ca4"
     },
     "the-studio/awards/index.html": {
-      "bytes": 94239,
-      "sha256": "1ca81072a9689d3f72e19a9aae47242cfc1ab8601454e2ae627ddc017bd93c3b"
+      "bytes": 97509,
+      "sha256": "7c11dce5915169eb572493bfb3ce0c5952ca17d89425029e737e2b1d7b2bf256"
     },
     "the-studio/clients/_payload.json": {
       "bytes": 987,
       "sha256": "2427c332edf206e4f96706d58acf02ad9ec420faf00782656ff565f7aa064a5c"
     },
     "the-studio/clients/index.html": {
-      "bytes": 94243,
-      "sha256": "8e96ee87ab277e5811ded1257fad6ce0786eee03de58571c4f770faeddd9f55a"
+      "bytes": 97513,
+      "sha256": "83626300dd19a58ed680cf7ca7ef8c0dfdd635e6fcaf1a53dcdff3fa22aeeaac"
     },
     "the-studio/contact-us/_payload.json": {
       "bytes": 608,
       "sha256": "b539508fe05afe384e8e6968dd44493a47583bbd8c960f9f6238fc3708074878"
     },
     "the-studio/contact-us/index.html": {
-      "bytes": 94311,
-      "sha256": "3ef55f617c0ef0d8e4699e2a10fa044423dd9a12dd0611d1930c4627880096ba"
+      "bytes": 97581,
+      "sha256": "e1dd5d40f753f254b6e2ae144fbcd64da708b7d2517a710591baab6af1e0c783"
     },
     "the-studio/index.html": {
-      "bytes": 94517,
-      "sha256": "14389581d89dcfff75794af9b36d088131337051a016e1e1e891d4b6fd31b815"
+      "bytes": 97792,
+      "sha256": "65249400b0d240c0e55c2b59b2726bcc8fbcd4aff18b88eda28a3796376d1f9f"
     },
     "the-studio/our-approach/_payload.json": {
       "bytes": 526,
       "sha256": "54fcc337c0a095dc2c3299fb1a571100a9601f205df01a83002803610fa6cb31"
     },
     "the-studio/our-approach/index.html": {
-      "bytes": 94299,
-      "sha256": "61dd3b2881c31cda36fd6d58ad09328677e954ad4315eb85de1586b12d6f9651"
+      "bytes": 97569,
+      "sha256": "dd754343e8606428f7d80118a3919cdff534e3b8be70ecd4741fd6be5105469b"
     },
     "the-studio/services/_payload.json": {
-      "bytes": 3904,
-      "sha256": "4688522581c81aa03629b2b28795a99c6aed2c16cf91d120541828ce2f52e838"
+      "bytes": 4429,
+      "sha256": "67aa3b40f38fb29b743a57d13d66907a047245f7b0983e38507836282ad367e6"
     },
     "the-studio/services/index.html": {
-      "bytes": 94263,
-      "sha256": "ff8592cd69003874d4fec4c8ae01debf1ad2c95c8abc4f1a6911df1a5891811a"
+      "bytes": 97533,
+      "sha256": "2670dbbb1ca94b173d1604e9a4c5e47946bf1af5819aeee938d3bbcda147a397"
     },
     "the-studio/the-studio/_payload.json": {
       "bytes": 1414,
       "sha256": "273e6dcdcba4035adc5aa146670aef7e5a63d0b333af997c444fb1833afeaeca"
     },
     "the-studio/the-studio/index.html": {
-      "bytes": 94281,
-      "sha256": "e2c8bbd0c85f9b1f1fe316c2765c7ef4c40db82036597bfb565208deec738355"
+      "bytes": 97551,
+      "sha256": "5fe3444ce044535f5d292e47a271fa93677734180973ddd33298a914ed12f857"
     }
   },
   "symlinks": {
@@ -2191,7 +2440,7 @@
     "sounds": "sites/immersive-g-com-955afd14/shared/sounds",
     "webgl": "sites/immersive-g-com-955afd14/shared/webgl"
   },
-  "bytes": 144466376,
+  "bytes": 151602868,
   "external_redirects": {
     "/where-to-study": "https://39.96.206.228/",
     "/where-to-study/": "https://39.96.206.228/"

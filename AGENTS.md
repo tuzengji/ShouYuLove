@@ -1,5 +1,9 @@
 # 以手予爱主站维护
 
+## 2026-11-14 手小语展示页上线并接入主站与作品集
+
+主站当前运行版本为 `20261114T063603Z-astra-home`：600 个文件、24 条页面路由、5 个相对链接、2 条外部跳转（`/where-to-study` 与 `/where-to-study/` 302 至 `https://39.96.206.228/`），共 151,602,868 字节。作品集现有 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）：在「核心创意」分区新增「手小语」（正式地址 `https://shouyulove.cn/shouxiaoyu/`，设计者涂增基，图标位于 `project-logos/20261114-shouxiaoyu/`），桌面端呈 4 行两列平衡排布。中文字体覆盖 570 字；本次图像、字体、运行模块、数据桥与作品集场景版本为 `syl-v1-1-shouxiaoyu`（`origin-asset-manifest.json` 共 238 项，保留兼容资源），主站标识保持 `syl-v1-1-giving-heart`。手小语独立静态站由本机 `核心创意/手小语/site/` 维护，发布至 `/var/www/shouyulove-showcase`（`/etc/nginx/snippets/shouxiaoyu.conf`），仅包含脱敏后的 38 张群聊/桌面实录截图与说明文案。详见 [当前运维状态](docs/operations-current.md)。
+
 ## 2026-11-14 心创云盘上线、扩至 100 GB 并接入主站与作品集
 
 主站当前运行版本为 `20261114T051119Z-astra-home`：538 个文件、23 条页面路由、5 个相对链接、2 条外部跳转（`/where-to-study` 与 `/where-to-study/` 302 至 `https://39.96.206.228/`），共 144,466,376 字节。作品集现有 14 个项目（7 个核心创意、3 个心创组内部使用、4 个其他作品）：在「心创组内部使用」分区新增「心创云盘」（正式地址 `https://shouyulove.cn/drive/`，设计者涂增基，图标位于 `project-logos/20261114-xinchuang-drive/`），桌面首行两列并排、末项跨列居中展示。中文字体覆盖 556 字；本次图像、字体、运行模块、数据桥与作品集场景版本为 `syl-v1-1-xinchuang-drive`（`origin-asset-manifest.json` 共 178 项，保留兼容资源），主站标识保持 `syl-v1-1-giving-heart`。网盘后台（`100 GB` 稀疏可扩展存储卷 `/srv/shouyulove-drive` / `/srv/drive`）由独立仓库 `心创组内部使用/心创云盘/` 维护，服务归属 `system-shouyulove.slice`。详见 [当前运维状态](docs/operations-current.md)。
