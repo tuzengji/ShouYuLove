@@ -51,6 +51,18 @@ class NginxStatisticsTests(unittest.TestCase):
                     if parent == root:
                         break
                     parent.chmod(0o755)
+            tzj_web = root / 'tuzengji'
+            tzj_web.mkdir()
+            tzj_web.chmod(0o755)
+            for name, body in [('index.html', '<html>Homepage</html>'), ('en/index.html', '<html>EN</html>'), ('styles.css', 'body{}')]:
+                path = tzj_web / name
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(body)
+                path.chmod(0o644)
+                for parent in path.parents:
+                    if parent == root:
+                        break
+                    parent.chmod(0o755)
             upstream = ThreadingHTTPServer(('127.0.0.1', 0), Upstream)
             thread = Thread(target=upstream.serve_forever, daemon=True)
             thread.start()
@@ -74,9 +86,19 @@ http {
         root "''' + str(web) + '''";
         access_log "''' + str(root/'events.log') + '''" syl_private_visits if=$syl_collect_event;
         include "''' + str(ROOT/'deploy/private_stats/nginx-click-location.conf') + '''";
+        location = /where-to-study { return 302 https://39.96.206.228/$is_args$args; }
+        location = /where-to-study/ { return 302 https://39.96.206.228/$is_args$args; }
+        location = /internal-temp { return 302 /future/new/; }
         location /rewrite/ { try_files $uri /index.html; }
         location /proxy/ { proxy_pass http://127.0.0.1:''' + str(upstream.server_port) + '''/; }
         location = /xhtml { default_type application/xhtml+xml; return 200 '<html>XHTML</html>'; }
+        location / { index index.html; }
+    }
+    server {
+        listen 127.0.0.1:''' + str(port) + ''';
+        server_name tuzengji.com;
+        root "''' + str(tzj_web) + '''";
+        access_log "''' + str(root/'events.log') + '''" syl_private_visits if=$syl_collect_event;
         location / { index index.html; }
     }
 }''')
@@ -120,6 +142,13 @@ http {
                 request('/future/new/',{'Sec-Purpose':'prefetch;prerender'})
                 request('/future/new/',{'Sec-Fetch-Dest':'empty'})
                 request('/future/new/',{'User-Agent':'ShouYuLove-QA'})
+                self.assertEqual(request('/where-to-study/')[0],302)
+                self.assertEqual(request('/where-to-study/',{'User-Agent':'ShouYuLove-QA'})[0],302)
+                self.assertEqual(request('/internal-temp')[0],302)
+                self.assertEqual(request('/',{'Host':'tuzengji.com'})[0],200)
+                self.assertEqual(request('/en/',{'Host':'tuzengji.com'})[0],200)
+                self.assertEqual(request('/?release=deadbeef',{'Host':'tuzengji.com','User-Agent':'HomepageReleaseCheck/1.0'})[0],200)
+                self.assertEqual(request('/styles.css',{'Host':'tuzengji.com','Sec-Fetch-Dest':'style'})[0],200)
                 self.assertEqual(request('/missing')[0],404)
                 request('/',method='HEAD')
                 # New files need neither a code change nor a configuration reload.
@@ -146,27 +175,38 @@ http {
             self.assertNotIn('must-not-be-logged',raw)
             self.assertNotIn('not-logged',raw)
             events = [json.loads(line) for line in raw.splitlines()]
+            self.assertNotIn('/internal-temp', [e['path'] for e in events])
             connection,key = visits.open_database(root/'private')
             catalog = root/'catalog.json'
             catalog.write_text(json.dumps({'beida-zhidao':'北大知道'}))
             with patch.object(visits, 'PORTFOLIO_CATALOG', catalog):
-                accepted = [event['path'] for event in events if visits.collect_event(connection,key,event)]
+                accepted = [(event['host'], event['path']) for event in events if visits.collect_event(connection,key,event)]
             connection.close()
-            self.assertCountEqual(accepted,['/','/future/new/','/rewrite/deep/page','/proxy/new/page','/xhtml','/','/brand-new.html',click_path])
+            self.assertCountEqual(accepted,[
+                ('shouyulove.cn','/'),('shouyulove.cn','/future/new/'),('shouyulove.cn','/rewrite/deep/page'),
+                ('shouyulove.cn','/proxy/new/page'),('shouyulove.cn','/xhtml'),('shouyulove.cn','/'),
+                ('shouyulove.cn','/where-to-study/'),('shouyulove.cn','/brand-new.html'),
+                ('shouyulove.cn',click_path),('tuzengji.com','/'),('tuzengji.com','/en/'),
+            ])
             result = visits.report(root/'private/visits.sqlite')
             self.assertEqual(result['portfolio_clicks']['period'],dict(clicks=1,visitors=1))
             self.assertEqual(result['portfolio_clicks']['collector'][0]['received'],2)
-            self.assertEqual(result['period'],dict(views=7,visitors=1))
-            self.assertEqual(len(result['pages']),6)
+            self.assertEqual(result['period'],dict(views=8,visitors=1))
+            self.assertEqual(len(result['pages']),7)
             self.assertNotIn('/static.css', [p['path'] for p in result['pages']])
             projects = {p['project']:p for p in result['projects']}
+            self.assertEqual(projects['where-to-study']['views'],1)
             self.assertEqual(projects['path:/future']['views'],1)
             self.assertEqual(projects['path:/proxy']['views'],1)
             self.assertEqual(projects['path:/brand-new.html']['views'],1)
-            self.assertEqual(sum(p['views'] for p in result['projects']),7)
+            self.assertEqual(sum(p['views'] for p in result['projects']),8)
             health = {p['project']:p for p in result['project_collector']}
             self.assertEqual(health['path:/future']['received'],2)  # Real page + excluded QA probe.
             self.assertEqual(health['path:/future']['accepted'],1)
+            self.assertEqual((health['where-to-study']['received'], health['where-to-study']['accepted']), (2, 1))
+            tzj = visits.report_site(root/'private/visits.sqlite', 'tuzengji.com')
+            self.assertEqual(tzj['period'], dict(views=2, visitors=1))
+            self.assertEqual((tzj['site_collector']['received'], tzj['site_collector']['accepted']), (3, 2))
 
 
 if __name__ == '__main__':

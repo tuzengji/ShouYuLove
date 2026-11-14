@@ -127,9 +127,11 @@ class PrivateStatisticsTests(unittest.TestCase):
             event = dict(time=datetime.now(timezone.utc).isoformat(), address='192.0.2.1',
                          method='GET', status=200, ua='ShouYuLove-QA', content_type='text/html')
             for path in ['/', '/portfolio/', '/signtrace/', '/dict/entries', '/chuanqinghuiyi/',
-                         '/flyinghands/', '/catchpot/', '/2026-sign-language-cultural-festival/',
-                         '/2026-year-end-summary/', '/signplay/', '/shouyu/html/', '/loveheart/html/']:
+                         '/flyinghands/', '/shouxiaoyu/', '/catchpot/', '/2026-sign-language-cultural-festival/',
+                         '/2026-year-end-summary/', '/signplay/', '/auth/', '/drive/', '/pkua100/',
+                         '/pkucpu/', '/shouyu/html/', '/loveheart/html/']:
                 self.assertFalse(visits.collect_event(connection, key, {**event, 'path':path}))
+            self.assertFalse(visits.collect_event(connection, key, {**event, 'path':'/where-to-study/', 'status':302}))
             self.assertFalse(visits.collect_event(connection, key, {**event, 'path':'/api/items', 'content_type':'application/json'}))
             self.assertTrue(visits.collect_event(connection, key, {**event, 'path':'/dict/entry/123', 'ua':'Browser'}))
             self.assertTrue(visits.collect_event(connection, key, {**event, 'path':'/new-project/', 'ua':'Browser'}))
@@ -139,11 +141,88 @@ class PrivateStatisticsTests(unittest.TestCase):
             health = {r['project']:r for r in result['project_collector']}
             self.assertEqual(set(health), set(visits.PROJECT_NAMES) | {'path:/new-project'})
             self.assertEqual(health['flyinghands']['name'], '飞手传书')
+            self.assertEqual(health['shouxiaoyu']['name'], '手小语')
+            self.assertEqual(health['where-to-study']['name'], '去哪自习')
+            self.assertEqual(health['auth']['name'], '手语分社统一通行证')
+            self.assertEqual(health['drive']['name'], '心创云盘')
             self.assertEqual(health['chuanqinghuiyi']['name'], '传情会意-手语版')
             self.assertEqual((health['dict']['received'], health['dict']['accepted']), (2, 1))
+            self.assertEqual((health['where-to-study']['received'], health['where-to-study']['accepted']), (1, 0))
             self.assertIsNone(health['portfolio']['last_accepted'])
             self.assertIsNotNone(health['portfolio']['first_received'])
             self.assertNotIn('192.0.2.1', json.dumps(result))
+
+    def test_where_to_study_gateway_drive_sanitization_and_health_merging(self):
+        with tempfile.TemporaryDirectory() as folder:
+            directory = Path(folder)
+            connection, key = visits.open_database(directory)
+            now = datetime.now(timezone.utc).isoformat()
+            base = dict(time=now, address='192.0.2.9', method='GET', host='shouyulove.cn',
+                        ua='Browser', destination='document', content_type='text/html; charset=utf-8')
+            self.assertTrue(visits.collect_event(connection, key, {**base, 'path': '/where-to-study', 'status': 302}))
+            self.assertTrue(visits.collect_event(connection, key, {**base, 'path': '/where-to-study/?from=pinhaoke', 'status': 302}))
+            self.assertFalse(visits.collect_event(connection, key, {**base, 'path': '/where-to-study/', 'status': 302, 'ua': 'ShouYuLove-QA'}))
+            for rejected in [{'path': '/signtrace', 'status': 302}, {'path': '/where-to-study/', 'status': 301},
+                             {'path': '/where-to-study/', 'status': 302, 'destination': 'empty'},
+                             {'path': '/where-to-study/', 'status': 302, 'purpose': 'prefetch'}]:
+                self.assertFalse(visits.collect_event(connection, key, {**base, **rejected}))
+            secret_drive = '/drive/files/files/%E5%86%85%E9%83%A8%E7%A7%81%E5%AF%86%E7%9B%AE%E5%BD%95/%E6%8A%A5%E5%91%8A.html'
+            self.assertTrue(visits.collect_event(connection, key, {**base, 'path': secret_drive, 'status': 200}))
+            self.assertFalse(visits.collect_event(connection, key, {**base, 'path': '/drive/files/static/app.js', 'status': 304, 'content_type': '', 'destination': 'script'}))
+            self.assertTrue(visits.collect_event(connection, key, {**base, 'path': '/api/docs/', 'status': 200}))
+            # Seed legacy un-aliased project_health keys and verify lossless merging on reopen.
+            connection.execute("INSERT INTO project_health VALUES('path:/shouxiaoyu',3,2,'2026-11-10T00:00:00+00:00','2026-11-14T00:00:00+00:00','2026-11-13T00:00:00+00:00')")
+            connection.execute("INSERT INTO project_health VALUES('shouxiaoyu',4,4,'2026-11-14T01:00:00+00:00','2026-11-14T02:00:00+00:00','2026-11-14T02:00:00+00:00')")
+            connection.execute("INSERT INTO project_health VALUES('path:/api',2,2,'2026-11-13T00:00:00+00:00','2026-11-13T01:00:00+00:00','2026-11-13T01:00:00+00:00')")
+            connection.commit()
+            connection.close()
+            connection, _ = visits.open_database(directory)
+            connection.close()
+            result = visits.report(directory / 'visits.sqlite')
+            projects = {r['project']: r for r in result['projects']}
+            self.assertEqual(projects['where-to-study']['views'], 2)
+            self.assertEqual(projects['drive']['views'], 1)
+            self.assertEqual(projects['dict']['views'], 1)
+            pages = {r['path']: r['views'] for r in result['pages']}
+            self.assertEqual(pages['/where-to-study/'], 2)
+            self.assertEqual(pages['/drive/files/'], 1)
+            db_bytes = (directory / 'visits.sqlite').read_bytes()
+            self.assertNotIn('内部私密目录'.encode(), db_bytes)
+            health = {r['project']: r for r in result['project_collector']}
+            self.assertEqual((health['where-to-study']['received'], health['where-to-study']['accepted']), (3, 2))
+            self.assertEqual((health['shouxiaoyu']['received'], health['shouxiaoyu']['accepted']), (7, 6))
+            self.assertEqual((health['dict']['received'], health['dict']['accepted']), (3, 3))
+
+    def test_isolated_extra_site_tracking_and_release_check_bot_filter(self):
+        with tempfile.TemporaryDirectory() as folder:
+            directory = Path(folder)
+            connection, key = visits.open_database(directory)
+            now = datetime.now(timezone.utc).isoformat()
+            self.assertTrue(visits.collect_event(connection, key, dict(
+                time=now, address='192.0.2.5', host='tuzengji.com', path='/index.html',
+                method='GET', status=200, ua='Browser', content_type='text/html; charset=utf-8', destination='document',
+            )))
+            self.assertTrue(visits.collect_event(connection, key, dict(
+                time=now, address='192.0.2.5', host='www.tuzengji.com', path='/en/',
+                method='GET', status=304, ua='Browser', content_type='', destination='document',
+            )))
+            self.assertFalse(visits.collect_event(connection, key, dict(
+                time=now, address='192.0.2.6', host='tuzengji.com', path='/?release=abc123',
+                method='GET', status=200, ua='HomepageReleaseCheck/1.0', content_type='text/html', destination='document',
+            )))
+            self.assertFalse(visits.collect_event(connection, key, dict(
+                time=now, address='192.0.2.7', host='tuzengji.com', path='/where-to-study/',
+                method='GET', status=302, ua='Browser', content_type='text/html', destination='document',
+            )))
+            connection.close()
+            # Primary shouyulove.cn totals must remain strictly isolated.
+            primary = visits.report(directory / 'visits.sqlite')
+            self.assertEqual(primary['total'], {'views': 0, 'visitors': 0})
+            tzj = visits.report_site(directory / 'visits.sqlite', 'tuzengji.com')
+            self.assertEqual(tzj['total'], {'views': 2, 'visitors': 1})
+            self.assertEqual({p['path']: p['views'] for p in tzj['pages']}, {'/': 1, '/en/': 1})
+            self.assertEqual((tzj['site_collector']['received'], tzj['site_collector']['accepted']), (3, 2))
+            self.assertNotIn('192.0.2.5', json.dumps(tzj))
 
     def test_report_missing_database_keeps_unknown_coverage_and_future_rows_out_of_period(self):
         with tempfile.TemporaryDirectory() as folder:

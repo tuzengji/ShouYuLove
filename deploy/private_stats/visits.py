@@ -20,7 +20,19 @@ DIRECTORY = Path('/var/lib/shouyulove-stats')
 SOCKET = Path('/run/shouyulove-stats/collector.sock')
 PORTFOLIO_CATALOG = Path('/var/www/shouyulove-home/portfolio/projects.json')
 BEIJING = timezone(timedelta(hours=8))
-BOT = re.compile(r'bot|spider|crawler|headless|ShouYuLove-QA|curl|wget|python|healthcheck', re.I)
+BOT = re.compile(r'bot|spider|crawler|headless|ShouYuLove-QA|HomepageReleaseCheck|curl|wget|python|healthcheck', re.I)
+SHOUYULOVE_HOSTS = {'shouyulove.cn', 'www.shouyulove.cn'}
+TRACKED_EXTRA_HOSTS = {
+    'tuzengji.com': 'tuzengji.com',
+    'www.tuzengji.com': 'tuzengji.com',
+}
+EXTRA_SITE_NAMES = {
+    'tuzengji.com': '涂增基个人主页 (tuzengji.com)',
+}
+EXTERNAL_REDIRECT_PATHS = {
+    '/where-to-study': '/where-to-study/',
+    '/where-to-study/': '/where-to-study/',
+}
 HTML_TYPES = {'text/html', 'application/xhtml+xml'}
 PAGE_DESTINATIONS = {'document', 'iframe', 'frame'}
 RESOURCE_SUFFIX = re.compile(r'\.(?:js|mjs|css|json|xml|txt|map|png|jpe?g|gif|webp|avif|svg|ico|woff2?|ttf|otf|mp[34]|webm|ogg|wav|pdf|zip|gz|wasm|glb|ktx2)$', re.I)
@@ -31,10 +43,16 @@ PROJECT_NAMES = {
     'dict': '分社手语词典',
     'chuanqinghuiyi': '传情会意-手语版',
     'flyinghands': '飞手传书',
+    'shouxiaoyu': '手小语',
     'catchpot': '接锅',
     '2026-sign-language-cultural-festival': '2026 手语文化节',
     '2026-year-end-summary': '手语分社骨干年终总结',
     'signplay': '指间趣游 SignPlay',
+    'where-to-study': '去哪自习',
+    'auth': '手语分社统一通行证',
+    'drive': '心创云盘',
+    'pkua100': 'PKU A100 监控',
+    'pkucpu': 'PKU CPU 监控',
     'shouyu': '手语论坛历史资料',
     'loveheart': '爱心社论坛历史资料',
 }
@@ -75,6 +93,8 @@ def project_key(path):
     prefix = path.strip('/').split('/', 1)[0]
     if prefix == 'vocab':
         return 'signtrace'
+    if path in {'/api', '/api/'} or path.startswith(('/api/docs', '/api/v1', '/api-console')):
+        return 'dict'
     if prefix == 'the-studio':
         return 'main'
     if prefix == 'projects':
@@ -84,11 +104,19 @@ def project_key(path):
     return 'path:/' + prefix
 
 
+def canonical_project_key(key):
+    if key.startswith('path:/'):
+        return project_key(key.removeprefix('path:'))
+    if key == 'vocab':
+        return 'signtrace'
+    return key
+
+
 def project_name(key):
     return PROJECT_NAMES.get(key, key.removeprefix('path:'))
 
 
-def page_path(event):
+def page_path(event, allowed_hosts=SHOUYULOVE_HOSTS):
     """Classify document responses, retaining the requested route before rewrites."""
     raw = event.get('path', '')
     if not isinstance(raw, str) or len(raw) > 2048:
@@ -96,18 +124,25 @@ def page_path(event):
     path = unquote(raw.split('?', 1)[0].split('#', 1)[0], errors='strict')
     if not path.startswith('/') or path.startswith('//') or any(ord(c) < 32 or ord(c) == 127 or c in '\\?#' for c in path):
         return None
-    if event.get('host', 'shouyulove.cn').lower() not in {'shouyulove.cn', 'www.shouyulove.cn'}:
+    if event.get('host', 'shouyulove.cn').lower() not in allowed_hosts:
         return None
     destination = event.get('destination', '').lower()
     if destination not in {'', '-'} | PAGE_DESTINATIONS:
         return None
     if 'prefetch' in (event.get('purpose', '') + ' ' + event.get('sec_purpose', '')).lower():
         return None
+    status = event.get('status')
+    if status == 302:
+        if allowed_hosts != SHOUYULOVE_HOSTS:
+            return None
+        return EXTERNAL_REDIRECT_PATHS.get(path)
+    if status not in (200, 304, None):
+        return None
     content_type = event.get('content_type', '').split(';', 1)[0].strip().lower()
     upstream_type = event.get('upstream_type', '').split(';', 1)[0].strip().lower()
     html = content_type in HTML_TYPES or (content_type in {'', '-'} and upstream_type in HTML_TYPES)
     # 304 omits Content-Type on static files and some upstreams.
-    if not html and event.get('status') == 304 and content_type in {'', '-'} and upstream_type in {'', '-'}:
+    if not html and status == 304 and content_type in {'', '-'} and upstream_type in {'', '-'}:
         resolved = event.get('resolved_path', path)
         html = (not RESOURCE_SUFFIX.search(path) and
                 (destination in PAGE_DESTINATIONS or resolved.lower().endswith(('.html', '.htm')) or
@@ -116,7 +151,31 @@ def page_path(event):
         return None
     if path.endswith(('/index.html', '/index.htm')):
         path = path.rsplit('/', 1)[0] + '/'
+    # Never store internal file/folder paths inside the private drive workspace.
+    if allowed_hosts == SHOUYULOVE_HOSTS and (path == '/drive/files' or path.startswith('/drive/files/')):
+        return '/drive/files/'
     return path
+
+
+def _aggregate_project_health(rows):
+    merged = {}
+    needs_rewrite = False
+    for project, received, accepted, first_received, last_received, last_accepted in rows:
+        canon = canonical_project_key(project)
+        if canon != project:
+            needs_rewrite = True
+        if canon not in merged:
+            merged[canon] = [received, accepted, first_received, last_received, last_accepted]
+        else:
+            needs_rewrite = True
+            cur = merged[canon]
+            cur[0] += received
+            cur[1] += accepted
+            cur[2] = min(cur[2], first_received)
+            cur[3] = max(cur[3], last_received)
+            if last_accepted is not None:
+                cur[4] = last_accepted if cur[4] is None else max(cur[4], last_accepted)
+    return [(k, v[0], v[1], v[2], v[3], v[4]) for k, v in sorted(merged.items())], needs_rewrite
 
 
 def open_database(directory=DIRECTORY):
@@ -143,15 +202,44 @@ def open_database(directory=DIRECTORY):
     connection.execute('''CREATE TABLE IF NOT EXISTS portfolio_click_health (
         project TEXT PRIMARY KEY, received INTEGER NOT NULL, accepted INTEGER NOT NULL,
         first_received TEXT NOT NULL, last_received TEXT NOT NULL, last_accepted TEXT)''')
+    connection.execute('''CREATE TABLE IF NOT EXISTS site_visits (
+        host TEXT NOT NULL, day TEXT NOT NULL, visitor TEXT NOT NULL, path TEXT NOT NULL, count INTEGER NOT NULL,
+        PRIMARY KEY(host,day,visitor,path))''')
+    connection.execute('''CREATE TABLE IF NOT EXISTS site_health (
+        host TEXT PRIMARY KEY, received INTEGER NOT NULL, accepted INTEGER NOT NULL,
+        first_received TEXT NOT NULL, last_received TEXT NOT NULL, last_accepted TEXT)''')
+    merged_health, needs_rewrite = _aggregate_project_health(
+        connection.execute('SELECT project,received,accepted,first_received,last_received,last_accepted FROM project_health').fetchall()
+    )
+    if needs_rewrite:
+        connection.execute('DELETE FROM project_health')
+        connection.executemany('INSERT INTO project_health VALUES(?,?,?,?,?,?)', merged_health)
     connection.commit()
     return connection, key
 
 
-def _record_in_tx(connection, key, event, path=None):
-    if event.get('method') != 'GET' or event.get('status') not in (200, 304) or BOT.search(event.get('ua', '')):
+def _classify_page_event(event):
+    if event.get('method') != 'GET':
+        return None, None, None
+    host = event.get('host', 'shouyulove.cn').lower()
+    status = event.get('status')
+    if host in SHOUYULOVE_HOSTS:
+        if status not in (200, 304, 302):
+            return None, None, None
+        path = page_path(event, allowed_hosts=SHOUYULOVE_HOSTS)
+        return ('visits', 'shouyulove.cn', path) if path is not None else (None, None, None)
+    if host in TRACKED_EXTRA_HOSTS:
+        if status not in (200, 304):
+            return None, None, None
+        path = page_path(event, allowed_hosts=set(TRACKED_EXTRA_HOSTS))
+        return ('site_visits', TRACKED_EXTRA_HOSTS[host], path) if path is not None else (None, None, None)
+    return None, None, None
+
+
+def _record_in_tx(connection, key, event, target=None):
+    if BOT.search(event.get('ua', '')):
         return False
-    if path is None:
-        path = page_path(event)
+    table, canon_host, path = target if target is not None else _classify_page_event(event)
     if path is None:
         return False
     stamp = datetime.fromisoformat(event['time'])
@@ -160,7 +248,13 @@ def _record_in_tx(connection, key, event, path=None):
     day = stamp.astimezone(BEIJING).date().isoformat()
     address = str(ipaddress.ip_address(event['address']))
     visitor = hmac.new(key, address.encode(), hashlib.sha256).hexdigest()
-    connection.execute('INSERT INTO visits VALUES(?,?,?,1) ON CONFLICT(day,visitor,path) DO UPDATE SET count=count+1', (day, visitor, path))
+    if table == 'visits':
+        connection.execute('INSERT INTO visits VALUES(?,?,?,1) ON CONFLICT(day,visitor,path) DO UPDATE SET count=count+1', (day, visitor, path))
+    else:
+        connection.execute(
+            'INSERT INTO site_visits VALUES(?,?,?,?,1) ON CONFLICT(host,day,visitor,path) DO UPDATE SET count=count+1',
+            (canon_host, day, visitor, path),
+        )
     return True
 
 
@@ -173,7 +267,7 @@ def _record_portfolio_click_in_tx(connection, key, event, now=None):
     project = event.get('project', '')
     if (event.get('method') != 'POST' or event.get('status') != 204 or
             event.get('portfolio_source') != '1' or event.get('same_origin') != '1' or
-            event.get('host') not in {'shouyulove.cn', 'www.shouyulove.cn'} or
+            event.get('host') not in SHOUYULOVE_HOSTS or
             event.get('path') != '/__syl/portfolio-click/' + project or
             event.get('destination', '') not in {'', '-', 'empty'} or
             'prefetch' in (event.get('purpose', '') + ' ' + event.get('sec_purpose', '')).lower() or
@@ -201,19 +295,25 @@ def record_portfolio_click(connection, key, event):
 def _collect_event_in_tx(connection, key, event, now=None):
     if event.get('kind') == 'portfolio_click':
         return _record_portfolio_click_in_tx(connection, key, event, now=now)
-    if event.get('method') != 'GET' or event.get('status') not in (200, 304):
-        return False
-    path = page_path(event)
+    table, canon_host, path = _classify_page_event(event)
     if path is None:
         return False
-    accepted = _record_in_tx(connection, key, event, path=path)
+    accepted = _record_in_tx(connection, key, event, target=(table, canon_host, path))
     now = now or datetime.now(timezone.utc).isoformat()
-    connection.execute('''INSERT INTO project_health VALUES(?,1,?,?,?,?)
-        ON CONFLICT(project) DO UPDATE SET
-        received=received+1, accepted=accepted+excluded.accepted,
-        last_received=excluded.last_received,
-        last_accepted=COALESCE(excluded.last_accepted,last_accepted)''',
-        (project_key(path), int(accepted), now, now, now if accepted else None))
+    if table == 'visits':
+        connection.execute('''INSERT INTO project_health VALUES(?,1,?,?,?,?)
+            ON CONFLICT(project) DO UPDATE SET
+            received=received+1, accepted=accepted+excluded.accepted,
+            last_received=excluded.last_received,
+            last_accepted=COALESCE(excluded.last_accepted,last_accepted)''',
+            (project_key(path), int(accepted), now, now, now if accepted else None))
+    else:
+        connection.execute('''INSERT INTO site_health VALUES(?,1,?,?,?,?)
+            ON CONFLICT(host) DO UPDATE SET
+            received=received+1, accepted=accepted+excluded.accepted,
+            last_received=excluded.last_received,
+            last_accepted=COALESCE(excluded.last_accepted,last_accepted)''',
+            (canon_host, int(accepted), now, now, now if accepted else None))
     return accepted
 
 
@@ -275,7 +375,9 @@ def report(database, days=30):
         project_health = []
         clicks = click_report(connection, since, today)
         if connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='project_health'").fetchone():
-            project_health = connection.execute('SELECT project,received,accepted,first_received,last_received,last_accepted FROM project_health ORDER BY project').fetchall()
+            project_health, _ = _aggregate_project_health(
+                connection.execute('SELECT project,received,accepted,first_received,last_received,last_accepted FROM project_health ORDER BY project').fetchall()
+            )
     project_totals = {r['project']: r for r in empty['projects']}
     for k, v, u in projects:
         project_totals[k] = {'project': k, 'name': project_name(k), 'views': v, 'visitors': u}
@@ -293,6 +395,148 @@ def report(database, days=30):
             'project_collector': [{'project':k,'name':project_name(k),'received':r,'accepted':a,
                                    'first_received':f,'last_received':l,'last_accepted':v}
                                   for k,r,a,f,l,v in project_health]}
+
+
+def report_site(database, site, days=30):
+    site = TRACKED_EXTRA_HOSTS.get(site.lower(), site.lower())
+    today = datetime.now(BEIJING).date().isoformat()
+    since = (datetime.now(BEIJING).date() - timedelta(days=days - 1)).isoformat()
+    empty = {
+        'site': site,
+        'name': EXTRA_SITE_NAMES.get(site, site),
+        'days': [],
+        'total': {'views': 0, 'visitors': 0},
+        'period': {'views': 0, 'visitors': 0},
+        'pages': [],
+        'coverage': {
+            'requested_start': since,
+            'requested_end': today,
+            'first_recorded_date': None,
+            'last_recorded_date': None,
+        },
+        'site_collector': None,
+    }
+    if not database.exists():
+        return empty
+    with closing(sqlite3.connect('file:' + str(database) + '?mode=ro', uri=True)) as connection:
+        if not connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='site_visits'").fetchone():
+            return empty
+        rows = connection.execute(
+            'SELECT day,SUM(count),COUNT(DISTINCT visitor) FROM site_visits WHERE host=? AND day BETWEEN ? AND ? GROUP BY day ORDER BY day DESC',
+            (site, since, today),
+        ).fetchall()
+        total = connection.execute(
+            'SELECT COALESCE(SUM(count),0),COUNT(DISTINCT visitor) FROM site_visits WHERE host=?',
+            (site,),
+        ).fetchone()
+        period = connection.execute(
+            'SELECT COALESCE(SUM(count),0),COUNT(DISTINCT visitor) FROM site_visits WHERE host=? AND day BETWEEN ? AND ?',
+            (site, since, today),
+        ).fetchone()
+        pages = connection.execute(
+            'SELECT day,path,SUM(count),COUNT(DISTINCT visitor) FROM site_visits WHERE host=? AND day BETWEEN ? AND ? GROUP BY day,path ORDER BY day DESC,path',
+            (site, since, today),
+        ).fetchall()
+        dates = connection.execute(
+            'SELECT MIN(day),MAX(day) FROM site_visits WHERE host=?',
+            (site,),
+        ).fetchone()
+        health_row = None
+        if connection.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='site_health'").fetchone():
+            health_row = connection.execute(
+                'SELECT received,accepted,first_received,last_received,last_accepted FROM site_health WHERE host=?',
+                (site,),
+            ).fetchone()
+    return {
+        'site': site,
+        'name': EXTRA_SITE_NAMES.get(site, site),
+        'days': [{'date': d, 'views': v, 'visitors': u} for d, v, u in rows],
+        'total': {'views': total[0], 'visitors': total[1]},
+        'period': {'views': period[0], 'visitors': period[1]},
+        'pages': [{'date': d, 'path': p, 'views': v, 'visitors': u} for d, p, v, u in pages],
+        'coverage': {
+            'requested_start': since,
+            'requested_end': today,
+            'first_recorded_date': dates[0],
+            'last_recorded_date': dates[1],
+        },
+        'site_collector': (
+            {
+                'host': site,
+                'name': EXTRA_SITE_NAMES.get(site, site),
+                'received': health_row[0],
+                'accepted': health_row[1],
+                'first_received': health_row[2],
+                'last_received': health_row[3],
+                'last_accepted': health_row[4],
+            }
+            if health_row
+            else None
+        ),
+    }
+
+
+def _print_site_report(result, days, show_pages=False, show_health=False):
+    coverage = result['coverage']
+    print(f"站点：{result['name']}")
+    print(f"查询范围：{coverage['requested_start']} 至 {coverage['requested_end']}（北京时间，今日未结束）")
+    print(f"最早保存的访问日期：{coverage['first_recorded_date'] or '暂无记录'}；此前没有记录的日期不视为零访问。")
+    print('日期         访问次数  访客数')
+    for row in result['days']:
+        print(f"{row['date']}  {row['views']:8d}  {row['visitors']:6d}")
+    print(f"累计        {result['total']['views']:8d}  {result['total']['visitors']:6d}")
+    print(f"近{days}天      {result['period']['views']:8d}  {result['period']['visitors']:6d}")
+    if show_health:
+        health = result.get('site_collector')
+        print('\n站点采集观测（含发布校验和机器人候选，不是历史访问量）')
+        if health:
+            print(f"{health['name']}  候选 {health['received']}  计入 {health['accepted']}  最近接收 {health['last_received']}")
+        else:
+            print('暂无观测记录')
+    if show_pages:
+        print('\n日期         访问次数  访客数  页面')
+        for row in result['pages']:
+            print(f"{row['date']}  {row['views']:8d}  {row['visitors']:6d}  {row['path']}")
+
+
+def _print_primary_report(result, args):
+    coverage = result['coverage']
+    print(f"查询范围：{coverage['requested_start']} 至 {coverage['requested_end']}（北京时间，今日未结束）")
+    print(f"最早保存的访问日期：{coverage['first_recorded_date'] or '暂无记录'}；此前没有记录的日期不视为零访问。")
+    print('日期         访问次数  访客数')
+    for row in result['days']:
+        print(f"{row['date']}  {row['views']:8d}  {row['visitors']:6d}")
+    print(f"累计        {result['total']['views']:8d}  {result['total']['visitors']:6d}")
+    print(f"近{args.days}天      {result['period']['views']:8d}  {result['period']['visitors']:6d}")
+    if args.projects:
+        print('\n访问次数  访客数  项目（访客数按项目去重，不能相加）')
+        for row in result['projects']:
+            print(f"{row['views']:8d}  {row['visitors']:6d}  {row['name']}")
+        print('\n日期         访问次数  访客数  项目')
+        for row in result['project_days']:
+            print(f"{row['date']}  {row['views']:8d}  {row['visitors']:6d}  {row['name']}")
+    if args.health:
+        print('\n项目采集观测（含测试和机器人候选；从升级后开始，不是历史访问量）')
+        for row in result['project_collector']:
+            print(f"{row['name']}  候选 {row['received']}  计入 {row['accepted']}  最近接收 {row['last_received']}")
+        print('\n作品集跳转采集观测（含 QA，不是页面访问量）')
+        for row in result['portfolio_clicks']['collector']:
+            print(f"{row['name']}  候选 {row['received']}  计入 {row['accepted']}  最近接收 {row['last_received']}")
+    if args.clicks:
+        clicks = result['portfolio_clicks']
+        print('\n作品集入口跳转（点击次数，不代表目标网页成功加载）')
+        print(f"近{args.days}天：{clicks['period']['clicks']} 次，{clicks['period']['visitors']} 位估算访客")
+        print(f"最早保存的跳转日期：{clicks['first_recorded_date'] or '暂无记录'}；上线前的跳转无法补回。")
+        print('跳转次数  访客数  作品')
+        for row in clicks['projects']:
+            print(f"{row['clicks']:8d}  {row['visitors']:6d}  {row['name']}")
+        print('\n日期         跳转次数  访客数  作品')
+        for row in clicks['project_days']:
+            print(f"{row['date']}  {row['clicks']:8d}  {row['visitors']:6d}  {row['name']}")
+    if args.pages:
+        print('\n日期         访问次数  访客数  页面')
+        for row in result['pages']:
+            print(f"{row['date']}  {row['views']:8d}  {row['visitors']:6d}  {row['path']}")
 
 
 def serve():
@@ -333,50 +577,30 @@ if __name__ == '__main__':
     parser.add_argument('--projects', action='store_true', help='Show project totals and per-day project counts')
     parser.add_argument('--clicks', action='store_true', help='Show portfolio outbound activations separately from page views')
     parser.add_argument('--health', action='store_true', help='Show per-project HTML delivery observations, including QA/bots')
+    parser.add_argument('--site', help='Report an isolated extra domain such as tuzengji.com')
+    parser.add_argument('--all-sites', action='store_true', help='Include isolated extra domains alongside shouyulove.cn')
     args = parser.parse_args()
     if args.command == 'serve':
         serve()
     else:
         if not 1 <= args.days <= 3660:
             parser.error('days must be between 1 and 3660')
-        result = report(DIRECTORY / 'visits.sqlite', args.days)
-        if args.json:
-            print(json.dumps(result, ensure_ascii=False, indent=2))
+        database = DIRECTORY / 'visits.sqlite'
+        if args.site and args.site.lower() not in SHOUYULOVE_HOSTS:
+            result = report_site(database, args.site, args.days)
+            if args.json:
+                print(json.dumps(result, ensure_ascii=False, indent=2))
+            else:
+                _print_site_report(result, args.days, show_pages=args.pages, show_health=args.health)
         else:
-            coverage = result['coverage']
-            print(f"查询范围：{coverage['requested_start']} 至 {coverage['requested_end']}（北京时间，今日未结束）")
-            print(f"最早保存的访问日期：{coverage['first_recorded_date'] or '暂无记录'}；此前没有记录的日期不视为零访问。")
-            print('日期         访问次数  访客数')
-            for row in result['days']:
-                print(f"{row['date']}  {row['views']:8d}  {row['visitors']:6d}")
-            print(f"累计        {result['total']['views']:8d}  {result['total']['visitors']:6d}")
-            print(f"近{args.days}天      {result['period']['views']:8d}  {result['period']['visitors']:6d}")
-            if args.projects:
-                print('\n访问次数  访客数  项目（访客数按项目去重，不能相加）')
-                for row in result['projects']:
-                    print(f"{row['views']:8d}  {row['visitors']:6d}  {row['name']}")
-                print('\n日期         访问次数  访客数  项目')
-                for row in result['project_days']:
-                    print(f"{row['date']}  {row['views']:8d}  {row['visitors']:6d}  {row['name']}")
-            if args.health:
-                print('\n项目采集观测（含测试和机器人候选；从升级后开始，不是历史访问量）')
-                for row in result['project_collector']:
-                    print(f"{row['name']}  候选 {row['received']}  计入 {row['accepted']}  最近接收 {row['last_received']}")
-                print('\n作品集跳转采集观测（含 QA，不是页面访问量）')
-                for row in result['portfolio_clicks']['collector']:
-                    print(f"{row['name']}  候选 {row['received']}  计入 {row['accepted']}  最近接收 {row['last_received']}")
-            if args.clicks:
-                clicks = result['portfolio_clicks']
-                print('\n作品集入口跳转（点击次数，不代表目标网页成功加载）')
-                print(f"近{args.days}天：{clicks['period']['clicks']} 次，{clicks['period']['visitors']} 位估算访客")
-                print(f"最早保存的跳转日期：{clicks['first_recorded_date'] or '暂无记录'}；上线前的跳转无法补回。")
-                print('跳转次数  访客数  作品')
-                for row in clicks['projects']:
-                    print(f"{row['clicks']:8d}  {row['visitors']:6d}  {row['name']}")
-                print('\n日期         跳转次数  访客数  作品')
-                for row in clicks['project_days']:
-                    print(f"{row['date']}  {row['clicks']:8d}  {row['visitors']:6d}  {row['name']}")
-            if args.pages:
-                print('\n日期         访问次数  访客数  页面')
-                for row in result['pages']:
-                    print(f"{row['date']}  {row['views']:8d}  {row['visitors']:6d}  {row['path']}")
+            result = report(database, args.days)
+            extra = [report_site(database, host, args.days) for host in EXTRA_SITE_NAMES] if args.all_sites else []
+            if args.json:
+                if args.all_sites:
+                    result['extra_sites'] = extra
+                print(json.dumps(result, ensure_ascii=False, indent=2))
+            else:
+                _print_primary_report(result, args)
+                for site_result in extra:
+                    print('\n' + '=' * 48)
+                    _print_site_report(site_result, args.days, show_pages=args.pages, show_health=args.health)

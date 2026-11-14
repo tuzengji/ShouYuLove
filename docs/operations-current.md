@@ -1,5 +1,11 @@
 # 当前运维状态与记录索引
 
+## 2026-11-14 全站网页访问统计核查与补齐
+
+已完成阿里云一号机（`shouyulove-aliyun`）与北大知道主机（`yanyuan-calendar`）上全部站点的统计核查：拼好课（`/var/lib/pinhaoke/访问统计.db`）、北大／清华知道（`/var/lib/yanyuan-calendar/访问统计.sqlite` + `广告点击.sqlite`）及海王求职（`/var/lib/zhaopin-zhidao/auth.sqlite`）均持续正常统计；位于 `yanyuan-calendar` 的 `wisact.pkuknow.cn` 维持 `access_log off;` 边界未作改动。
+
+在 `shouyulove-aliyun` 侧完成四项统计补齐：补全近期上线项目名称映射并合并分裂的项目健康观测键；为 `https://shouyulove.cn/where-to-study/` 接入外部网关 `GET 302` 采集并从日志一次性补回 2026-11-11 起 233 次跳转访问；将心创云盘 `/drive/files/` 改为仅上报私有 Unix 数据报并在采集端脱敏为 `/drive/files/`；为 `https://tuzengji.com/`（未改任何静态字节，17/17 文件发布校验一致）接入隔离表 `site_visits` 与 `tuzengji-stats` 命令，并补入 2026-10-31 至 11-14 的 1,553 次访问。12 项 Python 与隔离 Nginx 回归、全站 `ShouYuLove-QA` 无污染探针与 `PRAGMA integrity_check` 全部通过；备份与一次性回补回执位于 `/var/backups/shouyulove-stats/20261114-all-sites/`，维护说明归档于 `/opt/shouyulove-maintenance/20261114-stats-audit/`。详见 [后台统计说明](private-statistics.md)。
+
 ## 2026-11-14 手小语展示页上线并接入作品集（`/shouxiaoyu/`）
 
 手语分社微信群陪伴伙伴「手小语」展示页已上线 `shouyulove-aliyun`（`101.37.209.227`）：正式入口 `https://shouyulove.cn/shouxiaoyu/`，聚焦微信群日常陪伴、聊天水群、接梗斗图与看图猜手语（不含天气播报）。

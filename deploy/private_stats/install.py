@@ -19,6 +19,7 @@ targets = {
     'nginx-format.conf': (Path('/etc/nginx/conf.d/shouyulove-visit-format.conf'), 0o644),
     'nginx-click-location.conf': (Path('/etc/nginx/snippets/shouyulove-portfolio-click.conf'), 0o644),
     'shouyulove-stats': (Path('/usr/local/bin/shouyulove-stats'), 0o755),
+    'tuzengji-stats': (Path('/usr/local/bin/tuzengji-stats'), 0o755),
 }
 for name, (destination, mode) in targets.items():
     if destination.exists():
