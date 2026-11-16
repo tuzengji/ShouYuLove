@@ -39,6 +39,7 @@ RUNTIME_VERSION = "syl-v1-1-shouxiaoyu-v2"
 FONT_VERSION = "syl-v1-1-shouxiaoyu-v2"
 MODULE_VERSION = "syl-v1-1-shouxiaoyu-v2"
 PORTFOLIO_CLICKS_VERSION = "syl-v1-1-20261017"
+PROJECT_ENTRIES_VERSION = "syl-v1-1-20261116"
 BRIDGE_VERSION = "syl-v1-1-shouxiaoyu-v3"
 PORTFOLIO_SCENE_VERSION = BRIDGE_VERSION
 BRAND_VERSION = "syl-v1-1-giving-heart"
@@ -611,6 +612,7 @@ def html_pages(content, pages, listing, renames, wordmark=None):
         soup.body.append(soup.new_tag('script', src='/assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
         soup.body.append(home_shortcut(content))
         soup.body.append(soup.new_tag('script', src='/assets/home-shortcut.' + MODULE_VERSION + '.js'))
+        soup.body.append(soup.new_tag('script', src='/assets/project-entries.' + PROJECT_ENTRIES_VERSION + '.js'))
         fallback = BeautifulSoup('<noscript><style>#boot-loader{display:none}</style><main class="static-preview"><h1>以手予爱<br/>ShouYuLove</h1><p>'+html.escape(content["identity"])+
             '</p><p>'+html.escape(content["series"])+ '</p><h2>梦想</h2><p>'+html.escape(content["dream"])+
             '</p><h2>愿景</h2><p>'+html.escape(content["vision"])+ '</p>'+''.join('<h2>'+html.escape(p["title"])+
@@ -640,6 +642,20 @@ def entry_icon(identifier, label):
     drawing.title.decompose()
     return ('<svg class="portfolio-action-icon" viewBox="0 0 256 256" aria-hidden="true">' +
             ''.join(str(node) for node in drawing.find_all(recursive=False)) + '</svg>')
+
+
+def project_entries_script(content):
+    """Home cards show the entry buttons in place of the description; see scripts/project_entries.js."""
+    entries = {'projects/' + project['id']: [dict(label=entry['label'], url=entry['url'],
+                                                  icon=entry_icon(project['id'], entry['label']).replace(' class="portfolio-action-icon"', ''))
+                                             for entry in project['entries']]
+               for project in content['projects'] if project['entries']}
+    script = (ROOT / 'scripts/project_entries.js').read_text()
+    assert script.count('/*__ENTRIES__*/{}') == 1 and script.count("/*__STYLE__*/''") == 1
+    style = (ROOT / 'styles/project-entries.css').read_text()
+    script = script.replace('/*__ENTRIES__*/{}', json.dumps(entries, ensure_ascii=False, separators=(',', ':')))
+    script = script.replace("/*__STYLE__*/''", json.dumps(style, ensure_ascii=False))
+    (OUT / SHARED / ('assets/project-entries.' + PROJECT_ENTRIES_VERSION + '.js')).write_text(script)
 
 
 def portfolio_page(content):
@@ -767,6 +783,7 @@ def main():
     shutil.copy2(ROOT/'scripts/home_shortcut.js', OUT/SHARED/('assets/home-shortcut.' + MODULE_VERSION + '.js'))
     shutil.copy2(ROOT/'scripts/portfolio.js', OUT/SHARED/('assets/portfolio.' + MODULE_VERSION + '.js'))
     shutil.copy2(ROOT/'scripts/portfolio_clicks.js', OUT/SHARED/('assets/portfolio-clicks.' + PORTFOLIO_CLICKS_VERSION + '.js'))
+    project_entries_script(content)
     shutil.copytree(MOBILE_TEXTURES, OUT/SHARED/'webgl/about/model/textures/ktx2/mobile')
     sounds = OUT / SHARED / "sounds/general"
     for name in ["IG_HomePage_v5_v4.mp3", "IG_FocusPage_v5_v8.mp3", "IG_AboutPage_v5_v5.mp3"]:

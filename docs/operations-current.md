@@ -1,5 +1,14 @@
 # 当前运维状态与记录索引
 
+## 2026-11-16 首页通行证卡片同步为双入口按钮
+
+首页「心创组内部使用」里的「手语分社统一通行证」卡片与作品集保持一致：简介位置改为「通行证主页」（`/auth/`）与「接入与配置中心」（`/auth/dev`）两个带小图标的按钮，卡片原先整张跳转 `/auth/dev` 的覆盖链接对这张卡片停用。简介仍在绑定原稿中，作品详情页照常显示。
+
+- **主站版本**：`20261116T055144Z-astra-home`（663 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,647,863 字节；上一版本 `20261116T053836Z-astra-home`）。新增 1 个脚本，23 个 Nuxt 页面各多一行脚本引用，其余文件逐字节不变。
+- **实现方式**：首页卡片由已打包的运行时代码渲染，本机无法完整重建，因此新增独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-20261116.js`，由 ECS 提供），页面加载后在对应卡片的简介位置插入按钮，样式来自 `styles/project-entries.css` 并随脚本内嵌。入口数据与图标由 `scripts/build_content.py` 的 `project_entries_script` 从绑定原稿的「入口：」行生成，版本常量为 `PROJECT_ENTRIES_VERSION`；修改入口或样式时须升级该版本。
+- **字体**：脚本内同样内嵌了「配」字补充字形，下次完整重建字体后一并移除。
+- **记录**：服务器维护目录 `/opt/shouyulove-maintenance/20261116-pass-entries/stage-3/`，配置备份 `/etc/nginx/backups/shouyulove-home-20261116T055144Z-astra-home/`。
+
 ## 2026-11-16 手语分社统一通行证改为双入口按钮
 
 作品集「心创组内部使用」分区的「手语分社统一通行证」卡片改为两个独立按钮：「通行证主页」（`https://shouyulove.cn/auth/`）与「接入与配置中心」（`https://shouyulove.cn/auth/dev`，仅超级管理员可进入），各带一枚同系列小图标，源文件为 `project-logos/20261113-shouyu-pass/pass-home.svg` 与 `pass-console.svg`。卡片本身不再整体可点，两个按钮沿用 `data-project="shouyu-pass"` 计入作品集跳转统计。首页与作品详情页的单一入口保持 `https://shouyulove.cn/auth/dev`。同日第二次发布按用户要求调整：该卡片不再显示简介，两个按钮直接放在标题下方、设计者上方；「心创组内部使用」分区的图标改为与文字垂直居中对齐。

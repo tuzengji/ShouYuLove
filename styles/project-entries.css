@@ -1,0 +1,43 @@
+/* Home cards with several entries; injected by scripts/project_entries.js. */
+.homePage .projectBlock[data-syl-entries] > .projectEntry { display: none; }
+.homePage .projectBlock[data-syl-entries] .mediaBlock__image.text > p { display: none; }
+.homePage .projectCard__entries { position: relative; z-index: 2; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.homePage .projectCard__entry {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 44px;
+  padding: 4px 12px 4px 6px;
+  border: 1px solid rgba(52, 52, 52, .26);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .42);
+  color: #1c1c1c;
+  font-family: PSTimes, "ShouYuSerif", serif;
+  font-size: 15px;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+  transition: border-color 180ms ease-out, background-color 180ms ease-out;
+}
+.homePage .projectCard__entry > svg:first-child { flex: none; width: 28px; height: 28px; }
+.homePage .projectCard__entryArrow { flex: none; width: 13px; height: 13px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; transition: transform 180ms ease-out; }
+.homePage .projectCard__entry:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .homePage .projectCard__entry:hover { border-color: rgba(52, 52, 52, .7); background: rgba(255, 255, 255, .78); }
+  .homePage .projectCard__entry:hover .projectCard__entryArrow { transform: translate(2px, -2px); }
+}
+@media (max-width: 767px) {
+  .homePage .projectCard__entries { justify-content: flex-start; }
+}
+@media (max-width: 360px) {
+  .homePage .projectCard__entry { gap: 5px; padding: 4px 10px 4px 5px; font-size: 14px; }
+  .homePage .projectCard__entry > svg:first-child { width: 24px; height: 24px; }
+  .homePage .projectCard__entryArrow { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .homePage .projectCard__entry, .homePage .projectCard__entryArrow { transition: none; }
+  .homePage .projectCard__entry:hover .projectCard__entryArrow { transform: none; }
+}

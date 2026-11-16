@@ -2,6 +2,8 @@
 
 ## 2026-11-14 手小语展示页上线并接入主站与作品集
 
+2026-11-16 第三次发布后主站运行版本为 `20261116T055144Z-astra-home`（663 个文件，共 158,647,863 字节）：首页的「手语分社统一通行证」卡片也改为两个入口按钮，由独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-20261116.js`）在页面加载后替换简介，样式在 `styles/project-entries.css`，改动时升级 `PROJECT_ENTRIES_VERSION`。下一段是同日前两次作品集发布的记录。详见 [当前运维状态](docs/operations-current.md)。
+
 2026-11-16 起主站运行版本为 `20261116T053836Z-astra-home`（上一版本 `20261116T053402Z-astra-home`，662 个文件，共 158,639,174 字节，仅 `portfolio/index.html` 变化）：作品集中「手语分社统一通行证」改为「通行证主页」`/auth/` 与「接入与配置中心」`/auth/dev` 两个带小图标的按钮，写法为绑定原稿条目里的「入口：[名称](地址)」行，图标登记在 `scripts/build_content.py` 的 `ENTRY_ICONS`。作品集页面临时内嵌了「配」字补充字形，下次完整构建前先重新生成中文字体。下一段的版本数字保留为 11 月 14 日的记录。详见 [当前运维状态](docs/operations-current.md)。
 
 主站当前运行版本为 `20261114T123404Z-astra-home`（上一版本 `20261114T075210Z-astra-home`）：662 个文件、24 条页面路由、5 个相对链接、2 条外部跳转（`/where-to-study` 与 `/where-to-study/` 302 至 `https://39.96.206.228/`），共 158,632,740 字节。作品集现有 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）：在「核心创意」分区加入「手小语」（正式地址 `https://shouyulove.cn/shouxiaoyu/`，设计者涂增基，图标位于 `project-logos/20261114-shouxiaoyu/`），桌面端 4 行两列平衡排布且将「手小语」与「传情会意-手语版」并列展示于第 3 行；文案聚焦微信群日常陪伴、水群接梗与看图猜手语（不含天气播报）。中文字体覆盖 565 字；数据桥与作品集场景版本为 `syl-v1-1-shouxiaoyu-v3`，图像、字体与运行模块保持 `syl-v1-1-shouxiaoyu-v2`（`origin-asset-manifest.json` 共 300 项，保留兼容资源），主站标识保持 `syl-v1-1-giving-heart`。手小语独立静态站由本机 `核心创意/手小语/site/` 维护，发布至 `/var/www/shouyulove-showcase`（`/var/www/shouyulove-shouxiaoyu-releases/20261114T123437Z-shouxiaoyu`，由 `/etc/nginx/snippets/shouxiaoyu.conf` 托管），直接使用手小语微信头像作为 Logo，通过五个主题集合呈现 34 张纯深色手机端脱敏群聊截图（无白色桌面截图、无张数角标、无逐图解读，「福瑞庭审」仅保留横轴左右翻页圆钮）。详见 [当前运维状态](docs/operations-current.md)。
