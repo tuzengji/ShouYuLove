@@ -73,8 +73,13 @@ def parse_content(text=None):
         description = body.split("地址：", 1)[0].strip()
         designers = re.search(r"设计者：(.+)", body).group(1).strip()
         label = re.search(r"地址：\[([^]]+)\]", body)
+        # Optional "入口：[名称](地址)" lines give one project several separately clickable entries.
+        entries = [dict(label=name, url=target) for name, target in
+                   re.findall(r"(?m)^入口：\[([^]]+)\]\((https?://[^\s)]+)\)\s*$", body)]
+        assert len(entries) != 1, "A project needs two or more entries, or none: " + title
         projects.append(dict(id=identifier, title=title, description=description, url=url, designers=designers,
                              label=label.group(1) if label else "打开" + title,
+                             entries=entries,
                              show_portfolio_credit=bool(re.search(r"(?m)^作品集署名：显示\s*$", body)),
                              category=re.findall(r"(?m)^### ([^\n]+)$", text[:match.start()])[-1]))
     assert {p["id"] for p in projects} == set(identifiers.values()) and len(projects) == len(identifiers), "Missing or duplicate project"
@@ -624,6 +629,19 @@ def html_pages(content, pages, listing, renames, wordmark=None):
     (OUT / SHARED / ("local-bridge." + BRIDGE_VERSION + ".js")).write_text("window.__IG_LOCAL_PAGES__="+json.dumps(pages,ensure_ascii=False,separators=(",",":"))+";\n")
 
 
+ENTRY_ICONS = {("shouyu-pass", "通行证主页"): "project-logos/20261113-shouyu-pass/pass-home.svg",
+               ("shouyu-pass", "接入与配置中心"): "project-logos/20261113-shouyu-pass/pass-console.svg"}
+
+
+def entry_icon(identifier, label):
+    """Inline the small entry mark so the button needs no extra request."""
+    assert (identifier, label) in ENTRY_ICONS, "Add an entry icon for: " + label
+    drawing = BeautifulSoup((ROOT / ENTRY_ICONS[(identifier, label)]).read_text(), 'html.parser').svg
+    drawing.title.decompose()
+    return ('<svg class="portfolio-action-icon" viewBox="0 0 256 256" aria-hidden="true">' +
+            ''.join(str(node) for node in drawing.find_all(recursive=False)) + '</svg>')
+
+
 def portfolio_page(content):
     """The directory uses the same first-paint fonts and defers its scene resources."""
     shared = "/" + str(SHARED)
@@ -669,12 +687,22 @@ def portfolio_page(content):
         credit = ('<p class="portfolio-credit">设计者：' + designers + '</p>') if category != '其他作品' or content['portfolio']['show_other_designers'] or project.get('show_portfolio_credit') else ''
         icon = shared + '/shouyulove/' + project['id'] + '-square.' + RUNTIME_VERSION + '.png'
         loading = 'lazy' if category == '其他作品' else 'eager'
+        image = '<img class="portfolio-icon" src="' + icon + '" alt="" width="640" height="640" decoding="async" loading="' + loading + '"/>'
+        heading = ('<h3 id="project-' + project['id'] + '">' + html.escape(project['title']) +
+                   '</h3><p class="portfolio-description">' + html.escape(project['description']) + '</p>' + credit)
+        arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg>'
+        if project['entries']:
+            # Each entry keeps the click-tracking hook of an ordinary project link.
+            actions = ''.join(
+                '<a class="portfolio-link portfolio-action" data-project="' + project['id'] + '" href="' + html.escape(entry['url'], quote=True) +
+                '" target="_blank" rel="noopener noreferrer">' + entry_icon(project['id'], entry['label']) +
+                '<span>' + html.escape(entry['label']) + '</span>' + arrow + '</a>' for entry in project['entries'])
+            pieces.append('<li><div class="portfolio-card" role="group" aria-labelledby="project-' + project['id'] + '">' + image +
+                          '<div class="portfolio-copy">' + heading + '<div class="portfolio-actions">' + actions + '</div></div></div></li>')
+            continue
         pieces.append('<li><a class="portfolio-link" data-project="' + project['id'] + '" href="' + html.escape(project['url'], quote=True) +
                       '" target="_blank" rel="noopener noreferrer" aria-labelledby="project-' + project['id'] + '">' +
-                      '<img class="portfolio-icon" src="' + icon + '" alt="" width="640" height="640" decoding="async" loading="' + loading + '"/>' +
-                      '<div class="portfolio-copy"><h3 id="project-' + project['id'] + '">' + html.escape(project['title']) +
-                      '</h3><p class="portfolio-description">' + html.escape(project['description']) + '</p>' + credit + '</div>' +
-                      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg></a></li>')
+                      image + '<div class="portfolio-copy">' + heading + '</div>' + arrow + '</a></li>')
     if category is not None:
         pieces.append('</ul></section>')
     if content['portfolio']['thanks']:

@@ -41,8 +41,8 @@
       "sha256": "1949ecdde9ad97aa648ed287c20515e3344bd6392168edb795db11b6c909b4f2"
     },
     "portfolio/index.html": {
-      "bytes": 26217,
-      "sha256": "aff3bcf4b97819c0004544efaee6c065659d2e662f71ba48e522287e1b5e4224"
+      "bytes": 32891,
+      "sha256": "dee895c96ab60184863af23a71b9340f28c1e3cc01505128f2c397cf4f871992"
     },
     "portfolio/projects.json": {
       "bytes": 615,
@@ -2688,7 +2688,7 @@
     "sounds": "sites/immersive-g-com-955afd14/shared/sounds",
     "webgl": "sites/immersive-g-com-955afd14/shared/webgl"
   },
-  "bytes": 158632740,
+  "bytes": 158639414,
   "external_redirects": {
     "/where-to-study": "https://39.96.206.228/",
     "/where-to-study/": "https://39.96.206.228/"

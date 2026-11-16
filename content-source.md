@@ -132,6 +132,8 @@ ShouYuLove
 
 分社统一账号与单点登录服务，支持手机号验证码自动注册与各项目自助接入。
 地址：[进入手语分社统一通行证](https://shouyulove.cn/auth/dev)
+入口：[通行证主页](https://shouyulove.cn/auth/)
+入口：[接入与配置中心](https://shouyulove.cn/auth/dev)
 设计者：涂增基
 
 #### 心创云盘

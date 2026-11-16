@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">通行证主页 · 爱心通行证</title>
+  <g transform="translate(23 6)" stroke="#4b5d54" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M38 78 H172 V188 Q172 210 150 210 H60 Q38 210 38 188 Z" fill="#ece2cf" stroke="none"/>
+    <path d="M60 34 H150 Q172 34 172 56 V78 H38 V56 Q38 34 60 34 Z" fill="#aec2b1" stroke="none"/>
+    <path d="M60 34 H150 Q172 34 172 56 V188 Q172 210 150 210 H60 Q38 210 38 188 V56 Q38 34 60 34 Z M38 78 H172 M92 56 H118" fill="none"/>
+    <path d="M105 157 C80 140 73 123 82 112 C89 104 99 108 105 117 C111 108 121 104 128 112 C137 123 130 140 105 157 Z" fill="#c9a2a4" stroke-width="11"/>
+    <path d="M84 183 H126" fill="none"/>
+  </g>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">接入与配置中心 · 齿轮与锁孔</title>
+  <g stroke="#4b5d54" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M111.2 58.0 L115.2 32.9 L140.8 32.9 L144.8 58.0 L165.6 66.6 L186.2 51.7 L204.3 69.8 L189.4 90.4 L198.0 111.2 L223.1 115.2 L223.1 140.8 L198.0 144.8 L189.4 165.6 L204.3 186.2 L186.2 204.3 L165.6 189.4 L144.8 198.0 L140.8 223.1 L115.2 223.1 L111.2 198.0 L90.4 189.4 L69.8 204.3 L51.7 186.2 L66.6 165.6 L58.0 144.8 L32.9 140.8 L32.9 115.2 L58.0 111.2 L66.6 90.4 L51.7 69.8 L69.8 51.7 L90.4 66.6 Z" fill="#d4be88"/>
+    <circle cx="128" cy="128" r="41" fill="#ece2cf"/>
+    <circle cx="128" cy="119" r="9" fill="#4b5d54" stroke="none"/>
+    <path d="M128 124 V148" fill="none" stroke-width="12"/>
+  </g>
+</svg>

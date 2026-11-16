@@ -1,5 +1,14 @@
 # 当前运维状态与记录索引
 
+## 2026-11-16 手语分社统一通行证改为双入口按钮
+
+作品集「心创组内部使用」分区的「手语分社统一通行证」卡片改为两个独立按钮：「通行证主页」（`https://shouyulove.cn/auth/`）与「接入与配置中心」（`https://shouyulove.cn/auth/dev`，仅超级管理员可进入），各带一枚同系列小图标，源文件为 `project-logos/20261113-shouyu-pass/pass-home.svg` 与 `pass-console.svg`。卡片本身不再整体可点，两个按钮沿用 `data-project="shouyu-pass"` 计入作品集跳转统计。首页与作品详情页的单一入口保持 `https://shouyulove.cn/auth/dev`。
+
+- **主站版本**：`20261116T053402Z-astra-home`（662 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,639,414 字节；上一版本 `20261114T123404Z-astra-home`）。本次只有 `portfolio/index.html` 的内容变化，其余 661 个文件与上一版逐字节一致，各资源版本号保持。
+- **发布方式**：本机缺少完整重建所需的历史字体与构建记录目录，因此在线上当前版本的副本上只替换作品集页面，再由 `publish_astra.py` 逐文件校验后切换。`scripts/build_content.py`（绑定原稿的「入口：」行、`ENTRY_ICONS`、`entry_icon`）与 `styles/portfolio.css` 已同步，下次完整构建会生成同样的卡片。
+- **字体**：按钮文字中的「配」不在 `syl-v1-1-shouxiaoyu-v2` 中文子集内，本次在作品集页面内嵌了仅含该字的补充字形（816 字节，`unicode-range:U+914D`）。下次完整构建前需先重新生成并升级中文字体版本，届时移除这段补充字形。
+- **记录**：服务器维护目录 `/opt/shouyulove-maintenance/20261116-pass-entries/`，配置备份 `/etc/nginx/backups/shouyulove-home-20261116T053402Z-astra-home/`。本地与公网 1440／390／320px 无头浏览器检查通过。
+
 ## 2026-11-14 全站网页访问统计核查与补齐
 
 已完成阿里云一号机（`shouyulove-aliyun`）与北大知道主机（`yanyuan-calendar`）上全部站点的统计核查：拼好课（`/var/lib/pinhaoke/访问统计.db`）、北大／清华知道（`/var/lib/yanyuan-calendar/访问统计.sqlite` + `广告点击.sqlite`）及海王求职（`/var/lib/zhaopin-zhidao/auth.sqlite`）均持续正常统计；位于 `yanyuan-calendar` 的 `wisact.pkuknow.cn` 维持 `access_log off;` 边界未作改动。
@@ -19,15 +28,15 @@
 
 - **主站与作品集联动**：主站发布 `20261114T051119Z-astra-home`（538 个运行文件、23 条页面路由、5 个相对链接、2 条外部跳转，共 144,466,376 字节；上一版本 `20261113T044411Z-astra-home`）。在首页与作品集「心创组内部使用」分区新增「心创云盘」（设计者涂增基，柔和彩色图标位于 `project-logos/20261114-xinchuang-drive/`），共 14 个作品；新增资源版本为 `syl-v1-1-xinchuang-drive`（中文覆盖 556 字），由 ECS 提供，既有 CDN 资源 `/v/20261020-flyinghands/` 保留。
 - **共享存储池与在线扩容边界**：独立稀疏可扩容 ext4 磁盘镜像 `/var/lib/shouyulove-drive/volume.img` 初始划分 `60 GB` 并已在线零停机扩容至 `100 GB`（实际宿主机仅占写入体积，挂载 `/srv/shouyulove-drive`，共享读写目录 `/srv/shouyulove-drive/files` / 软链 `/srv/drive` 与 `/home/{wishingcat,zhuxingye}/projects/drive`）。宿主机系统盘 `/dev/vda3`（`118G`）与存储卷解耦，支持控制台或 `shouyulove-drive-cli resize <GB>` 经 `/usr/local/sbin/shouyulove-drive-resize` 在线持续扩容。
-- **服务架构与认证边界**：本机源码位于 `心创组内部使用/心创云盘/`，服务器发布位于 `/opt/shouyulove-drive/current`。`shouyulove-drive.service` 监听 `127.0.0.1:8768`，`shouyulove-drive-fb.service` 监听 `127.0.0.1:8769`，均归属 `system-shouyulove.slice`。Web 请求经 `/etc/nginx/snippets/shouyulove-drive.conf` 调用 `shouyulove-auth` `auth_request /_syl_auth_optional`，由 `X-Shouyu-User-Phone-Hash` 判定白名单（`/var/lib/shouyulove-drive/state.json` 仅存哈希与脱敏号，不存明文手机号）；本机回环 `/drive/api/agent/*` 与服务器同属组 `shouyulove-drive`（`2775` + ACL）可直接读写，远程协作支持签发 Bearer Token。
+- **服务架构与认证边界**：本机源码位于 `心创组内部使用/心创云盘/`，服务器发布位于 `/opt/shouyulove-drive/current`。`shouyulove-drive.service` 监听 `127.0.0.1:8768`，`shouyulove-drive-fb.service` 监听 `127.0.0.1:8769`，均归属 `system-shouyulove.slice`。Web 请求经 `/etc/nginx/snippets/shouyulove-drive.conf` 调用 `shouyulove-auth` `auth_request /_syl_auth_optional/drive`，由 `X-Shouyu-User-Phone-Hash` 判定白名单并结合 `X-Shouyu-User-Role` 判定权限（`191****0323` 与 `152****6060` 为超级管理员，其余未额外指定为云盘项目管理员的账号按普通成员处理；`/var/lib/shouyulove-drive/state.json` 仅存哈希与脱敏号，不存明文手机号）；本机回环 `/drive/api/agent/*` 与服务器同属组 `shouyulove-drive`（`2775` + ACL）可直接读写，远程协作支持签发 Bearer Token。
 
 ## 2026-11-13 手语分社统一通行证上线并接入作品集（`shouyulove-auth`）
 
-手语分社独立账号与单点登录基础设施已上线 `shouyulove-aliyun`（`101.37.209.227`）：用户通行证登录页 `https://shouyulove.cn/auth/`，开发者自助接入台 `https://shouyulove.cn/auth/dev`，接入文档《手语分社统一通行证接入指南》位于 `/auth/手语分社统一通行证接入指南.md`（兼容 `/auth/guide.md`）。
+手语分社独立账号与单点登录基础设施已上线 `shouyulove-aliyun`（`101.37.209.227`）：用户通行证登录页 `https://shouyulove.cn/auth/`，**仅全站超级管理员可访问**的接入与配置中心 `https://shouyulove.cn/auth/dev`（原 `/auth/手语分社统一通行证接入指南.md` 与 `/auth/guide.md` 同步整合至 `/auth/dev#recipes` 并受超级管理员权限保护）。
 
 - **主站与作品集联动**：主站发布 `20261113T044411Z-astra-home`（477 个运行文件、22 条页面路由、5 个相对链接、2 条外部跳转，共 137,472,614 字节；上一版本 `20261111T013217Z-astra-home`）。在首页与作品集「心创组内部使用」分区新增「手语分社统一通行证」（设计者涂增基，柔和彩色图标位于 `project-logos/20261113-shouyu-pass/`），桌面与「接锅」两列并排展示、窄屏单列排列；新增资源版本为 `syl-v1-1-shouyu-pass`（中文覆盖 551 字），由 ECS 提供，既有 CDN 资源 `/v/20261020-flyinghands/` 保留。
 - **应用与账号数据边界**：本机源码位于 `心创组内部使用/手语分社账号/`，服务器发布位于 `/opt/shouyulove-auth/releases/20261113T041013Z` → `/opt/shouyulove-auth/current`，`shouyulove-auth.service` 监听 `127.0.0.1:8767`（纳入 `system-shouyulove.slice`）；独立加密账号库 `accounts.sqlite`（手机号 AES-256-GCM 加密 + HMAC 索引、密码 scrypt 哈希）、主密钥与 JWT 密钥位于 `/var/lib/shouyulove-auth/`（`0700`/`0600`），`shouyulove-auth-backup.timer` 每日两次热备至 `/var/backups/shouyulove-auth/`。
-- **短信认证与自助接入**：短信验证复用阿里云 `dypnsapi` 与 ECS 实例 RAM 角色 `ShouYuLoveSmsVerifyRole` 免密钥方案（配置于 `/etc/shouyulove-auth/sms.json`），支持未注册手机号验证码登录时自动完成注册；开发者经口令解锁 `/auth/dev` 后可自助签发、轮换与删除本人名下 OAuth 2.0 / OIDC 接入凭证。
+- **短信认证、三级角色与超管专属接入中心**：短信验证复用阿里云 `dypnsapi` 与 ECS 实例 RAM 角色 `ShouYuLoveSmsVerifyRole` 免密钥方案（配置于 `/etc/shouyulove-auth/sms.json`），支持未注册手机号验证码登录时自动完成注册。全站采用三级角色体系：`191****0323` 与 `152****6060` 为全站超级管理员，拥有全站与所有已接入项目的管理权限并可任命其他超级管理员及各项目定制管理员；各接入项目可隔离授撤本项目管理员身份，未指定的项目内权限与普通用户一致。`/auth/dev`、`dev.js` 及 `/auth/api/dev/*` 由服务端校验仅限全站超级管理员访问（未登录展示超管登录引导门户，非超管已登录返回 `403` 提示切换超级管理员），并直接在网页内集中展示全部同域/SPA/OIDC/JWKS/Roles API/`shouyulove-auth-cli` 接入与配置方法。
 
 ## 2026-11-11 拼好课迁入 `shouyulove-aliyun`（`101.37.209.227`）
 
