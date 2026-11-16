@@ -1,92 +1,33 @@
 # 以手予爱 ShouYuLove 主站
 
-## 2026-11-14 手小语展示页上线并接入作品集
+[以手予爱](https://shouyulove.cn/) 是北京大学学生爱心社手语分社心创组的介绍主页与作品导航，采用 Astra/Nuxt、GSAP 和 WebGL 运行层。
 
-「手小语」（涂增基设计）已加入首页与作品集「核心创意」分区（与「传情会意-手语版」并列展示于桌面端第 3 行），入口为 https://shouyulove.cn/shouxiaoyu/ ，文案聚焦微信群日常陪伴、水群接梗与看图猜手语。主站版本更新为 `20261114T123404Z-astra-home`（662 文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,632,740 字节，15 个项目，中文字体覆盖 565 字；数据桥与作品集场景 `syl-v1-1-shouxiaoyu-v3`，图像/字体/模块保持 `syl-v1-1-shouxiaoyu-v2`），新增 ECS 静态资源与既往 CDN 对象共存。手小语展示页源码位于 `核心创意/手小语/`，线上由 `shouyulove-aliyun` `/var/www/shouyulove-showcase`（`20261114T123437Z-shouxiaoyu`）提供纯静态访问，直接采用手小语微信头像作为 Logo，通过五个主题集合展示 34 张纯深色手机端脱敏群聊截图，保留首页卡片栈与原图灯箱（无白色桌面截图、无天气播报、无逐图解读、无张数角标，庭审横轴仅保留左右翻页圆钮）。详见 [当前运维状态](docs/operations-current.md)。
+## 当前运行概览（2026-11-16）
 
-## 2026-11-14 心创云盘上线并接入作品集
+- **维护主机与当前版本**：部署于阿里云 `101.37.209.227`（`ssh shouyulove-aliyun`），当前运行发布为 `20261116T055144Z-astra-home`（仓库提交 `2590e43`）。精确运行白名单保存在 [runtime-manifest.json](runtime-manifest.json)：共 **663 个运行文件、24 条页面路由、5 个相对资源链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` 302 至 `https://39.96.206.228/`），合计 `158,647,863` 字节。
+- **作品规模（15 个项目）**：包含 8 个核心创意、3 个心创组内部使用与 4 个其他作品；公开文字与多入口配置读取绑定正文源（公开副本为 `content-source.md`）。
+- **静态加速与源站分工**：大体积三维、图像与音频对象经私有 OSS 与 `assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）分发；后续增量静态资源（`origin-asset-manifest.json` 300 项及 `project-entries.syl-v1-1-20261116.js`）、HTML 页面、外部跳转和私有访问统计由原 ECS 直接提供。腾讯旧机 `49.232.193.175` 已于 2026-10-28 重装退役，词典经本机直连 CLab。
+- **说明文档索引**：[当前运维状态](docs/operations-current.md) 汇总服务器职责与近期全部上线变更；[作品集维护说明](docs/portfolio-maintenance.md) 记录目录排版、图标、字体与多入口按钮约定；[迁移与维护](迁移与维护.md) 说明服务与数据边界；[部署说明](deploy/README.md) 说明白名单发布与回滚流程；[验证记录](VALIDATION.md) 归档各版本验收证据。
 
-「心创云盘」（涂增基设计）已加入首页与作品集「心创组内部使用」分区，入口为 https://shouyulove.cn/drive/ 。主站版本更新为 `20261114T051119Z-astra-home`（538 文件、23 条页面路由、5 个相对链接、2 条外部跳转，共 144,466,376 字节，14 个项目，中文字体覆盖 556 字；版本标识 `syl-v1-1-xinchuang-drive`），新增 ECS 静态资源与既往 CDN 对象共存。网盘服务部署在 `shouyulove-aliyun`（`127.0.0.1:8768` + FileBrowser `8769`），提供 100 GB 可随时在线扩容的共享稀疏存储池（`/srv/drive`），支持统一通行证白名单访问与 Agent 协同读写。详见 [当前运维状态](docs/operations-current.md)。
+## 近期重要更新
 
-## 2026-11-13 手语分社统一通行证上线作品集
+- **2026-11-16 手语分社统一通行证重构与双入口按钮**：「手语分社统一通行证」后端与前端统一更名并切换为暖色天光视觉（`/auth/` 版本 `20261116T042852Z`，`/auth/dev` 三视图控制台版本 `20261116T050830Z`）；主站首页 `/` 与作品集 `/portfolio/` 的对应卡片同步取消卡片内简介与整卡点击，改为「通行证主页」（`/auth/`）与「接入与配置中心」（`/auth/dev`）两个带同系列小图标的按钮，「心创组内部使用」三张卡片左侧图标统一与文字垂直居中对齐（主站版本 `20261116T055144Z-astra-home`）。
+- **2026-11-14 手小语展示页上线**：「手小语」（涂增基设计）加入首页与作品集「核心创意」第 3 行（与「传情会意-手语版」并列），入口 `https://shouyulove.cn/shouxiaoyu/`；子站源码位于 `核心创意/手小语/`（`tuzengji/shouxiaoyu`），由 `/var/www/shouyulove-showcase`（`20261114T123437Z-shouxiaoyu`）托管 34 张深色手机端脱敏群聊实拍画册。
+- **2026-11-14 心创云盘上线并扩至 100 GB**：「心创云盘」（涂增基设计）加入「心创组内部使用」分区，入口 `https://shouyulove.cn/drive/` 为一体化完整云盘工作台（零二级跳转，旧 `/drive/files/` 自动归并跳回 `/drive/`），底层挂载 100 GB 可在线扩容共享存储池 `/srv/drive`，接入统一通行证悬浮窗免跳转登录与三级权限校验。
+- **2026-11-13 手语分社统一通行证上线**：独立单点登录基础设施 `shouyulove-auth`（`127.0.0.1:8767`）上线并接入主站与作品集，支持手机号短信自动注册、三级角色体系、同域 `auth_request` / `sdk.js` 悬浮窗与跨站 OAuth 2.0 + OIDC（PKCE / RS256 JWT）。
+- **2026-11-10 / 11-11 去哪自习接入与站内固定入口**：新增其他作品「去哪自习」（王宁静设计，单独开启作品集署名），统一通过 `https://shouyulove.cn/where-to-study/` 302 跳转至 `https://39.96.206.228/` 并纳入私有跳转与访问统计。
+- **2026-10-20 飞手传书上线**：新增核心创意「飞手传书」（王宁静设计，`https://shouyulove.cn/flyinghands/`），由独立 `flyinghands.service`（`8766`）承载，主站静态资源同步启用 CDN 前缀 `/v/20261020-flyinghands/`。
+- **2026-10-15 指间趣游上线与阿里云切换**：新增核心创意「指间趣游 SignPlay」（伍家阳设计，`https://shouyulove.cn/signplay/`），全站流量与可写服务切换至阿里云 `shouyulove-aliyun`。
 
-「手语分社统一通行证」（涂增基设计）已加入首页与作品集「心创组内部使用」分区，与「接锅」并列展示，直达开发者自助接入台 https://shouyulove.cn/auth/dev 。主站版本 `20261113T044411Z-astra-home`（477 文件、22 条页面路由、13 个项目，中文字体覆盖 551 字）；新增 `syl-v1-1-shouyu-pass` 资源由 ECS 提供，既有大体积资源继续使用 CDN。详见 [当前运维状态](docs/operations-current.md)。
+## 页面结构、图标与加载机制
 
-## 2026-11-11 去哪自习固定入口
+作品集独立使用轻量 HTML，正式入口为 `/portfolio/`（旧 `/projects/` 308 跳转，详情页 `/projects/<id>/` 保留）。首屏直接展示图标、分类、名称、简介（或多入口按钮）与署名；首次绘制至少两秒后在后台加载完整原生三维场景，且不加载音乐。三维下载共用两路并发名额，页面隐藏后暂停新增下载、返回续载（见 [后台资源加载](docs/background-loading.md)）。首页只预载当前场景，心创组与页脚按需加载；版本化公共资源使用一年 `immutable` 缓存，HTML 和 payload 使用 `no-cache`。
 
-正式入口 https://shouyulove.cn/where-to-study/ 已同步首页和作品集，通过 302 跳转至原项目。主站版本 `20261111T013217Z-astra-home`；配置与回滚记录见[当前运维状态](docs/operations-current.md)。
-
-## 2026-11-10 去哪自习入口
-
-「去哪自习」（王宁静设计）已接入首页和作品集，直达 https://39.96.206.228/ 。主站版本 `20261110T155641Z-astra-home`；新增资源由现有 ECS 提供，既有资源继续使用 CDN。发布清单与回滚信息见[当前运维状态](docs/operations-current.md)。
-
-## 2026-10-28 腾讯旧服务器退役
-
-`49.232.193.175` 已按用户要求重装为纯净 Ubuntu 22.04.5，保留实例和公网 IP。主站在阿里云继续运行，旧任务、旧会话及旧地址兼容已退出。配置、验证与重装快照记录见 [当前运维状态](docs/operations-current.md)。
-
-## 2026-10-20 飞手传书上线
-
-「飞手传书」（王宁静设计）已加入核心创意，地址为 https://shouyulove.cn/flyinghands/ 。主站版本 `20261020T123649Z-astra-home`，354 个文件、20 条页面路由、11 个项目；资源使用 CDN 新前缀 `/v/20261020-flyinghands/`。发布与回滚信息见 [当前运维状态](docs/operations-current.md)。
-
-## 2026-10-18 CDN 与 OSS 已上线
-
-主站公开静态资源现由 `assets.shouyulove.cn` 加速，OSS 保持私有；页面、接口和私有访问统计继续由原 ECS 提供。完整三维、两个后台下载并发及作品集静音规则保留。资源发布、100 GB 流量包、证书手动续签与实测结果见 [CDN 维护说明](docs/cdn-oss.md)。
-
-## 当前状态与说明入口（2026-11-11）
-
-当前主站部署在阿里云 `101.37.209.227`，使用 `ssh shouyulove-aliyun` 维护。运行版本为 `20261111T013217Z-astra-home`：415 文件、21 页面路由、5 个相对链接、2 条外部跳转，作品集 12 项；中文字体覆盖 545 字。腾讯旧机 `49.232.193.175` 已于 2026-10-28 重装退役，词典直连 CLab。
-
-[当前运维状态](docs/operations-current.md) 汇总服务器当前职责、腾讯旧机退役快照、PKUKnow 旧代理退役结果和各仓迁移提交。[迁移与维护](迁移与维护.md) 说明数据与服务边界，[部署说明](deploy/README.md) 说明发布步骤，[验证记录](VALIDATION.md) 区分本次核查和历史验收。下文带日期的旧结果保留用于追溯。
-
-## 2026-10-18 后台资源下载
-
-三维网络资源共用两个下载名额，页面隐藏后暂停新增下载，返回后继续。完整模型、纹理、动画与交互保留，作品集仍先显示目录且不下载音乐。词典现有 WebP 缩略图和近屏懒加载已核查；实现、实际预取范围和验证方式见 [后台资源加载](docs/background-loading.md)。
-
-## 2026-10-17 校园网词典访问
-
-词典普通访问改为按服务器签发的浏览器会话分配额度，避免同一校园出口共用 24 个并发名额。已通过 30、50、100 人共享 IP 的隔离模拟，并验证限流、批量遍历限制和视频权限。规则、测试范围与回滚方法见 [词典访问保护](docs/dictionary-campus-access.md)。
-
-## 2026-10-17 作品集跳转统计
-
-作品集十个入口新增后台跳转计数，包含北大知道、清华知道和拼好课。按天、按作品汇总，与目标页面访问量分开；新增作品随构建自动加入。原链接直接打开，统计不阻塞访问；报表仍仅通过服务器查看：`sudo shouyulove-stats --days 30 --clicks`。查看 [完整口径与维护说明](docs/private-statistics.md)。
-
-## 2026-10-15 阿里云迁移维护入口（流量已切换）
-
-主站及以手予爱子项目迁移后的维护入口统一为 `ssh shouyulove-aliyun`，固定连接 `root@101.37.209.227`（ECS `i-bp1hi3u3w5p3vg4owfl0`）。不要使用 `yanyuan-calendar` 发布或维护这些项目，该别名属于北大知道的独立迁移。
-
-2026-10-15 已完成流量与数据切换，DNS 的 @、www 已指向新 ECS；DNS、证书、最终页面验收和本站自动续期演练均已通过。主站公开链接和运行白名单保持；SignTrace、传情会意改用独立 `/opt` 版本目录与 `/var/lib` 状态目录。词典暂经旧机转接 CLab，年终总结及旧 SignTrace 任务仍有过渡兼容路径，源站 80/443/8018 兼容转发也保留；不要覆盖其线上片段或提前停旧进程。
-
-当前路径、服务及发布边界见 [服务器迁移与维护](迁移与维护.md)。最终非秘密配置快照见 [阿里云维护配置](deploy/aliyun/README.md)。文中旧日期段落仅用于追溯，不重放旧机发布命令或 request。
-
-## 2026-10-15 全站后台访问统计
-
-访问统计已改为按 HTML 页面响应自动收集，覆盖同域名下的主站、详情页和各子站，新增页面无需维护路径名单。沿用按北京时间分天、HMAC 访客去重与服务器私有数据库，保留全部历史计数。新增 `sudo shouyulove-stats --days 30 --pages` 查看逐日逐页明细；完整口径、查看方式和维护规则见 [后台统计说明](docs/private-statistics.md)。
-
-只统计到达服务器的页面请求；浏览器内部无请求的切换不额外计数，也不测量停留时间。
-
-## 2026-10-15 指间趣游上线
-
-新增核心创意「指间趣游 SignPlay」，设计者为伍家阳，正式入口为 https://shouyulove.cn/signplay/ 。首页、作品集和项目详情共用新 Logo 与正文，作品集现有 10 个项目。
-
-主站发布为 `20261014T162210Z-astra-home`，运行白名单含 255 个文件、19 条页面路由和 5 个相对链接，共 111,756,084 字节。图像、模块、字体和数据桥版本为 `syl-v1-1-signplay`；主站品牌图标版本保持不变。中文覆盖 511 字，字体源位于 `output/deployment/signplay-20261015/font-source/`。
-
-部署记录保存在 `output/deployment/signplay-20261015/`。本次先更新绑定原稿的新项目条目，再从已发布内容快照追加该条目构建；原稿中其他未发布编辑保留。指间趣游由独立 Nginx 片段和版本目录维护，主站发布不接管其运行文件。
-
-[以手予爱](https://shouyulove.cn/) 的心创组介绍与作品导航，采用现有 Astra/Nuxt、GSAP 和 WebGL 运行层。
-
-本仓库保存当前公开的精确静态版本：415 个运行文件、21 条页面路由、5 个相对资源链接、2 条外部跳转，共 128,810,103 字节。十二个作品包含七个核心创意、一个内部工具与四个其他作品；公开文字读取绑定 MD。文件白名单、大小及 SHA-256 见 [runtime-manifest.json](runtime-manifest.json)。
-
-作品集独立使用轻量 HTML，正式入口为 `/portfolio/`，原 `/projects/` 自动跳转；图标、分类、名称和简介先显示；核心创意、内部工具及单独开启署名的条目显示设计者，整项直接访问对应项目。核心创意桌面两列、手机单列，其他作品紧凑置底。完整原生三维程序在首次绘制至少两秒后后台加载；该页面不加载音乐。手机「添加到桌面」直接进入新入口。
-
-首页继续只预载当前场景，心创组与页脚按需加载，保留现有音乐行为；版本化资源使用一年 immutable 缓存，HTML 和 payload 使用 no-cache。
-
-项目图标使用 [柔和彩色套件](project-logos/20261012-柔和彩色/README.md)，文化节保留原卡通人物，年终总结使用感谢章，传情会意使用「心意小卡」，SignPlay、飞手传书与去哪自习分别使用 `project-logos/20261015-signplay/`、`project-logos/20261020-flyinghands/` 与 `project-logos/20261110-quna-study/` 的已选图标。作品集底部显示 12px 小字鸣谢。完整维护约定和发布记录见 [作品集维护说明](docs/portfolio-maintenance.md)。当前运行发布为 `20261111T013217Z-astra-home`。
-
-主站标识采用 [把爱递给你](project-logos/20261012-主站-把爱递给你/README.md)，手掌为浅暖米色，搭配豆沙爱心与灰绿描边。主站各页标签图标、Apple 触屏图标及作品集安装图标共用这一图形，独立资源版本为 `syl-v1-1-giving-heart`。
+主站标识采用 [把爱递给你](project-logos/20261012-主站-把爱递给你/README.md)（`syl-v1-1-giving-heart`）；15 个项目共用柔和彩色系列图标（`project-logos/20261012-柔和彩色/` 及各新增项目独立图标目录）。中文采用狮尾四季春·加糖（当前 `syl-v1-1-shouxiaoyu-v2` 子集覆盖 565 字，作品集与首页多入口脚本另临时内嵌「配」字补充字形），英文采用 PSTimes 与 Helvetica Neue。
 
 ## 验证、恢复与本地预览
 
-只需 Python 3.9+ 和支持相对符号链接的文件系统，不需要 npm、pip 或重新构建：
+只需 Python 3.9+ 和支持相对符号链接的文件系统，无需 npm、pip 或重新构建即可校验并预览当前完整站点：
 
 ```sh
 python3 -B scripts/runtime_snapshot.py verify
@@ -94,135 +35,25 @@ python3 -B scripts/runtime_snapshot.py export output/runtime
 python3 -B serve.py --directory output/runtime --port 8038
 ```
 
-打开 `http://127.0.0.1:8038/`，结束时使用 Ctrl-C。导出工具按清单复制文件和链接，校验每个文件并拒绝覆盖已有目标；再次导出时请指定一个新的目录。导出的目录只包含运行白名单，源码、说明和版本历史不会混入。
-
-验证已有独立副本：
+打开 `http://127.0.0.1:8038/`，结束时按 Ctrl-C。导出工具按清单复制文件和链接，校验每个文件并拒绝覆盖已有目录；校验独立导出目录可执行：
 
 ```sh
 python3 -B scripts/runtime_snapshot.py verify --directory output/runtime --exact
 ```
 
-当前版本已退出旧 esbuild/garden 工程；不要恢复旧 `package.json`、`home-assets/` 或已退出展示的页面。
+当前版本已退出旧 esbuild/garden 工程，不要恢复旧 `package.json`、`home-assets/` 或已退出展示的页面。
 
-## 维护源码
+## 源码维护与测试
 
-`scripts/content_source.py` 解析本机正文源绑定，`content-source.md` 保存成功构建生成的公开文案副本；`styles/shouyulove-v1-1-jieguo.css` 保存当前样式，`styles/project-logo-mask.svg` 保存 HTML 与 WebGL 共用的不规则边缘遮罩。`scripts/build_content.py` 生成页面与运行资源，`scripts/optimize_runtime.py` 应用场景加载、手机纹理和图标边缘补丁，`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。中文子集与图集覆盖 511 字，字体缓存名由独立 `FONT_VERSION` 管理。现有回归检查覆盖文本源绑定、字标、共享字体、导航、背景加载和实际 HTTP 缓存响应。
+- `scripts/content_source.py` 读取本机 `.content-source-path`（Git 忽略的一行绝对路径）绑定的正文源 MD，构建成功后自动同步仓库 `content-source.md` 副本。
+- `scripts/build_content.py` 生成页面、多入口卡片（`ENTRY_ICONS` / `project_entries_script`）与运行资源；`scripts/project_entries.js` 与 `styles/project-entries.css` 维护首页多按钮入口；`styles/shouyulove-v1-1-jieguo.css` 与 `styles/portfolio.css` 维护主站与作品集样式；`scripts/optimize_runtime.py` 应用场景队列、手机纹理和图标遮罩补丁；`scripts/fast_bootstrap.js` 衔接 HTML 与原生视图。
+- 完整内容重建除本仓库文件外，还依赖本机保留的 `output/deployment/shouyulove-content-v1/v0-backup.json` 对应 V0 归档、当前字体源与图集、`music/` 音频、`output/deployment/shouyulove-fast-20261009/mobile-textures/`（Khronos KTX-Software 4.4.2）及 `msdfgen` v1.13。当前本机缺失部分历史字体构建目录时，按 [当前运维状态](docs/operations-current.md) 在已校验运行包副本上增量更新。
 
-维护脚本保留实际原始素材的读取约定，完整内容重新生成还需要本机保存的素材：
-
-- `output/deployment/shouyulove-content-v1/v0-backup.json` 中对应的项目内 V0 原始页面与共享素材。
-- `project-logos/20261012-主站-把爱递给你/shouyulove.svg` 中的主站标识；`brand_assets()` 生成图标，`brand_links()` 同步所有页面引用。
-- `output/deployment/signplay-20261015/font-source/` 中的当前字体源、子集与中文图集。
-- `project-logos/20261012-柔和彩色/` 中的原图标及 `project-logos/20261015-signplay/` 中的 SignPlay 图标、`music/` 中的既有音乐，以及字体候选清单指定的预览和许可文件。
-- `output/deployment/shouyulove-fast-20261009/mobile-textures/` 中的两张手机纹理。重建脚本为 `scripts/prepare_mobile_textures.py`，使用固定版本 Khronos KTX-Software 4.4.2；已生成的纹理也在运行快照中。
-
-克隆可独立恢复现有站点。完整内容重建还需上述原始素材；构建脚本会重建固定的 `output/shouyulove-jieguo-site/`，运行前保存已有输出。
-
-源码回归检查使用 Python 3.13 和以下依赖：
+源码回归测试依赖 Python 3.13 与系统 Cairo（macOS Homebrew 位于 `/opt/homebrew/lib`）：
 
 ```sh
 python3 -m pip install -r requirements-build.txt
-python3 -B -m unittest discover -s tests -v
+DYLD_LIBRARY_PATH=/opt/homebrew/lib python3 -B -m unittest discover -s tests -v
 ```
 
-图标渲染使用 CairoSVG 和系统 Cairo 库；本机 macOS 的 Cairo 位于 `/opt/homebrew/lib`，运行构建或源码测试时加上 `DYLD_LIBRARY_PATH=/opt/homebrew/lib`。回归测试自行创建临时页面与输入，不要求 V0 或完整字体。需要新增字形或重新生成音乐时，另外使用对应的 `prepare_chinese_font.py` / `prepare_music.py`；这些生成步骤依赖 fontTools/Brotli、NumPy、SciPy、FFmpeg，以及固定版本 msdfgen v1.13，不能用它们替代运行快照恢复。
-
-## 发布和许可
-
-按白名单使用既有主站发布流程，见 [部署说明](deploy/README.md)。按用户要求，后续修改需同步推送仓库并更新既有服务器部署；另有明确要求时从其要求。
-
-保留 [第三方许可与归属说明](THIRD_PARTY_NOTICES.md)。公开仓库不包含凭据、服务器状态快照、内部交接、研究材料或历史大目录。
-
-## 正文文本源绑定
-
-本机 `.content-source-path` 保存正文 MD 的绝对路径（一行 UTF-8），该配置由 Git 忽略。修改主站文案时先同步修改该 MD；`scripts/build_content.py` 和 `scripts/prepare_chinese_font.py` 均直接读取绑定原稿，成功构建自动更新仓库的 `content-source.md` 副本。已绑定原稿不可读取时，构建会停止；没有本机绑定的克隆使用仓库副本。
-
-文字更新流程：编辑绑定 MD，检查新增用字与对应字体版本，构建并检查电脑、手机页面，再提交推送和更新既有服务器部署。
-
-## 导航回归
-
-`tests/project_navigation.js` 覆盖原生首页进入独立作品集、返回及历史切换，可交给 Playwright CLI 的 `run-code`，在已打开的本地预览或部署标签执行；先创建 `output/playwright/project-navigation/` 保存截图。用例创建并关闭独立的桌面与手机上下文，覆盖原生按钮打开独立目录、返回首页与前进后退。
-
-## 手机添加到桌面
-
-作品集手机端右下角提供「添加到桌面」，位于页面右下角；支持浏览器原生安装提示，未提供提示时显示 iPhone、其他浏览器或内置浏览器的操作指引。已从桌面以独立窗口打开时隐藏按钮，快捷入口直接进入 `/portfolio/`。安装清单只覆盖作品集路径；没有新增 Service Worker 或更改页面缓存。
-
-按钮和指引文案由绑定 MD 的「添加到桌面」章节生成。`scripts/home_shortcut.js` 处理安装提示与站内路由，初始 HTML 阶段即可使用。`tests/home_shortcut.js` 可通过 Playwright CLI 的 `run-code` 执行，先创建 `output/playwright/home-shortcut/`；覆盖手机、窄屏、横屏、原生提示分支、指引关闭、站内切换、独立窗口和桌面隐藏。原生提示结果通过事件替身检查，实际系统安装需由用户在设备上确认。
-
-## 2026-10-11 轻量作品集与私有统计
-
-作品集正式入口改为 `/portfolio/`，`/projects`、`/projects/`、`/projects/index.html` 使用 308 跳转，查询参数保留。七个作品详情原地址保留。作品目录由绑定 MD 直接生成 HTML，保留三个分类、名称和设计者，整行链接直接打开对应项目；字体或 JavaScript 未完成时也可以使用。
-
-作品集不启动 Nuxt/WebGL、预加载场景或音频，背景仅在正文首次绘制至少两秒后低优先级加载既有石膏纹理；减少动态效果、节省流量或 2G 网络时跳过背景。安装按钮和清单同步进入新地址，安装身份仍保留原 id。首页的原生作品集按钮使用完整页面导航，离开时停止首页音频；初始 HTML 也提供作品集入口。
-
-同一 5 Mbps/80 ms、禁用缓存的手机模拟中，首屏可见作品链接从约 17.58 秒变为 0.21 秒；该读数表示作品入口可用，字体和后置纹理可以继续下载。桌面、390px、320px、背景阻塞、无 JavaScript、旧地址跳转和手机安装入口通过实际浏览器检查。
-
-访问统计使用本机 Unix 数据报和独立 SQLite 后台进程，不添加浏览器追踪代码或公开接口。按北京时间统计成功的主站 HTML GET 请求（含 304），重开/刷新增加次数；同一网络地址估算为同一访客，机器人与验证 UA 不计入。数据库只保存 HMAC 标识、日期、页面和计数，不保存原始地址、查询参数或浏览器标识。合计访客跨页面去重，分页面访客不能直接相加。统计从本次发布开始，SPA 内没有 HTML 请求的切换不会额外计数。
-
-资料位于服务器 `/var/lib/shouyulove-stats/`，目录 0700、数据库与密钥 0600；后台进程 `shouyulove-stats.service` 随开机启动。通过 SSH 执行 `sudo shouyulove-stats --days 30`，或添加 `--json` 查看每日及分页面资料。统计资料不在运行清单和 Git 中。普通 Nginx 请求日志继续保留，主站统计仅追加独立的私有日志通道。
-
-## 2026-10-11 作品集三维特效恢复
-
-用户明确要求完整保留特效、只调整加载顺序。作品集继续使用独立可点击 HTML；首次内容绘制至少两秒后后台加载原生 Nuxt/WebGL 场景，复用原三维模型、着色器、鼠标跟随与流体交互，完成后渐入。静态作品列表一直保留，加载过程不覆盖正文或重置滚动；音乐不初始化、不下载。`/portfolio/`、旧地址跳转、手机桌面入口和私有后台统计继续保留。新的模块与数据桥版本为 `syl-v1-1-portfolio-3d`。
-
-目录优先展示核心创意、心创组内部使用；两类使用字号大于作品名、加深加重的分区标题。其他作品置于末尾，作品名为 16px、署名 12px，行间距更紧凑。展示顺序由内容源 MD 的「作品集页面 / 展示顺序」读取。
-
-## 2026-10-11 作品集标题与次要作品收紧
-
-顶部只显示「心创组作品集」并保留首页入口，删除原品牌文字与重复的作品集标题。其他作品移至末尾的紧凑单行列表：名称 14px、署名 12px、点击高度 44px，桌面宽度最多 480px。核心创意与心创组内部使用保持主要分区标题。完整三维背景仍后置加载，音乐不下载。展示文字及规则已同步正文 MD。
-
-## 2026-10-11 次要作品隐藏署名
-
-作品目录中其他作品的三个入口只显示作品名称，暂不显示设计者；核心创意、心创组内部使用的署名保留。显示规则读取内容源「作品集页面 / 其他作品设计者：不显示」，原项目资料及其他页面的署名保留。完整三维背景、目录标题、分类层级和手机入口沿用已发布版本。
-
-## 2026-10-11 移除加载临时页面
-
-首页、心创组及七个作品详情等原生页面统一使用原加载界面；资源准备进度由 0 显示到 100，完成后进入原三维页面。已删除共享构建中的临时文字页面、巨型标题样式与阅读位置接续逻辑。初始 HTML 和原生加载组件连续衔接，进度值同时提供给辅助技术。作品集的独立正式列表继续立即可用，完整三维特效随后在后台加载，音乐不下载。模块版本为 `syl-v1-1-native-loader`；字体、图片与数据桥沿用现有版本。
-
-## 2026-10-11 手语文化节上线
-
-新增核心创意「2026 手语文化节」，入口 https://shouyulove.cn/2026-sign-language-cultural-festival/ 。简介「服务于 2026 年手语文化节的小游戏网页～」，设计者「周丽敏 涂增基 黄庭逸」，均来自用户指定 MD。首页、作品集与独立作品详情同步更新，使用原作品的手小语形象。
-
-构建按作品名称匹配稳定 ID，新增项目不再挤占原项目路由；八个作品、17 条页面路由、248 个运行文件。新增字形的中文字体与数据桥、运行模块使用 `syl-v1-1-festival`，原英文、音乐及其他图片保留。字体覆盖 439 字。
-
-正式主站版本：`/var/www/shouyulove-home-releases/20261011T145255Z-astra-home`。248 个运行文件逐一校验，17 条页面路由、旧目录跳转、三个原有子站正常；新增游戏独立运行于 `/2026-sign-language-cultural-festival/`。本地 API 注册、穿搭、留言、送花、数据文件隔离检查通过；作品集 1440/390/320px 原生三维场景、延迟加载与异常回退检查通过；主站与游戏桌面、手机均无横向溢出或资源错误。验证资料在维护目录 `output/deployment/shouyulove-festival-20261011/`。
-
-## 2026-10-11 字体加载稳定化
-
-主站与心创组、作品详情、作品集共用首屏字体样式。中文沿用狮尾四季春·加糖，英文标题沿用 PSTimes，正文及轻字重控件沿用 Helvetica Neue；保留主页现有字体文件、字库与排版层级。四个现有 WOFF2 字体内嵌于同一个版本化 CSS，字体解码期间不显示系统替代字体；移除原 HTML 和延后样式中的重复字体定义与多余预载。作品集后台场景复用已经载入的字体样式，避免重复插入和二次选择。字体样式压缩后约 159 KiB，跨页面及再次访问复用一年缓存；内容继续先于三维场景可用。模块版本 `syl-v1-1-stable-fonts`，字体和数据桥版本继续为 `syl-v1-1-festival`。
-
-## 2026-10-11 作品集图文目录与年终总结
-
-作品集展示九个项目的现有图标与原稿简介；核心创意桌面两列、手机单列，奇数末项跨列，内部工具独立成组，其他作品紧凑置底且不显示设计者。沿用中文和英文字体、图标羽化、悬停位移、完整三维背景及延后加载。手机署名按姓名换行，快捷按钮在背景就绪前后保持安全区位置。
-
-新增第五个核心创意「2026 手语分社骨干年终总结」，首页、作品集与详情页同步接入 `/2026-year-end-summary/`，简介和五位署名来自绑定 MD。图标复用原项目登录页爱心，正文链接优先读取 Markdown 目标。字体、模块和数据桥版本为 `syl-v1-1-portfolio-recap`，字体覆盖 486 字。
-
-已发布 `20261011T155351Z-astra-home`：252 个运行文件、18 条页面路由、五个相对链接，共 111,663,526 字节；70 个文件更新，182 个复用。父级配置与主页片段哈希保持。1440/390/320px、平板与横屏、键盘及减少动态效果、背景延迟/失败、无 JavaScript、滚动与布局稳定检查通过；首页与详情页的年终总结入口经独立浏览器核验。构建与验证记录在 `output/deployment/shouyulove-portfolio-icons-20261011/`。
-
-## 2026-10-12 九项目 Logo 统一重设计
-
-九个项目的图标统一为深墨绿色、收尖曲线与开阔留白，分别保留手势、书页、交流、文化节、年度回顾、课程模块、两校地标与接锅意象。全部由内置 image_gen 独立生成透明 PNG，原图和完整提示词位于 `project-logos/20261012-统一曲线/`；历史素材保留。首页与作品集共用新的版本化图像，沿用原尺寸归一、底色、羽化、排版和原生三维动效。
-
-图片、模块、数据桥版本 `syl-v1-1-unified-logos`；字体继续使用 `syl-v1-1-portfolio-recap`。已发布 `20261011T161646Z-astra-home`：252 个文件、18 条路由、五个相对链接，共 111,760,623 字节；71 个文件更新，181 个复用。桌面/390px/320px 作品集、背景延迟与失败、无 JavaScript、滚动和布局稳定、首页桌面与手机检查通过。记录位于 `output/deployment/shouyulove-logos-20261012/`。
-
-## 2026-10-12 柔和彩色项目图标
-
-按用户选择，以 A 组造型为主加入灰绿、雾蓝、豆沙、暖米、浅紫和浅金色；传情绘意采用面对面的双人侧脸。年终总结重设计为「谢谢这一年」感谢章，手语文化节恢复用户指定的原卡通人物 PNG。八枚新图标的 SVG、1024px 透明 PNG、单色与反白版本、配色和预览在 `project-logos/20261012-柔和彩色/`。SVG 保留可缩放描边，彩色建议至少 32px，16px 使用单色。
-
-首页与作品集共用图标。图片、模块和数据桥版本为 `syl-v1-1-soft-color-logos`，字体继续为 `syl-v1-1-portfolio-recap`；正文、署名、路由、页面布局和原生动效沿用现有实现。发布目录 `20261012T023409Z-astra-home`，构建与发布记录在 `output/deployment/shouyulove-colored-logos-20261012/`。
-
-## 2026-10-12 传情绘意「心意小卡」
-
-传情绘意·手语版图标由双人侧脸替换为用户选定的 B「心意小卡」：两张错开的卡片和豆沙色爱心。彩色 SVG、透明 PNG、单色版本、总览与选型记录同步更新；其余八个图标保留原文件。首页和作品集共用新图标，缓存版本为 `syl-v1-1-charades-cards`，发布目录 `20261012T025514Z-astra-home`。
-
-## 2026-10-12 作品集鸣谢与子站图标
-
-作品集末尾新增居中的 12px 小字「鸣谢所有心创组成员」，文字由原稿「作品集页面／鸣谢」字段维护。补齐“鸣、谢”两个字形，中文覆盖 488 字；英文原字库和图集中的英文字形像素保持。模块、数据桥和字体版本为 `syl-v1-1-portfolio-thanks`，项目图片继续使用 `syl-v1-1-charades-cards`。
-
-发布 `20261012T031847Z-astra-home`。以手寻语、传情绘意、文化节、年终总结与接锅各子站的项目标识、浏览器图标和 Apple 触屏图标已同步；词典独立服务未修改。记录见 `output/deployment/shouyulove-site-icons-thanks-20261012/`。
-
-## 2026-10-12 传情会意更名
-
-项目正式名称统一为「传情会意-手语版」，首页、作品集、详情页、数据桥和内容源已同步。正式地址仍为 `/chuanqinghuiyi/`。中文字体与 WebGL 字库补齐「会」字，保留原英文、效果与图标。主站发布为 `20261012T070956Z-astra-home`，模块、字体和数据桥版本为 `syl-v1-1-chuanqinghuiyi-rename`。
-
-本次使用已发布的内容快照构建，仅加入项目改名；绑定原稿中其他未发布的编辑保留。运行清单核验 252 文件、18 条页面路由、5 个资源链接。电脑、390px、320px 作品集与原生背景检查通过，正式入口均可访问。
+浏览器回归脚本包括 `tests/project_navigation.js`（首页与作品集站内导航、返回及前进后退）、`tests/home_shortcut.js`（作品集手机右下角「添加到桌面」及浏览器安装指引）与 `tests/portfolio_scene.js`（作品集三维背景后置加载）。私有访问与点击统计维护见 [后台统计说明](docs/private-statistics.md)，第三方许可保留在 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

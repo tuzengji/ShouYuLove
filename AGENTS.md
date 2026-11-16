@@ -1,125 +1,46 @@
 # 以手予爱主站维护
 
-## 2026-11-14 手小语展示页上线并接入主站与作品集
+## 当前运行状态（2026-11-16）
 
-2026-11-16 第三次发布后主站运行版本为 `20261116T055144Z-astra-home`（663 个文件，共 158,647,863 字节）：首页的「手语分社统一通行证」卡片也改为两个入口按钮，由独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-20261116.js`）在页面加载后替换简介，样式在 `styles/project-entries.css`，改动时升级 `PROJECT_ENTRIES_VERSION`。下一段是同日前两次作品集发布的记录。详见 [当前运维状态](docs/operations-current.md)。
+- **当前线上版本**：`20261116T055144Z-astra-home`（上一版本 `20261116T053836Z-astra-home`，663 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `158,647,863` 字节；仓库提交 `2590e43`）。完整变更脉络见 [当前运维状态](docs/operations-current.md)。
+- **作品集规模与多入口卡片**：作品集共 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）。
+  - 桌面端「核心创意」4 行两列平衡排布，第 3 行并列展示「手小语」（`https://shouyulove.cn/shouxiaoyu/`，涂增基设计）与「传情会意-手语版」。
+  - 「心创组内部使用」分区包含「接锅」「手语分社统一通行证」「心创云盘」，三张卡片左侧图标统一与文字垂直居中对齐。
+  - **多按钮入口机制**：绑定原稿条目可在「地址：」后追加两行及以上 `入口：[名称](地址)`，并在 `scripts/build_content.py` 的 `ENTRY_ICONS` 登记小图标。作品集生成不可整卡点击的 `.portfolio-card`，由各 `.portfolio-action` 按钮取代简介展示在标题与署名之间（仍带 `data-project` 计入作品集点击统计）；首页由独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-20261116.js`，样式 `styles/project-entries.css`，版本常量 `PROJECT_ENTRIES_VERSION`）在渲染后做同样替换；原稿简介保留供作品详情页使用。当前「手语分社统一通行证」使用「通行证主页」（`/auth/`，`pass-home.svg`）与「接入与配置中心」（`/auth/dev`，`pass-console.svg`）双按钮。
+- **当前资源版本与字体待办**：
+  - 主站品牌图标 `BRAND_VERSION = syl-v1-1-giving-heart`（`project-logos/20261012-主站-把爱递给你/shouyulove.svg`）；
+  - 图像 `RUNTIME_VERSION`、字体 `FONT_VERSION`（中文覆盖 565 字）、运行模块 `MODULE_VERSION` 均为 `syl-v1-1-shouxiaoyu-v2`；
+  - 数据桥 `BRIDGE_VERSION` 与作品集场景 `PORTFOLIO_SCENE_VERSION` 为 `syl-v1-1-shouxiaoyu-v3`；
+  - 多入口脚本 `PROJECT_ENTRIES_VERSION = syl-v1-1-20261116`；
+  - CDN 资源继续使用 `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项），后续新增资源（`origin-asset-manifest.json` 300 项及 `project-entries.syl-v1-1-20261116.js`）由 ECS 直接提供。
+  - **字体注意**：按钮文字中的「配」（`U+914D`）不在 `syl-v1-1-shouxiaoyu-v2` 子集内，已在 `portfolio/index.html` 与 `scripts/project_entries.js` 内嵌 844 字节单字补充字形；下次完整重建前须先重新生成中文字体并移除两处临时补充字形。
 
-2026-11-16 起主站运行版本为 `20261116T053836Z-astra-home`（上一版本 `20261116T053402Z-astra-home`，662 个文件，共 158,639,174 字节，仅 `portfolio/index.html` 变化）：作品集中「手语分社统一通行证」改为「通行证主页」`/auth/` 与「接入与配置中心」`/auth/dev` 两个带小图标的按钮，写法为绑定原稿条目里的「入口：[名称](地址)」行，图标登记在 `scripts/build_content.py` 的 `ENTRY_ICONS`。作品集页面临时内嵌了「配」字补充字形，下次完整构建前先重新生成中文字体。下一段的版本数字保留为 11 月 14 日的记录。详见 [当前运维状态](docs/operations-current.md)。
+## 服务器与基础设施边界
 
-主站当前运行版本为 `20261114T123404Z-astra-home`（上一版本 `20261114T075210Z-astra-home`）：662 个文件、24 条页面路由、5 个相对链接、2 条外部跳转（`/where-to-study` 与 `/where-to-study/` 302 至 `https://39.96.206.228/`），共 158,632,740 字节。作品集现有 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）：在「核心创意」分区加入「手小语」（正式地址 `https://shouyulove.cn/shouxiaoyu/`，设计者涂增基，图标位于 `project-logos/20261114-shouxiaoyu/`），桌面端 4 行两列平衡排布且将「手小语」与「传情会意-手语版」并列展示于第 3 行；文案聚焦微信群日常陪伴、水群接梗与看图猜手语（不含天气播报）。中文字体覆盖 565 字；数据桥与作品集场景版本为 `syl-v1-1-shouxiaoyu-v3`，图像、字体与运行模块保持 `syl-v1-1-shouxiaoyu-v2`（`origin-asset-manifest.json` 共 300 项，保留兼容资源），主站标识保持 `syl-v1-1-giving-heart`。手小语独立静态站由本机 `核心创意/手小语/site/` 维护，发布至 `/var/www/shouyulove-showcase`（`/var/www/shouyulove-shouxiaoyu-releases/20261114T123437Z-shouxiaoyu`，由 `/etc/nginx/snippets/shouxiaoyu.conf` 托管），直接使用手小语微信头像作为 Logo，通过五个主题集合呈现 34 张纯深色手机端脱敏群聊截图（无白色桌面截图、无张数角标、无逐图解读，「福瑞庭审」仅保留横轴左右翻页圆钮）。详见 [当前运维状态](docs/operations-current.md)。
+- **唯一维护入口**：`ssh shouyulove-aliyun` → `root@101.37.209.227`（ECS `i-bp1hi3u3w5p3vg4owfl0`）。**禁止**使用北大知道的 `yanyuan-calendar`（`121.43.143.226`）发布或维护以手予爱项目。
+- **已退役兼容清理边界**：
+  - 腾讯轻量服务器 `49.232.193.175` 已于 2026-10-28 重装为纯净 Ubuntu 22.04.5，旧 SignTrace `28018` 回源、旧年终总结 `28042` 会话分流及全部 `280xx` 迁移隧道均已移除，不得恢复任何腾讯旧机兼容配置。
+  - 阿里云上的旧 PKUKnow vhost 已退役（HTTP 410、拒绝 TLS 握手、无代理），不得恢复旧反代；本站仍复用现有 SSH 身份、共用 ACME 账户和 `certbot.timer`，不得误删。
+- **子站独立运行边界**：主站发布只管理 `/var/www/shouyulove-home`（版本目录 `/var/www/shouyulove-home-releases/`），不接管同机独立维护的子站：
+  - 手小语：纯静态站 `/var/www/shouyulove-showcase`（`core: 核心创意/手小语/site/`，片段 `/etc/nginx/snippets/shouxiaoyu.conf`）；
+  - 指间趣游：`/var/www/shouyulove-signplay` + `signplay-bank.service`（`8765`）；
+  - 飞手传书：`/opt/flyinghands/current` + `flyinghands.service`（`8766`）；
+  - 手语分社统一通行证：`/opt/shouyulove-auth/current` + `shouyulove-auth.service`（`8767`）；
+  - 心创云盘：`/opt/shouyulove-drive/current` + `shouyulove-drive.service`（`8768`）+ `shouyulove-drive-fb.service`（`8769`），共享存储池 `/srv/drive`（`100 GB`）；
+  - 以手寻语（`signtrace.service` `8018`）、传情会意（`shouyu-game.service` `8019`）、接锅（`jieguo.service` `8040`）、手语文化节、骨干年终总结（`8042`）均纳入 `system-shouyulove.slice`（共 11 个活跃单元）；
+  - 分社手语词典 `/dict`：经本机 `18080/18081` 直连 CLab，配合 `shouyulove-dict-guard` 独立签名会话限流（见 [词典访问保护](docs/dictionary-campus-access.md)）。
+- **CDN 与证书**：静态资源 CDN 与私有 OSS 流程见 [CDN 说明](docs/cdn-oss.md)。每次资源更新须分配新的 `/v/<版本>/`，先跑 `prepare_cdn.py`、上传并执行 `verify_cdn.py`，再发布 HTML。`assets.shouyulove.cn` 专用证书到期日为 `2027-01-16`，当前需手动续签与上传，不能当作已自动续期；根域与 `www` 证书（`/etc/shouyulove/tls/`）由 `certbot.timer` 自动续期。
+- **私有访问与点击统计**：HTML 页面响应自动统计（同域全覆盖，无需登记路径名单，含 `/where-to-study/` 外部 302 入口与 `/drive/files/` 路径脱敏）及 `tuzengji.com` 隔离统计、`portfolio_clicks` 作品集跳转统计统一由 `shouyulove-stats.service` 采集，测试请求须带 `User-Agent: ShouYuLove-QA` 以免污染真实数据。详见 [后台统计说明](docs/private-statistics.md)。
 
-## 2026-11-14 心创云盘上线、扩至 100 GB 并接入主站与作品集
+## 构建、发布与日常维护规则
 
-主站当前运行版本为 `20261114T051119Z-astra-home`：538 个文件、23 条页面路由、5 个相对链接、2 条外部跳转（`/where-to-study` 与 `/where-to-study/` 302 至 `https://39.96.206.228/`），共 144,466,376 字节。作品集现有 14 个项目（7 个核心创意、3 个心创组内部使用、4 个其他作品）：在「心创组内部使用」分区新增「心创云盘」（正式地址 `https://shouyulove.cn/drive/`，设计者涂增基，图标位于 `project-logos/20261114-xinchuang-drive/`），桌面首行两列并排、末项跨列居中展示。中文字体覆盖 556 字；本次图像、字体、运行模块、数据桥与作品集场景版本为 `syl-v1-1-xinchuang-drive`（`origin-asset-manifest.json` 共 178 项，保留兼容资源），主站标识保持 `syl-v1-1-giving-heart`。网盘后台（`100 GB` 稀疏可扩展存储卷 `/srv/shouyulove-drive` / `/srv/drive`）由独立仓库 `心创组内部使用/心创云盘/` 维护，服务归属 `system-shouyulove.slice`。详见 [当前运维状态](docs/operations-current.md)。
-
-## 2026-11-13 手语分社统一通行证接入主站与作品集
-
-主站当前运行版本为 `20261113T044411Z-astra-home`：477 个文件、22 条页面路由、5 个相对链接、2 条外部跳转（`/where-to-study` 与 `/where-to-study/` 302 至 `https://39.96.206.228/`），共 137,472,614 字节。作品集现有 13 个项目（7 个核心创意、2 个心创组内部使用、4 个其他作品）：在「心创组内部使用」分区与「接锅」并列新增「手语分社统一通行证」（正式地址 `https://shouyulove.cn/auth/dev`，设计者涂增基，图标位于 `project-logos/20261113-shouyu-pass/`），桌面两列并排、窄屏单列展示。中文字体覆盖 551 字；本次图像、字体、运行模块、数据桥与作品集场景版本为 `syl-v1-1-shouyu-pass`（保留上一版兼容资源），主站标识保持 `syl-v1-1-giving-heart`。详见 [当前运维状态](docs/operations-current.md)。
-
-## 2026-11-11 当前运行与固定入口
-
-主站当前运行版本为 `20261111T013217Z-astra-home`：415 个文件、21 条页面路由、5 个相对链接、2 条外部跳转（`/where-to-study` 与 `/where-to-study/` 302 至 `https://39.96.206.228/`），共 128,810,103 字节。作品集包含 12 个项目（7 个核心创意、1 个内部使用、4 个其他作品，其中「去哪自习」按条目设置显示设计者），中文字体覆盖 545 字；数据桥与作品集场景为 `syl-v1-1-where-to-study`，图像、字体和运行模块为 `syl-v1-1-quna-study`，主站标识保持 `syl-v1-1-giving-heart`。详见 [当前运维状态](docs/operations-current.md)。
-
-## 2026-10-28 腾讯旧机已退役并重装
-
-用户已确认重装腾讯轻量服务器 `49.232.193.175`（`lhins-rarfnokk`），保留实例和公网 IP。现为纯净 Ubuntu 22.04.5，旧项目、旧地址转发和迁移隧道已移除。阿里云已撤销旧 SignTrace 任务回源、旧年终总结会话分流和该 IP 的代理信任；词典使用现有 CLab 直连。不得重新部署下方历史记录中的腾讯兼容配置。验收与快照记录见 [当前运维状态](docs/operations-current.md)。
-
-## 2026-10-20 飞手传书上线
-
-「飞手传书」（王宁静设计）已加入核心创意，地址为 https://shouyulove.cn/flyinghands/ 。主站版本 `20261020T123649Z-astra-home`，354 个文件、20 条页面路由、11 个项目；资源使用 CDN 新前缀 `/v/20261020-flyinghands/`。发布与回滚信息见 [当前运维状态](docs/operations-current.md)。
-
-## 当前运行与运维记录（2026-10-18）
-
-- 主站静态资源已接入 CDN + 私有 OSS，维护入口见 [CDN 说明](docs/cdn-oss.md)。以后资源更新使用新的 `/v/<版本>/`，先运行 `prepare_cdn.py`、上传及 `verify_cdn.py`，再发布 HTML；同步两份清单。保留原站静态字节、同源 Worker/安装清单、HTML/API/统计与子项目边界。`assets.shouyulove.cn` 专用证书到期日为 2027-01-16，目前手动续签与上传，不能当作已自动续期。
-
-- 词典校园网访问采用独立签名会话限流，维护入口和验证记录见 [词典访问保护](docs/dictionary-campus-access.md)。普通请求不再使用共享 `syl_req/syl_conn`，不要恢复每 IP 24 并发。保留当前 CLab 直连、本地视频、报告入口和主备监控；只按现场差异修改 Nginx，私钥及生成的签名片段不得进 Git。
-- 作品集跳转使用独立的 `portfolio_clicks` 统计表；不与页面 PV 相加。`scripts/build_content.py` 随作品生成 `data-project` 和 `portfolio/projects.json`。保留链接直达、异步记录和私有报表；新增作品无需单独改统计服务。详见 [后台统计说明](docs/private-statistics.md)。
-- 先读 [当前运维状态](docs/operations-current.md)。主站使用 `shouyulove-aliyun` → `101.37.209.227`；`yanyuan-calendar` 已指向 PKUKnow 新机 `121.43.143.226`，不能用于主站发布。
-- 当前静态版本 `20261018T084902Z-astra-home`：296 文件（含 39 个上一版兼容模块/样式/场景文件）、19 页面路由、5 个链接，10 个项目，字体覆盖 511 字。模块为 `syl-v1-1-queued-scenes`；图像、字体和数据桥仍为 `syl-v1-1-signplay`，品牌图标独立保留。
-- 原生三维下载共用两个并发名额；隐藏页面暂停新增网络请求，返回后续载，保留完整场景。队列接入、词典现有缩略图核查及回归方式见 [后台资源加载](docs/background-loading.md)。更新时保留上一版 immutable 模块地址，避免已打开页面的延迟请求 404。
-- 旧阿里云 PKUKnow vhost 已退役，不能恢复其旧反代或业务任务。本站仍复用现有 SSH 身份和 ACME 账户，不能随其他项目一起删除。
-- 腾讯旧机仍承载词典转接与备用、旧会话/任务/地址兼容、燕园图寻和时间秘书；不是可整机关闭的闲置备份。三个闲置转发端口仍与词典共用隧道，未执行退役。
-- 本机原工作树保留用户历史修改与删除。说明更新使用隔离副本提交，只同步文档和必要索引；运行资源相同的说明发布存入服务器私有维护目录，不构建或重启网站。
-
-## 2026-10-15 阿里云迁移维护入口（流量已切换）
-
-主站及以手予爱子项目迁移后的维护入口统一为 `ssh shouyulove-aliyun`，固定连接 `root@101.37.209.227`（ECS `i-bp1hi3u3w5p3vg4owfl0`）。不要使用 `yanyuan-calendar` 发布或维护这些项目，该别名属于北大知道的独立迁移。
-
-2026-10-15 已完成流量与数据切换，DNS 的 @、www 已指向新 ECS；DNS、证书、最终页面验收和本站自动续期演练均已通过。主站公开链接和运行白名单保持；SignTrace、传情会意改用独立 `/opt` 版本目录与 `/var/lib` 状态目录。词典暂经旧机转接 CLab，年终总结及旧 SignTrace 任务仍有过渡兼容路径，源站 80/443/8018 兼容转发也保留；不要覆盖其线上片段或提前停旧进程。
-
-当前路径、服务及发布边界见 [服务器迁移与维护](迁移与维护.md)。最终非秘密配置快照见 [阿里云维护配置](deploy/aliyun/README.md)。文中旧日期段落仅用于追溯，不重放旧机发布命令或 request。
-
-## 2026-10-15 全站后台访问统计
-
-访问统计已改为按 HTML 页面响应自动收集，覆盖同域名下的主站、详情页和各子站，新增页面无需维护路径名单。沿用按北京时间分天、HMAC 访客去重与服务器私有数据库，保留全部历史计数。新增 `sudo shouyulove-stats --days 30 --pages` 查看逐日逐页明细；完整口径、查看方式和维护规则见 [后台统计说明](docs/private-statistics.md)。
-
-只统计到达服务器的页面请求；浏览器内部无请求的切换不额外计数，也不测量停留时间。
-
-## 2026-10-15 指间趣游上线
-
-新增核心创意「指间趣游 SignPlay」，设计者为伍家阳，正式入口为 https://shouyulove.cn/signplay/ 。首页、作品集和项目详情共用新 Logo 与正文，作品集现有 10 个项目。
-
-主站发布为 `20261014T162210Z-astra-home`，运行白名单含 255 个文件、19 条页面路由和 5 个相对链接，共 111,756,084 字节。图像、模块、字体和数据桥版本为 `syl-v1-1-signplay`；主站品牌图标版本保持不变。中文覆盖 511 字，字体源位于 `output/deployment/signplay-20261015/font-source/`。
-
-部署记录保存在 `output/deployment/signplay-20261015/`。本次先更新绑定原稿的新项目条目，再从已发布内容快照追加该条目构建；原稿中其他未发布编辑保留。指间趣游由独立 Nginx 片段和版本目录维护，主站发布不接管其运行文件。
-
-- 用中文交流，先查看 Git 状态和 README，保留用户已有修改、删除和资产。
-- 项目采用 Astra/Nuxt、GSAP、WebGL 的已导出运行时；不要恢复已退出的 garden 工程。
-- 主站正文以 `.content-source-path` 指向的 MD 为文本源；修改文字、成员、作品介绍、署名和链接时，先同步修改此 MD，再构建、推送和部署。`content-source.md` 是成功构建自动更新的仓库副本；未配置绑定的克隆使用该副本。样式为 `styles/shouyulove-v1-1-jieguo.css`；保留批准的文案、字体、布局、声音和原生动效。
-- 新修改完成后，提交推送到本仓库，并更新既有用户服务器部署；用户另有明确要求时从其要求。部署只用用户服务器或本地预览，禁止 chatgpt.site。
-- 以 `runtime-manifest.json` 保存运行白名单；仓库同步和发布都须逐个校验文件哈希及五个相对链接。主站与各子站分别维护。
-- 研究、账户、会话、部署认证与内部数据不能进入公开仓库或静态目录。历史素材与版本归档保留在维护者的项目内。
-- 用 `scripts/runtime_snapshot.py` 验证或导出当前版本。重新构建前先读 README 中的素材约定，并备份已有构建输出。
-- 版本化公共资源使用一年 immutable 缓存；更新内容时更换对应版本名。HTML 和页面 payload 使用 no-cache。
-- 页面改动检查桌面与手机，结束时关闭本次创建的浏览器上下文，保留用户窗口。
-- 如果某句话只为防止被质疑而不能推进论证，请删除。
-
-## 2026-10-12 维护依据（历史记录）
-
-- 已确认的作品集布局、图标、字体、加载规则和发布记录集中在 [作品集维护说明](docs/portfolio-maintenance.md)。带日期的旧版本规则用于历史追溯，修改前核对当前构建字段、运行清单和服务器状态。
-- 2026-10-12 当时运行发布为 `20261012T142201Z-astra-home`：257 文件、18 条页面路由、5 个相对链接，111,609,132 字节。主站图标版本为 `syl-v1-1-giving-heart`；项目图像版本为 `syl-v1-1-charades-cards`；模块、字体和数据桥为 `syl-v1-1-chuanqinghuiyi-rename`，中文覆盖 488 字。
-- 2026-10-12 当时九项目图标使用 `project-logos/20261012-柔和彩色/`。文化节保留原人物，年终总结使用感谢章，传情会意使用「心意小卡」；不要将历史试稿重新作为当前素材。
-- 只修改说明时，推送经审查的文档并同步到服务器非公开维护目录，核对运行清单未变；说明和线程原始记录不进入公共运行白名单，不重建或切换相同的运行版本。
-- 超过 200 字的中文汇报和文档正文按 `humanizer-zh` 技能润色，保留事实、时间和验证范围。
-
-- 新增中文用字时更新字体子集与 MSDF 图集，并更新独立 `FONT_VERSION`；成员名单按原稿同步，不固定人数。
-
-- 作品目录悬停使用标题深绿色与 3px 位移，保持署名原位；不要恢复穿过署名的 `.name::after` 横线。样式覆盖须考虑原站 CSS 迟加载，支持键盘焦点和减少动态效果。
-
-- 作品集导航须检查从已加载首页点击进入、资源暂停期间返回、延迟完成后再次进入、前进后退和直接打开。`tests/project_navigation.js` 是实际浏览器回归；首次资源未准备好时保持正文可读，加载回调不能恢复已离开的页面。
-
-- 手机「添加到桌面」仅在作品集显示；文案由正文 MD 生成。维护时保留原生提示与浏览器指引，检查声音开关间距、安全区、横屏、站内切换和独立窗口隐藏；使用 `tests/home_shortcut.js`。
-
-- 2026-10-11：作品集改为独立轻量 `/portfolio/`，旧目录入口使用 308；七个详情地址保留。`styles/portfolio.css` 和 `scripts/portfolio.js` 维护始终可用的静态目录；完整原生三维场景在内容首次绘制至少两秒后于后台加载。保持原有模型、着色器、鼠标跟随和流体交互，不可用纹理替代；禁止阻塞内容或加载音乐。`scripts/optimize_runtime.py` 将原生场景保留在独立目录后方，禁止重置目录滚动、改变正式地址或覆盖作品列表。回归入口 `tests/portfolio_scene.js`。私有统计源码在 `deploy/private_stats/`，数据库与密钥仅留服务器；检查统计资料不可从网站下载，QA 请求不得污染访问数字。当前构建清单 `output/deployment/shouyulove-portfolio-other-credit-20261011/`。
-
-- 作品目录的「其他作品」暂不显示设计者；原项目资料保留署名。显示设置来自正文 MD 的「其他作品设计者」字段，核心创意及内部使用的署名保持显示。
-
-- 2026-10-11：所有原生页面使用原生 0–100 加载界面；禁止重新添加独立临时大字文字页面。`scripts/fast_bootstrap.js` 只保留作品集完整页面导航与原生就绪标记。作品集正式列表立即可用、完整三维特效后置加载。
-
-- 新增第八个作品「2026 手语文化节」：`/2026-sign-language-cultural-festival/`。按 MD 保留简介与三位设计者署名；构建以标题匹配稳定 ID，不按位置分配。
-
-- 字体定义只保留在 `scripts/build_content.py` 生成的共用首屏字体 CSS 中；HTML 内嵌样式和延后载入的原生 CSS 均通过 `stable_font_rules` 清除重复定义、补齐同一中文字体栈。保留主页已选字体文件与 WebGL 字库；作品集不能在背景就绪时重建字体定义。字体相关改动须检查冷加载、刷新和背景完成后的实际渲染字体及文字位置。
-
-- 作品集的字体抗锯齿、文字渲染和滚动条样式应在首屏与主页一致；不能等三维场景样式载入后再改变，避免笔画粗细及文字位置发生变化。当前构建记录 `output/deployment/shouyulove-font-stability-20261011/`。
-
-## 新项目部署与主站联动
-
-- 在以手予爱工作区部署新项目时，同一任务必须同步加入主站首页与作品集，并完成主站仓库更新、服务器部署和入口验收；用户另有明确要求时遵从。
-- 名称、简介、设计者与正式地址以绑定 MD 为正文源。先修改正文源，再构建；各项目分别按运行白名单发布，个人报告、账户和原始资料不因导航入口公开而公开。
-
-- 作品集由 `scripts/build_content.py` 的 `portfolio_page` 与 `styles/portfolio.css` 维护，展示十个项目的图标、简介与分组；核心创意桌面两列、手机单列，奇数末项跨列。其他作品不显示设计者。保留原字体、图标羽化、完整三维场景与延后加载方式。
-- 年终总结为第五个核心创意，入口 `/2026-year-end-summary/`，详情 `/projects/2026-year-end-summary/`。解析 Markdown 地址时优先使用链接目标。字体源位于 `output/deployment/shouyulove-recap-entry-20261011/font-source/`。
-
-- 2026-10-12：九项目图标源统一为 `project-logos/20261012-统一曲线/`。替换图像后更新 `RUNTIME_VERSION` 与引用它的数据桥/场景版本；保留旧素材，首页与作品集使用同一套 Logo。
-
-- 2026-10-12：当前项目图标源为 `project-logos/20261012-柔和彩色/`：八枚 SVG 与透明 PNG，文化节保留原卡通人物。年终总结采用已选「谢谢这一年」感谢章；首页和作品集共用。修改图像需同步更新 `RUNTIME_VERSION`、模块与数据桥版本；本次为 `syl-v1-1-soft-color-logos`，构建记录 `output/deployment/shouyulove-colored-logos-20261012/`。
-
-- 2026-10-12：传情绘意·手语版使用用户选定的 B「心意小卡」，替换双人侧脸，源文件仍位于 `project-logos/20261012-柔和彩色/`。其他八枚图标保留；当前缓存版本 `syl-v1-1-charades-cards`，构建记录 `output/deployment/shouyulove-charades-cards-20261012/`。
-
-- 2026-10-12：作品集末尾鸣谢文字由原稿「作品集页面」中的「鸣谢」字段维护，使用 12px 小字。当前字体源 `output/deployment/shouyulove-site-icons-thanks-20261012/font-source/`，覆盖 488 字；模块、数据桥与字体版本 `syl-v1-1-portfolio-thanks`。项目图片继续为 `syl-v1-1-charades-cards`。五个相关子站复用已选图标，词典服务除外。
-
-- 2026-10-12：项目现名为「传情会意-手语版」，线上地址保持 `/chuanqinghuiyi/`。当前构建记录 `output/deployment/chuanqinghuiyi-rename-20261012/`，中文字体与原生图集已补「会」字；其他未发布原稿编辑保留。
-
-- 主站标识为 `project-logos/20261012-主站-把爱递给你/shouyulove.svg`，手掌浅暖米色 `#f3dfcf`。`brand_assets()` 与 `brand_links()` 共用独立 `BRAND_VERSION`，同步标签页、Apple 触屏与安装图标；避免重新复制历史站点图标，保留作品集安装 id 和启动路径。
-
-- 私有统计默认覆盖同域名下所有 HTML 页面；新增页面不加路径名单。保持 server 层的私有日志继承，location 如另设 `access_log` 必须保留私有统计入口；测试 UA 使用 `ShouYuLove-QA`。统计调整先跑 Python 回归及隔离 Nginx 测试，再核对线上采集、历史数据和权限。
+- 用中文交流；先看 Git 状态、README 与 [作品集维护说明](docs/portfolio-maintenance.md)。本机原工作树保留历史修改与删除，提交推送使用隔离克隆副本，避免误提交或清掉本机忽略资产。
+- 项目采用 Astra/Nuxt、GSAP、WebGL 的已导出运行时；不要恢复已退出的旧 garden/esbuild 工程。
+- **正文文本源**：以 `.content-source-path` 指向的 `/Users/wishingcat/ObsidianNotes/AI Study/爱心社/心创组主站-以手予爱.md` 为唯一正文源；修改文字、成员、作品介绍、署名、链接和 `入口：` 行时，先修改该原稿再构建或同步，`content-source.md` 为公开副本。「其他作品」默认隐藏作品集署名，单独开启署名的条目通过 `作品集署名：显示` 控制；核心创意与心创组内部使用保持显示署名。
+- **运行白名单与缓存**：以 `runtime-manifest.json` 保存精确运行白名单，使用 `scripts/runtime_snapshot.py` 校验或导出，发布与同步均逐个核对文件 SHA-256 及 5 个相对符号链接（`assets`、`webgl`、`sounds`、`images`、`lotties`）。版本化公共资源使用一年 `immutable` 缓存（内容变化必须更换对应版本常量），HTML 与 payload 使用 `no-cache`。保留上一版 `immutable` 模块地址，防止已打开页面延迟请求 404。
+- **仅修改说明文档时**：提交并推送经审查的文档，同步至服务器私有维护目录 `/opt/shouyulove-maintenance/`，核对线上运行清单未变；说明和验收记录不进入公共运行白名单，不重建或重启网站。
+- **字体与加载体验**：
+  - 首屏字体定义只保留在 `scripts/build_content.py` 生成的共用首屏字体 CSS 中，通过 `stable_font_rules` 清除重复定义；改动字体后检查冷加载、刷新和三维背景就绪前后的字体渲染及文字位置一致。新增中文用字须更新字体子集与 MSDF 图集并升级 `FONT_VERSION`。
+  - 原生页面保持 0–100 加载界面（禁止恢复临时大字文字页）；作品集 `/portfolio/` 静态目录立即可读可点，首次绘制至少两秒后在后台加载完整三维场景且不下载音乐。三维网络下载共用两路并发名额，页面隐藏暂停新增请求、返回续载（见 [后台资源加载](docs/background-loading.md)）。
+- **回归与验收**：页面改动须在无头浏览器检查桌面（1440px）、手机（390px）与窄屏（320px），结束时关闭新建浏览器上下文，不干扰用户窗口。导航回归使用 `tests/project_navigation.js`，手机「添加到桌面」（仅在 `/portfolio/` 显示）回归使用 `tests/home_shortcut.js`，场景回归使用 `tests/portfolio_scene.js`。
+- **新项目联动要求**：在工作区部署任何新项目时，同一任务必须同步加入主站首页与作品集 `/portfolio/`，完成主站仓库推送、服务器部署及两处入口打开验收。研究稿、账户、会话、部署凭据与内部数据严禁进入公开仓库或静态目录。

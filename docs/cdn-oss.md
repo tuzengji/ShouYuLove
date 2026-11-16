@@ -1,4 +1,8 @@
-# 主站 CDN 与 OSS（2026-10-18）
+# 主站 CDN 与 OSS
+
+## 2026-11-16 通行证双入口脚本更新
+
+主站版本更新为 `20261116T055144Z-astra-home`（663 文件，`158,647,863` 字节）：新增首页多按钮入口脚本 `/assets/project-entries.syl-v1-1-20261116.js`（及作品集双按钮 HTML）由现有 ECS 直接提供，`origin-asset-manifest.json`（300 项）与既有 CDN `/v/20261020-flyinghands/`（`cdn-manifest.json` 共 311 项，`119,738,586` 字节）保持不变。详见 [当前运维状态](operations-current.md)。
 
 ## 2026-11-14 手小语上线更新
 
@@ -33,8 +37,8 @@
 | OSS | `shouyulove-static-20261018`，杭州、标准存储、LRS |
 | 访问控制 | 私有 Bucket，阻止公共访问开启 |
 | 回源 | OSS 域名类型、HTTPS 443、同账号 STS 回源 |
-| 资源前缀 | `https://assets.shouyulove.cn/v/20261020-flyinghands/`（去哪自习新增 59 个文件暂由 ECS 提供） |
-| 资源规模 | 308 文件，119,656,162 字节；见根目录 `cdn-manifest.json` |
+| 资源前缀 | `https://assets.shouyulove.cn/v/20261020-flyinghands/`（去哪自习、通行证、心创云盘、手小语与双入口脚本等增量资源暂由 ECS 提供，见 `origin-asset-manifest.json`） |
+| 资源规模 | CDN 清单 311 项，`119,738,586` 字节；见根目录 `cdn-manifest.json` |
 | 缓存 | `/v/` 缓存 365 天，客户端跟随；实测 `Cache-Control: max-age=31536000` |
 | 传输 | HTTPS、HTTP/2、TLS 1.2/1.3、Gzip、Brotli |
 | 跨域 | `Access-Control-Allow-Origin: *`；仅公开静态文件，无凭据请求 |

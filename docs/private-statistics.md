@@ -4,7 +4,7 @@
 
 本次核查确认并补齐以下统计口径与采集覆盖：
 
-- **新上线项目识别与词典别名**：在 `deploy/private_stats/visits.py` 补全 `手小语`（`/shouxiaoyu/`）、`去哪自习`（`/where-to-study/`）、`手语分社统一通行证`（`/auth/`）、`心创云盘`（`/drive/`）及内部监控 `PKU A100 监控`、`PKU CPU 监控` 的中文项目名；将旧文档路径 `/api`、`/api/docs/*` 归入 `分社手语词典`（`dict`）；并在打开数据库与生成报表时自动合并此前按 `path:/<prefix>` 记录的 `project_collector` 观测行。
+- **新上线项目识别与词典别名**：在 `deploy/private_stats/visits.py` 补全 `手小语`（`/shouxiaoyu/`）、`去哪自习`（`/where-to-study/`）、`手语分社统一通行证`（`/auth/`）、`心创云盘`（`/drive/`）及内部监控 `PKU A100 监控`、`PKU CPU 监控` 的中文项目名；将旧文档路径 `/api`、`/api/docs/*` 归入 `分社手语词典`（`dict`）；并在打开数据库与生成报表时自动合并此前按 `path:/<prefix>` 记录的 `project_collector` 观测行。2026-11-16 作品集中「手语分社统一通行证」拆为「通行证主页」与「接入与配置中心」双按钮后，两个按钮均保留 `data-project="shouyu-pass"`，统一计入该作品跳转统计。
 - **「去哪自习」外部入口 302 跳转统计**：`https://shouyulove.cn/where-to-study/`（含无斜杠 `/where-to-study`）指向外部合作主机 `https://39.96.206.228/` 并返回 `302`。`nginx-format.conf` 通过 `$syl_external_entry` 仅放行这两条 `GET 302` 外部跳转，站内 `301`/`308` 与其余 `302` 仍不进入统计；`visits.py` 过滤爬虫与预取后归一为 `/where-to-study/` 记入 `去哪自习`。已结合重启切分点从 `/var/log/nginx/shouyulove.access.log*` 一次性补入 2026-11-11 至 11-14 的 233 次真实跳转访问。
 - **心创云盘工作台路径脱敏统计**：`/etc/nginx/snippets/shouyulove-drive.conf` 的 `location ^~ /drive/files/` 继续禁止写入共享明文 Nginx 日志，改为仅向私有 Unix 套接字发送候选 HTML 页面事件；`visits.py` 在入库前将 `/drive/files/...` 统一脱敏为 `/drive/files/`，库内不留存具体网盘目录或文件名。
 - **个人主页（`tuzengji.com`）独立隔离统计**：在不修改任何静态文件、完整保留发布 SHA256 一致性的前提下，`tuzengji.com` 443 虚拟主机接入 `syl_private_visits` 日志流；`visits.py` 在 `BOT` 中排除发布校验代理 `HomepageReleaseCheck`，并将 `tuzengji.com` / `www.tuzengji.com` 单独写入同库的 `site_visits` 与 `site_health` 表，与 `shouyulove.cn` 默认主表严格隔离。已从 `/var/log/nginx/tuzengji.access.log*` 一次性补入 2026-10-31 至 11-14 共 1,553 次访问（首页 1,397 次、英文版 `/en/` 156 次）。
