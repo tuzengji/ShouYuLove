@@ -2,12 +2,12 @@
 
 ## 2026-11-16 手语分社统一通行证改为双入口按钮
 
-作品集「心创组内部使用」分区的「手语分社统一通行证」卡片改为两个独立按钮：「通行证主页」（`https://shouyulove.cn/auth/`）与「接入与配置中心」（`https://shouyulove.cn/auth/dev`，仅超级管理员可进入），各带一枚同系列小图标，源文件为 `project-logos/20261113-shouyu-pass/pass-home.svg` 与 `pass-console.svg`。卡片本身不再整体可点，两个按钮沿用 `data-project="shouyu-pass"` 计入作品集跳转统计。首页与作品详情页的单一入口保持 `https://shouyulove.cn/auth/dev`。
+作品集「心创组内部使用」分区的「手语分社统一通行证」卡片改为两个独立按钮：「通行证主页」（`https://shouyulove.cn/auth/`）与「接入与配置中心」（`https://shouyulove.cn/auth/dev`，仅超级管理员可进入），各带一枚同系列小图标，源文件为 `project-logos/20261113-shouyu-pass/pass-home.svg` 与 `pass-console.svg`。卡片本身不再整体可点，两个按钮沿用 `data-project="shouyu-pass"` 计入作品集跳转统计。首页与作品详情页的单一入口保持 `https://shouyulove.cn/auth/dev`。同日第二次发布按用户要求调整：该卡片不再显示简介，两个按钮直接放在标题下方、设计者上方；「心创组内部使用」分区的图标改为与文字垂直居中对齐。
 
-- **主站版本**：`20261116T053402Z-astra-home`（662 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,639,414 字节；上一版本 `20261114T123404Z-astra-home`）。本次只有 `portfolio/index.html` 的内容变化，其余 661 个文件与上一版逐字节一致，各资源版本号保持。
+- **主站版本**：`20261116T053836Z-astra-home`（662 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 158,639,174 字节；上一版本 `20261116T053402Z-astra-home`，再上一版 `20261114T123404Z-astra-home`）。本次只有 `portfolio/index.html` 的内容变化，其余 661 个文件与上一版逐字节一致，各资源版本号保持。
 - **发布方式**：本机缺少完整重建所需的历史字体与构建记录目录，因此在线上当前版本的副本上只替换作品集页面，再由 `publish_astra.py` 逐文件校验后切换。`scripts/build_content.py`（绑定原稿的「入口：」行、`ENTRY_ICONS`、`entry_icon`）与 `styles/portfolio.css` 已同步，下次完整构建会生成同样的卡片。
-- **字体**：按钮文字中的「配」不在 `syl-v1-1-shouxiaoyu-v2` 中文子集内，本次在作品集页面内嵌了仅含该字的补充字形（816 字节，`unicode-range:U+914D`）。下次完整构建前需先重新生成并升级中文字体版本，届时移除这段补充字形。
-- **记录**：服务器维护目录 `/opt/shouyulove-maintenance/20261116-pass-entries/`，配置备份 `/etc/nginx/backups/shouyulove-home-20261116T053402Z-astra-home/`。本地与公网 1440／390／320px 无头浏览器检查通过。
+- **字体**：按钮文字中的「配」不在 `syl-v1-1-shouxiaoyu-v2` 中文子集内，本次在作品集页面内嵌了仅含该字的补充字形（844 字节，`unicode-range:U+914D`）。下次完整构建前需先重新生成并升级中文字体版本，届时移除这段补充字形。
+- **记录**：服务器维护目录 `/opt/shouyulove-maintenance/20261116-pass-entries/`，配置备份 `/etc/nginx/backups/shouyulove-home-20261116T053836Z-astra-home/`。本地与公网 1440／390／320px 无头浏览器检查通过。
 
 ## 2026-11-14 全站网页访问统计核查与补齐
 

@@ -688,17 +688,17 @@ def portfolio_page(content):
         icon = shared + '/shouyulove/' + project['id'] + '-square.' + RUNTIME_VERSION + '.png'
         loading = 'lazy' if category == '其他作品' else 'eager'
         image = '<img class="portfolio-icon" src="' + icon + '" alt="" width="640" height="640" decoding="async" loading="' + loading + '"/>'
-        heading = ('<h3 id="project-' + project['id'] + '">' + html.escape(project['title']) +
-                   '</h3><p class="portfolio-description">' + html.escape(project['description']) + '</p>' + credit)
+        title = '<h3 id="project-' + project['id'] + '">' + html.escape(project['title']) + '</h3>'
+        heading = title + '<p class="portfolio-description">' + html.escape(project['description']) + '</p>' + credit
         arrow = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 5h5v5m0-5-9 9M10 5H5v14h14v-5"/></svg>'
         if project['entries']:
-            # Each entry keeps the click-tracking hook of an ordinary project link.
+            # The entry buttons stand in for the description; each keeps the click-tracking hook of a project link.
             actions = ''.join(
                 '<a class="portfolio-link portfolio-action" data-project="' + project['id'] + '" href="' + html.escape(entry['url'], quote=True) +
                 '" target="_blank" rel="noopener noreferrer">' + entry_icon(project['id'], entry['label']) +
                 '<span>' + html.escape(entry['label']) + '</span>' + arrow + '</a>' for entry in project['entries'])
             pieces.append('<li><div class="portfolio-card" role="group" aria-labelledby="project-' + project['id'] + '">' + image +
-                          '<div class="portfolio-copy">' + heading + '<div class="portfolio-actions">' + actions + '</div></div></div></li>')
+                          '<div class="portfolio-copy">' + title + '<div class="portfolio-actions">' + actions + '</div>' + credit + '</div></div></li>')
             continue
         pieces.append('<li><a class="portfolio-link" data-project="' + project['id'] + '" href="' + html.escape(project['url'], quote=True) +
                       '" target="_blank" rel="noopener noreferrer" aria-labelledby="project-' + project['id'] + '">' +

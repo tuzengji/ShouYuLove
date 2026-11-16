@@ -106,11 +106,11 @@ a.portfolio-link:focus-visible h3 { color: #37654a; transform: translateX(3px); 
 .portfolio-section--internal .portfolio-card { grid-template-columns: 80px minmax(0, 1fr); min-height: 128px; }
 .portfolio-card h3 { margin: 0; font-size: 23px; font-weight: 400; line-height: 1.4; overflow-wrap: anywhere; text-wrap: balance; }
 .portfolio-card p { margin: 0; overflow-wrap: anywhere; }
-.portfolio-card .portfolio-description { margin-top: 10px; font-size: 15px; line-height: 1.75; color: #3d5547; }
 .portfolio-card .portfolio-credit { margin-top: 12px; font-size: 13px; line-height: 1.65; color: #52675a; }
-.portfolio-section--internal .portfolio-card .portfolio-description { margin-top: 6px; }
-.portfolio-section--internal .portfolio-card .portfolio-credit { margin-top: 8px; }
-.portfolio-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.portfolio-section--internal .portfolio-card .portfolio-credit { margin-top: 10px; }
+/* Rows share the taller card's height, so the icon follows the vertically centred copy. */
+.portfolio-section--internal .portfolio-icon { align-self: center; }
+.portfolio-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
 .portfolio-actions .portfolio-action {
   display: inline-flex;
   grid-template-columns: none;
@@ -138,7 +138,6 @@ a.portfolio-link:focus-visible h3 { color: #37654a; transform: translateX(3px); 
 @media (max-width: 640px) {
   .portfolio-card, .portfolio-section--internal .portfolio-card { grid-template-columns: 76px minmax(0, 1fr); gap: 12px; padding-block: 20px; min-height: 124px; }
   .portfolio-card h3 { font-size: 20px; }
-  .portfolio-card .portfolio-description { margin-top: 8px; font-size: 14px; line-height: 1.75; }
   .portfolio-card .portfolio-credit { margin-top: 10px; font-size: 12px; line-height: 1.7; }
   .portfolio-actions { gap: 8px; margin-top: 12px; }
   .portfolio-actions .portfolio-action { font-size: 14px; padding-right: 12px; }
