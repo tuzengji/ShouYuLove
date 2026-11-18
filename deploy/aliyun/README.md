@@ -5,7 +5,7 @@
 [当前运维状态](../../docs/operations-current.md) 是本目录的总索引。`shouyulove.cn` 主站、全部同域子项目与拼好课当前统一运行于阿里云杭州 ECS `i-bp1hi3u3w5p3vg4owfl0`（`101.37.209.227`，维护入口 `ssh shouyulove-aliyun`）。
 
 - **腾讯旧机兼容已退役（2026-10-28）**：腾讯 `49.232.193.175` 已重装为纯净 Ubuntu 22.04.5；本站 vhost 已移除对旧 IP 的代理信任、SignTrace `28018` 旧任务回源及年终总结 `28042` 会话分流，迁移隧道与全部 `280xx` 转发端口已停用销毁，词典经本机 `18080/18081` 直连 CLab。`compat/` 目录仅作为 2026-10-15 迁移期历史留存，**严禁**重新部署。
-- **现网增量与局部更新原则**：本目录中的 `live-config-manifest.json` 与 `nginx/` 保存迁移及后续关键变更的非秘密配置基线。线上共享 Nginx 另外包含近期上线的 `shouxiaoyu.conf`、`shouyulove-drive.conf`、`shouyulove-auth.conf`、`flyinghands.conf`、去哪自习外部跳转统计、词典视频缓存及独立站点 `pinhaoke`、`tuzengji.com` 配置；日常发布只按项目差异更新对应片段，**严禁**将本目录整体覆盖到服务器 `/etc/nginx/`。共享 Nginx 的备份、修改、`nginx -t`、平滑 reload 与回滚统一持有 `/run/lock/nginx-deploy.lock`。
+- **现网增量与局部更新原则**：本目录中的 `live-config-manifest.json` 与 `nginx/` 保存迁移及后续关键变更的非秘密配置基线。线上共享 Nginx 另外包含近期上线的 `shouxiaoyu.conf`、`shouyulove-drive.conf`、`shouyulove-auth.conf`、`flyinghands.conf`、`naimahjong.conf`、去哪自习外部跳转统计、词典视频缓存及独立站点 `pinhaoke`、`tuzengji.com` 配置；日常发布只按项目差异更新对应片段，**严禁**将本目录整体覆盖到服务器 `/etc/nginx/`。共享 Nginx 的备份、修改、`nginx -t`、平滑 reload 与回滚统一持有 `/run/lock/nginx-deploy.lock`。
 - **PKUKnow 旧代理退役与共用设施保护**：`101.37.209.227` 上的 `/etc/nginx/conf.d/yanyuan-calendar.conf` 仅保留退役响应（HTTP 410、拒绝 TLS 握手、无 upstream），不得恢复旧反代；以手予爱仍复用现有 SSH 身份、共用 `/etc/letsencrypt/accounts/` 与全局 `certbot.timer`，不得误删。
 
 ## 目录内容说明

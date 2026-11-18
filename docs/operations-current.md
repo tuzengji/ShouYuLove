@@ -1,9 +1,21 @@
 # 当前运维状态与记录索引
 
+## 2026-11-18 奶家麻将独立跳转入口（`/NaiMahjong/`）
+
+按用户要求在 `shouyulove-aliyun` 共享 Nginx 新增独立路由片段 `/etc/nginx/snippets/naimahjong.conf`（由 `/etc/nginx/sites-available/shouyulove` 引用，不加入以手予爱主站首页与作品集 `/portfolio/`，主站运行版本维持 `20261116T055144Z-astra-home` 不变）：
+
+- `https://shouyulove.cn/NaiMahjong` 与 `https://shouyulove.cn/NaiMahjong/` 均以 `302`（`Cache-Control: no-store`）直接跳转至合作主机 `http://39.96.206.228:8444/`，完整保留查询参数（如 `?room=123456`）；
+- 其他大小写形式（如 `/naimahjong`、`/naimahjong/?room=123456`）先 `302` 规范化至 `/NaiMahjong/` 并保留参数，子路径 `/naimahjong/<rest>` 同步跳转至对应上游路径；
+- 持锁 `/run/lock/nginx-deploy.lock` 完成 `nginx -t` 与平滑 reload，12 个既有后台服务（`system-shouyulove.slice` 11 个单元及 `pinhaoke.service`）PID 与运行状态保持不变，主站及 10 个子站巡检全部返回 `200`。配置备份与验收回执位于 `/var/backups/shouyulove-maintenance/naimahjong-20261118/20261118T125814Z/`，非秘密说明归档于 `/opt/shouyulove-maintenance/20261118-naimahjong/`。撤销时持锁恢复 `shouyulove.before`、移除 `/etc/nginx/snippets/naimahjong.conf` 并验证重载即可。
+
 ## 2026-11-18 云盘文件操作与以手寻语 HTTP 修复
 
 - 心创云盘运行版本为 `20261118T013142Z`，仓库提交为 `573c384`。覆盖移动失败时保留原文件，ZIP 超过 4 GiB 时使用 ZIP64，单次超过 10,000 项会在传输前报错。39 个发布文件的 SHA-256 与仓库一致，代码属主为 `root:shouyulove-drive`。独立解压校验通过，正式主机使用临时存储通过 7 项测试。
 - 以手寻语运行版本为 `20261118T013309Z-http-encoding-2e0eead4a`，仓库提交为 `2e0eead`。首页、词汇页和公共静态资源支持 HEAD 巡检，请求指定 gzip 权重为零时返回原始内容。离线载荷预览可在没有模型密钥的环境运行。已核对 37 个运行文件。
+
+## 2026-11-17 心创云盘界面整体重构（`shouyulove-drive`）
+
+`https://shouyulove.cn/drive/` 发布 `20261117T003512Z`（上一版本 `20261115T103534Z`，云盘仓库提交 `7546a0e`）。页面由深色方案改为只有浅色一种外观的暖纸面工作台：左侧目录树与刻度尺存储条，右侧文件区，管理设置改为独立对话框，统一通行证悬浮窗以浅色主题打开。静态资源改为带内容版本号的地址（`?v=`），接口、Nginx 片段、存储卷与权限均未变化；发布过程重启了 `shouyulove-drive.service` 与 `shouyulove-drive-fb.service` 并持锁重载 Nginx。发布后核验：两项服务与 Nginx 均为 `active`，`/drive/` 返回 200 且占位符全部替换，访客接口不返回成员名单与令牌，`/drive/files/` 仍归并回 `/drive/`，无头浏览器在 1440、390、320 三种宽度下无横向溢出、无控制台报错，主站首页与作品集的云盘入口均可打开。主站本身未重新发布。
 
 ## 2026-11-16 首页与作品集通行证卡片同步为双入口按钮
 
@@ -40,7 +52,7 @@
 
 - **主站与作品集联动**：主站发布 `20261114T051119Z-astra-home`（538 个运行文件、23 条页面路由、5 个相对链接、2 条外部跳转，共 144,466,376 字节；上一版本 `20261113T044411Z-astra-home`）。在首页与作品集「心创组内部使用」分区新增「心创云盘」（设计者涂增基，柔和彩色图标位于 `project-logos/20261114-xinchuang-drive/`），共 14 个作品；新增资源版本为 `syl-v1-1-xinchuang-drive`（中文覆盖 556 字），由 ECS 提供，既有 CDN 资源 `/v/20261020-flyinghands/` 保留。
 - **共享存储池与在线扩容边界**：独立稀疏可扩容 ext4 磁盘镜像 `/var/lib/shouyulove-drive/volume.img` 初始划分 `60 GB` 并已在线零停机扩容至 `100 GB`（实际宿主机仅占写入体积，挂载 `/srv/shouyulove-drive`，共享读写目录 `/srv/shouyulove-drive/files`，软链 `/srv/drive` 及各用户 `~/drive`、`~/projects/drive`）。采用 `2777` 目录、`0666` 文件、`UMask=0000` 及默认 POSIX ACL（`other::rwx`），服务器上的任意进程与拥有服务器权限的伙伴无需额外用户组即可直接自由读写；支持控制台或 `shouyulove-drive-cli resize <GB>` 经 `/usr/local/sbin/shouyulove-drive-resize` 在线持续扩容。
-- **服务架构与认证边界**：本机源码位于 `心创组内部使用/心创云盘/`（origin `git@github.com:tuzengji/ShouYuLove-Drive.git`），服务器当前发布位于 `/opt/shouyulove-drive/releases/20261115T103534Z` → `/opt/shouyulove-drive/current`。`shouyulove-drive.service` 监听 `127.0.0.1:8768`，`shouyulove-drive-fb.service` 监听 `127.0.0.1:8769`，均归属 `system-shouyulove.slice`。Web 端通过统一通行证当前页悬浮窗免跳转登录，经 `/etc/nginx/snippets/shouyulove-drive.conf` 调用 `shouyulove-auth` `auth_request /_syl_auth_optional/drive`，由 `X-Shouyu-User-Phone-Hash` 判定白名单并结合 `X-Shouyu-User-Role` 判定分级权限（`191****0323` 与 `152****6060` 为全站超级管理员，连同受权的 `drive` 项目管理员可调用「管理与接入设置」；其余普通白名单成员隐藏管理面板并享有完整网盘存取权限；`/var/lib/shouyulove-drive/state.json` 仅存哈希与脱敏号，不存明文手机号）；本机回环 `/drive/api/agent/*` 免密直连，远程协作支持签发 Bearer Token。
+- **服务架构与认证边界**：本机源码位于 `心创组内部使用/心创云盘/`（origin `git@github.com:tuzengji/ShouYuLove-Drive.git`），服务器当前发布位于 `/opt/shouyulove-drive/releases/20261117T003512Z` → `/opt/shouyulove-drive/current`。`shouyulove-drive.service` 监听 `127.0.0.1:8768`，`shouyulove-drive-fb.service` 监听 `127.0.0.1:8769`，均归属 `system-shouyulove.slice`。Web 端通过统一通行证当前页悬浮窗免跳转登录，经 `/etc/nginx/snippets/shouyulove-drive.conf` 调用 `shouyulove-auth` `auth_request /_syl_auth_optional/drive`，由 `X-Shouyu-User-Phone-Hash` 判定白名单并结合 `X-Shouyu-User-Role` 判定分级权限（`191****0323` 与 `152****6060` 为全站超级管理员，连同受权的 `drive` 项目管理员可调用「管理与接入设置」；其余普通白名单成员隐藏管理面板并享有完整网盘存取权限；`/var/lib/shouyulove-drive/state.json` 仅存哈希与脱敏号，不存明文手机号）；本机回环 `/drive/api/agent/*` 免密直连，远程协作支持签发 Bearer Token。
 
 ## 2026-11-13 手语分社统一通行证上线并接入作品集（`shouyulove-auth`）
 
