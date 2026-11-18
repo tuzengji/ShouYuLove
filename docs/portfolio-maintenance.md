@@ -48,7 +48,7 @@
 
 项目图标统一采用柔和彩色系列：基础项目使用 [柔和彩色套件](../project-logos/20261012-柔和彩色/README.md)（文化节保留原卡通人物 PNG，年终总结为「谢谢这一年」感谢章，传情会意为「心意小卡」），后续上线项目分别位于 `project-logos/20261015-signplay/`、`20261020-flyinghands/`、`20261110-quna-study/`、`20261113-shouyu-pass/`（含双按钮小图标 `pass-home.svg`、`pass-console.svg`）、`20261114-xinchuang-drive/` 与 `20261114-shouxiaoyu/`。首页和作品集共用同一套图像。统一曲线版、卡通试稿、低饱和试稿和旧标识保留为历史材料，当前构建不从试稿选图。
 
-中文继续使用狮尾四季春·加糖，英文标题为 PSTimes，英文正文及轻字重控件为 Helvetica Neue。首屏共用一份字体 CSS，后台场景复用已加载的字体定义，刷新或背景就绪时不切换字体。当前 `syl-v1-1-shouxiaoyu-v2` 中文子集与图集覆盖 565 字；双入口按钮新增的「配」（`U+914D`）暂以 844 字节单字补充字形内嵌于 `portfolio/index.html` 与 `scripts/project_entries.js`，下次完整重建前须先重切完整中文字体并移除补充字形。
+中文继续使用狮尾四季春·加糖，英文标题为 PSTimes，英文正文及轻字重控件为 Helvetica Neue。首屏共用一份字体 CSS，后台场景复用已加载的字体定义，刷新或背景就绪时不切换字体。当前 `syl-v1-1-shouxiaoyu-v2` 中文子集与图集覆盖 565 字；双入口按钮新增的「配」（`U+914D`）暂以 844 字节单字补充字形内嵌于 `portfolio/index.html` 与 `sites/immersive-g-com-955afd14/shared/assets/project-entries.syl-v1-1-20261116.js`，下次完整重建前须先重切完整中文字体并移除补充字形。
 
 | 构建字段 | 当前值 |
 | --- | --- |

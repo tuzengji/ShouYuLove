@@ -11,7 +11,7 @@
 
 - **主站版本**：`20261116T055144Z-astra-home`（663 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 `158,647,863` 字节；同日先前两次作品集单页发布为 `20261116T053402Z-astra-home` 与 `20261116T053836Z-astra-home`，再上一版为 `20261114T123404Z-astra-home`）。
 - **实现与发布方式**：本机缺少完整重建所需的历史字体与构建记录目录，因此在当前线上运行包副本上增量更新并经 `publish_astra.py` 逐文件校验切换。作品集由 `scripts/build_content.py`（绑定原稿「入口：」行、`ENTRY_ICONS`、`entry_icon`）与 `styles/portfolio.css` 生成；首页卡片由打包运行时渲染，新增独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-20261116.js`，由 ECS 提供，23 个 Nuxt 页面引入，样式来自 `styles/project-entries.css`，版本常量 `PROJECT_ENTRIES_VERSION`）在页面加载后把简介替换为双按钮。
-- **字体**：按钮文字中的「配」（`U+914D`）不在 `syl-v1-1-shouxiaoyu-v2` 中文子集内，已在作品集页面与 `scripts/project_entries.js` 临时内嵌仅含该字的补充字形（844 字节）。下次完整重建前须先重新生成并升级中文字体版本，届时一并移除两处补充字形。
+- **字体**：按钮文字中的「配」（`U+914D`）不在 `syl-v1-1-shouxiaoyu-v2` 中文子集内，已在作品集页面与 `sites/immersive-g-com-955afd14/shared/assets/project-entries.syl-v1-1-20261116.js` 临时内嵌仅含该字的补充字形（844 字节）。下次完整重建前须先重新生成并升级中文字体版本，届时一并移除两处补充字形。
 - **记录**：服务器维护目录 `/opt/shouyulove-maintenance/20261116-pass-entries/`（含 `stage-3/`），配置备份 `/etc/nginx/backups/shouyulove-home-20261116T055144Z-astra-home/`。本地与公网 1440／390／320px 无头浏览器验收通过。
 
 ## 2026-11-16 手语分社统一通行证全站更名与暖色视觉重构（`shouyulove-auth`）

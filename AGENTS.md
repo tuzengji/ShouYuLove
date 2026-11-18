@@ -13,7 +13,7 @@
   - 数据桥 `BRIDGE_VERSION` 与作品集场景 `PORTFOLIO_SCENE_VERSION` 为 `syl-v1-1-shouxiaoyu-v3`；
   - 多入口脚本 `PROJECT_ENTRIES_VERSION = syl-v1-1-20261116`；
   - CDN 资源继续使用 `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项），后续新增资源（`origin-asset-manifest.json` 300 项及 `project-entries.syl-v1-1-20261116.js`）由 ECS 直接提供。
-  - **字体注意**：按钮文字中的「配」（`U+914D`）不在 `syl-v1-1-shouxiaoyu-v2` 子集内，已在 `portfolio/index.html` 与 `scripts/project_entries.js` 内嵌 844 字节单字补充字形；下次完整重建前须先重新生成中文字体并移除两处临时补充字形。
+  - **字体注意**：按钮文字中的「配」（`U+914D`）不在 `syl-v1-1-shouxiaoyu-v2` 子集内，已在 `portfolio/index.html` 与 `sites/immersive-g-com-955afd14/shared/assets/project-entries.syl-v1-1-20261116.js` 内嵌 844 字节单字补充字形；下次完整重建前须先重新生成中文字体并移除两处临时补充字形。
 
 ## 服务器与基础设施边界
 
