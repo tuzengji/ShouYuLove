@@ -29,7 +29,8 @@ a:focus-visible { outline: 2px solid #294c3a; outline-offset: 6px; }
 .portfolio-section h2 { margin: 0 0 16px; font-size: 28px; font-weight: 600; line-height: 1.4; text-wrap: balance; }
 .portfolio-section ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 48px; margin: 0; padding: 0; list-style: none; }
 .portfolio-section li { min-width: 0; }
-.portfolio-section--core li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+.portfolio-section--core li:last-child:nth-child(odd),
+.portfolio-section--games li:last-child:nth-child(odd) { grid-column: 1 / -1; }
 .portfolio-link {
   display: grid;
   grid-template-columns: 112px minmax(0, 1fr) 18px;

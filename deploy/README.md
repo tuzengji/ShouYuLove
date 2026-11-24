@@ -1,11 +1,11 @@
 # 主站运行白名单与发布约定
 
-## 当前发布基线（2026-11-16）
+## 当前发布基线（2026-11-24）
 
-- **当前线上版本**：`20261116T055144Z-astra-home`（上一版本 `20261116T053836Z-astra-home`），共 **663 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `158,647,863` 字节（仓库提交 `2590e43`）。
-- **本轮变更范围**：首页 `/` 与作品集 `/portfolio/` 中「手语分社统一通行证」卡片同步改为「通行证主页」（`/auth/`）与「接入与配置中心」（`/auth/dev`）两个带小图标按钮，「心创组内部使用」分区卡片图标与文字垂直居中对齐；首页通过新增 `/assets/project-entries.syl-v1-1-20261116.js`（由 ECS 提供）动态替换。详见 [当前运维状态](../docs/operations-current.md)。
+- **当前线上版本**：`20261124T075334Z-astra-home`（上一版本 `20261116T055144Z-astra-home`），共 **666 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `158,764,324` 字节。
+- **本轮变更范围**：在首页 `/` 与作品集 `/portfolio/` 的「核心创意」下方新增「手语游戏」栏目，移入「指间趣游 SignPlay」「飞手传书」「传情会意-手语版」三项作品；新增三个不可变版本化静态资源（`shouyulove.syl-v1-1-sign-games.css`、`local-bridge.syl-v1-1-sign-games.js`、`portfolio-scene.syl-v1-1-sign-games.json`），保留旧版本资源供已打开页面续用。详见 [当前运维状态](../docs/operations-current.md)。
 - **静态资源与子站隔离**：
-  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 300 项及 `project-entries.syl-v1-1-20261116.js`）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
+  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 303 项及 `project-entries.syl-v1-1-20261116.js`）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
   - 主站发布目录固定为 `/var/www/shouyulove-home`（指向 `/var/www/shouyulove-home-releases/<版本>`），与同机独立维护的手小语（`/var/www/shouyulove-showcase`）、指间趣游（`/var/www/shouyulove-signplay`）、飞手传书（`/opt/flyinghands/current`）、手语分社统一通行证（`/opt/shouyulove-auth/current`）、心创云盘（`/opt/shouyulove-drive/current`）、以手寻语、传情会意、接锅、文化节、年终总结及拼好课严格隔离，互不混用静态目录。
 
 ## 发布与回滚规范
@@ -23,6 +23,7 @@
 
 | 日期 | 主站发布版本 | 文件 / 路由 / 规模 | 核心变更 |
 | --- | --- | --- | --- |
+| 2026-11-24 | `20261124T075334Z-astra-home` | 666 文件 / 24 路由 / `158,764,324` B | 首页与作品集在「核心创意」下方新增「手语游戏」栏目（收录指间趣游、飞手传书、传情会意-手语版） |
 | 2026-11-16 | `20261116T055144Z-astra-home` | 663 文件 / 24 路由 / `158,647,863` B | 作品集与首页「手语分社统一通行证」同步改为双入口按钮，「心创组内部使用」图标垂直居中 |
 | 2026-11-14 | `20261114T123404Z-astra-home` | 662 文件 / 24 路由 / `158,632,740` B | 「手小语」接入首页与作品集核心创意第 3 行（与传情会意并列，共 15 个项目） |
 | 2026-11-14 | `20261114T051119Z-astra-home` | 538 文件 / 23 路由 / `144,466,376` B | 「心创云盘」（`/drive/`）接入首页与作品集内部使用分区（共 14 个项目） |

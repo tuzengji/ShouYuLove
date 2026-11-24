@@ -642,6 +642,10 @@
       "bytes": 86675,
       "sha256": "5679dfad56b56ae3bd9eaca87ef6a3716ee173164796738689ec286f5230b4a2"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-sign-games.json": {
+      "bytes": 93569,
+      "sha256": "6cadf8661ec6dffc9d8225735b68a89aed5e5cadc2c03b330f9786e248d7705c"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-where-to-study.json": {
       "bytes": 82957,
       "sha256": "0618c62bd5bf193f8a9fb2ade8703e854f88f4fd8ac4971a2034f90b20cf0854"
@@ -726,6 +730,10 @@
       "bytes": 15645,
       "sha256": "f03ec90be26906550810230129b76009352fba83d0708a65d5035dabed4e97bf"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/shouyulove.syl-v1-1-sign-games.css": {
+      "bytes": 15813,
+      "sha256": "c939cd76ab7cef374c37cfceaeb4e95895fa1025c2dfc5502dfb94b438f1c6a3"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/shouyulove.syl-v1-1-xinchuang-drive.css": {
       "bytes": 15645,
       "sha256": "f03ec90be26906550810230129b76009352fba83d0708a65d5035dabed4e97bf"
@@ -809,6 +817,10 @@
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-shouyu-pass.js": {
       "bytes": 32530,
       "sha256": "eea5616ad660607d5fff2d4491e75abb3c33b70e7d50560654d8fec728084f60"
+    },
+    "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-sign-games.js": {
+      "bytes": 34919,
+      "sha256": "da68160cf10c06dfcce36e58ac07bda81e63c3873789f85d986e2e4fd0337736"
     },
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-where-to-study.js": {
       "bytes": 31047,
@@ -1203,5 +1215,5 @@
       "sha256": "0804cb963d3da1a84a29f08ad262ad96b12c7ff774855142f03ec42df589318a"
     }
   },
-  "bytes": 36043086
+  "bytes": 36187387
 }

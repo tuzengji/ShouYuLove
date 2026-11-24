@@ -1,8 +1,8 @@
 # 作品集维护说明
 
-## 当前状态与多入口规则（2026-11-16）
+## 当前状态与多入口规则（2026-11-24）
 
-- **当前线上版本**：`20261116T055144Z-astra-home`（663 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `158,647,863` 字节；仓库提交 `2590e43`）。完整发布与运维记录见 [当前运维状态](operations-current.md)。
+- **当前线上版本**：`20261124T075334Z-astra-home`（666 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `158,764,324` 字节）。完整发布与运维记录见 [当前运维状态](operations-current.md)。
 - **一个作品多个入口按钮**：绑定原稿的作品条目可在「地址：」之后追加两行或更多 `入口：[名称](地址)`。
   - 有入口行的作品在作品集 `/portfolio/` 里渲染为不可整卡点击的 `.portfolio-card`，每个入口是一个带小图标的按钮（`.portfolio-action`）；按钮取代简介显示在标题与设计者之间，沿用 `data-project` 属性计入作品集跳转统计；「心创组内部使用」分区全部卡片（接锅、手语分社统一通行证、心创云盘）左侧图标统一与右侧文字垂直居中对齐。
   - 首页 `/` 对应卡片由独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-20261116.js`，样式 `styles/project-entries.css`，版本常量 `PROJECT_ENTRIES_VERSION`）在加载后做同样替换。
@@ -14,18 +14,18 @@
 
 `scripts/build_content.py` 的 `portfolio_page` 生成正式 HTML，`styles/portfolio.css` 维护排版，`scripts/portfolio.js` 后台载入原生三维场景。作品名称、简介、设计者、链接、多入口按钮、分类顺序及鸣谢来自绑定 Markdown（`/Users/wishingcat/ObsidianNotes/AI Study/爱心社/心创组主站-以手予爱.md`），`content-source.md` 为公开副本。
 
-作品集现有 15 个项目（8 个核心创意、3 个心创组内部使用、4 个其他作品）：
+作品集现有 15 个项目（5 个核心创意、3 个手语游戏、3 个心创组内部使用、4 个其他作品）：
 
 | 分类 | 项目 | 正式入口 |
 | --- | --- | --- |
 | 核心创意 | 以手寻语 SignTrace | `/signtrace/` |
 | 核心创意 | 分社手语词典 | `/dict` |
-| 核心创意 | 指间趣游 SignPlay | `/signplay/` |
-| 核心创意 | 飞手传书 | `/flyinghands/` |
 | 核心创意 | 手小语 | `/shouxiaoyu/` |
-| 核心创意 | 传情会意-手语版 | `/chuanqinghuiyi/` |
 | 核心创意 | 2026 手语文化节 | `/2026-sign-language-cultural-festival/` |
 | 核心创意 | 2026 手语分社骨干年终总结 | `/2026-year-end-summary/` |
+| 手语游戏 | 指间趣游 SignPlay | `/signplay/` |
+| 手语游戏 | 飞手传书 | `/flyinghands/` |
+| 手语游戏 | 传情会意-手语版 | `/chuanqinghuiyi/` |
 | 心创组内部使用 | 接锅 | `/catchpot/` |
 | 心创组内部使用 | 手语分社统一通行证 | `/auth/`（通行证主页）、`/auth/dev`（接入与配置中心） |
 | 心创组内部使用 | 心创云盘 | `/drive/` |
@@ -36,7 +36,7 @@
 
 ## 已确认的展示方式
 
-顶部只保留「心创组作品集」与首页入口。核心创意和心创组内部使用优先展示，使用明显的分类标题；核心创意桌面 4 行两列平衡排布（第 3 行并列展示「手小语」与「传情会意-手语版」）、手机单列，奇数末项跨列居中。主要类别保留设计者署名，手机署名按姓名换行。
+顶部只保留「心创组作品集」与首页入口。核心创意、手语游戏和心创组内部使用优先展示，使用明显的分类标题；核心创意（5 项）与手语游戏（3 项）桌面均采用两列排布、手机单列，奇数末项跨列。主要类别保留设计者署名，手机署名按姓名换行。
 
 其他作品紧凑置底，默认不显示设计者；需要单独显示设计者的条目（如「去哪自习」）通过原稿条目中的 `作品集署名：显示` 开启，原稿和其他页面中的署名继续保留。末尾居中显示 12px 小字「鸣谢所有心创组成员」，对应原稿「作品集页面／鸣谢」字段。
 
@@ -56,7 +56,7 @@
 | `RUNTIME_VERSION`（图像） | `syl-v1-1-shouxiaoyu-v2` |
 | `FONT_VERSION` | `syl-v1-1-shouxiaoyu-v2` |
 | `MODULE_VERSION` | `syl-v1-1-shouxiaoyu-v2` |
-| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-shouxiaoyu-v3` |
+| `STYLE_VERSION` / `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-sign-games` |
 | `PROJECT_ENTRIES_VERSION`（首页多入口脚本） | `syl-v1-1-20261116` |
 
 ## 加载和隐私规则
@@ -87,5 +87,6 @@
 | 心创云盘接入主站与作品集 | `syl-v1-1-xinchuang-drive` | `20261114T051119Z-astra-home` |
 | 手小语接入主站与作品集（第 3 行并列） | `135f6d4` | `20261114T123404Z-astra-home` |
 | 手语分社统一通行证作品集与首页双入口按钮 + 内部图标居中 | `7e3f2c7`、`3cb077f`、`2590e43` | `20261116T055144Z-astra-home` |
+| 首页与作品集新增「手语游戏」栏目（收录指间趣游、飞手传书、传情会意-手语版） | `2026-11-24` | `20261124T075334Z-astra-home` |
 
 后续改文案先改绑定 Markdown；改图标同步首页、作品集及涉及的子站，并更新对应缓存版本；改排版或加载逻辑须在无头浏览器完成 1440／390／320px 及延迟／失败分支检查。

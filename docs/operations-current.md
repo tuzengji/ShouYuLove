@@ -1,5 +1,21 @@
 # 当前运维状态与记录索引
 
+## 2026-11-24 主站首页与作品集新增「手语游戏」栏目
+
+按用户要求在工作区新建 `手语游戏/` 目录并将「指间趣游」「飞手传书」「传情会意-手语版」三个项目从 `核心创意/` 整体移入（线上子站路由 `/signplay/`、`/flyinghands/`、`/chuanqinghuiyi/` 与服务保持不变），同步在绑定原稿、以手予爱主站首页与作品集 `/portfolio/` 的「核心创意」下方新增「手语游戏」栏目：
+
+- **栏目排布与源码同步**：首页 `/` 顺序为「核心创意（5 项）→ 手语游戏（3 项：指间趣游 SignPlay、飞手传书、传情会意-手语版）→ 其他作品（4 项）→ 心创组内部使用（3 项）」；作品集 `/portfolio/` 顺序为「核心创意 → 手语游戏 → 心创组内部使用 → 其他作品」，「手语游戏」沿用与「核心创意」一致的两列醒目排版与独立标题锚点 `id="portfolio-games"`。新增栏目与简介用字 100% 落入现有 `syl-v1-1-shouxiaoyu-v2` 中文字体与 MSDF 图集内，未增加缺字补充。
+- **主站版本与不可变资源**：线上切换至 `20261124T075334Z-astra-home`（上一版本 `20261116T055144Z-astra-home`，666 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转，共 `158,764,324` 字节）。新增三个不可变版本化静态资源 `shouyulove.syl-v1-1-sign-games.css`、`local-bridge.syl-v1-1-sign-games.js` 与 `portfolio-scene.syl-v1-1-sign-games.json`（均由 ECS 提供），既有旧版本资源与 CDN `assets.shouyulove.cn/v/20261020-flyinghands/` 保持不变。
+- **发布与验收**：经 `publish_astra.py` 持锁 `/run/lock/nginx-deploy.lock` 完成 666 文件 SHA-256 逐项校验、`nginx -t` 及平滑重载；24 条页面路由、4 条站内 308 跳转、2 条 `/where-to-study` 外部 302 跳转与既有子站均通过，12 个服务器后台服务 PID 保持不变。本地 1440／390／320px 及公网 1440／390px 无头浏览器验收（零报错、零横向溢出、三款游戏入口均返回 200）通过。配置备份位于 `/etc/nginx/backups/shouyulove-home-20261124T075334Z-astra-home/`，服务器维护目录位于 `/opt/shouyulove-maintenance/20261124-sign-games/`。
+
+## 2026-11-22 心创云盘白名单扩容与 `xinchuangzu` 非特权 SSH 账号
+
+按用户要求在阿里云一号机 `shouyulove-aliyun`（`101.37.209.227`）完成两项配置：
+
+- **心创云盘普通白名单成员**：通过 `shouyulove-drive-cli whitelist add` 新增手机号 `152****7606`（`role: user`，备注 `心创组成员`）。`/var/lib/shouyulove-drive/state.json` 保持 `0600 shouyulove-drive:shouyulove-drive`，`shouyulove-drive.service` 零重启热加载生效（白名单共 3 人：2 名超管 + 1 名普通成员）。核验 `/drive/api/state` 返回 `allowed: true, role: "user", isAdmin: false`，`/drive/api/agent/tree?path=/` 返回 `200`，管理接口 `/drive/api/whitelist/add` 返回 `403 ADMIN_ONLY`，未入白名单用户仍返回 `403 FORBIDDEN`。
+- **非特权 SSH 协作账号 `xinchuangzu`**：创建 `uid=1003` 普通账号（仅附加组 `shouyulove-drive`，未加入 `sudo` 或 `docker` 组），登录命令 `ssh xinchuangzu@101.37.209.227`；家目录 `/home/xinchuangzu`（`0750`）下软链 `~/drive` → `/srv/shouyulove-drive/files`，预建 `~/projects`（`0750`）、`~/.ssh/authorized_keys`（`0600`）与 `~/README-使用说明.txt`，并开启 `loginctl enable-linger xinchuangzu` 以支持无需 `sudo` 的 `systemctl --user` 常驻部署。新增 `/etc/ssh/sshd_config.d/90-xinchuangzu-password.conf`（`Match User xinchuangzu`）仅对该账号开启密码登录，经 `sshd -t` 检查并平滑 reload `ssh.service`，原有账号（`root`/`wishingcat`/`zhuxingye`/`tunnel`）SSH 策略及全部 12 个业务服务 PID 均保持不变。实测密码登录、`sudo`/`docker` 拒绝、`~/drive` 与 `~/projects` 读写删、敏感目录隔离及 `systemctl --user` 均通过。
+- **凭据与备份**：初始密码仅保存在本机仓库外 `0600` 凭据文件，不进入 Git 或公开目录；服务器变更前备份位于 `/var/backups/shouyulove-maintenance/xinchuangzu-20261122/`，非秘密说明归档于 `/opt/shouyulove-maintenance/20261122-xinchuangzu-account/`。
+
 ## 2026-11-18 奶家麻将独立跳转入口（`/NaiMahjong/`）
 
 按用户要求在 `shouyulove-aliyun` 共享 Nginx 新增独立路由片段 `/etc/nginx/snippets/naimahjong.conf`（由 `/etc/nginx/sites-available/shouyulove` 引用，不加入以手予爱主站首页与作品集 `/portfolio/`，主站运行版本维持 `20261116T055144Z-astra-home` 不变）：

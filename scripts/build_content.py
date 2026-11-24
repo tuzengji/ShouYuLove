@@ -38,9 +38,10 @@ FONT_SOURCE = ROOT / "output/deployment/shouxiaoyu-v2-20261114/font-source"
 RUNTIME_VERSION = "syl-v1-1-shouxiaoyu-v2"
 FONT_VERSION = "syl-v1-1-shouxiaoyu-v2"
 MODULE_VERSION = "syl-v1-1-shouxiaoyu-v2"
+STYLE_VERSION = "syl-v1-1-sign-games"
 PORTFOLIO_CLICKS_VERSION = "syl-v1-1-20261017"
 PROJECT_ENTRIES_VERSION = "syl-v1-1-20261116"
-BRIDGE_VERSION = "syl-v1-1-shouxiaoyu-v3"
+BRIDGE_VERSION = "syl-v1-1-sign-games"
 PORTFOLIO_SCENE_VERSION = BRIDGE_VERSION
 BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
@@ -97,7 +98,7 @@ def parse_content(text=None):
     labels = dict(line.split("：", 1) for line in section(text, "作品集页面").splitlines() if line.strip())
     assert set(labels) - {"鸣谢"} == {"标题", "首页入口", "展示顺序", "其他作品设计者"} and all(labels.values()), "Portfolio copy"
     order = labels['展示顺序'].split('、')
-    assert len(order) == 3 and set(order) == {"核心创意", "其他作品", "心创组内部使用"}, "Portfolio category order"
+    assert len(order) == 4 and set(order) == {"核心创意", "手语游戏", "其他作品", "心创组内部使用"}, "Portfolio category order"
     assert labels['其他作品设计者'] in {'显示', '不显示'}, "Other-project credit setting"
     portfolio = dict(title=labels['标题'], home=labels['首页入口'], order=order, thanks=labels.get('鸣谢', ''),
                      show_other_designers=labels['其他作品设计者'] == '显示')
@@ -107,6 +108,7 @@ def parse_content(text=None):
                 boundaries=[line[2:] for line in section(text, "边界").splitlines() if line.startswith("- ")],
                 identity=identity, series=series,
                 core=section(text, "核心创意").split("####", 1)[0].strip(),
+                games=section(text, "手语游戏").split("####", 1)[0].strip(),
                 other=section(text, "其他作品").split("####", 1)[0].strip(),
                 internal=section(text, "心创组内部使用").split("####", 1)[0].strip())
 
@@ -235,7 +237,7 @@ def make_pages(content):
     home["blocks"] = [dict(type="hero", id="home-intro", text1=html.escape(introduction), textAlign="left", cta=None, url=None),
                       text_block("愿景", content["vision"])]
     listing = []
-    descriptions = {"核心创意": content["core"], "其他作品": content["other"], "心创组内部使用": content["internal"]}
+    descriptions = {"核心创意": content["core"], "手语游戏": content["games"], "其他作品": content["other"], "心创组内部使用": content["internal"]}
     category = None
     for project in content["projects"]:
         if project["category"] != category:
@@ -599,7 +601,7 @@ def html_pages(content, pages, listing, renames, wordmark=None):
                 node.decompose()
         soup.head.append(BeautifulSoup(brand_links(), "html.parser"))
         soup.head.append(soup.new_tag("link", rel="stylesheet", href="/assets/fonts." + MODULE_VERSION + ".css"))
-        stylesheet = soup.new_tag("link",rel="stylesheet",href="/assets/shouyulove." + MODULE_VERSION + ".css")
+        stylesheet = soup.new_tag("link",rel="stylesheet",href="/assets/shouyulove." + STYLE_VERSION + ".css")
         soup.head.append(stylesheet)
         boot_style = soup.new_tag("style", id="boot-loader-style")
         boot_style.string = '#boot-loader{position:fixed;inset:0;height:100vh;width:100%;background:#e8e8e8;z-index:1010}#boot-loader .introLoader__logo svg,#boot-loader .introLoader__baseline>div,#boot-loader .introLoader__scrollDown{opacity:1}'
@@ -696,7 +698,7 @@ def portfolio_page(content):
             if category is not None:
                 pieces.append('</ul></section>')
             category = project['category']
-            variant = {'其他作品': 'secondary', '心创组内部使用': 'internal'}.get(category, 'core')
+            variant = {'其他作品': 'secondary', '心创组内部使用': 'internal', '手语游戏': 'games'}.get(category, 'core')
             pieces.append('<section class="portfolio-section portfolio-section--' + variant +
                           '" aria-labelledby="portfolio-' + variant + '"><h2 id="portfolio-' + variant + '">' + html.escape(category) + '</h2><ul>')
         designers = ' '.join('<span>' + html.escape(name) + '</span>' for name in project['designers'].split())
@@ -778,7 +780,7 @@ def main():
     font_stylesheet()
     html_pages(content,pages,listing,renames,wordmark)
     portfolio_page(content)
-    (OUT/SHARED/("assets/shouyulove." + MODULE_VERSION + ".css")).write_text((ROOT/"styles/shouyulove-v1-1-jieguo.css").read_text().replace("__FONT_VERSION__", FONT_VERSION))
+    (OUT/SHARED/("assets/shouyulove." + STYLE_VERSION + ".css")).write_text((ROOT/"styles/shouyulove-v1-1-jieguo.css").read_text().replace("__FONT_VERSION__", FONT_VERSION))
     shutil.copy2(ROOT/'scripts/fast_bootstrap.js', OUT/SHARED/('assets/fast-bootstrap.' + MODULE_VERSION + '.js'))
     shutil.copy2(ROOT/'scripts/home_shortcut.js', OUT/SHARED/('assets/home-shortcut.' + MODULE_VERSION + '.js'))
     shutil.copy2(ROOT/'scripts/portfolio.js', OUT/SHARED/('assets/portfolio.' + MODULE_VERSION + '.js'))

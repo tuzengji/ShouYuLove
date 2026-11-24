@@ -142,18 +142,18 @@ body { font-family: HelveticaNeueRegular, "ShouYuSerif", serif; }
   line-height: 1.7;
 }
 .homePage .projectBlock .text__mobileLink { display: none !important; }
-.homePage .textBlock[id="核心创意"], .homePage .textBlock:is([id="其他作品"], [id="心创组内部使用"]) {
+.homePage .textBlock[id="核心创意"], .homePage .textBlock:is([id="手语游戏"], [id="其他作品"], [id="心创组内部使用"]) {
   min-height: 0 !important;
   padding-top: 80px;
   padding-bottom: 32px;
   row-gap: 14px;
 }
 .homePage .textBlock[id="核心创意"] .textBlock__text,
-.homePage .textBlock:is([id="其他作品"], [id="心创组内部使用"]) .textBlock__text { grid-column: 2 / 12; }
+.homePage .textBlock:is([id="手语游戏"], [id="其他作品"], [id="心创组内部使用"]) .textBlock__text { grid-column: 2 / 12; }
 .homePage .textBlock[id="核心创意"] .textBlock__text--1,
-.homePage .textBlock:is([id="其他作品"], [id="心创组内部使用"]) .textBlock__text--1 { font-size: 34px; line-height: 1.35; }
+.homePage .textBlock:is([id="手语游戏"], [id="其他作品"], [id="心创组内部使用"]) .textBlock__text--1 { font-size: 34px; line-height: 1.35; }
 .homePage .textBlock[id="核心创意"] .textBlock__text--2,
-.homePage .textBlock:is([id="其他作品"], [id="心创组内部使用"]) .textBlock__text--2 { font-size: 18px; line-height: 1.75; }
+.homePage .textBlock:is([id="手语游戏"], [id="其他作品"], [id="心创组内部使用"]) .textBlock__text--2 { font-size: 18px; line-height: 1.75; }
 @media (min-width: 768px) and (max-width: 1099px) {
   .homePage .page__wrapper > .projectBlock { flex-basis: calc((100% - 96px) / 2); max-width: 420px; }
 }
@@ -164,13 +164,13 @@ body { font-family: HelveticaNeueRegular, "ShouYuSerif", serif; }
   .homePage .projectBlock .mediaBlock__grid { grid-template-columns: 104px minmax(0, 1fr); gap: 16px; }
   .homePage .projectBlock .mediaBlock__image.image { grid-column: 1; grid-row: 1; height: auto; width: 104px; max-width: none; aspect-ratio: 1; align-self: start; }
   .homePage .projectBlock .mediaBlock__image.text { grid-column: 2; grid-row: 1; align-self: start; font-size: 16px; line-height: 1.7; }
-  .homePage .textBlock[id="核心创意"], .homePage .textBlock:is([id="其他作品"], [id="心创组内部使用"]) { padding-top: 48px; padding-bottom: 24px; }
+  .homePage .textBlock[id="核心创意"], .homePage .textBlock:is([id="手语游戏"], [id="其他作品"], [id="心创组内部使用"]) { padding-top: 48px; padding-bottom: 24px; }
   .homePage .textBlock[id="核心创意"] .textBlock__text,
-  .homePage .textBlock:is([id="其他作品"], [id="心创组内部使用"]) .textBlock__text { grid-column: 1 / 13; }
+  .homePage .textBlock:is([id="手语游戏"], [id="其他作品"], [id="心创组内部使用"]) .textBlock__text { grid-column: 1 / 13; }
   .homePage .textBlock[id="核心创意"] .textBlock__text--1,
-  .homePage .textBlock:is([id="其他作品"], [id="心创组内部使用"]) .textBlock__text--1 { font-size: 30px; }
+  .homePage .textBlock:is([id="手语游戏"], [id="其他作品"], [id="心创组内部使用"]) .textBlock__text--1 { font-size: 30px; }
   .homePage .textBlock[id="核心创意"] .textBlock__text--2,
-  .homePage .textBlock:is([id="其他作品"], [id="心创组内部使用"]) .textBlock__text--2 { font-size: 17px; }
+  .homePage .textBlock:is([id="手语游戏"], [id="其他作品"], [id="心创组内部使用"]) .textBlock__text--2 { font-size: 17px; }
 }
 
 .projectsPage .projectListItem .name { font-size: clamp(24px, 2.2vw, 32px); line-height: 1.5; }
