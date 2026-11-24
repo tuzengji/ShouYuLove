@@ -87,6 +87,45 @@ ShouYuLove
 地址：[开始传情会意](https://shouyulove.cn/chuanqinghuiyi/)  
 设计者：涂增基
 
+#### 炸飞机
+
+两队秘密布局机位，轮流打手语汇报格点坐标搜寻机头；提供主持人控场台与玩家观众盘。
+
+地址：[进入炸飞机](https://shouyulove.cn/bombplane/)
+入口：[主持人端](https://shouyulove.cn/bombplane/host/)
+入口：[玩家端](https://shouyulove.cn/bombplane/player/)
+设计者：伍家阳
+
+#### 水果炸弹
+
+轮流打出蔬果手语进行颜色运算，触发隐藏技能与逆转效果；提供主持人台与玩家技能表。
+
+地址：[进入水果炸弹](https://shouyulove.cn/fruitbomb/)
+入口：[主持人端](https://shouyulove.cn/fruitbomb/host/)
+入口：[玩家端](https://shouyulove.cn/fruitbomb/player/)
+设计者：伍家阳
+
+#### 巴巴爸爸
+
+配合《巴巴爸爸》素材与节奏挑战视频的现场主持台，支持分组、闯关、提问与身份猜测。
+
+地址：[进入巴巴爸爸](https://shouyulove.cn/barbapapa/)
+设计者：伍家阳
+
+#### 行动代号
+
+手语版 Codenames 现场主持人台，两队由组长用手语词与数字给出线索，猜词盖牌对抗。
+
+地址：[进入行动代号](https://shouyulove.cn/codenames/)
+设计者：伍家阳
+
+#### 雪豹凶杀案
+
+现场互动地图与线索推理主持人台，大家轮流用手语调查家具与工具，在有限机会中还原真相。
+
+地址：[进入雪豹凶杀案](https://shouyulove.cn/snowleopard/)
+设计者：伍家阳
+
 
 
 ### 其他作品

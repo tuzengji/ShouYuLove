@@ -2,18 +2,16 @@
 
 ## 当前运行状态（2026-11-24）
 
-- **当前线上版本**：`20261124T075334Z-astra-home`（上一版本 `20261116T055144Z-astra-home`，666 个运行文件、24 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `158,764,324` 字节）。完整变更脉络见 [当前运维状态](docs/operations-current.md)。
-- **作品集规模与多入口卡片**：作品集共 15 个项目，分为四个栏目（5 个核心创意、3 个手语游戏、3 个心创组内部使用、4 个其他作品）。
-  - 首页顺序为「核心创意 → 手语游戏 → 其他作品 → 心创组内部使用」；作品集 `/portfolio/` 顺序为「核心创意 → 手语游戏 → 心创组内部使用 → 其他作品」。「手语游戏」独立收录「指间趣游 SignPlay」「飞手传书」「传情会意-手语版」，桌面端沿用与「核心创意」一致的两列醒目排版（奇数末项跨列）。
+- **当前线上版本**：`20261124T091501Z-astra-home`（上一版本 `20261124T075334Z-astra-home`，741 个运行文件、29 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `167,147,840` 字节）。完整变更脉络见 [当前运维状态](docs/operations-current.md)。
+- **作品集规模与多入口卡片**：作品集共 20 个项目，分为四个栏目（5 个核心创意、8 个手语游戏、3 个心创组内部使用、4 个其他作品）。
+  - 首页顺序为「核心创意 → 手语游戏 → 其他作品 → 心创组内部使用」；作品集 `/portfolio/` 顺序为「核心创意 → 手语游戏 → 心创组内部使用 → 其他作品」。「手语游戏」收录 8 项（指间趣游 SignPlay、飞手传书、传情会意-手语版、炸飞机、水果炸弹、巴巴爸爸、行动代号、雪豹凶杀案），桌面端 4 行两列平衡排布。
   - 「心创组内部使用」分区包含「接锅」「手语分社统一通行证」「心创云盘」，三张卡片左侧图标统一与文字垂直居中对齐。
-  - **多按钮入口机制**：绑定原稿条目可在「地址：」后追加两行及以上 `入口：[名称](地址)`，并在 `scripts/build_content.py` 的 `ENTRY_ICONS` 登记小图标。作品集生成不可整卡点击的 `.portfolio-card`，由各 `.portfolio-action` 按钮取代简介展示在标题与署名之间（仍带 `data-project` 计入作品集点击统计）；首页由独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-20261116.js`，样式 `styles/project-entries.css`，版本常量 `PROJECT_ENTRIES_VERSION`）在渲染后做同样替换；原稿简介保留供作品详情页使用。当前「手语分社统一通行证」使用「通行证主页」（`/auth/`，`pass-home.svg`）与「接入与配置中心」（`/auth/dev`，`pass-console.svg`）双按钮。
-- **当前资源版本与字体待办**：
+  - **多按钮入口机制**：绑定原稿条目可在「地址：」后追加两行及以上 `入口：[名称](地址)`，并在 `scripts/build_content.py` 的 `ENTRY_ICONS` 登记小图标。作品集生成不可整卡点击的 `.portfolio-card`，由各 `.portfolio-action` 按钮取代简介展示在标题与署名之间（仍带 `data-project` 计入作品集点击统计）；首页由独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-five-games.js`，样式 `styles/project-entries.css`，版本常量 `PROJECT_ENTRIES_VERSION`）在渲染后做同样替换；原稿简介保留供作品详情页使用。当前支持多按钮的项目为「手语分社统一通行证」（通行证主页 `/auth/`、接入与配置中心 `/auth/dev`）、「炸飞机」（主持人端 `/bombplane/host/`、玩家端 `/bombplane/player/`）与「水果炸弹」（主持人端 `/fruitbomb/host/`、玩家端 `/fruitbomb/player/`）。
+- **当前资源版本**：
   - 主站品牌图标 `BRAND_VERSION = syl-v1-1-giving-heart`（`project-logos/20261012-主站-把爱递给你/shouyulove.svg`）；
-  - 图像 `RUNTIME_VERSION`、字体 `FONT_VERSION`（中文覆盖 565 字）、运行模块 `MODULE_VERSION` 均为 `syl-v1-1-shouxiaoyu-v2`；
-  - 样式 `STYLE_VERSION`、数据桥 `BRIDGE_VERSION` 与作品集场景 `PORTFOLIO_SCENE_VERSION` 为 `syl-v1-1-sign-games`；
-  - 多入口脚本 `PROJECT_ENTRIES_VERSION = syl-v1-1-20261116`；
-  - CDN 资源继续使用 `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项），后续新增资源（`origin-asset-manifest.json` 303 项及 `project-entries.syl-v1-1-20261116.js`）由 ECS 直接提供。
-  - **字体注意**：按钮文字中的「配」（`U+914D`）不在 `syl-v1-1-shouxiaoyu-v2` 子集内，已在 `portfolio/index.html` 与 `sites/immersive-g-com-955afd14/shared/assets/project-entries.syl-v1-1-20261116.js` 内嵌 844 字节单字补充字形；下次完整重建前须先重新生成中文字体并移除两处临时补充字形。
+  - 图像 `RUNTIME_VERSION`、字体 `FONT_VERSION`（中文完整覆盖 607 字，已移除先前「配」字临时补充字形）、运行模块 `MODULE_VERSION`、多入口脚本 `PROJECT_ENTRIES_VERSION`、数据桥 `BRIDGE_VERSION` 与作品集场景 `PORTFOLIO_SCENE_VERSION` 均为 `syl-v1-1-five-games`；
+  - 首页定制样式 `STYLE_VERSION = syl-v1-1-sign-games`；
+  - CDN 资源继续使用 `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项），后续增量资源（`origin-asset-manifest.json` 368 项）由 ECS 直接提供。
 
 ## 服务器与基础设施边界
 

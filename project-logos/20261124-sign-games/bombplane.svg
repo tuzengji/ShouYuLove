@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">炸飞机 · 格点棋盘与俯冲飞机</title>
+  <g stroke="#4b5d54" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="34" y="42" width="166" height="166" rx="26" fill="#ece2cf"/>
+    <path d="M90 42 V208 M145 42 V208 M34 97 H200 M34 153 H200" fill="none" stroke-width="7.5" stroke-opacity=".42"/>
+    <circle cx="62" cy="70" r="16" fill="#c9a2a4" stroke-width="9"/>
+    <circle cx="172" cy="180" r="5.5" fill="#4b5d54" stroke="none"/>
+    <path d="M214 54 L144 90 L98 78 L80 96 L118 118 L94 144 L66 142 L54 156 L86 168 L98 200 L112 188 L110 160 L136 136 L158 174 L176 156 L164 110 Z" fill="#a5bac9" stroke-width="11.5"/>
+  </g>
+</svg>

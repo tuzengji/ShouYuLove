@@ -1,5 +1,13 @@
 # 当前运维状态与记录索引
 
+## 2026-11-24 五款手语游戏静态站部署与主站联动上线
+
+按用户确认将「炸飞机」「水果炸弹」「巴巴爸爸」「行动代号」「雪豹凶杀案」五个手语游戏（均由伍家阳设计）部署为阿里云一号机 `shouyulove-aliyun` 上的五条独立纯静态子路径，并同步接入主站首页与作品集「手语游戏」栏目：
+
+- **五个游戏静态站与路由（`20261124T090628Z-sign-games`）**：本机分别整理于 `手语游戏/{炸飞机,水果炸弹,巴巴爸爸,行动代号,雪豹凶杀案}/`（仅同步白名单 `site/`，共 35 文件、`19,905,675` 字节，原压缩包留存本机未上公网），发布至 `/var/www/shouyulove-sign-games`，由 `/etc/nginx/snippets/sign-games.conf`（持锁 `/run/lock/nginx-deploy.lock` 接入 `/etc/nginx/sites-available/shouyulove`）提供 5 条入口：`https://shouyulove.cn/bombplane/`（双端分流页 + `/host/` 主持人端 + `/player/` 玩家端）、`https://shouyulove.cn/fruitbomb/`（双端分流页 + `/host/` + `/player/`）、`https://shouyulove.cn/barbapapa/`（含同级 `巴巴爸爸素材/` 10 张图与 `巴巴爸爸视频/` 9 段 MP4，支持 206 分段播放）、`https://shouyulove.cn/codenames/`、`https://shouyulove.cn/snowleopard/`。
+- **专属柔和彩色图标与完整字体重建**：在 `project-logos/20261124-sign-games/` 新增 5 枚游戏主图标与 2 枚双端按钮小图标（`game-host.svg`、`game-player.svg`）。使用 `msdfgen v1.13` 完整重建覆盖 607 个中文用字的 `swei-spring-serif.syl-v1-1-five-games.woff2`、`fonts.syl-v1-1-five-games.css` 及双套 WebGL MSDF 图集（`PSTimesBody` 687 字、`Helvetica-neue` 679 字），彻底移除先前「配」字临时补充字形。
+- **主站原子发布（`20261124T091501Z-astra-home`）**：运行白名单升级至 741 个文件、29 条页面路由（新增 `/projects/{bombplane,fruitbomb,barbapapa,codenames,snowleopard}/`）、5 个相对链接、2 条外部跳转，共 `167,147,840` 字节；作品集「手语游戏」现为 8 项（4 行两列），「炸飞机」「水果炸弹」在首页与作品集同步呈现「主持人端」「玩家端」双按钮。经 `publish_astra.py` 全量校验切换，全部 9 条游戏入口、29 条主站路由、公网 1440／390px 无头浏览器检查及 12 个既有后台服务 PID 均核验通过。配置与回滚备份位于 `/var/backups/shouyulove-maintenance/five-games-20261124/` 与 `/etc/nginx/backups/shouyulove-home-20261124T091501Z-astra-home/`，维护记录位于 `/opt/shouyulove-maintenance/20261124-five-games/`。
+
 ## 2026-11-24 主站首页与作品集新增「手语游戏」栏目
 
 按用户要求在工作区新建 `手语游戏/` 目录并将「指间趣游」「飞手传书」「传情会意-手语版」三个项目从 `核心创意/` 整体移入（线上子站路由 `/signplay/`、`/flyinghands/`、`/chuanqinghuiyi/` 与服务保持不变），同步在绑定原稿、以手予爱主站首页与作品集 `/portfolio/` 的「核心创意」下方新增「手语游戏」栏目：

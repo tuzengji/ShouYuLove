@@ -110,7 +110,8 @@ a.portfolio-link:focus-visible h3 { color: #37654a; transform: translateX(3px); 
 .portfolio-card .portfolio-credit { margin-top: 12px; font-size: 13px; line-height: 1.65; color: #52675a; }
 .portfolio-section--internal .portfolio-card .portfolio-credit { margin-top: 10px; }
 /* Rows share the taller card's height, so the icon follows the vertically centred copy. */
-.portfolio-section--internal .portfolio-icon { align-self: center; }
+.portfolio-section--internal .portfolio-icon,
+.portfolio-card .portfolio-icon { align-self: center; }
 .portfolio-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
 .portfolio-actions .portfolio-action {
   display: inline-flex;

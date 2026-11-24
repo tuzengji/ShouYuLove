@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">玩家端 · 格点玩家盘</title>
+  <g stroke="#4b5d54" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="38" y="44" width="180" height="168" rx="26" fill="#ece2cf"/>
+    <path d="M64 44 H192 Q218 44 218 70 V92 H38 V70 Q38 44 64 44 Z" fill="#a5bac9" stroke="none"/>
+    <path d="M64 44 H192 Q218 44 218 70 V186 Q218 212 192 212 H64 Q38 212 38 186 V70 Q38 44 64 44 Z M38 92 H218" fill="none"/>
+    <rect x="68" y="114" width="44" height="32" rx="8" fill="#c9a2a4" stroke-width="10"/>
+    <rect x="134" y="114" width="54" height="32" rx="8" fill="#aec2b1" stroke-width="10"/>
+    <rect x="68" y="162" width="120" height="24" rx="8" fill="#f5efe4" stroke-width="10"/>
+  </g>
+</svg>

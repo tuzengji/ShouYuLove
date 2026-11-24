@@ -101,7 +101,7 @@ class LoaderBatchTests(unittest.TestCase):
     def test_project_ids_survive_insertions_and_reordering(self):
         text = (SOURCE.parents[1] / "content-source.md").read_text()
         projects = self.builder.parse_content(text)["projects"]
-        self.assertEqual(len(projects), 15)
+        self.assertEqual(len(projects), 20)
         by_id = {p["id"]: p for p in projects}
         self.assertEqual(by_id["shouxiaoyu"]["url"], "https://shouyulove.cn/shouxiaoyu/")
         self.assertEqual(by_id["shouxiaoyu"]["designers"], "涂增基")
@@ -119,6 +119,18 @@ class LoaderBatchTests(unittest.TestCase):
         self.assertEqual(by_id["flyinghands"]["designers"], "王宁静")
         self.assertEqual(by_id["flyinghands"]["category"], "手语游戏")
         self.assertEqual(by_id["chuanqinghuiyi"]["category"], "手语游戏")
+        for gid, url in [
+            ("bombplane", "https://shouyulove.cn/bombplane/"),
+            ("fruitbomb", "https://shouyulove.cn/fruitbomb/"),
+            ("barbapapa", "https://shouyulove.cn/barbapapa/"),
+            ("codenames", "https://shouyulove.cn/codenames/"),
+            ("snowleopard", "https://shouyulove.cn/snowleopard/"),
+        ]:
+            self.assertEqual(by_id[gid]["url"], url)
+            self.assertEqual(by_id[gid]["designers"], "伍家阳")
+            self.assertEqual(by_id[gid]["category"], "手语游戏")
+        self.assertEqual([e["label"] for e in by_id["bombplane"]["entries"]], ["主持人端", "玩家端"])
+        self.assertEqual([e["label"] for e in by_id["fruitbomb"]["entries"]], ["主持人端", "玩家端"])
         self.assertEqual(self.builder.parse_content(text)["portfolio"]["order"], ["核心创意", "手语游戏", "心创组内部使用", "其他作品"])
         self.assertEqual(self.builder.parse_content(text)["portfolio"]["thanks"], "")
         self.assertEqual(by_id["pinhaoke"]["title"], "拼好课")

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">雪豹凶杀案 · 放大镜与雪豹足印</title>
+  <g stroke="#4b5d54" stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M167 167 L214 214" stroke-width="24" stroke="#4b5d54"/>
+    <path d="M167 167 L214 214" stroke-width="12" stroke="#f3dfcf"/>
+    <circle cx="114" cy="114" r="78" fill="#d8e1e7"/>
+    <circle cx="114" cy="114" r="61" fill="#f4f2ec" stroke-width="8"/>
+    <path d="M90 138 C86 120 100 109 114 109 C128 109 142 120 138 138 C135 150 122 146 114 146 C106 146 93 150 90 138 Z" fill="#c9a2a4" stroke-width="8.5"/>
+    <ellipse cx="84" cy="104" rx="9" ry="12" transform="rotate(-20 84 104)" fill="#a5bac9" stroke-width="7.5"/>
+    <ellipse cx="104" cy="86" rx="9" ry="12" transform="rotate(-7 104 86)" fill="#a5bac9" stroke-width="7.5"/>
+    <ellipse cx="126" cy="86" rx="9" ry="12" transform="rotate(7 126 86)" fill="#a5bac9" stroke-width="7.5"/>
+    <ellipse cx="145" cy="104" rx="9" ry="12" transform="rotate(20 145 104)" fill="#a5bac9" stroke-width="7.5"/>
+  </g>
+</svg>
