@@ -1,5 +1,22 @@
 # 当前运维状态与记录索引
 
+## 2026-11-25 阿里云一号机 ECS 自动快照策略与快照前一致性热备上线
+
+按用户确认启用阿里云 ECS 自动快照方案，并同步在服务器补齐快照前一致性热备，解决全站此前仅有本机局部备份、无云端兜底的隐患：
+
+- **阿里云 ECS 自动快照策略（华东1 杭州）**：
+  - 绑定实例：`i-bp1hi3u3w5p3vg4owfl0`（`以手予爱`，`101.37.209.227`），系统盘 `d-bp1hi3u3w5p3vg4r71kr`（`200 GiB ESSD 云盘 PL0`，`/dev/xvda`）；未改动账号下其他实例（如 `i-bp12k7010n8lbitm2phs`），未触发任何预付费购买流程。
+  - 策略详情：`sp-bp13xzhg26jlbv1rvebq`（名称 `shouyulove-daily-7d`，状态正常），**每天 `04:00`（UTC+8，周一至周日）**自动创建标准增量快照，**保留 `7` 天**自动滚动清理，未开启跨地域复制。首次自动快照将于次日 `04:00` 自动触发。
+- **服务器快照前一致性热备（`shouyulove-presnap-backup.timer`）**：
+  - 部署 `/usr/local/sbin/shouyulove-presnap-backup.py` 及 `shouyulove-presnap-backup.{service,timer}`，每天 **`03:40` CST**（云盘快照前 20 分钟）运行：通过 Python SQLite Online Backup 只读 URI 对全站 9 份活跃可写数据库（`shouyulove-auth/accounts.sqlite`、`shouyulove-stats/visits.sqlite`、`pinhaoke/{账户,访问统计,留言板}.db`、`flyinghands/materials.sqlite`、`jieguo/jieguo.sqlite3`、`shouyu-game/访问统计.sqlite`、`signplay-bank/bank.sqlite`）热备并逐个校验 `PRAGMA integrity_check == ok`，连同云盘配置、路由表、Nginx 配置片段原子替换写入 `/var/backups/presnap/latest/`（单份滚动约 `33 MB`，权限严格 `0700 root:root`，`xinchuangzu` 不可读），末尾执行 `sync` 将系统盘与 `/srv/shouyulove-drive` 挂载镜像脏页刷盘。
+  - 实测首次运行 1 秒完成（9 库全部校验 `ok`、`33,312,768` 字节），原库文件属主/权限与 11 个系统服务、`skull-table.service` 均零扰动。
+
+## 2026-11-25 手语游戏六个项目界面重做上线
+
+- **五款单文件游戏（`20261125T092841Z-sign-games`，保留 `20261125T091605Z-sign-games`、`20261125T062723Z-sign-games`、`20261124T090628Z-sign-games`）**：水果炸弹、炸飞机、行动代号、雪豹凶杀案、巴巴爸爸各自换成独立主题的新界面，文案重写，并修复一批逻辑问题（详见各游戏 `README.md`）。路由、存档键与 `巴巴爸爸素材/`、`巴巴爸爸视频/` 不变；`site/` 里的中文文件名改为与正式页面内容一致。发布用 `手语游戏/工具/deploy.sh --go`：以线上版本为底复制出新版本目录，同步各游戏 `site/`，校验 9 段视频与 10 张图后原子切换软链，未改 Nginx。
+- **指间趣游（`20261125T091853Z-signplay`，保留 `20261017T031714Z-signplay`）**：保留配色、Logo 与信息架构的视觉打磨和界面文案润色，修复待补充游戏返回路径、难度说明与搜索框残留三处问题。静态版本经 `sign-games-ctl switch signplay` 切换，未使用旧发布器 `publish_release.py`，未改 Nginx 与题库服务。本机仓库改动尚未提交推送。
+- **验收**：公网 13 个地址与本机文件 SHA-256 一致；10 个页面在 1440／390／320px 无头浏览器下零横向溢出、零报错；视频、素材、主站首页与作品集、其余手语游戏入口均返回 200。
+
 ## 2026-11-25 手语游戏手机端与桌面端专项优化上线
 
 按用户要求巡检「手语游戏」栏目除涂增基与王宁静外的 8 款游戏在手机（390px、320px 触控）与桌面（1440px）视口下的显示与交互表现，并在保留原有视觉配色、文案与玩法机制前提下完成定向优化与上线：
