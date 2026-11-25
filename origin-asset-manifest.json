@@ -998,6 +998,10 @@
       "bytes": 112824,
       "sha256": "9e6b69557cbd88d0e55b247da1de849d7b3eb801c70cb8e3e00e4779543b2c4e"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-games-copy.json": {
+      "bytes": 118371,
+      "sha256": "2435060a1eb659fafb832f995d6fc1800e9896b801706c450b2582e6db6f0a5a"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-perfectmenu-v2.json": {
       "bytes": 120735,
       "sha256": "d14554570e8d4ae9a5cfc12756f40fd37731850a976af99a29207511b595d465"
@@ -1265,6 +1269,10 @@
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-five-games.js": {
       "bytes": 41962,
       "sha256": "6eee73afc7b72aed88de8eca51685dc94c68d375247e19cc908d5fe31e61d6df"
+    },
+    "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-games-copy.js": {
+      "bytes": 43668,
+      "sha256": "8c07fcb5f132d0b00824a931f150d6f7d3681fd383c071c8a19f16199fccd5f1"
     },
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-perfectmenu-v2.js": {
       "bytes": 44850,
@@ -2007,5 +2015,5 @@
       "sha256": "0804cb963d3da1a84a29f08ad262ad96b12c7ff774855142f03ec42df589318a"
     }
   },
-  "bytes": 58747838
+  "bytes": 58909877
 }

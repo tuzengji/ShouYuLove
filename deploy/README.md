@@ -2,10 +2,10 @@
 
 ## 当前发布基线（2026-11-25）
 
-- **当前线上版本**：`20261125T052701Z-astra-home`（上一版本 `20261125T051617Z-astra-home`），共 **878 个运行文件、31 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `182,796,703` 字节。
-- **本轮变更范围**：将「完美一餐」（`/games/perfectmenu/`，设计者黄雨琦）调整至「手语游戏」栏目第 2 位（紧跟「骷髅牌」之后），增量升级数据桥与作品集场景版本至 `syl-v1-1-perfectmenu-v2`，保留全部旧版不可变资源。详见 [当前运维状态](../docs/operations-current.md)。
+- **当前线上版本**：`20261125T053315Z-astra-home`（上一版本 `20261125T052701Z-astra-home`），共 **880 个运行文件、31 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `182,903,784` 字节。
+- **本轮变更范围**：按 `humanizer` 原则将「手语游戏」栏目下全部 10 款游戏简介润色精炼为单句自然介绍，增量升级数据桥与作品集场景版本至 `syl-v1-1-games-copy`，保留全部旧版不可变资源。详见 [当前运维状态](../docs/operations-current.md)。
 - **静态资源与子站隔离**：
-  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 501 项）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
+  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 503 项）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
   - 主站发布目录固定为 `/var/www/shouyulove-home`（指向 `/var/www/shouyulove-home-releases/<版本>`），与同机独立维护的手小语（`/var/www/shouyulove-showcase`）、指间趣游（`/var/www/shouyulove-signplay`）、飞手传书（`/opt/flyinghands/current`）、手语分社统一通行证（`/opt/shouyulove-auth/current`）、心创云盘（`/opt/shouyulove-drive/current`）、以手寻语、传情会意、接锅、文化节、年终总结及拼好课严格隔离，互不混用静态目录。
 
 ## 发布与回滚规范
@@ -23,6 +23,7 @@
 
 | 日期 | 主站发布版本 | 文件 / 路由 / 规模 | 核心变更 |
 | --- | --- | --- | --- |
+| 2026-11-25 | `20261125T053315Z-astra-home` | 880 文件 / 31 路由 / `182,903,784` B | 润色精炼全部 10 款手语游戏单句简介，升级数据桥与场景至 `syl-v1-1-games-copy` |
 | 2026-11-25 | `20261125T052701Z-astra-home` | 878 文件 / 31 路由 / `182,796,703` B | 将「完美一餐」调至「手语游戏」第 2 位（与「骷髅牌」并列首行），升级数据桥与场景至 `syl-v1-1-perfectmenu-v2` |
 | 2026-11-25 | `20261125T051617Z-astra-home` | 876 文件 / 31 路由 / `182,631,025` B | 「手语游戏」接入「完美一餐」（`/games/perfectmenu/`，设计者黄雨琦），重建 621 字中文字体与 MSDF 图集 |
 | 2026-11-25 | `20261125T035923Z-astra-home` | 808 文件 / 30 路由 / `174,829,536` B | 「手语游戏」首位接入「骷髅牌」（`/games/skull/`，设计者黄庭逸），重建 615 字中文字体与 MSDF 图集 |

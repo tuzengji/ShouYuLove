@@ -2,7 +2,7 @@
 
 ## 当前状态与多入口规则（2026-11-25）
 
-- **当前线上版本**：`20261125T052701Z-astra-home`（878 个运行文件、31 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `182,796,703` 字节）。完整发布与运维记录见 [当前运维状态](operations-current.md)。
+- **当前线上版本**：`20261125T053315Z-astra-home`（880 个运行文件、31 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `182,903,784` 字节）。完整发布与运维记录见 [当前运维状态](operations-current.md)。
 - **一个作品多个入口按钮**：绑定原稿的作品条目可在「地址：」之后追加两行或更多 `入口：[名称](地址)`。
   - 有入口行的作品在作品集 `/portfolio/` 里渲染为不可整卡点击的 `.portfolio-card`，每个入口是一个带小图标的按钮（`.portfolio-action`）；按钮取代简介显示在标题与设计者之间，沿用 `data-project` 属性计入作品集跳转统计；「心创组内部使用」分区全部卡片（接锅、手语分社统一通行证、心创云盘）左侧图标统一与右侧文字垂直居中对齐。
   - 首页 `/` 对应卡片由独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-five-games.js`，样式 `styles/project-entries.css`，版本常量 `PROJECT_ENTRIES_VERSION`）在加载后做同样替换。
@@ -64,7 +64,7 @@
 | `FONT_VERSION`（中文 621 字） | `syl-v1-1-perfectmenu` |
 | `MODULE_VERSION` | `syl-v1-1-perfectmenu` |
 | `STYLE_VERSION` | `syl-v1-1-sign-games` |
-| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-perfectmenu-v2` |
+| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-games-copy` |
 | `PROJECT_ENTRIES_VERSION`（首页多入口脚本） | `syl-v1-1-five-games` |
 
 ## 加载和隐私规则
@@ -99,6 +99,7 @@
 | 「手语游戏」接入炸飞机、水果炸弹、巴巴爸爸、行动代号、雪豹凶杀案（重建 607 字字体） | `3ba67d4` | `20261124T091501Z-astra-home` |
 | 「手语游戏」首位接入「骷髅牌」（设计者黄庭逸，重建 615 字字体） | `a9bb48a` | `20261125T035923Z-astra-home` |
 | 「手语游戏」接入「完美一餐」（设计者黄雨琦，重建 621 字字体） | `112071d` | `20261125T051617Z-astra-home` |
-| 将「完美一餐」调至「手语游戏」第 2 位（与「骷髅牌」并列首行） | `2026-11-25` | `20261125T052701Z-astra-home` |
+| 将「完美一餐」调至「手语游戏」第 2 位（与「骷髅牌」并列首行） | `44a57d5` | `20261125T052701Z-astra-home` |
+| 润色精炼全部 10 款手语游戏单句简介（`syl-v1-1-games-copy`） | `2026-11-25` | `20261125T053315Z-astra-home` |
 
 后续改文案先改绑定 Markdown；改图标同步首页、作品集及涉及的子站，并更新对应缓存版本；改排版或加载逻辑须在无头浏览器完成 1440／390／320px 及延迟／失败分支检查。
