@@ -133,6 +133,13 @@ ShouYuLove
 地址：[进入雪豹凶杀案](https://shouyulove.cn/snowleopard/)
 设计者：伍家阳
 
+#### 完美一餐
+
+5–15 人手语点菜合作游戏主持人台，为每位玩家分配爱吃与忌口词，用手语表态共同凑成完美宴席。
+
+地址：[进入完美一餐](https://shouyulove.cn/games/perfectmenu/)
+设计者：黄雨琦
+
 
 
 ### 其他作品

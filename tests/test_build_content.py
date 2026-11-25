@@ -101,13 +101,17 @@ class LoaderBatchTests(unittest.TestCase):
     def test_project_ids_survive_insertions_and_reordering(self):
         text = (SOURCE.parents[1] / "content-source.md").read_text()
         projects = self.builder.parse_content(text)["projects"]
-        self.assertEqual(len(projects), 21)
+        self.assertEqual(len(projects), 22)
         by_id = {p["id"]: p for p in projects}
         games_ids = [p["id"] for p in projects if p["category"] == "手语游戏"]
         self.assertEqual(games_ids[0], "skull")
+        self.assertEqual(games_ids[-1], "perfectmenu")
         self.assertEqual(by_id["skull"]["url"], "https://shouyulove.cn/games/skull/")
         self.assertEqual(by_id["skull"]["designers"], "黄庭逸")
         self.assertEqual(by_id["skull"]["category"], "手语游戏")
+        self.assertEqual(by_id["perfectmenu"]["url"], "https://shouyulove.cn/games/perfectmenu/")
+        self.assertEqual(by_id["perfectmenu"]["designers"], "黄雨琦")
+        self.assertEqual(by_id["perfectmenu"]["category"], "手语游戏")
         self.assertEqual(by_id["shouxiaoyu"]["url"], "https://shouyulove.cn/shouxiaoyu/")
         self.assertEqual(by_id["shouxiaoyu"]["designers"], "涂增基")
         self.assertEqual(by_id["shouxiaoyu"]["category"], "核心创意")

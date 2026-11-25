@@ -2,10 +2,10 @@
 
 ## 当前发布基线（2026-11-25）
 
-- **当前线上版本**：`20261125T035923Z-astra-home`（上一版本 `20261124T091501Z-astra-home`），共 **808 个运行文件、30 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `174,829,536` 字节。
-- **本轮变更范围**：在「手语游戏」栏目首位新增黄庭逸部署的实时联机手语牌桌游戏「骷髅牌」（`https://shouyulove.cn/games/skull/`，详情路由 `/projects/skull/`），设计专属柔和彩色图标（`project-logos/20261125-skull/`），完整重建 615 字中文字体与双套 WebGL MSDF 图集（`syl-v1-1-skull`），并保留全部旧版不可变资源。详见 [当前运维状态](../docs/operations-current.md)。
+- **当前线上版本**：`20261125T051617Z-astra-home`（上一版本 `20261125T035923Z-astra-home`），共 **876 个运行文件、31 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `182,631,025` 字节。
+- **本轮变更范围**：部署黄雨琦设计的「完美一餐」主持人端静态站（`https://shouyulove.cn/games/perfectmenu/`，走 `sign-games-ctl` 托管，详情路由 `/projects/perfectmenu/`），设计暖米餐盖柔和彩色图标（`project-logos/20261125-perfectmenu/`），完整重建 621 字中文字体与双套 WebGL MSDF 图集（`syl-v1-1-perfectmenu`），保留全部旧版不可变资源。详见 [当前运维状态](../docs/operations-current.md)。
 - **静态资源与子站隔离**：
-  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 433 项）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
+  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 499 项）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
   - 主站发布目录固定为 `/var/www/shouyulove-home`（指向 `/var/www/shouyulove-home-releases/<版本>`），与同机独立维护的手小语（`/var/www/shouyulove-showcase`）、指间趣游（`/var/www/shouyulove-signplay`）、飞手传书（`/opt/flyinghands/current`）、手语分社统一通行证（`/opt/shouyulove-auth/current`）、心创云盘（`/opt/shouyulove-drive/current`）、以手寻语、传情会意、接锅、文化节、年终总结及拼好课严格隔离，互不混用静态目录。
 
 ## 发布与回滚规范
@@ -23,6 +23,7 @@
 
 | 日期 | 主站发布版本 | 文件 / 路由 / 规模 | 核心变更 |
 | --- | --- | --- | --- |
+| 2026-11-25 | `20261125T051617Z-astra-home` | 876 文件 / 31 路由 / `182,631,025` B | 「手语游戏」接入「完美一餐」（`/games/perfectmenu/`，设计者黄雨琦），重建 621 字中文字体与 MSDF 图集 |
 | 2026-11-25 | `20261125T035923Z-astra-home` | 808 文件 / 30 路由 / `174,829,536` B | 「手语游戏」首位接入「骷髅牌」（`/games/skull/`，设计者黄庭逸），重建 615 字中文字体与 MSDF 图集 |
 | 2026-11-24 | `20261124T091501Z-astra-home` | 741 文件 / 29 路由 / `167,147,840` B | 「手语游戏」接入炸飞机、水果炸弹、巴巴爸爸、行动代号、雪豹凶杀案五款游戏，重建 607 字中文字体与 MSDF 图集 |
 | 2026-11-24 | `20261124T075334Z-astra-home` | 666 文件 / 24 路由 / `158,764,324` B | 首页与作品集在「核心创意」下方新增「手语游戏」栏目（收录指间趣游、飞手传书、传情会意-手语版） |
