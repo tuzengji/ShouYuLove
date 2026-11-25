@@ -105,7 +105,7 @@ class LoaderBatchTests(unittest.TestCase):
         by_id = {p["id"]: p for p in projects}
         games_ids = [p["id"] for p in projects if p["category"] == "手语游戏"]
         self.assertEqual(games_ids[0], "skull")
-        self.assertEqual(games_ids[-1], "perfectmenu")
+        self.assertEqual(games_ids[1], "perfectmenu")
         self.assertEqual(by_id["skull"]["url"], "https://shouyulove.cn/games/skull/")
         self.assertEqual(by_id["skull"]["designers"], "黄庭逸")
         self.assertEqual(by_id["skull"]["category"], "手语游戏")

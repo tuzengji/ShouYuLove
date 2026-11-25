@@ -2,16 +2,16 @@
 
 ## 当前运行状态（2026-11-25）
 
-- **当前线上版本**：`20261125T051617Z-astra-home`（上一版本 `20261125T035923Z-astra-home`，876 个运行文件、31 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `182,631,025` 字节）。完整变更脉络见 [当前运维状态](docs/operations-current.md)。
+- **当前线上版本**：`20261125T052701Z-astra-home`（上一版本 `20261125T051617Z-astra-home`，878 个运行文件、31 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `182,796,703` 字节）。完整变更脉络见 [当前运维状态](docs/operations-current.md)。
 - **作品集规模与多入口卡片**：作品集共 22 个项目，分为四个栏目（5 个核心创意、10 个手语游戏、3 个心创组内部使用、4 个其他作品）。
-  - 首页顺序为「核心创意 → 手语游戏 → 其他作品 → 心创组内部使用」；作品集 `/portfolio/` 顺序为「核心创意 → 手语游戏 → 心创组内部使用 → 其他作品」。「手语游戏」收录 10 项（骷髅牌、指间趣游 SignPlay、飞手传书、传情会意-手语版、炸飞机、水果炸弹、巴巴爸爸、行动代号、雪豹凶杀案、完美一餐），作品集桌面端 5 行两列平衡排布。
+  - 首页顺序为「核心创意 → 手语游戏 → 其他作品 → 心创组内部使用」；作品集 `/portfolio/` 顺序为「核心创意 → 手语游戏 → 心创组内部使用 → 其他作品」。「手语游戏」收录 10 项（骷髅牌、完美一餐、指间趣游 SignPlay、飞手传书、传情会意-手语版、炸飞机、水果炸弹、巴巴爸爸、行动代号、雪豹凶杀案），作品集桌面端 5 行两列平衡排布。
   - 「心创组内部使用」分区包含「接锅」「手语分社统一通行证」「心创云盘」，三张卡片左侧图标统一与文字垂直居中对齐。
   - **多按钮入口机制**：绑定原稿条目可在「地址：」后追加两行及以上 `入口：[名称](地址)`，并在 `scripts/build_content.py` 的 `ENTRY_ICONS` 登记小图标。作品集生成不可整卡点击的 `.portfolio-card`，由各 `.portfolio-action` 按钮取代简介展示在标题与署名之间（仍带 `data-project` 计入作品集点击统计）；首页由独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-five-games.js`，样式 `styles/project-entries.css`，版本常量 `PROJECT_ENTRIES_VERSION`）在渲染后做同样替换；原稿简介保留供作品详情页使用。当前支持多按钮的项目为「手语分社统一通行证」（通行证主页 `/auth/`、接入与配置中心 `/auth/dev`）、「炸飞机」（主持人端 `/bombplane/host/`、玩家端 `/bombplane/player/`）与「水果炸弹」（主持人端 `/fruitbomb/host/`、玩家端 `/fruitbomb/player/`）。
 - **当前资源版本**：
   - 主站品牌图标 `BRAND_VERSION = syl-v1-1-giving-heart`（`project-logos/20261012-主站-把爱递给你/shouyulove.svg`）；
-  - 图像 `RUNTIME_VERSION`、字体 `FONT_VERSION`（中文完整覆盖 621 字）、运行模块 `MODULE_VERSION`、数据桥 `BRIDGE_VERSION` 与作品集场景 `PORTFOLIO_SCENE_VERSION` 均为 `syl-v1-1-perfectmenu`；
+  - 图像 `RUNTIME_VERSION`、字体 `FONT_VERSION`（中文完整覆盖 621 字）与运行模块 `MODULE_VERSION` 均为 `syl-v1-1-perfectmenu`；数据桥 `BRIDGE_VERSION` 与作品集场景 `PORTFOLIO_SCENE_VERSION` 为 `syl-v1-1-perfectmenu-v2`；
   - 首页多入口脚本 `PROJECT_ENTRIES_VERSION = syl-v1-1-five-games`、首页定制样式 `STYLE_VERSION = syl-v1-1-sign-games`；
-  - CDN 资源继续使用 `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项），后续增量资源（`origin-asset-manifest.json` 499 项）由 ECS 直接提供。
+  - CDN 资源继续使用 `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项），后续增量资源（`origin-asset-manifest.json` 501 项）由 ECS 直接提供。
 
 ## 服务器与基础设施边界
 
