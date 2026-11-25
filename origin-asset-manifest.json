@@ -6,6 +6,10 @@
       "bytes": 6114,
       "sha256": "e25925392c87b8b2bb361880c87e276a49e18139bfb966132a7d80c4f1a1c4dd"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-naimahjong.css": {
+      "bytes": 6114,
+      "sha256": "e25925392c87b8b2bb361880c87e276a49e18139bfb966132a7d80c4f1a1c4dd"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-perfectmenu.css": {
       "bytes": 6114,
       "sha256": "e25925392c87b8b2bb361880c87e276a49e18139bfb966132a7d80c4f1a1c4dd"
@@ -37,6 +41,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.DgUWXiAT.syl-v1-1-five-games.js": {
       "bytes": 6275,
       "sha256": "91006c0e0d0778781fd05acef59075909de405c513e8b61ed0cf774eed8eb0c7"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/AboutPage.DgUWXiAT.syl-v1-1-naimahjong.js": {
+      "bytes": 6275,
+      "sha256": "f10c12a53e34e3548fac242a81bab178b99e8daa2f660a7d7a6aa437c13c7eca"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.DgUWXiAT.syl-v1-1-perfectmenu.js": {
       "bytes": 6279,
@@ -70,6 +78,10 @@
       "bytes": 20055,
       "sha256": "58ee7896f82604bb2970f9aab1e79053097cab3333436e9e26b28f2b01079d71"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.BJXpRcDM.syl-v1-1-naimahjong.js": {
+      "bytes": 20055,
+      "sha256": "4e786fd623e0acf861a3bce42dacdc847095f06d214e32d6290432f636983e0c"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.BJXpRcDM.syl-v1-1-perfectmenu.js": {
       "bytes": 20057,
       "sha256": "c28641a26f33d9e6595d6d9ed5d03dd9a49e8e3345e1e78f56a5c24baa2d9b16"
@@ -99,6 +111,10 @@
       "sha256": "a04fb4d1c64318e38fa592860f600082d527fa63919eac3ca0c7b90879108f05"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.C3T5QDcr.syl-v1-1-five-games.css": {
+      "bytes": 14442,
+      "sha256": "5ee72eeb9a2b14faab6b3cfeed42f6f0f157d90c4fe90a7e9e8da73c130307af"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/AllProjectsButton.C3T5QDcr.syl-v1-1-naimahjong.css": {
       "bytes": 14442,
       "sha256": "5ee72eeb9a2b14faab6b3cfeed42f6f0f157d90c4fe90a7e9e8da73c130307af"
     },
@@ -134,6 +150,10 @@
       "bytes": 5903,
       "sha256": "975b6cd4fbcd78da13dbe103f45933bf2f0f3b1aef94e8fb419ebe15858498b4"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/BasicButton.D91CLqAw.syl-v1-1-naimahjong.js": {
+      "bytes": 5903,
+      "sha256": "d2e53ed0e8370eaa41b8a49e2a77ef0c78241932942d3be8f17a87903d4f4c4d"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/BasicButton.D91CLqAw.syl-v1-1-perfectmenu.js": {
       "bytes": 5904,
       "sha256": "76f00ff2bcc338e396b358f007393fb9af36b8d2598081e885e87553ad8e6f17"
@@ -163,6 +183,10 @@
       "sha256": "8414004a3f672967593ada7adcf0348f953503a1bd148aa0facdb0e9a190531f"
     },
     "sites/immersive-g-com-955afd14/shared/assets/BasicButton.Dorc8BWb.syl-v1-1-five-games.css": {
+      "bytes": 766,
+      "sha256": "468d0b4e3da662827820e62ec6554852df753f565b415b057cc0e71c3a380602"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/BasicButton.Dorc8BWb.syl-v1-1-naimahjong.css": {
       "bytes": 766,
       "sha256": "468d0b4e3da662827820e62ec6554852df753f565b415b057cc0e71c3a380602"
     },
@@ -198,6 +222,10 @@
       "bytes": 1636,
       "sha256": "32c0554a6bb4ed8519f3993091a5659a5f932af598e8ec4b8338bd3a1b1b8481"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.Bs5C7G0C.syl-v1-1-naimahjong.js": {
+      "bytes": 1636,
+      "sha256": "4914c1cb48550540e9560647cd5989b75f8d18f1e1fe848120c42712758e61a4"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.Bs5C7G0C.syl-v1-1-perfectmenu.js": {
       "bytes": 1637,
       "sha256": "a72cd2dafbf5df58e015719ab79744194f38d6f4b5d2aef921f823796f2ca74f"
@@ -227,6 +255,10 @@
       "sha256": "127d8c9b08be83528bc808cd9ffba244994b0f069e2cb14e1eb2f546956278bc"
     },
     "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.DY5DOHtB.syl-v1-1-five-games.css": {
+      "bytes": 753,
+      "sha256": "736867c9a2d6a080de6b13012857688e57475e53097c64ed1e70ea3efdbf576a"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/BlocksPage.DY5DOHtB.syl-v1-1-naimahjong.css": {
       "bytes": 753,
       "sha256": "736867c9a2d6a080de6b13012857688e57475e53097c64ed1e70ea3efdbf576a"
     },
@@ -262,6 +294,10 @@
       "bytes": 25531,
       "sha256": "3aaeeaca62d498d129e43382683d56afc869490cea654614193639aabd704465"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.BetzaiHB.syl-v1-1-naimahjong.css": {
+      "bytes": 25531,
+      "sha256": "3aaeeaca62d498d129e43382683d56afc869490cea654614193639aabd704465"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.BetzaiHB.syl-v1-1-perfectmenu.css": {
       "bytes": 25531,
       "sha256": "3aaeeaca62d498d129e43382683d56afc869490cea654614193639aabd704465"
@@ -293,6 +329,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.DoznkBHg.syl-v1-1-five-games.js": {
       "bytes": 10728,
       "sha256": "f5c4c3716ae575effd7ac2f06cef854a9587938306cc35c443c5cc5a9790f8bc"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.DoznkBHg.syl-v1-1-naimahjong.js": {
+      "bytes": 10728,
+      "sha256": "62855b7a3985a018852de8da3324d1d56d261779db01850c3b257f45d75acc32"
     },
     "sites/immersive-g-com-955afd14/shared/assets/HeroBlock.DoznkBHg.syl-v1-1-perfectmenu.js": {
       "bytes": 10731,
@@ -326,6 +366,10 @@
       "bytes": 6406,
       "sha256": "f2588f80d804150805ad07a17796e6e598d341568898620c761628da7a088552"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/HomePage.ClaPmn7U.syl-v1-1-naimahjong.js": {
+      "bytes": 6406,
+      "sha256": "f42149832f2127431cc16f2f5747a4116ba6de2ef63c88b38748195a14ab3841"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/HomePage.ClaPmn7U.syl-v1-1-perfectmenu.js": {
       "bytes": 6410,
       "sha256": "97a3e6464fe32bdfb6f56aafa5c861cfdcde283c1c56504fc29c09cebb6a6352"
@@ -358,6 +402,10 @@
       "bytes": 2977,
       "sha256": "784964370adbd5b575bc009bce5ee97b8ebb8ac396737edfbcb524e5c18d1038"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.B66t4y4U.syl-v1-1-naimahjong.js": {
+      "bytes": 2977,
+      "sha256": "c330523a5bffd46f20f626637b8fac7f246dc5bc507b0984eb3c2173510c3a2a"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.B66t4y4U.syl-v1-1-perfectmenu.js": {
       "bytes": 2979,
       "sha256": "c26b085aff462133c60e9095fcd25087ddc783b5e4e253f6fddd5e627ccb8105"
@@ -387,6 +435,10 @@
       "sha256": "4f3ef48e41b4686abc37185176594d0a864b4f13fc67a9e3cfb33f7527187740"
     },
     "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.BLAoBKI3.syl-v1-1-five-games.css": {
+      "bytes": 1247,
+      "sha256": "befbc0b374c5d4841f88d8c3d7278a4d7cadcdae41b03e4141fb9c800250607b"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/PrevNextButton.BLAoBKI3.syl-v1-1-naimahjong.css": {
       "bytes": 1247,
       "sha256": "befbc0b374c5d4841f88d8c3d7278a4d7cadcdae41b03e4141fb9c800250607b"
     },
@@ -422,6 +474,10 @@
       "bytes": 5196,
       "sha256": "71a07597d8d91994ab012d4573fb7f33aa64572f75f739e4c92d0f206f443f30"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.BGFPg47w.syl-v1-1-naimahjong.css": {
+      "bytes": 5196,
+      "sha256": "71a07597d8d91994ab012d4573fb7f33aa64572f75f739e4c92d0f206f443f30"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.BGFPg47w.syl-v1-1-perfectmenu.css": {
       "bytes": 5196,
       "sha256": "71a07597d8d91994ab012d4573fb7f33aa64572f75f739e4c92d0f206f443f30"
@@ -454,6 +510,10 @@
       "bytes": 3184,
       "sha256": "01401496e99e647e2f8d63f687749bf463967f4bd2023083908538000044ec84"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.Bh_iOA_x.syl-v1-1-naimahjong.js": {
+      "bytes": 3184,
+      "sha256": "df199c71ad81b5f71f3c93631cb8fd9bfe9d1c01b0b861e506daa23437f654ea"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/ProjectBackstagePage.Bh_iOA_x.syl-v1-1-perfectmenu.js": {
       "bytes": 3186,
       "sha256": "44cc134646652332a4ef5f0a56e31f2bf60fbbdc718d406558930eb6e2cb5253"
@@ -483,6 +543,10 @@
       "sha256": "8ab3c7a14b7177055d80ed7cdc985c5647c7f44ef9f30133ab5830dc0e4498fe"
     },
     "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.CazkSH89.syl-v1-1-five-games.css": {
+      "bytes": 14516,
+      "sha256": "7e4c47664fdab6fcd08de854d7c596062da2d124b1f879598faf56b08274e2af"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.CazkSH89.syl-v1-1-naimahjong.css": {
       "bytes": 14516,
       "sha256": "7e4c47664fdab6fcd08de854d7c596062da2d124b1f879598faf56b08274e2af"
     },
@@ -518,6 +582,10 @@
       "bytes": 13773,
       "sha256": "8c7d17e3a1012c79d6804f9c929fe551f8d5fff8aca44f341c58518d91b320da"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.Cv0OM6xq.syl-v1-1-naimahjong.js": {
+      "bytes": 13773,
+      "sha256": "d0095b9344861d3ada2c601654a4bc8338963cc8df7d362ee68d06c6ecd7134a"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/ProjectPage.Cv0OM6xq.syl-v1-1-perfectmenu.js": {
       "bytes": 13778,
       "sha256": "bdc68907985a4975cbad04f95e3482e64c780126aeaf5567a58ebbfa35ff5912"
@@ -550,6 +618,10 @@
       "bytes": 2618,
       "sha256": "05887dc52181d7ec4a97ff219b36120b1e12d905f4c26a6d9d0560fdf2027872"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/asyncData.B6IxwMmT.syl-v1-1-naimahjong.js": {
+      "bytes": 2618,
+      "sha256": "a4767519d3d81608377403b0bfb07ed2123cd357392f9df6a7fe8d9990338f13"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/asyncData.B6IxwMmT.syl-v1-1-perfectmenu.js": {
       "bytes": 2619,
       "sha256": "fd8b6ce13dcc4b79202a58f16d915d2a52e52c3df508a0210b8fe5cc1406f353"
@@ -579,6 +651,10 @@
       "sha256": "02f732a1e8f8425d647fd7bf59a86d51d9bdd687b2548193691433cfb706b519"
     },
     "sites/immersive-g-com-955afd14/shared/assets/component-stub.FmFgRqLi.syl-v1-1-five-games.js": {
+      "bytes": 33,
+      "sha256": "49751e83c2dabf8a8ead01b84ca4a250f0f305b4845f33a0cd4ffe880e409d63"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/component-stub.FmFgRqLi.syl-v1-1-naimahjong.js": {
       "bytes": 33,
       "sha256": "49751e83c2dabf8a8ead01b84ca4a250f0f305b4845f33a0cd4ffe880e409d63"
     },
@@ -614,6 +690,10 @@
       "bytes": 12052,
       "sha256": "ef487696b0c40192c7af5ec98e799e8c6cae8bbe9e23b8c95d68bd8349548af0"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/default.C99tf3EK.syl-v1-1-naimahjong.css": {
+      "bytes": 12052,
+      "sha256": "ef487696b0c40192c7af5ec98e799e8c6cae8bbe9e23b8c95d68bd8349548af0"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/default.C99tf3EK.syl-v1-1-perfectmenu.css": {
       "bytes": 12052,
       "sha256": "ef487696b0c40192c7af5ec98e799e8c6cae8bbe9e23b8c95d68bd8349548af0"
@@ -646,6 +726,10 @@
       "bytes": 18073,
       "sha256": "04cea8de02bea9ddcd829bd30a421a950044946392fc94f9aecc856332219272"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/default.CxpTjDRZ.syl-v1-1-naimahjong.js": {
+      "bytes": 18073,
+      "sha256": "4f0638161aa2539cae8b5c9509028921c73a1bca9abd409b33becb0aa33f62ab"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/default.CxpTjDRZ.syl-v1-1-perfectmenu.js": {
       "bytes": 18080,
       "sha256": "c62fdb54c4ce1bb3911a43b7853d6d3e5012e5df2fd7d544fe27cd8aa9d353da"
@@ -675,6 +759,10 @@
       "sha256": "642822e733db55c22cf21db503beeda2d2d43eb0e5ee5bc79ea2aae417e2a8f9"
     },
     "sites/immersive-g-com-955afd14/shared/assets/entry.CU8H-nqP.syl-v1-1-five-games.css": {
+      "bytes": 10480,
+      "sha256": "4de6528880c524a937a13b122dc78adb6a124a9da2b74eaa763e64ea6862e319"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/entry.CU8H-nqP.syl-v1-1-naimahjong.css": {
       "bytes": 10480,
       "sha256": "4de6528880c524a937a13b122dc78adb6a124a9da2b74eaa763e64ea6862e319"
     },
@@ -710,6 +798,10 @@
       "bytes": 2457770,
       "sha256": "67d068c9a27170af8c71788813836aeb17c8e302ba007996477ca5c9c5ef6288"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/entry.DyxL_KXi.syl-v1-1-naimahjong.js": {
+      "bytes": 2457770,
+      "sha256": "85c8711aec3aae837d7b3407aa9711cd09db109377d9eb78a1a550fbcbd9800f"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/entry.DyxL_KXi.syl-v1-1-perfectmenu.js": {
       "bytes": 2457855,
       "sha256": "6082ffef2b0a68b433a13cd34c9f3e0afb80b1c77a711c6fac98dfb9157d6fa8"
@@ -739,6 +831,10 @@
       "sha256": "412af6e23f2ea2f9e5153e21db1c713e399986d87a404f70a64781537faa43e8"
     },
     "sites/immersive-g-com-955afd14/shared/assets/fast-bootstrap.syl-v1-1-five-games.js": {
+      "bytes": 1139,
+      "sha256": "521df458f34ee8c297247f84a5eb5b9bd0703227dee428f19b9b7b7b34404fce"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/fast-bootstrap.syl-v1-1-naimahjong.js": {
       "bytes": 1139,
       "sha256": "521df458f34ee8c297247f84a5eb5b9bd0703227dee428f19b9b7b7b34404fce"
     },
@@ -774,6 +870,10 @@
       "bytes": 256588,
       "sha256": "d66b318e238d100a3464d8e3b3952df636cec79d70ad6edd2bdb6068bed14d43"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/fonts.syl-v1-1-naimahjong.css": {
+      "bytes": 257864,
+      "sha256": "4839f8af606921a90696c443c92da05040f90bd5756c2cf1eb8cd9e668493dc9"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/fonts.syl-v1-1-perfectmenu.css": {
       "bytes": 260720,
       "sha256": "07a378ae7b8b746fff1429f22a877408450fa61e17393ea20918d91e1d435838"
@@ -803,6 +903,10 @@
       "sha256": "e2257604b396e25242f5cd0f238f9a130a51ca4717ceeba197da9153c68f144b"
     },
     "sites/immersive-g-com-955afd14/shared/assets/home-shortcut.syl-v1-1-five-games.js": {
+      "bytes": 3082,
+      "sha256": "00801cbd1e11c095eda8feae8358807f2541f6fab02299c53eae02a08e230957"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/home-shortcut.syl-v1-1-naimahjong.js": {
       "bytes": 3082,
       "sha256": "00801cbd1e11c095eda8feae8358807f2541f6fab02299c53eae02a08e230957"
     },
@@ -838,6 +942,10 @@
       "bytes": 891,
       "sha256": "4882a0be34240e8dfbf49e222e8d350eb4f5b8a2c8808d332132012cd16485d7"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/index.C0GRCNhC.syl-v1-1-naimahjong.js": {
+      "bytes": 891,
+      "sha256": "ac7fcd13dc29665e18a8c57461c75f662e6e608bc593f07438a6fa16f18a93f8"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/index.C0GRCNhC.syl-v1-1-perfectmenu.js": {
       "bytes": 896,
       "sha256": "c079db66ae0df2b17633539759c59f2e0af636bc66a01732fafe1b88cabcf148"
@@ -867,6 +975,10 @@
       "sha256": "ea4c2cca58b9556ed6784f8506e4eb86f793a35c4b77be8ccfe57e7502965992"
     },
     "sites/immersive-g-com-955afd14/shared/assets/index.CZfKaD6V.syl-v1-1-five-games.css": {
+      "bytes": 5106,
+      "sha256": "2706eb119376411a968d509d79eb2b93aec096df1b8ca4b5c7fb08d9c67c6d7d"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/index.CZfKaD6V.syl-v1-1-naimahjong.css": {
       "bytes": 5106,
       "sha256": "2706eb119376411a968d509d79eb2b93aec096df1b8ca4b5c7fb08d9c67c6d7d"
     },
@@ -902,6 +1014,10 @@
       "bytes": 9497,
       "sha256": "5c6b31592068d64be10f95257d64bf829940ed3622c69ffa7d4025cd5f3f1368"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/index.CeH_ahVV.syl-v1-1-naimahjong.js": {
+      "bytes": 9497,
+      "sha256": "4cfe9e3e563c447e19ecda86814a9539bbfdf16c69c23f91ae466e9b8fdb9d70"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/index.CeH_ahVV.syl-v1-1-perfectmenu.js": {
       "bytes": 9504,
       "sha256": "2c122dc4a92d4edf86112799faa84a866266a0da1bbe165a1097b7396c9c0495"
@@ -934,6 +1050,10 @@
       "bytes": 745,
       "sha256": "8fbd7bd8d99f22a6dd14f564a3d57d5f898af08635e43b90a6802baefff134a0"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/index.D4TZz6rT.syl-v1-1-naimahjong.js": {
+      "bytes": 745,
+      "sha256": "0347cadc58703d8b6314b0de8fecf40d7e0a9dcc66546e22cdbcc563ffa8363a"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/index.D4TZz6rT.syl-v1-1-perfectmenu.js": {
       "bytes": 752,
       "sha256": "e4aecaec4dd6e11b0f1042b078088ea05a4f51ee734d3075785a06520725c2db"
@@ -965,6 +1085,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/index.D7bwnB0L.syl-v1-1-five-games.js": {
       "bytes": 1095,
       "sha256": "9cb9477b3de36715344e83868fdb2df1cb90fcdb5371014348e0613eb5d68734"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/index.D7bwnB0L.syl-v1-1-naimahjong.js": {
+      "bytes": 1095,
+      "sha256": "8aaf9dfba12226ea6bcda72b8608d79fe24494a8dc689c0f0afeb242623e3c84"
     },
     "sites/immersive-g-com-955afd14/shared/assets/index.D7bwnB0L.syl-v1-1-perfectmenu.js": {
       "bytes": 1103,
@@ -1001,6 +1125,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-games-copy.json": {
       "bytes": 118371,
       "sha256": "2435060a1eb659fafb832f995d6fc1800e9896b801706c450b2582e6db6f0a5a"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-naimahjong.json": {
+      "bytes": 122099,
+      "sha256": "7083a95eb5b1db65acc2ba7af97501e06009d61d1125bd6b7a958fb34c9d6a07"
     },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-perfectmenu-v2.json": {
       "bytes": 120735,
@@ -1050,6 +1178,10 @@
       "bytes": 3318,
       "sha256": "48664df8f784f9f5dfe4251b4b0525e09842ee4a205f24662e130bfac0b12770"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio.syl-v1-1-naimahjong.js": {
+      "bytes": 3318,
+      "sha256": "48664df8f784f9f5dfe4251b4b0525e09842ee4a205f24662e130bfac0b12770"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio.syl-v1-1-perfectmenu.js": {
       "bytes": 3318,
       "sha256": "48664df8f784f9f5dfe4251b4b0525e09842ee4a205f24662e130bfac0b12770"
@@ -1081,6 +1213,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/preview.qrRKLGJD.syl-v1-1-five-games.js": {
       "bytes": 1660,
       "sha256": "2802893f00ed3485c4ea2c937bf03f39ab017ef60c4b6876cc25379841497ab9"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/preview.qrRKLGJD.syl-v1-1-naimahjong.js": {
+      "bytes": 1660,
+      "sha256": "8d7cd76d5c16ade9d62297df985c3f6909957783e1a448a169867c76accbb0ab"
     },
     "sites/immersive-g-com-955afd14/shared/assets/preview.qrRKLGJD.syl-v1-1-perfectmenu.js": {
       "bytes": 1671,
@@ -1117,6 +1253,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/proto.DuMH9e-J.syl-v1-1-five-games.js": {
       "bytes": 289,
       "sha256": "631f31e5fd2bff706311149e07e723f71aee9f5abe243824e51674b3c21f902e"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/proto.DuMH9e-J.syl-v1-1-naimahjong.js": {
+      "bytes": 289,
+      "sha256": "14b5e92afa8da2ae9dca0620282212c2eb18a5508e0e590234cd9624f0d21e0e"
     },
     "sites/immersive-g-com-955afd14/shared/assets/proto.DuMH9e-J.syl-v1-1-perfectmenu.js": {
       "bytes": 290,
@@ -1174,6 +1314,10 @@
       "bytes": 867,
       "sha256": "1970c5db108f440528e6d8fd041319462fea506488658e6e089b50d862d8593d"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/sortGeometryVertices-CjfG_b7R.syl-v1-1-naimahjong.js": {
+      "bytes": 867,
+      "sha256": "1970c5db108f440528e6d8fd041319462fea506488658e6e089b50d862d8593d"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/sortGeometryVertices-CjfG_b7R.syl-v1-1-perfectmenu.js": {
       "bytes": 867,
       "sha256": "1970c5db108f440528e6d8fd041319462fea506488658e6e089b50d862d8593d"
@@ -1206,6 +1350,10 @@
       "bytes": 245,
       "sha256": "21fdc9f1ebb62bcf0d116cdd941dd0a1a96fc763343018796188fb686949133f"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/useTimeRaf.CEtG5dZ4.syl-v1-1-naimahjong.js": {
+      "bytes": 245,
+      "sha256": "ef56d504cd8ea3570f61386736d0c28ec3c722940d1b40332c9bd1b21e1c322c"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/useTimeRaf.CEtG5dZ4.syl-v1-1-perfectmenu.js": {
       "bytes": 246,
       "sha256": "a5b36d267bb86aa50679c2bbf08bb10be17895940e74e92d7eb2fb7c757feffd"
@@ -1237,6 +1385,10 @@
     "sites/immersive-g-com-955afd14/shared/assets/vue3-lottie.es.B1QeRuZw.syl-v1-1-five-games.js": {
       "bytes": 314201,
       "sha256": "c999cd8947e6188bf4719fa0377ff82ec415727f01bb504562816dc57b86b61f"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/vue3-lottie.es.B1QeRuZw.syl-v1-1-naimahjong.js": {
+      "bytes": 314201,
+      "sha256": "03ac2f1c79c32681088e1c448092a331ea0640d16bdf5557f3b000a2162d2583"
     },
     "sites/immersive-g-com-955afd14/shared/assets/vue3-lottie.es.B1QeRuZw.syl-v1-1-perfectmenu.js": {
       "bytes": 314202,
@@ -1273,6 +1425,10 @@
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-games-copy.js": {
       "bytes": 43668,
       "sha256": "8c07fcb5f132d0b00824a931f150d6f7d3681fd383c071c8a19f16199fccd5f1"
+    },
+    "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-naimahjong.js": {
+      "bytes": 45022,
+      "sha256": "6b3054b378d490d6c2e30e2e1894cf5ec1a99b62a0b584511e451723bf0e305a"
     },
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-perfectmenu-v2.js": {
       "bytes": 44850,
@@ -1322,6 +1478,10 @@
       "bytes": 91856,
       "sha256": "e689dc57c1d0eb7c79c9eb689d256ba4a28c41c46e875bd19e1708ab5e950e2e"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/2026-sign-language-cultural-festival-square.syl-v1-1-naimahjong.png": {
+      "bytes": 91856,
+      "sha256": "e689dc57c1d0eb7c79c9eb689d256ba4a28c41c46e875bd19e1708ab5e950e2e"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/2026-sign-language-cultural-festival-square.syl-v1-1-perfectmenu.png": {
       "bytes": 91856,
       "sha256": "e689dc57c1d0eb7c79c9eb689d256ba4a28c41c46e875bd19e1708ab5e950e2e"
@@ -1351,6 +1511,10 @@
       "sha256": "e689dc57c1d0eb7c79c9eb689d256ba4a28c41c46e875bd19e1708ab5e950e2e"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/2026-year-end-summary-square.syl-v1-1-five-games.png": {
+      "bytes": 45571,
+      "sha256": "7f64fada5eb069611a43d6dbc403df6a93f7dc83bc2f9de9e3e5c31f7962b3a1"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/2026-year-end-summary-square.syl-v1-1-naimahjong.png": {
       "bytes": 45571,
       "sha256": "7f64fada5eb069611a43d6dbc403df6a93f7dc83bc2f9de9e3e5c31f7962b3a1"
     },
@@ -1386,6 +1550,10 @@
       "bytes": 39808,
       "sha256": "810a7d7f5a54316565dd55668cc063f037458bdd9279787211b226cffa81749c"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/barbapapa-square.syl-v1-1-naimahjong.png": {
+      "bytes": 39808,
+      "sha256": "810a7d7f5a54316565dd55668cc063f037458bdd9279787211b226cffa81749c"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/barbapapa-square.syl-v1-1-perfectmenu.png": {
       "bytes": 39808,
       "sha256": "810a7d7f5a54316565dd55668cc063f037458bdd9279787211b226cffa81749c"
@@ -1395,6 +1563,10 @@
       "sha256": "810a7d7f5a54316565dd55668cc063f037458bdd9279787211b226cffa81749c"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/beida-zhidao-square.syl-v1-1-five-games.png": {
+      "bytes": 30170,
+      "sha256": "e9e8beab3983f3ce10ec7c967caf320dc19225ec4f9abf475bd9dfd2e213fb0a"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/beida-zhidao-square.syl-v1-1-naimahjong.png": {
       "bytes": 30170,
       "sha256": "e9e8beab3983f3ce10ec7c967caf320dc19225ec4f9abf475bd9dfd2e213fb0a"
     },
@@ -1430,6 +1602,10 @@
       "bytes": 46761,
       "sha256": "11c1ac2abbc9f38c28758886775c381ab0716ce5cc9b1599fe529b1c179076b7"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/bombplane-square.syl-v1-1-naimahjong.png": {
+      "bytes": 46761,
+      "sha256": "11c1ac2abbc9f38c28758886775c381ab0716ce5cc9b1599fe529b1c179076b7"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/bombplane-square.syl-v1-1-perfectmenu.png": {
       "bytes": 46761,
       "sha256": "11c1ac2abbc9f38c28758886775c381ab0716ce5cc9b1599fe529b1c179076b7"
@@ -1439,6 +1615,10 @@
       "sha256": "11c1ac2abbc9f38c28758886775c381ab0716ce5cc9b1599fe529b1c179076b7"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/chuanqinghuiyi-square.syl-v1-1-five-games.png": {
+      "bytes": 48399,
+      "sha256": "b585851c95bb258b67607382cf47bf730f5a444dec4a533fb96a39e4a6ee8049"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/chuanqinghuiyi-square.syl-v1-1-naimahjong.png": {
       "bytes": 48399,
       "sha256": "b585851c95bb258b67607382cf47bf730f5a444dec4a533fb96a39e4a6ee8049"
     },
@@ -1474,6 +1654,10 @@
       "bytes": 42275,
       "sha256": "bc2b466146528a415aebb0c96c64a9da9524859140af56d8ced78f8c0a283cbb"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/codenames-square.syl-v1-1-naimahjong.png": {
+      "bytes": 42275,
+      "sha256": "bc2b466146528a415aebb0c96c64a9da9524859140af56d8ced78f8c0a283cbb"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/codenames-square.syl-v1-1-perfectmenu.png": {
       "bytes": 42275,
       "sha256": "bc2b466146528a415aebb0c96c64a9da9524859140af56d8ced78f8c0a283cbb"
@@ -1483,6 +1667,10 @@
       "sha256": "bc2b466146528a415aebb0c96c64a9da9524859140af56d8ced78f8c0a283cbb"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/dictionary-square.syl-v1-1-five-games.png": {
+      "bytes": 28970,
+      "sha256": "1bfdadca58400f761a83b4471df65df25cbca3db5bd3eb1c09405bf429258e09"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/dictionary-square.syl-v1-1-naimahjong.png": {
       "bytes": 28970,
       "sha256": "1bfdadca58400f761a83b4471df65df25cbca3db5bd3eb1c09405bf429258e09"
     },
@@ -1518,6 +1706,10 @@
       "bytes": 50992,
       "sha256": "31c5af91a58b8e46c2f1338643d9cfca229a918835689d0e3bab32917886a7de"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/flyinghands-square.syl-v1-1-naimahjong.png": {
+      "bytes": 50992,
+      "sha256": "31c5af91a58b8e46c2f1338643d9cfca229a918835689d0e3bab32917886a7de"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/flyinghands-square.syl-v1-1-perfectmenu.png": {
       "bytes": 50992,
       "sha256": "31c5af91a58b8e46c2f1338643d9cfca229a918835689d0e3bab32917886a7de"
@@ -1550,6 +1742,10 @@
       "bytes": 34334,
       "sha256": "35bf770ce259561b7da2681248b917f3b55b7090495351505eed67fc6ce1f8ed"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/fruitbomb-square.syl-v1-1-naimahjong.png": {
+      "bytes": 34334,
+      "sha256": "35bf770ce259561b7da2681248b917f3b55b7090495351505eed67fc6ce1f8ed"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/fruitbomb-square.syl-v1-1-perfectmenu.png": {
       "bytes": 34334,
       "sha256": "35bf770ce259561b7da2681248b917f3b55b7090495351505eed67fc6ce1f8ed"
@@ -1559,6 +1755,10 @@
       "sha256": "35bf770ce259561b7da2681248b917f3b55b7090495351505eed67fc6ce1f8ed"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/jieguo-square.syl-v1-1-five-games.png": {
+      "bytes": 23514,
+      "sha256": "42248e494a567c49ca16f66f63523bfdc29384137da5e9b00fa924ee8c6845eb"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/jieguo-square.syl-v1-1-naimahjong.png": {
       "bytes": 23514,
       "sha256": "42248e494a567c49ca16f66f63523bfdc29384137da5e9b00fa924ee8c6845eb"
     },
@@ -1590,11 +1790,23 @@
       "bytes": 23514,
       "sha256": "42248e494a567c49ca16f66f63523bfdc29384137da5e9b00fa924ee8c6845eb"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/naimahjong-square.syl-v1-1-naimahjong.png": {
+      "bytes": 36277,
+      "sha256": "44def0f55e3697deb053c5f58377b81f458d676dd529ef9ffa5bd72fca06a8fb"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/perfectmenu-square.syl-v1-1-naimahjong.png": {
+      "bytes": 51463,
+      "sha256": "aa08dde5710d599735ad612269056f2f9e7d601a96d1fb50e5484e06d85ee30a"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/perfectmenu-square.syl-v1-1-perfectmenu.png": {
       "bytes": 51463,
       "sha256": "aa08dde5710d599735ad612269056f2f9e7d601a96d1fb50e5484e06d85ee30a"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/pinhaoke-square.syl-v1-1-five-games.png": {
+      "bytes": 17437,
+      "sha256": "674b1b58143233aae325c1402f0045096b524be893c57b60db7663fd4dc0cab5"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/pinhaoke-square.syl-v1-1-naimahjong.png": {
       "bytes": 17437,
       "sha256": "674b1b58143233aae325c1402f0045096b524be893c57b60db7663fd4dc0cab5"
     },
@@ -1630,6 +1842,10 @@
       "bytes": 13961,
       "sha256": "f5fd5ec7746b3b94541daadd3147bbb618b6e321c4e0f86ed9b159e1fe0e02cd"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/qinghua-zhidao-square.syl-v1-1-naimahjong.png": {
+      "bytes": 13961,
+      "sha256": "f5fd5ec7746b3b94541daadd3147bbb618b6e321c4e0f86ed9b159e1fe0e02cd"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/qinghua-zhidao-square.syl-v1-1-perfectmenu.png": {
       "bytes": 13961,
       "sha256": "f5fd5ec7746b3b94541daadd3147bbb618b6e321c4e0f86ed9b159e1fe0e02cd"
@@ -1659,6 +1875,10 @@
       "sha256": "f5fd5ec7746b3b94541daadd3147bbb618b6e321c4e0f86ed9b159e1fe0e02cd"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/quna-study-square.syl-v1-1-five-games.png": {
+      "bytes": 33516,
+      "sha256": "679ad5cfd85bc13f4407ab07ad7c68d7f8f62cc1226447b9392456facf234d07"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/quna-study-square.syl-v1-1-naimahjong.png": {
       "bytes": 33516,
       "sha256": "679ad5cfd85bc13f4407ab07ad7c68d7f8f62cc1226447b9392456facf234d07"
     },
@@ -1694,6 +1914,10 @@
       "bytes": 36557,
       "sha256": "898e2eedb253c21717ec3421fbe12c5ca8e1cbce914e0fe48591847b052e797c"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/shouxiaoyu-square.syl-v1-1-naimahjong.png": {
+      "bytes": 36557,
+      "sha256": "898e2eedb253c21717ec3421fbe12c5ca8e1cbce914e0fe48591847b052e797c"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/shouxiaoyu-square.syl-v1-1-perfectmenu.png": {
       "bytes": 36557,
       "sha256": "898e2eedb253c21717ec3421fbe12c5ca8e1cbce914e0fe48591847b052e797c"
@@ -1711,6 +1935,10 @@
       "sha256": "898e2eedb253c21717ec3421fbe12c5ca8e1cbce914e0fe48591847b052e797c"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/shouyu-pass-square.syl-v1-1-five-games.png": {
+      "bytes": 33723,
+      "sha256": "c4458343799df8971b7f1e729f0f4e637485c8038cfdbd6e28e92433126be8de"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/shouyu-pass-square.syl-v1-1-naimahjong.png": {
       "bytes": 33723,
       "sha256": "c4458343799df8971b7f1e729f0f4e637485c8038cfdbd6e28e92433126be8de"
     },
@@ -1739,6 +1967,10 @@
       "sha256": "c4458343799df8971b7f1e729f0f4e637485c8038cfdbd6e28e92433126be8de"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/signplay-square.syl-v1-1-five-games.png": {
+      "bytes": 40508,
+      "sha256": "ec34093326b779b65a8b9832dc32da8e64802c499bacadd2f04e1615ca40204f"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/signplay-square.syl-v1-1-naimahjong.png": {
       "bytes": 40508,
       "sha256": "ec34093326b779b65a8b9832dc32da8e64802c499bacadd2f04e1615ca40204f"
     },
@@ -1774,6 +2006,10 @@
       "bytes": 45810,
       "sha256": "3d8525518d2a64a2fe719b950e8e5f415654f8df3af9e1e8a2cb501d00a78062"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/signtrace-square.syl-v1-1-naimahjong.png": {
+      "bytes": 45810,
+      "sha256": "3d8525518d2a64a2fe719b950e8e5f415654f8df3af9e1e8a2cb501d00a78062"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/signtrace-square.syl-v1-1-perfectmenu.png": {
       "bytes": 45810,
       "sha256": "3d8525518d2a64a2fe719b950e8e5f415654f8df3af9e1e8a2cb501d00a78062"
@@ -1802,6 +2038,10 @@
       "bytes": 45810,
       "sha256": "3d8525518d2a64a2fe719b950e8e5f415654f8df3af9e1e8a2cb501d00a78062"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/skull-square.syl-v1-1-naimahjong.png": {
+      "bytes": 69634,
+      "sha256": "16aa322c0cae1fbc97b5a07048404005fd58b5ba2a9c50995fc0b87233745f4a"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/skull-square.syl-v1-1-perfectmenu.png": {
       "bytes": 69634,
       "sha256": "16aa322c0cae1fbc97b5a07048404005fd58b5ba2a9c50995fc0b87233745f4a"
@@ -1811,6 +2051,10 @@
       "sha256": "16aa322c0cae1fbc97b5a07048404005fd58b5ba2a9c50995fc0b87233745f4a"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/snowleopard-square.syl-v1-1-five-games.png": {
+      "bytes": 66176,
+      "sha256": "cf0e63ca3dfe2b14bdb1028ed45512b22e8c37cfc52f073a41b011d427dc9328"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/snowleopard-square.syl-v1-1-naimahjong.png": {
       "bytes": 66176,
       "sha256": "cf0e63ca3dfe2b14bdb1028ed45512b22e8c37cfc52f073a41b011d427dc9328"
     },
@@ -1825,6 +2069,10 @@
     "sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-five-games.woff2": {
       "bytes": 112280,
       "sha256": "b686e776a7aff1fd7d1a03e3bc2384a7fb446f39c0fffacd24304338c6895c11"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-naimahjong.woff2": {
+      "bytes": 113236,
+      "sha256": "b9937d11967452acdc11211fbb14f594637bfebb50321b4e9893f75d47588fd3"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/swei-spring-serif.syl-v1-1-perfectmenu.woff2": {
       "bytes": 115380,
@@ -1855,6 +2103,10 @@
       "sha256": "daf3d70647da9b6c69572eaa68111398c450edc50d1fe6aa51b31f4618215a62"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/xinchuang-drive-square.syl-v1-1-five-games.png": {
+      "bytes": 42538,
+      "sha256": "fcc4854cfce027dca5e5f66990e22ed9f0f78ba7b539d2f107a19b5868a99e45"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/xinchuang-drive-square.syl-v1-1-naimahjong.png": {
       "bytes": 42538,
       "sha256": "fcc4854cfce027dca5e5f66990e22ed9f0f78ba7b539d2f107a19b5868a99e45"
     },
@@ -1890,6 +2142,10 @@
       "bytes": 119156,
       "sha256": "08f10fa4eafcec40fbf6209cdd08f87d3b57e5252e98312048eb18bbd354eb93"
     },
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf.syl-v1-1-naimahjong.json": {
+      "bytes": 119340,
+      "sha256": "1c60f6adc95dcf611745f7424a28c2353ec545863dc68037f826073c36391a24"
+    },
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue-msdf.syl-v1-1-perfectmenu.json": {
       "bytes": 121561,
       "sha256": "181550e2fd2731d97ef52821885501571d9dbb9a29be74d8e2a1eeb6181c1109"
@@ -1921,6 +2177,10 @@
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue.syl-v1-1-five-games.png": {
       "bytes": 1309625,
       "sha256": "28b931d238be174241b4d0ab67f0815ccfcfb0b077c69ebc9f3bfaf27752e6be"
+    },
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue.syl-v1-1-naimahjong.png": {
+      "bytes": 1317307,
+      "sha256": "7daf0150a9f4547f8daac43d5a9e880d316ac3a1d57e2d8c91196dee4554d5c8"
     },
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/Helvetica-neue/Helvetica-neue.syl-v1-1-perfectmenu.png": {
       "bytes": 1343599,
@@ -1957,6 +2217,14 @@
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-five-games.png": {
       "bytes": 1320804,
       "sha256": "b2a950a6502c3c216214a9744ab5708596ff62f8a187423847eef50662eb155d"
+    },
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-naimahjong.json": {
+      "bytes": 282825,
+      "sha256": "2bcdf18fd85b62bb4c1963ffe681e54e8865953df7357e186974ab6cb4575893"
+    },
+    "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-naimahjong.png": {
+      "bytes": 1326928,
+      "sha256": "c91dd8c9c1a668dd91f57f14819b7ef83ed0a126cc6406c9d6daa1816311e056"
     },
     "sites/immersive-g-com-955afd14/shared/webgl/msdf/PSTimesBody/PSTimes-Regular.syl-v1-1-perfectmenu.json": {
       "bytes": 285059,
@@ -2015,5 +2283,5 @@
       "sha256": "0804cb963d3da1a84a29f08ad262ad96b12c7ff774855142f03ec42df589318a"
     }
   },
-  "bytes": 58909877
+  "bytes": 66447411
 }

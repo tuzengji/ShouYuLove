@@ -80,6 +80,13 @@ ShouYuLove
 地址：[进入完美一餐](https://shouyulove.cn/games/perfectmenu/)
 设计者：黄雨琦
 
+#### 奶家麻将
+
+玩奶麻需要经常点击屏幕，有助于锻炼手指灵活性，可以提高手语能力。
+
+地址：[进入奶家麻将](https://shouyulove.cn/NaiMahjong/)
+设计者：王宁静
+
 #### 指间趣游 SignPlay
 
 手语小游戏手册，按场景和难度查玩法和资料。

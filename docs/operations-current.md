@@ -1,5 +1,12 @@
 # 当前运维状态与记录索引
 
+## 2026-11-25 主站「手语游戏」第 3 位接入「奶家麻将」（直连 `/NaiMahjong/`）
+
+按用户确认将王宁静设计的「奶家麻将」收录至以手予爱主站首页与作品集 `/portfolio/` 的「手语游戏」第 3 位（列于「骷髅牌」「完美一餐」之后），直接复用既有站内独立跳转入口 `https://shouyulove.cn/NaiMahjong/`（`/etc/nginx/snippets/naimahjong.conf` `302` 跳转至 `http://39.96.206.228:8444/`，保留查询参数）：
+
+- **原稿、图标与完整字体重建**：先更新绑定原稿与公开副本 `content-source.md`（简介采用用户指定文案、设计者王宁静）；设计柔和彩色红中麻将图标（`project-logos/20261125-naimahjong/`）；使用 `msdfgen v1.13` 完整重建覆盖 608 个中文用字的浏览器 WOFF2 字体与双套 WebGL MSDF 图集（`syl-v1-1-naimahjong`），保留全部旧版不可变资源与既有 CDN 资源。
+- **主站原子发布（`20261125T061159Z-astra-home`）**：运行白名单升级至 949 个文件、32 条页面路由（新增 `/projects/naimahjong/`）、5 个相对链接、2 条外部跳转，共 `190,665,793` 字节（上一版本 `20261125T053315Z-astra-home`）；全站共 23 个作品（「手语游戏」11 款）。经 `publish_astra.py` 全量校验切换，32 条主站路由、`https://shouyulove.cn/NaiMahjong/` `302` 跳转与公网 1440／390／320px 无头浏览器验收均零报错通过。配置备份位于 `/etc/nginx/backups/shouyulove-home-20261125T061159Z-astra-home/`，维护记录位于 `/opt/shouyulove-maintenance/20261125-naimahjong/`。
+
 ## 2026-11-25 「完美一餐」主持人端上线并联动主站
 
 按用户要求部署黄雨琦设计的 5–15 人手语点菜合作游戏「完美一餐 · 主持人控制台」（单文件纯静态 `perfectmenu-standalone(7).html`，零外部依赖）并同步接入主站首页与作品集「手语游戏」栏目：
