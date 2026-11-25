@@ -35,13 +35,13 @@ V0 = ROOT / "主站版本归档" / V0_VERSION / "site"
 OUT = ROOT / "output/shouyulove-jieguo-site"
 SHARED = Path("sites/immersive-g-com-955afd14/shared")
 FONT_SOURCE = ROOT / "output/deployment/shouxiaoyu-v2-20261114/font-source"
-RUNTIME_VERSION = "syl-v1-1-five-games"
-FONT_VERSION = "syl-v1-1-five-games"
-MODULE_VERSION = "syl-v1-1-five-games"
+RUNTIME_VERSION = "syl-v1-1-skull"
+FONT_VERSION = "syl-v1-1-skull"
+MODULE_VERSION = "syl-v1-1-skull"
 STYLE_VERSION = "syl-v1-1-sign-games"
 PORTFOLIO_CLICKS_VERSION = "syl-v1-1-20261017"
 PROJECT_ENTRIES_VERSION = "syl-v1-1-five-games"
-BRIDGE_VERSION = "syl-v1-1-five-games"
+BRIDGE_VERSION = "syl-v1-1-skull"
 PORTFOLIO_SCENE_VERSION = BRIDGE_VERSION
 BRAND_VERSION = "syl-v1-1-giving-heart"
 SOURCE = source_path(ROOT)
@@ -57,7 +57,7 @@ def parse_content(text=None):
     text = SOURCE.read_text(encoding='utf-8') if text is None else text
     projects = []
     identifiers = {"以手寻语 SignTrace": "signtrace", "分社手语词典": "dictionary", "手小语": "shouxiaoyu",
-                   "指间趣游 SignPlay": "signplay", "飞手传书": "flyinghands",
+                   "骷髅牌": "skull", "指间趣游 SignPlay": "signplay", "飞手传书": "flyinghands",
                    "传情会意-手语版": "chuanqinghuiyi", "炸飞机": "bombplane", "水果炸弹": "fruitbomb",
                    "巴巴爸爸": "barbapapa", "行动代号": "codenames", "雪豹凶杀案": "snowleopard",
                    "2026 手语文化节": "2026-sign-language-cultural-festival",
@@ -139,6 +139,7 @@ def raster_assets(content):
     palettes["barbapapa"] = ("#f3e3e4", "#b88f96")
     palettes["codenames"] = ("#e2e7e1", "#85998d")
     palettes["snowleopard"] = ("#e6e4ea", "#8e899c")
+    palettes["skull"] = ("#eae3e6", "#9a868d")
     for project in content["projects"]:
         palette = palettes[project["id"]]
         icon = ROOT / "project-logos/20261012-柔和彩色" / (project["id"] + ".png")
@@ -156,6 +157,8 @@ def raster_assets(content):
             icon = ROOT / "project-logos/20261114-shouxiaoyu/shouxiaoyu.png"
         if project["id"] in {"bombplane", "fruitbomb", "barbapapa", "codenames", "snowleopard"}:
             icon = ROOT / "project-logos/20261124-sign-games" / (project["id"] + ".png")
+        if project["id"] == "skull":
+            icon = ROOT / "project-logos/20261125-skull/skull.png"
         mark = Image.open(icon).convert("RGBA")
         assert mark.getchannel("A").getextrema() == (0, 255), icon
         size = 640

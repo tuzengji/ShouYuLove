@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">骷髅牌 · 玫瑰与骷髅双圆牌</title>
+  <g stroke="#4b5d54" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- 后方玫瑰圆牌（豆沙粉 + 柔和花瓣与灰绿小叶） -->
+    <circle cx="164" cy="96" r="64" fill="#c9a2a4"/>
+    <path d="M188 64 C202 58 212 72 200 84 C190 88 182 78 188 64 Z" fill="#aec2b1" stroke-width="8.5"/>
+    <circle cx="168" cy="86" r="24" fill="#f5e6d6" stroke-width="9"/>
+    <path d="M159 86 C161 77 175 77 177 86 C177 94 166 98 162 92" fill="none" stroke-width="8"/>
+    <!-- 前方骷髅圆牌（暖纸底 + 圆润友好小骷髅） -->
+    <circle cx="104" cy="146" r="76" fill="#ece2cf"/>
+    <circle cx="104" cy="146" r="60" fill="none" stroke-width="5.5" stroke-opacity=".35"/>
+    <!-- 友好圆润小骷髅 -->
+    <path d="M104 99 C76 99 62 116 62 138 C62 153 71 163 82 167 V180 Q82 188 90 188 H118 Q126 188 126 180 V167 C137 163 146 153 146 138 C146 116 132 99 104 99 Z" fill="#f7f4ee" stroke-width="10"/>
+    <circle cx="88" cy="138" r="9" fill="#4b5d54" stroke="none"/>
+    <circle cx="120" cy="138" r="9" fill="#4b5d54" stroke="none"/>
+    <path d="M104 150 L99 158 H109 Z" fill="#4b5d54" stroke="none"/>
+    <path d="M95 174 V188 M113 174 V188" fill="none" stroke-width="8"/>
+  </g>
+</svg>

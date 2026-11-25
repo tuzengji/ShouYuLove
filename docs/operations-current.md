@@ -1,5 +1,20 @@
 # 当前运维状态与记录索引
 
+## 2026-11-25 主站首页与作品集上架「骷髅牌」（手语游戏首位）
+
+黄庭逸已在阿里云一号机 `shouyulove-aliyun`（`101.37.209.227`）通过 `sign-games-ctl custom-add skull proxy 19087` 与 `xinchuangzu` 用户级常驻服务 `skull-table.service`（`/home/xinchuangzu/sign-games/skull`）部署 3–10 人实时联机手语牌桌游戏「骷髅牌」（`https://shouyulove.cn/games/skull/`）。按用户要求将其同步上架至以手予爱主站首页与作品集 `/portfolio/` 的「手语游戏」栏目首位（未改动或重启游戏本体与受管 Nginx 路由）：
+
+- **绑定原稿、图标与字体重建**：先更新绑定原稿 `/Users/wishingcat/ObsidianNotes/AI Study/爱心社/心创组主站-以手予爱.md` 及副本 `content-source.md`（设计者黄庭逸，列于「手语游戏」第 1 位）；在 `project-logos/20261125-skull/` 设计柔和彩色牌垫图标（奶白骷髅牌与灰粉玫瑰牌交叠）；使用 `msdfgen v1.13` 完整重建覆盖 615 个中文用字的 `swei-spring-serif.syl-v1-1-skull.woff2`、`fonts.syl-v1-1-skull.css` 及双套 WebGL MSDF 图集（`syl-v1-1-skull`），保留全部旧版不可变资源与 CDN `assets.shouyulove.cn/v/20261020-flyinghands/`。
+- **主站原子发布（`20261125T035923Z-astra-home`）**：运行白名单升级至 808 个文件、30 条页面路由（新增 `/projects/skull/`）、5 个相对链接、2 条外部跳转，共 `174,829,536` 字节（上一版本 `20261124T091501Z-astra-home`）；「手语游戏」现收录 9 项（首页桌面端 3×3 排布、作品集桌面端 4 行两列加末项跨列），全站共 21 个作品。经 `publish_astra.py` 持锁 `/run/lock/nginx-deploy.lock` 全量校验切换，30 条主站路由、4 条 308 跳转、2 条 `/where-to-study` 外部 302 跳转、`https://shouyulove.cn/games/skull/`（HTTP 200）、本地与公网无头浏览器（1440／390px）及全部后台服务（含 `skull-table.service` PID `3738568`）均核验通过。配置备份位于 `/etc/nginx/backups/shouyulove-home-20261125T035923Z-astra-home/`，维护记录位于 `/opt/shouyulove-maintenance/20261125-skull/`。
+
+## 2026-11-24 为 `xinchuangzu` 开放全部 8 款手语游戏完整控制与替换部署权限
+
+按用户要求在阿里云一号机 `shouyulove-aliyun`（`101.37.209.227`）为 `xinchuangzu` 开放「手语游戏」栏目下全部 8 款项目的完整修改、版本替换、下线删除、路由模式切换及数据备份/重置权限，同时继续保持不开放通用 `sudo` 与 `docker`：
+
+- **专用协作组 `sign-games-dev`**：将 `xinchuangzu`（及管理员 `wishingcat`、`zhuxingye`）加入 `sign-games-dev`，对 5 棵手语游戏发布目录树（`/var/www/shouyulove-sign-games-releases`、`/var/www/shouyulove-signplay-releases`、`/opt/signplay-bank/releases`、`/opt/flyinghands/releases`、`/opt/shouyu-game/releases`）与自定义新游戏根目录 `/var/www/shouyulove-sign-games-custom` 配置 SGID `2775` 与默认 POSIX ACL（`d:g:sign-games-dev:rwx,d:o:r-x`）；在 `/home/xinchuangzu/sign-games/` 下建立全部快捷软链并更新 `~/README-使用说明.txt`。
+- **受管 Nginx 片段与完整控制工具 `sign-games-ctl`**：将全部 8 款游戏的线上路由统一迁入受管片段 `/etc/nginx/snippets/sign-games-managed.conf`（状态存储于 `/var/lib/shouyulove-sign-games-ctl/routes.json`，备份位于 `/var/backups/shouyulove-maintenance/sign-games-full-control-20261124/`）。部署 `root:root 0700` 隔离脚本 `/usr/local/sbin/sign-games-ctl`（封装 `/usr/local/bin/sign-games-ctl`），经 `/etc/sudoers.d/91-xinchuangzu-sign-games`（`0440`，`visudo -c` 通过）仅授权 `xinchuangzu` 调用，支持：`status`、`releases`、`switch`、`delete-release`、`start|stop|restart|enable|disable|logs`（仅限 `signplay-bank`、`flyinghands`、`shouyu-game`）、`route <game> default|static|proxy <19000-19999>|disable`、`remove <game> [--purge-files]`、`custom-add/custom-delete <slug>`（`/games/<slug>/`）及 `data backup|reset`。每次路由修改均持 `/run/lock/nginx-deploy.lock`、通过 `nginx -t` 并失败自动回滚。
+- **边界核验**：以 `xinchuangzu` 实测目录读写、版本切换与删除、`/games/qa-probe/` 上线返回 `200` 与删除清理、数据库在线备份均通过；通用 `sudo`、未授权服务/非 `19000–19999` 端口反代、路径穿越、非手语游戏站点写入及 `/etc/signplay-bank.env`、`/var/lib/flyinghands/admin.json`、`/var/lib/*`、`/root`、`/home/wishingcat` 读取均全部拦截；全部 8 款线上游戏返回 `200` 且 12 个后台服务 PID 不变。服务器维护说明位于 `/opt/shouyulove-maintenance/20261124-xinchuangzu-sign-games-access/README.md`。
+
 ## 2026-11-24 五款手语游戏静态站部署与主站联动上线
 
 按用户确认将「炸飞机」「水果炸弹」「巴巴爸爸」「行动代号」「雪豹凶杀案」五个手语游戏（均由伍家阳设计）部署为阿里云一号机 `shouyulove-aliyun` 上的五条独立纯静态子路径，并同步接入主站首页与作品集「手语游戏」栏目：
