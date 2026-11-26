@@ -1166,6 +1166,10 @@
       "bytes": 116284,
       "sha256": "960755fed55f808266d8307ab7c33c83a7cbf435ac0fc11dea15588724423713"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-top-routes.json": {
+      "bytes": 122003,
+      "sha256": "b6a66c2475b6ce5e0f21cd7d85b71bd478578133cdc9943ef98fcb4d7ee32c59"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-where-to-study.json": {
       "bytes": 82957,
       "sha256": "0618c62bd5bf193f8a9fb2ade8703e854f88f4fd8ac4971a2034f90b20cf0854"
@@ -1465,6 +1469,10 @@
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-skull.js": {
       "bytes": 43245,
       "sha256": "51f5c3cabc38e86e3e7ad2d592d3549f9a4a738e60a3de2221111ef879c75859"
+    },
+    "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-top-routes.js": {
+      "bytes": 44986,
+      "sha256": "166fbb0c12e5a4b303ac66f3af352bf63283a049264c3a8d5d0af4687d6a6dd8"
     },
     "sites/immersive-g-com-955afd14/shared/local-bridge.syl-v1-1-where-to-study.js": {
       "bytes": 31047,

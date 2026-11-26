@@ -70,14 +70,14 @@ ShouYuLove
 
 多人联机手语牌桌，用玫瑰和骷髅试探并放技能。
 
-地址：[进入骷髅牌](https://shouyulove.cn/games/skull/)
+地址：[进入骷髅牌](https://shouyulove.cn/skull/)
 设计者：黄庭逸
 
 #### 完美一餐
 
 手语点菜合作游戏，避开忌口凑出一桌爱吃的菜。
 
-地址：[进入完美一餐](https://shouyulove.cn/games/perfectmenu/)
+地址：[进入完美一餐](https://shouyulove.cn/perfectmenu/)
 设计者：黄雨琦
 
 #### 奶家麻将

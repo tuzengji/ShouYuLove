@@ -1,5 +1,19 @@
 # 当前运维状态与记录索引
 
+## 2026-11-26 全站去除 `/games/` 中缀、迁移 `/XiaoAi-Warm-Cabin/` 与开放 `xinchuangzu` 顶层路径权限
+
+按用户要求取消所有 `https://shouyulove.cn/games/*` 中缀路径，将既有 `/games/` 项目迁至简洁贴合项目名称的顶层路径（既有其他域名与外部跳转保持不变），并升级 `xinchuangzu` 的全站顶层路径配置权限：
+
+- **三项 `/games/` 路由迁移至顶层路径（备份于 `/var/backups/shouyulove-maintenance/remove-games-prefix-20261126/`）**：
+  - **骷髅牌**：`/games/skull/` → **`https://shouyulove.cn/skull/`**（`proxy -> 127.0.0.1:19087`）。以 `xinchuangzu` 在 `/home/xinchuangzu/sign-games/skull-releases/20261126-root` 执行 `npm ci && ./node_modules/.bin/vite build --base=/skull/`（25/25 单元测试通过、`dist/` 零 `/games/` 残留、`npm prune --omit=dev`），保留 `20261125-2` 回滚目录，原子切换 `/home/xinchuangzu/sign-games/skull` 软链并重启 `skull-table.service`。
+  - **完美一餐**：`/games/perfectmenu/` → **`https://shouyulove.cn/perfectmenu/`**（静态托管 `/var/www/shouyulove-sign-games-custom/perfectmenu/`，单文件零硬编码前缀）。
+  - **小爱物资小屋（`shared-storage-room.service` `19016`）**：`/games/stored-room/` → **`https://shouyulove.cn/XiaoAi-Warm-Cabin/`**（前端 `appBase()` 动态解析前缀，`/XiaoAi-Warm-Cabin/api/state` 与 `/XiaoAi-Warm-Cabin/community-inventory/` 零改动直通，并附带大小写不敏感 308 归并）。
+  - 为保障昨日已分享链接与打开标签页不中断，在受管配置中保留三条历史 `/games/{skull,perfectmenu,stored-room}/` → 对应新顶层路径的 `308` 兼容跳转（可随时通过 `shouyulove-route legacy-clear` 移除）。其余已有独立域名或站内跳转的项目（`/NaiMahjong/`、`/where-to-study/`、`pinhaoke.love`、`pkuknow.cn`、`pkuknow.cn/thu` 及 8 款内置手语游戏等）均原样保留。
+- **`xinchuangzu` 顶层路径配置工具升级（`shouyulove-route` / `sign-games-ctl`）**：
+  - 升级 `/usr/local/sbin/sign-games-ctl` 并新增等价封装 `/usr/local/bin/shouyulove-route` 与软链 `/home/xinchuangzu/routes` → `/var/www/shouyulove-sign-games-custom`。
+  - 不再强制 `/games/` 前缀，允许 `xinchuangzu` 在 `https://shouyulove.cn/<slug>/`（2–48 位大小写字母、数字、`-`、`_`）下自由执行 `add`（`static` / `proxy <19000-19999>` / `redirect <http(s)://...>` 外部服务器 302 跳转并透传子路径与参数）、`rename`、`delete [--purge-files]`、`routes`、`legacy-delete` / `legacy-clear`，所有自定义顶层路径均自动附带大小写不敏感 308 归并；写入前动态扫描 `/etc/nginx/sites-available/shouyulove` 与非受管片段，自动拦截对主站、`/auth/`、`/drive/`、`/dict/`、`/signtrace/`、`/catchpot/`、`/NaiMahjong/`、`/where-to-study/` 及内置 8 款游戏等既有路径的冲突覆盖，仍不开放通用 `sudo`/`docker`。同步更新 `/home/xinchuangzu/README-使用说明.txt` 并以 `xinchuangzu` 实测 `static`、改名、`redirect`、冲突拦截及删除清理全流程通过。
+- **主站原子发布（`20261126T150007Z-astra-home`）**：先更新绑定原稿与 `content-source.md` 中「骷髅牌」「完美一餐」正式地址，升级 `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` 至 `syl-v1-1-top-routes`（零新增中文字，保留 `syl-v1-1-naimahjong` 字体与旧版不可变桥文件），经 `publish_astra.py` 持锁校验切换：951 个文件、32 条页面路由、5 个相对链接、2 条外部跳转，总计 `190,830,502` 字节（上一版本 `20261125T061159Z-astra-home`，备份于 `/etc/nginx/backups/shouyulove-home-20261126T150007Z-astra-home/`，维护记录位于 `/opt/shouyulove-maintenance/20261126-top-routes/`）。全部 11 个同域系统服务及 `skull-table.service`、`shared-storage-room.service` 均正常运行。
+
 ## 2026-11-25 阿里云一号机 ECS 自动快照策略与快照前一致性热备上线
 
 按用户确认启用阿里云 ECS 自动快照方案，并同步在服务器补齐快照前一致性热备，解决全站此前仅有本机局部备份、无云端兜底的隐患：
