@@ -1,5 +1,12 @@
 # 当前运维状态与记录索引
 
+## 2026-11-26 主站「核心创意」第 3 位接入「小爱同学的物资小屋」
+
+按用户确认将「小爱同学的物资小屋」（`https://shouyulove.cn/XiaoAi-Warm-Cabin/`，简介「爱心社物资与社办储物间管理系统。」，设计者黄庭逸）收录至以手予爱主站首页与作品集 `/portfolio/` 的「核心创意」第 3 位（排在「分社手语词典」之后、「手小语」之前，「核心创意」共 6 项，桌面端正好 3 行两列对齐，全站共 24 个作品）：
+
+- **图标制作与完整字体重建**：基于用户提供的小爱同学卡通原图精细去除外围与丝带环内白色底色、消除描边白边并保留眼中星光高光，居中导出 `1024×1024` 透明主图标（`project-logos/20261126-xiaoai-warm-cabin/xiaoai-warm-cabin.png`），按主站统一留白叠加暖粉米底色 `#f4e5e4` 生成 `640×640` 方形卡片图；使用 `msdfgen v1.13` 完整重建覆盖 612 个中文用字的浏览器 WOFF2 字体与双套 WebGL MSDF 图集（`syl-v1-1-xiaoai-cabin`），保留全部旧版不可变资源与既有 CDN 资源。
+- **主站原子发布（`20261126T152545Z-astra-home`）**：运行白名单升级至 1,021 个文件、33 条页面路由（新增 `/projects/xiaoai-warm-cabin/`）、5 个相对链接、2 条外部跳转，共 `198,789,310` 字节（上一版本 `20261126T150007Z-astra-home`）。经 `publish_astra.py` 全量校验切换，33 条主站路由、`https://shouyulove.cn/XiaoAi-Warm-Cabin/` 与公网 1440／390／320px 无头浏览器验收均零报错、零横向溢出通过。配置备份位于 `/etc/nginx/backups/shouyulove-home-20261126T152545Z-astra-home/`，维护记录位于 `/opt/shouyulove-maintenance/20261126-xiaoai-cabin/`。
+
 ## 2026-11-26 全站去除 `/games/` 中缀、迁移 `/XiaoAi-Warm-Cabin/` 与开放 `xinchuangzu` 顶层路径权限
 
 按用户要求取消所有 `https://shouyulove.cn/games/*` 中缀路径，将既有 `/games/` 项目迁至简洁贴合项目名称的顶层路径（既有其他域名与外部跳转保持不变），并升级 `xinchuangzu` 的全站顶层路径配置权限：

@@ -2,10 +2,10 @@
 
 ## 当前发布基线（2026-11-26）
 
-- **当前线上版本**：`20261126T150007Z-astra-home`（上一版本 `20261125T061159Z-astra-home`），共 **951 个运行文件、32 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `190,830,502` 字节。
-- **本轮变更范围**：移除全站 `/games/` 中缀路径，将主站首页、作品集与详情页中的「骷髅牌」「完美一餐」正式地址更新为顶层路径 `/skull/` 与 `/perfectmenu/`（升级数据桥与场景至 `syl-v1-1-top-routes`，保留全部旧版不可变资源）。详见 [当前运维状态](../docs/operations-current.md)。
+- **当前线上版本**：`20261126T152545Z-astra-home`（上一版本 `20261126T150007Z-astra-home`），共 **1,021 个运行文件、33 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `198,789,310` 字节。
+- **本轮变更范围**：在「核心创意」第 3 位接入「小爱同学的物资小屋」（`/XiaoAi-Warm-Cabin/`，设计者黄庭逸），使用用户提供的小爱同学卡通图去背制作 `1024×1024` 透明主图标（`project-logos/20261126-xiaoai-warm-cabin/`）并完整重建覆盖 612 字的中文字体与双套 WebGL MSDF 图集（`syl-v1-1-xiaoai-cabin`），保留全部旧版不可变资源。详见 [当前运维状态](../docs/operations-current.md)。
 - **静态资源与子站隔离**：
-  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 572 项）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
+  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 640 项）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
   - 主站发布目录固定为 `/var/www/shouyulove-home`（指向 `/var/www/shouyulove-home-releases/<版本>`），与同机独立维护的手小语（`/var/www/shouyulove-showcase`）、指间趣游（`/var/www/shouyulove-signplay`）、飞手传书（`/opt/flyinghands/current`）、手语分社统一通行证（`/opt/shouyulove-auth/current`）、心创云盘（`/opt/shouyulove-drive/current`）、以手寻语、传情会意、接锅、文化节、年终总结及拼好课严格隔离，互不混用静态目录。
 
 ## 发布与回滚规范
@@ -23,6 +23,7 @@
 
 | 日期 | 主站发布版本 | 文件 / 路由 / 规模 | 核心变更 |
 | --- | --- | --- | --- |
+| 2026-11-26 | `20261126T152545Z-astra-home` | 1,021 文件 / 33 路由 / `198,789,310` B | 「核心创意」第 3 位接入「小爱同学的物资小屋」（`/XiaoAi-Warm-Cabin/`，设计者黄庭逸），重建 612 字中文字体与 MSDF 图集（`syl-v1-1-xiaoai-cabin`） |
 | 2026-11-26 | `20261126T150007Z-astra-home` | 951 文件 / 32 路由 / `190,830,502` B | 移除 `/games/` 中缀，主站「骷髅牌」「完美一餐」改为顶层路径 `/skull/`、`/perfectmenu/`（`syl-v1-1-top-routes`） |
 | 2026-11-25 | `20261125T061159Z-astra-home` | 949 文件 / 32 路由 / `190,665,793` B | 「手语游戏」第 3 位接入「奶家麻将」（`/NaiMahjong/`，设计者王宁静），重建 608 字中文字体与 MSDF 图集（`syl-v1-1-naimahjong`） |
 | 2026-11-25 | `20261125T053315Z-astra-home` | 880 文件 / 31 路由 / `182,903,784` B | 润色精炼全部 10 款手语游戏单句简介，升级数据桥与场景至 `syl-v1-1-games-copy` |
