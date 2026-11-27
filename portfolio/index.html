@@ -1,6 +1,6 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><title>心创组作品集 · 以手予爱 ShouYuLove</title><meta name="description" content="我们是北京大学爱心社手语分社心创组"/><meta name="robots" content="index, follow"/><meta name="theme-color" content="#fffdfa"/><meta name="format-detection" content="telephone=no"/><meta name="apple-mobile-web-app-capable" content="yes"/><meta name="apple-mobile-web-app-title" content="以手予爱"/><link rel="canonical" href="https://shouyulove.cn/portfolio/"/><meta property="og:type" content="website"/><meta property="og:site_name" content="以手予爱 ShouYuLove"/><meta property="og:title" content="心创组作品集 · 以手予爱 ShouYuLove"/><meta property="og:description" content="我们是北京大学爱心社手语分社心创组"/><meta property="og:image" content="https://shouyulove.cn/sites/immersive-g-com-955afd14/shared/shouyulove/home-icon-512.c53c491be0.png"/><link rel="icon" type="image/png" sizes="64x64" href="/sites/immersive-g-com-955afd14/shared/shouyulove/favicon.8cd31036e0.png"/><link rel="apple-touch-icon" sizes="180x180" href="/sites/immersive-g-com-955afd14/shared/shouyulove/apple-touch-icon.99693e03b4.png"/><link rel="manifest" href="/sites/immersive-g-com-955afd14/shared/shouyulove/works-manifest.9838a214ab.json"/><link rel="preload" as="font" type="font/woff2" href="/assets/next-sylsans.80b9ec3fe3.woff2" crossorigin/><link rel="preload" as="font" type="font/woff2" href="/assets/next-sylsong.0241c7c0f4.woff2" crossorigin/><link rel="preload" as="font" type="font/woff2" href="/assets/next-syllatin.2c1581177b.woff2" crossorigin/><style>@font-face{font-family:SylSans;font-style:normal;font-weight:400;font-display:block;src:url(/assets/next-sylsans.80b9ec3fe3.woff2) format('woff2')}@font-face{font-family:SylSong;font-style:normal;font-weight:400;font-display:block;src:url(/assets/next-sylsong.0241c7c0f4.woff2) format('woff2')}@font-face{font-family:SylLatin;font-style:normal;font-weight:400;font-display:block;src:url(/assets/next-syllatin.2c1581177b.woff2) format('woff2')}</style><style>/* 以手予爱新版页面的共用样式（首页与作品集）：二维手绘风。
    底色是干净的暖白，颜色只出现在画和字上，全部取自主站标识「把爱递给你」：
-   墨绿是线条与文字，灰绿是袖子和小装饰，豆沙是爱（爱心和它走过的路），手掌米色用作手语游戏的托盘。插画由 scripts/sketch.py 按标识原稿生成：墨线、彩铅排线和剪纸色块。 */
+   墨绿是线条与文字，灰绿是袖子和小装饰，豆沙是爱（爱心和它走过的路），手掌米色用在入口按钮上。各分区都是同一种暖白底，不另垫底色。插画由 scripts/sketch.py 按标识原稿生成：墨线、彩铅排线和剪纸色块。 */
 :root {
   --paper: #fffdfa;
   --ink: #1f352b;
@@ -11,9 +11,7 @@
   --heart: #c9a2a4;
   --heart-line: #c2979a;
   --palm: #f3dfcf;
-  --palm-soft: #fdf3ea;
   --sage-soft: #d9e4d9;
-  --butter: #fdf6e2;
   --col: 1080px;
   --font-body: SylSans, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
   --font-display: SylSong, "Songti SC", "Noto Serif SC", SimSun, serif;
@@ -131,11 +129,6 @@ a.tile:active .tile-art { transform: scale(.94); }
 .js .rise { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--glide), transform .8s var(--glide); }
 .js .rise.is-in { opacity: 1; transform: none; }
 
-/* 手语游戏放在一张手掌色的剪纸上，边角剪得不太规整 */
-.tray { margin-inline: 8px; border-radius: 30px 22px 34px 24px / 24px 34px 22px 30px; }
-.tray--palm { background: var(--palm-soft); }
-@media (min-width: 700px) { .tray { margin-inline: 14px; border-radius: 52px 36px 58px 40px / 40px 56px 36px 52px; } }
-
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -234,7 +227,6 @@ a.tile:active .tile-art { transform: scale(.94); }
 /* 分类 */
 #portfolio { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
 .portfolio-section { padding-block: clamp(48px, 6.4vw, 96px); scroll-margin-top: 64px; }
-.portfolio-section.tray { margin-block: clamp(8px, 2vw, 24px); }
 .works-head { margin-bottom: clamp(40px, 5.2vw, 76px); }
 .works-head h2 { font-size: clamp(26px, 2.9vw, 36px); }
 /* 作品之间不画分隔线，只靠留白分开 */

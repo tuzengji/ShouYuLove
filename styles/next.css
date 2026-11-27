@@ -1,6 +1,6 @@
 /* 以手予爱新版页面的共用样式（首页与作品集）：二维手绘风。
    底色是干净的暖白，颜色只出现在画和字上，全部取自主站标识「把爱递给你」：
-   墨绿是线条与文字，灰绿是袖子和小装饰，豆沙是爱（爱心和它走过的路），手掌米色用作手语游戏的托盘。插画由 scripts/sketch.py 按标识原稿生成：墨线、彩铅排线和剪纸色块。 */
+   墨绿是线条与文字，灰绿是袖子和小装饰，豆沙是爱（爱心和它走过的路），手掌米色用在入口按钮上。各分区都是同一种暖白底，不另垫底色。插画由 scripts/sketch.py 按标识原稿生成：墨线、彩铅排线和剪纸色块。 */
 :root {
   --paper: #fffdfa;
   --ink: #1f352b;
@@ -11,9 +11,7 @@
   --heart: #c9a2a4;
   --heart-line: #c2979a;
   --palm: #f3dfcf;
-  --palm-soft: #fdf3ea;
   --sage-soft: #d9e4d9;
-  --butter: #fdf6e2;
   --col: 1080px;
   --font-body: SylSans, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
   --font-display: SylSong, "Songti SC", "Noto Serif SC", SimSun, serif;
@@ -130,11 +128,6 @@ a.tile:active .tile-art { transform: scale(.94); }
 @keyframes sticker { from { transform: scale(.4) rotate(-16deg); } }
 .js .rise { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--glide), transform .8s var(--glide); }
 .js .rise.is-in { opacity: 1; transform: none; }
-
-/* 手语游戏放在一张手掌色的剪纸上，边角剪得不太规整 */
-.tray { margin-inline: 8px; border-radius: 30px 22px 34px 24px / 24px 34px 22px 30px; }
-.tray--palm { background: var(--palm-soft); }
-@media (min-width: 700px) { .tray { margin-inline: 14px; border-radius: 52px 36px 58px 40px / 40px 56px 36px 52px; } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

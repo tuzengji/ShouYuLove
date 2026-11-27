@@ -296,7 +296,7 @@ def home_page(content, constants):
         f'<div class="pair pair--dream"><h2>梦想</h2><p class="dream" aria-label="{escape(content["dream"], quote=True)}">{dream}</p></div>',
         f'<div class="pair pair--vision rise"><h2>愿景</h2><p class="vision">{escape(content["vision"])}</p></div></div></section>',
         home_works(content, constants),
-        f'<section class="bounds tray" data-stop><div class="wrap">{heading("边界", 2, extra=" class=\"rise\"")}<ul>{bounds}</ul></div></section>',
+        f'<section class="bounds" data-stop><div class="wrap">{heading("边界", 2, extra=" class=\"rise\"")}<ul>{bounds}</ul></div></section>',
         f'<section class="members" data-stop><div class="wrap">{heading(MEMBERS_TITLE, 3, extra=" class=\"rise\"")}<ul>{members}</ul></div></section>',
         '</main>',
         '<footer class="finale"><div class="finale-inner">', hand("take", "heart-to"),
