@@ -2350,6 +2350,10 @@
       "bytes": 45571,
       "sha256": "7f64fada5eb069611a43d6dbc403df6a93f7dc83bc2f9de9e3e5c31f7962b3a1"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/apple-touch-icon.5e35cc417a.png": {
+      "bytes": 13680,
+      "sha256": "5e35cc417a6be1330a824094460583c2073feee4e4500e654dd00becbe2ec0ba"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/apple-touch-icon.99693e03b4.png": {
       "bytes": 9811,
       "sha256": "99693e03b4fa7ba513a686ce1fbbba84a6ad14e2ec54b1e94773703798ca0153"
@@ -2622,6 +2626,10 @@
       "bytes": 28970,
       "sha256": "1bfdadca58400f761a83b4471df65df25cbca3db5bd3eb1c09405bf429258e09"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/favicon.151e920488.png": {
+      "bytes": 4299,
+      "sha256": "151e92048846bb16ad83ce06f4389b15cbf9ee5e9b90b79b8ac8ca7f41c88cd5"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/favicon.8cd31036e0.png": {
       "bytes": 3493,
       "sha256": "8cd31036e0f683e4d6ceca19f1badaae7c8b54b7273ccfc7ec6e4354e9187986"
@@ -2718,6 +2726,10 @@
       "bytes": 34334,
       "sha256": "35bf770ce259561b7da2681248b917f3b55b7090495351505eed67fc6ce1f8ed"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/home-icon-192.43553ee779.png": {
+      "bytes": 14424,
+      "sha256": "43553ee77922f89fa83d3d02b77f98dc893fc15931cf91a0ba42effbfb6ae7ed"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/home-icon-192.812b8c89a4.png": {
       "bytes": 10521,
       "sha256": "812b8c89a4d63c58ae96b28eeb304494d5ed9353c53731356971b2d4a7b0a3ba"
@@ -2725,6 +2737,10 @@
     "sites/immersive-g-com-955afd14/shared/shouyulove/home-icon-512.c53c491be0.png": {
       "bytes": 29255,
       "sha256": "c53c491be0e4bf3a4d914a854999807307236e6135a5b3b901fedd53c42a089b"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/home-icon-512.f2576a52ba.png": {
+      "bytes": 41308,
+      "sha256": "f2576a52ba495e799bfdaa2b20e7aa8d2540bb0eb9a963156cda772fb52e2bb0"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/jieguo-square.8bdb799577.png": {
       "bytes": 33017,
@@ -3330,6 +3346,10 @@
       "bytes": 103428,
       "sha256": "daf3d70647da9b6c69572eaa68111398c450edc50d1fe6aa51b31f4618215a62"
     },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/works-manifest.8be157715c.json": {
+      "bytes": 512,
+      "sha256": "8be157715c836fb426ac61c12af5b8eefce47a775a4e3237e5f82b64751a3aa2"
+    },
     "sites/immersive-g-com-955afd14/shared/shouyulove/works-manifest.9838a214ab.json": {
       "bytes": 512,
       "sha256": "9838a214abf2ead73bd49eb814024ad32392e508d1a5af23aa29570ba5364781"
@@ -3583,5 +3603,5 @@
       "sha256": "0804cb963d3da1a84a29f08ad262ad96b12c7ff774855142f03ec42df589318a"
     }
   },
-  "bytes": 91747397
+  "bytes": 91821620
 }

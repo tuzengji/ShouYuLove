@@ -12,6 +12,10 @@
     python3 -B scripts/icon_riso.py
 
 新增或修改作品图标后运行一次。入口按钮里的小图标由 build_home.py 直接内联 `entry()` 的结果。
+
+标签页图标、桌面图标这类 16 到 180px 的小图标用简化的套印 `tab()`（2026-11-27 用户要求）：只保留错版，
+不加颗粒，线条加粗、错位加大，免得缩小后看不出来。主站标识的这一版也由本脚本印出
+（project-logos/<SET>/shouyulove-tab.png），各子站的标签页图标用同一个 `tab()` 生成。
 """
 
 import base64
@@ -34,6 +38,9 @@ PAPER = "#fffdfa"
 INK_DEEP = "#1f352b"
 SIZE = 1024
 VIEW = "-10 -10 280 280"   # room for the colour plate that slips to the lower right
+TAB_SLIP = (14, 11)
+BRAND_TAB = "shouyulove-tab"   # the site's mark in the tab print
+TAB_VIEW = "-6 -6 276 276"   # tighter, so the drawing fills more of a tiny icon
 # Underprint inks for the picture icons, by hue.
 UNDERPRINTS = {350: "#f4a6b8", 22: "#f6b48f", 45: "#f5d06f", 130: "#9fd6a9", 210: "#94bde8", 262: "#c3b0e8"}
 
@@ -93,8 +100,10 @@ def grain_filter(uid, frequency):
             '<feComposite in="SourceGraphic" in2="m" operator="in"/></filter>')
 
 
-def riso(text, uid, *, grain=.9, weight=.5, view="0 0 256 256", size=""):
-    """A vector drawing printed as two plates: ink lines, and colour slipped to the lower right."""
+def riso(text, uid, *, grain=.9, weight=.5, view="0 0 256 256", size="", slip=(10, 8)):
+    """A vector drawing printed as two plates: ink lines, and colour slipped to the lower right.
+
+    `grain=None` leaves the colour plate solid, for icons too small to show the grain."""
     def line(fill, stroke, width):
         if fill == INK:
             return INK_DEEP, "none", 0, {}
@@ -109,9 +118,12 @@ def riso(text, uid, *, grain=.9, weight=.5, view="0 0 256 256", size=""):
         if is_hex(stroke) and stroke != INK:
             return "none", lively(stroke), width * 1.4, {}
         return "none", "none", 0, {}
+    grainy = grain is not None
     body = (f'<g>{restyle(text, line)}</g>'
-            f'<g transform="translate(10 8)" style="mix-blend-mode:multiply" filter="url(#g{uid})">{restyle(text, colour)}</g>')
-    return f'<svg xmlns="{SVG}" viewBox="{view}"{size} aria-hidden="true"><defs>{grain_filter(uid, grain)}</defs>{body}</svg>'
+            f'<g transform="translate({slip[0]} {slip[1]})" style="mix-blend-mode:multiply"'
+            + (f' filter="url(#g{uid})"' if grainy else "") + f'>{restyle(text, colour)}</g>')
+    defs = f'<defs>{grain_filter(uid, grain)}</defs>' if grainy else ""
+    return f'<svg xmlns="{SVG}" viewBox="{view}"{size} aria-hidden="true">{defs}{body}</svg>'
 
 
 def underprint(picture):
@@ -162,15 +174,31 @@ def drawing(project_id):
     return riso(text, project_id, grain=.5, weight=.42, view=VIEW)
 
 
+def tab(text):
+    """The simplified print for tab and launcher icons (16 to 180px): the slip stays, the grain goes,
+    and the lines are heavier and the slip wider so both still read at that size."""
+    return riso(text, "t", grain=None, weight=.8, view=TAB_VIEW, slip=TAB_SLIP, size=' width="256" height="256"')
+
+
 def entry(path, key):
     """A small entry-button mark in the same print, with heavier lines so it survives at 30px."""
     uid = "e" + hashlib.sha256(key.encode()).hexdigest()[:8]
     return re.sub(r">\s+<", "><", riso(Path(path).read_text(encoding="utf-8"), uid, weight=.82).replace(f' xmlns="{SVG}"', ""))
 
 
+def render(page, svg):
+    """One SVG printed by Chromium as a SIZE x SIZE transparent picture."""
+    svg = re.sub(r' (width|height)="[^"]*"', "", svg.split(">", 1)[0]) + ">" + svg.split(">", 1)[1]
+    page.set_content(f'<html><body style="margin:0;background:transparent">'
+                     f'{svg.replace("<svg ", f"<svg width=\"{SIZE}\" height=\"{SIZE}\" ", 1)}</body></html>')
+    page.wait_for_timeout(60)
+    return Image.open(io.BytesIO(page.screenshot(omit_background=True, clip={"x": 0, "y": 0, "width": SIZE, "height": SIZE})))
+
+
 def main():
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     import build_home
+    import legacy_pages
     from playwright.sync_api import sync_playwright
     folder = ROOT / "project-logos" / SET
     folder.mkdir(exist_ok=True)
@@ -181,12 +209,13 @@ def main():
         for project in projects:
             svg = drawing(project["id"])
             (folder / (project["id"] + ".svg")).write_text(svg + "\n", encoding="utf-8")
-            page.set_content(f'<html><body style="margin:0;background:transparent">'
-                             f'{svg.replace("<svg ", f"<svg width=\"{SIZE}\" height=\"{SIZE}\" ", 1)}</body></html>')
-            page.wait_for_timeout(60)
-            picture = Image.open(io.BytesIO(page.screenshot(omit_background=True, clip={"x": 0, "y": 0, "width": SIZE, "height": SIZE})))
-            picture.save(folder / (project["id"] + ".png"), optimize=True)
+            render(page, svg).save(folder / (project["id"] + ".png"), optimize=True)
             print("printed:", project["id"])
+        # The site's own mark, for its tab, launcher and share icons (legacy_pages.brand()).
+        svg = tab(legacy_pages.BRAND_MARK.read_text(encoding="utf-8"))
+        (folder / (BRAND_TAB + ".svg")).write_text(svg + "\n", encoding="utf-8")
+        render(page, svg).save(folder / (BRAND_TAB + ".png"), optimize=True)
+        print("printed:", BRAND_TAB)
         browser.close()
 
 

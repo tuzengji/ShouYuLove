@@ -90,6 +90,17 @@ class NextPagesTest(unittest.TestCase):
                 self.assertNotIn(icon_style.INK, button.lower())
                 self.assertIn("mix-blend-mode:multiply", button)
 
+    def test_tab_icons_use_the_simplified_riso_print(self):
+        import legacy_pages
+        printed = (ROOT / "project-logos" / icon_riso.SET / (icon_riso.BRAND_TAB + ".svg")).read_text(encoding="utf-8")
+        self.assertEqual(printed, icon_riso.tab(legacy_pages.BRAND_MARK.read_text(encoding="utf-8")) + "\n")
+        self.assertIn("mix-blend-mode:multiply", printed)  # the slip stays
+        self.assertNotIn("<filter", printed)  # the grain goes
+        self.assertNotIn(icon_style.INK, printed.lower())
+        favicon = "/" + legacy_pages.brand()["favicon"][0]
+        for document in (self.home, self.portfolio):
+            self.assertIn(f'rel="icon" type="image/png" sizes="64x64" href="{favicon}"', document)
+
     def test_drawings_are_reproducible_and_every_frame_is_referenced(self):
         paths = build_home.brand_paths()
         first = sketch.drawings(paths)

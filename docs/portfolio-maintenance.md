@@ -2,7 +2,7 @@
 
 ## 当前状态与多入口规则（2026-11-27）
 
-- **当前线上版本**：`20261127T131121Z-astra-home`（1,278 个运行文件、34 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `216,482,912` 字节）。
+- **当前线上版本**：`20261127T151253Z-astra-home`（1,283 个运行文件、34 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `216,557,135` 字节）。
 - **2026-11-27 起作品集与首页由 `scripts/build_home.py` 生成**：两页是二维手绘风的轻量页面，多入口作品在首页和作品集都直接渲染成按钮，不再依赖 `scripts/project_entries.js` 与三维场景。下文关于 `styles/portfolio.css`、作品集三维场景和首页替换脚本的说明只对旧版页面有效；构建顺序与新增作品的做法见 [主站维护入口](../AGENTS.md)。完整发布与运维记录见 [当前运维状态](operations-current.md)。
 - **一个作品多个入口按钮**：绑定原稿的作品条目可在「地址：」之后追加两行或更多 `入口：[名称](地址)`。
   - 有入口行的作品在作品集 `/portfolio/` 里渲染为不可整卡点击的 `.portfolio-card`，每个入口是一个带小图标的按钮（`.portfolio-action`）；按钮取代简介显示在标题与设计者之间，沿用 `data-project` 属性计入作品集跳转统计；「心创组内部使用」分区全部卡片（接锅、手语分社统一通行证、心创云盘）左侧图标统一与右侧文字垂直居中对齐。
@@ -55,7 +55,7 @@
 
 ## 当前图标和字体
 
-主站使用 [把爱递给你](../project-logos/20261012-主站-把爱递给你/README.md)：浅暖米色手掌、豆沙爱心与灰绿描边。34 条主站页面路由的标签页图标、Apple 触屏图标和作品集安装图标统一从该 SVG 生成，独立缓存版本为 `syl-v1-1-giving-heart`。
+主站使用 [把爱递给你](../project-logos/20261012-主站-把爱递给你/README.md)：浅暖米色手掌、豆沙爱心与灰绿描边。34 条主站页面路由的标签页图标、Apple 触屏图标和作品集安装图标统一从该 SVG 生成，独立缓存版本为 `syl-v1-1-giving-heart`。2026-11-27 起新版两页与旧详情页改用该标识的简化套印版（`scripts/icon_riso.py` 的 `tab()`，主图 `project-logos/20261127-套印/shouyulove-tab.png`，文件名按内容哈希）。
 
 项目图标统一采用柔和彩色系列：基础项目使用 [柔和彩色套件](../project-logos/20261012-柔和彩色/README.md)（文化节保留原卡通人物 PNG，年终总结为「谢谢这一年」感谢章，传情会意为「心意小卡」），后续上线项目分别位于 `project-logos/20261015-signplay/`、`20261020-flyinghands/`、`20261110-quna-study/`、`20261113-shouyu-pass/`（含双按钮小图标 `pass-home.svg`、`pass-console.svg`）、`20261114-xinchuang-drive/`、`20261114-shouxiaoyu/`、`20261124-sign-games/`（含双端按钮小图标 `game-host.svg`、`game-player.svg`）、`20261125-skull/`、`20261125-perfectmenu/`、`20261125-naimahjong/`、`20261126-xiaoai-warm-cabin/`（小爱同学卡通形象去背透明 PNG）与 `20261127-shouyu-shitingshuo/`（柔和彩色视频台词与对话泡 SVG/PNG）。首页和作品集共用同一套图像。统一曲线版、卡通试稿、低饱和试稿和旧标识保留为历史材料，当前构建不从试稿选图。
 

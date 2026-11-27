@@ -7,7 +7,7 @@ edits the published files in place:
 - each work's picture becomes its riso print (scripts/icon_riso.py) on warm white, the same as on the
   portfolio (`<id>-square.<hash>.png`);
 - the site icon, touch icon, install icons and web manifest are redrawn from the brand mark in the
-  same style (`favicon.<hash>.png` and so on), and the new pages link to them too;
+  simplified riso print (slipped plates, no grain; `icon_riso.tab()`) (`favicon.<hash>.png` and so on), and the new pages link to them too;
 - category names and one-line descriptions follow the bound Markdown again;
 - the page data script `local-bridge.<hash>.js` is rewritten to match.
 
@@ -24,12 +24,11 @@ import re
 import sys
 from pathlib import Path
 
-if sys.platform == "darwin":  # cairosvg finds Homebrew's cairo only when told where to look
+if sys.platform == "darwin":  # for scripts that import this before cairosvg (icon_style.py, logo_options.py)
     os.environ.setdefault("DYLD_FALLBACK_LIBRARY_PATH", "/opt/homebrew/lib:/usr/local/lib")
-import cairosvg  # noqa: E402
 from PIL import Image
 
-import icon_style
+import icon_riso
 
 ROOT = Path(__file__).resolve().parents[1]
 SHARED = "sites/immersive-g-com-955afd14/shared"
@@ -70,9 +69,10 @@ def square(master):
 
 @functools.lru_cache(maxsize=None)
 def brand():
-    """The site's icons, redrawn from the brand mark: {kind: (address, bytes)}."""
-    drawing = icon_style.tonal(BRAND_MARK.read_text(encoding="utf-8"))
-    mark = Image.open(io.BytesIO(cairosvg.svg2png(bytestring=drawing.encode(), output_width=1024, output_height=1024))).convert("RGBA")
+    """The site's icons, from the brand mark in the simplified riso print: {kind: (address, bytes)}."""
+    master = ROOT / "project-logos" / icon_riso.SET / (icon_riso.BRAND_TAB + ".png")
+    assert master.is_file(), f"{master} is missing: run python3 -B scripts/icon_riso.py"
+    mark = Image.open(master).convert("RGBA")
     files = {"favicon": png(mark.resize((64, 64), Image.Resampling.LANCZOS))}
     # Launchers want an opaque tile with some margin around the drawing.
     tile = drawing_on(Image.new("RGBA", (1024, 1024), PAPER), mark, (1024 * .12, 1024 * .12, 1024 * .76)).convert("RGB")
