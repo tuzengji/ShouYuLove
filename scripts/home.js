@@ -1,7 +1,7 @@
 // 首页：首屏那只手递出的爱心，随滚动沿手画的虚线飘过整页，最后落进页尾另一只手里。
 // 没有脚本或系统要求减少动态时，两只手各自托着一颗静止的爱心。
 (() => {
-  const { pointer, onFrame, wake, still } = SylNext;
+  const { pointer, onFrame, wake, still, touch } = SylNext;
   const root = document.documentElement, id = (name) => document.getElementById(name);
   const from = id('heart-from'), to = id('heart-to'), route = id('route'), heart = id('heart');
   const hands = document.querySelectorAll('.hand');
@@ -138,8 +138,16 @@
       arrive();
     }
     light();
-    // The hands shift a few pixels against the pointer, like paper on a second layer.
-    for (const hand of hands) { hand.style.setProperty('--px', (-pointer.x * 7).toFixed(1)); hand.style.setProperty('--py', (-pointer.y * 5).toFixed(1)); }
+    // The hands shift a few pixels against the pointer, like paper on a second layer. A touch screen has no
+    // pointer to follow, so there they float slowly on their own, and the first hand lags a little behind the scroll.
+    hands.forEach((hand, index) => {
+      let x = -pointer.x * 7, y = -pointer.y * 5;
+      if (touch.matches) {
+        x = Math.sin(now * .7 + index * 2) * 4;
+        y = Math.sin(now * .95 + index * 2) * 5 + (index ? 0 : Math.min(scrollY, 320) * .06);
+      }
+      hand.style.setProperty('--px', x.toFixed(1)); hand.style.setProperty('--py', y.toFixed(1));
+    });
   });
 
   let pending = 0;

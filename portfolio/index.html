@@ -302,7 +302,36 @@ const SylNext = (() => {
     tile.addEventListener('focusout', light(false));
   }
 
-  return { pointer, onFrame, wake, still };
+  // A touch screen has no hover, so the work passing through the middle of the screen lights up instead:
+  // the same crayon loop, hearts and highlighter, sweeping down the list as the reader scrolls.
+  const touch = matchMedia('(hover: none), (pointer: coarse)');
+  const tiles = [...document.querySelectorAll('.tile')];
+  let spot = null, queued = 0;
+  function spotlight() {
+    queued = 0;
+    let best = null;
+    if (touch.matches && !still.matches) {
+      const middle = innerHeight * .5;
+      let nearest = innerHeight * .22;
+      for (const tile of tiles) {
+        const art = tile.querySelector('.tile-art').getBoundingClientRect();
+        const distance = Math.abs(art.top + art.height / 2 - middle);
+        if (distance < nearest) { nearest = distance; best = tile; }
+      }
+    }
+    if (best === spot) return;
+    spot?.classList.remove('is-lit');
+    best?.classList.add('is-lit');
+    spot = best;
+  }
+  const look = () => { if (!queued) queued = requestAnimationFrame(spotlight); };
+  addEventListener('scroll', look, { passive: true });
+  addEventListener('resize', look);
+  touch.addEventListener?.('change', look);
+  still.addEventListener?.('change', look);
+  look();
+
+  return { pointer, onFrame, wake, still, touch };
 })();
 
 // 作品集：分类按钮标出当前所在的分类；标题旁那颗手绘爱心点一下会转一圈。
