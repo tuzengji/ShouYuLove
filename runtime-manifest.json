@@ -58,8 +58,8 @@
       "sha256": "ddb951b811aacaf975dea4681f52428ef69efb361582333d801f573ae20a0ba9"
     },
     "index.html": {
-      "bytes": 146119,
-      "sha256": "9447c2ec3857a46fd321e99c97f61c6987d8391a1c0092712616918cb3470c8b"
+      "bytes": 146215,
+      "sha256": "dc1eb40ce356d0ea2036e5e40ef3bd57bca9379686e4a65708971969c5ef6dbc"
     },
     "portfolio/index.html": {
       "bytes": 137784,
@@ -4962,5 +4962,5 @@
       "sha256": "9cfe56070a17a25e1d17ef99623b2e5454f3629532765d3f5d3b1ee5e893054d"
     }
   },
-  "bytes": 211154649
+  "bytes": 211154745
 }
