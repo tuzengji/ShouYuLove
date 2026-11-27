@@ -1,8 +1,8 @@
 # 作品集维护说明
 
-## 当前状态与多入口规则（2026-11-26）
+## 当前状态与多入口规则（2026-11-27）
 
-- **当前线上版本**：`20261126T152545Z-astra-home`（1,021 个运行文件、33 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `198,789,310` 字节）。完整发布与运维记录见 [当前运维状态](operations-current.md)。
+- **当前线上版本**：`20261127T094624Z-astra-home`（1,092 个运行文件、34 条页面路由、5 个相对链接、2 条外部跳转 `/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`，共 `206,849,407` 字节）。完整发布与运维记录见 [当前运维状态](operations-current.md)。
 - **一个作品多个入口按钮**：绑定原稿的作品条目可在「地址：」之后追加两行或更多 `入口：[名称](地址)`。
   - 有入口行的作品在作品集 `/portfolio/` 里渲染为不可整卡点击的 `.portfolio-card`，每个入口是一个带小图标的按钮（`.portfolio-action`）；按钮取代简介显示在标题与设计者之间，沿用 `data-project` 属性计入作品集跳转统计；「心创组内部使用」分区全部卡片（接锅、手语分社统一通行证、心创云盘）左侧图标统一与右侧文字垂直居中对齐。
   - 首页 `/` 对应卡片由独立脚本 `scripts/project_entries.js`（线上 `/assets/project-entries.syl-v1-1-five-games.js`，样式 `styles/project-entries.css`，版本常量 `PROJECT_ENTRIES_VERSION`）在加载后做同样替换。
@@ -14,13 +14,14 @@
 
 `scripts/build_content.py` 的 `portfolio_page` 生成正式 HTML，`styles/portfolio.css` 维护排版，`scripts/portfolio.js` 后台载入原生三维场景。作品名称、简介、设计者、链接、多入口按钮、分类顺序及鸣谢来自绑定 Markdown（`/Users/wishingcat/ObsidianNotes/AI Study/爱心社/心创组主站-以手予爱.md`），`content-source.md` 为公开副本。
 
-作品集现有 24 个项目（6 个核心创意、11 个手语游戏、3 个心创组内部使用、4 个其他作品）：
+作品集现有 25 个项目（7 个核心创意、11 个手语游戏、3 个心创组内部使用、4 个其他作品）：
 
 | 分类 | 项目 | 正式入口 |
 | --- | --- | --- |
 | 核心创意 | 以手寻语 SignTrace | `/signtrace/` |
 | 核心创意 | 分社手语词典 | `/dict` |
 | 核心创意 | 小爱同学的物资小屋 | `/XiaoAi-Warm-Cabin/` |
+| 核心创意 | 手语视听说 | `/shouyu-shitingshuo/` |
 | 核心创意 | 手小语 | `/shouxiaoyu/` |
 | 核心创意 | 2026 手语文化节 | `/2026-sign-language-cultural-festival/` |
 | 核心创意 | 2026 手语分社骨干年终总结 | `/2026-year-end-summary/` |
@@ -45,7 +46,7 @@
 
 ## 已确认的展示方式
 
-顶部只保留「心创组作品集」与首页入口。核心创意、手语游戏和心创组内部使用优先展示，使用明显的分类标题；核心创意（6 项，作品集桌面端 3 行两列）与手语游戏（11 项，作品集桌面端两列排布、奇数末项跨列）桌面均采用两列排布、手机单列，奇数末项跨列。主要类别保留设计者署名，手机署名按姓名换行。
+顶部只保留「心创组作品集」与首页入口。核心创意、手语游戏和心创组内部使用优先展示，使用明显的分类标题；核心创意（7 项，作品集桌面端两列排布、奇数末项跨列）与手语游戏（11 项，作品集桌面端两列排布、奇数末项跨列）桌面均采用两列排布、手机单列，奇数末项跨列。主要类别保留设计者署名，手机署名按姓名换行。
 
 其他作品紧凑置底，默认不显示设计者；需要单独显示设计者的条目（如「去哪自习」）通过原稿条目中的 `作品集署名：显示` 开启，原稿和其他页面中的署名继续保留。末尾居中显示 12px 小字「鸣谢所有心创组成员」，对应原稿「作品集页面／鸣谢」字段。
 
@@ -53,20 +54,20 @@
 
 ## 当前图标和字体
 
-主站使用 [把爱递给你](../project-logos/20261012-主站-把爱递给你/README.md)：浅暖米色手掌、豆沙爱心与灰绿描边。33 条主站页面路由的标签页图标、Apple 触屏图标和作品集安装图标统一从该 SVG 生成，独立缓存版本为 `syl-v1-1-giving-heart`。
+主站使用 [把爱递给你](../project-logos/20261012-主站-把爱递给你/README.md)：浅暖米色手掌、豆沙爱心与灰绿描边。34 条主站页面路由的标签页图标、Apple 触屏图标和作品集安装图标统一从该 SVG 生成，独立缓存版本为 `syl-v1-1-giving-heart`。
 
-项目图标统一采用柔和彩色系列：基础项目使用 [柔和彩色套件](../project-logos/20261012-柔和彩色/README.md)（文化节保留原卡通人物 PNG，年终总结为「谢谢这一年」感谢章，传情会意为「心意小卡」），后续上线项目分别位于 `project-logos/20261015-signplay/`、`20261020-flyinghands/`、`20261110-quna-study/`、`20261113-shouyu-pass/`（含双按钮小图标 `pass-home.svg`、`pass-console.svg`）、`20261114-xinchuang-drive/`、`20261114-shouxiaoyu/`、`20261124-sign-games/`（含双端按钮小图标 `game-host.svg`、`game-player.svg`）、`20261125-skull/`、`20261125-perfectmenu/`、`20261125-naimahjong/` 与 `20261126-xiaoai-warm-cabin/`（小爱同学卡通形象去背透明 PNG）。首页和作品集共用同一套图像。统一曲线版、卡通试稿、低饱和试稿和旧标识保留为历史材料，当前构建不从试稿选图。
+项目图标统一采用柔和彩色系列：基础项目使用 [柔和彩色套件](../project-logos/20261012-柔和彩色/README.md)（文化节保留原卡通人物 PNG，年终总结为「谢谢这一年」感谢章，传情会意为「心意小卡」），后续上线项目分别位于 `project-logos/20261015-signplay/`、`20261020-flyinghands/`、`20261110-quna-study/`、`20261113-shouyu-pass/`（含双按钮小图标 `pass-home.svg`、`pass-console.svg`）、`20261114-xinchuang-drive/`、`20261114-shouxiaoyu/`、`20261124-sign-games/`（含双端按钮小图标 `game-host.svg`、`game-player.svg`）、`20261125-skull/`、`20261125-perfectmenu/`、`20261125-naimahjong/`、`20261126-xiaoai-warm-cabin/`（小爱同学卡通形象去背透明 PNG）与 `20261127-shouyu-shitingshuo/`（柔和彩色视频台词与对话泡 SVG/PNG）。首页和作品集共用同一套图像。统一曲线版、卡通试稿、低饱和试稿和旧标识保留为历史材料，当前构建不从试稿选图。
 
-中文继续使用狮尾四季春·加糖，英文标题为 PSTimes，英文正文及轻字重控件为 Helvetica Neue。首屏共用一份字体 CSS，后台场景复用已加载的字体定义，刷新或背景就绪时不切换字体。当前 `syl-v1-1-xiaoai-cabin` 中文子集与双套 WebGL MSDF 图集完整覆盖 612 字（含「物」「屋」「办」「储」等全部正文用字），无临时补充字形。
+中文继续使用狮尾四季春·加糖，英文标题为 PSTimes，英文正文及轻字重控件为 Helvetica Neue。首屏共用一份字体 CSS，后台场景复用已加载的字体定义，刷新或背景就绪时不切换字体。当前 `syl-v1-1-shitingshuo` 中文子集与双套 WebGL MSDF 图集完整覆盖 625 字（含「视」「听」「影」「台」「复」等全部正文用字），无临时补充字形。
 
 | 构建字段 | 当前值 |
 | --- | --- |
 | `BRAND_VERSION`（主站图标） | `syl-v1-1-giving-heart` |
-| `RUNTIME_VERSION`（图像） | `syl-v1-1-xiaoai-cabin` |
-| `FONT_VERSION`（中文 612 字） | `syl-v1-1-xiaoai-cabin` |
-| `MODULE_VERSION` | `syl-v1-1-xiaoai-cabin` |
+| `RUNTIME_VERSION`（图像） | `syl-v1-1-shitingshuo` |
+| `FONT_VERSION`（中文 625 字） | `syl-v1-1-shitingshuo` |
+| `MODULE_VERSION` | `syl-v1-1-shitingshuo` |
 | `STYLE_VERSION` | `syl-v1-1-sign-games` |
-| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-xiaoai-cabin` |
+| `BRIDGE_VERSION` / `PORTFOLIO_SCENE_VERSION` | `syl-v1-1-shitingshuo` |
 | `PROJECT_ENTRIES_VERSION`（首页多入口脚本） | `syl-v1-1-five-games` |
 
 ## 加载和隐私规则
@@ -105,6 +106,7 @@
 | 润色精炼全部 10 款手语游戏单句简介（`syl-v1-1-games-copy`） | `2026-11-25` | `20261125T053315Z-astra-home` |
 | 「手语游戏」第 3 位接入「奶家麻将」（`/NaiMahjong/`，重建 608 字字体） | `1474ed9` | `20261125T061159Z-astra-home` |
 | 移除 `/games/` 中缀，「骷髅牌」「完美一餐」改用顶层路径 `/skull/`、`/perfectmenu/`（`syl-v1-1-top-routes`） | `4d7eea4` | `20261126T150007Z-astra-home` |
-| 「核心创意」第 3 位接入「小爱同学的物资小屋」（`/XiaoAi-Warm-Cabin/`，重建 612 字字体） | `2026-11-26` | `20261126T152545Z-astra-home` |
+| 「核心创意」第 3 位接入「小爱同学的物资小屋」（`/XiaoAi-Warm-Cabin/`，重建 612 字字体） | `401eb09` | `20261126T152545Z-astra-home` |
+| 「核心创意」第 4 位接入「手语视听说」（`/shouyu-shitingshuo/`，重建 625 字字体） | `2026-11-27` | `20261127T094624Z-astra-home` |
 
 后续改文案先改绑定 Markdown；改图标同步首页、作品集及涉及的子站，并更新对应缓存版本；改排版或加载逻辑须在无头浏览器完成 1440／390／320px 及延迟／失败分支检查。

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">手语视听说 · 小尺寸图标</title>
+  <g stroke="#4b5d54" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="26" y="78" width="176" height="140" rx="28" fill="#ece2cf" stroke="none"/>
+    <path d="M26 168 H202 V190 Q202 218 174 218 H54 Q26 218 26 190 Z" fill="#aec2b1" stroke="none"/>
+    <rect x="26" y="78" width="176" height="140" rx="28" fill="none" stroke-width="15"/>
+    <path d="M28 168 H200" fill="none" stroke-width="13"/>
+    <path d="M82 100 L132 124 L82 148 Z" fill="#c9a2a4" stroke-width="12"/>
+    <g transform="rotate(6 184 66)">
+      <path d="M148 32 H210 Q230 32 230 52 V78 Q230 98 210 98 H182 L162 114 L165 98 H148 Q128 98 128 78 V52 Q128 32 148 32 Z" fill="#a5bac9" stroke-width="14"/>
+    </g>
+  </g>
+</svg>

@@ -1,5 +1,12 @@
 # 当前运维状态与记录索引
 
+## 2026-11-27 主站「核心创意」第 4 位接入「手语视听说」
+
+按用户要求核验服务器上的「手语视听说」静态子站（由 `xinchuangzu` 经 `shouyulove-route` 托管于 `https://shouyulove.cn/shouyu-shitingshuo/`，目录 `/var/www/shouyulove-sign-games-custom/shouyu-shitingshuo`，含 109 路支持 HTTP 206 Range 播放的手语视频），设计以手予爱同系列柔和彩色图标并同步接入主站首页与作品集 `/portfolio/` 的「核心创意」第 4 位（排在「小爱同学的物资小屋」之后、「手小语」之前，设计者李昌昊，「核心创意」共 7 项、全站共 25 个作品）：
+
+- **柔和彩色图标与子站标签页同步**：按 `shouyulove-icon-design` 规范绘制 `256×256` 主矢量图 `project-logos/20261127-shouyu-shitingshuo/shouyu-shitingshuo.svg`（奶油色圆角影屏 + 底部灰绿字幕定位带 + 豆沙粉播放三角 + 右上微倾雾蓝对话泡，统一 `13px` 灰绿圆润描边 `#4b5d54`）及小尺寸简化稿 `shouyu-shitingshuo-small.svg`，导出 `1024×1024` 透明主图（叠加雾蓝浅底 `#e1e8ec` 生成 `640×640` 卡片方图），同时为 `/shouyu-shitingshuo/` 补齐同源 `favicon-64.png`、`favicon.ico` 与 `apple-touch-icon.png`（保留 `xinchuangzu:sign-games-dev` `0664` 协作权限，原站 `verify-deployment.py` 134 文件与 109 路视频 Range 校验零报错通过）。
+- **字体重建与主站原子发布（`20261127T094624Z-astra-home`）**：先更新绑定原稿与公开副本 `content-source.md`，使用 `msdfgen v1.13` 完整重建覆盖 625 个中文用字的浏览器 WOFF2 字体与双套 WebGL MSDF 图集（`syl-v1-1-shitingshuo`），保留全部旧版不可变资源与既有 CDN 资源；运行白名单升级至 1,092 个文件、34 条页面路由（新增 `/projects/shouyu-shitingshuo/`）、5 个相对链接、2 条外部跳转，共 `206,849,407` 字节（上一版本 `20261126T152545Z-astra-home`）。经 `publish_astra.py` 持锁校验切换，34 条主站路由、`https://shouyulove.cn/shouyu-shitingshuo/` 及公网 1440／390／320px 无头浏览器验收均通过。配置备份位于 `/etc/nginx/backups/shouyulove-home-20261127T094624Z-astra-home/`，维护记录位于 `/opt/shouyulove-maintenance/20261127-shouyu-shitingshuo/`。
+
 ## 2026-11-26 主站「核心创意」第 3 位接入「小爱同学的物资小屋」
 
 按用户确认将「小爱同学的物资小屋」（`https://shouyulove.cn/XiaoAi-Warm-Cabin/`，简介「爱心社物资与社办储物间管理系统。」，设计者黄庭逸）收录至以手予爱主站首页与作品集 `/portfolio/` 的「核心创意」第 3 位（排在「分社手语词典」之后、「手小语」之前，「核心创意」共 6 项，桌面端正好 3 行两列对齐，全站共 24 个作品）：
