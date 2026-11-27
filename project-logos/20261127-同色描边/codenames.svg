@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
   <title id="title">行动代号 · 双阵营密电棋盘</title>
   <g stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="34" y="34" width="188" height="188" rx="30" fill="#ece2cf" stroke="#c79f55" stroke-width="7.4" />
-    <rect x="54" y="54" width="42" height="42" rx="10" fill="#a5bac9" stroke-width="5.6" stroke="#507b9b" />
-    <rect x="107" y="54" width="42" height="42" rx="10" fill="#f5efe4" stroke-width="5.6" stroke="#cea760" />
-    <rect x="160" y="54" width="42" height="42" rx="10" fill="#c9a2a4" stroke-width="5.6" stroke="#9b4d51" />
-    <rect x="54" y="107" width="42" height="42" rx="10" fill="#c9a2a4" stroke-width="5.6" stroke="#9b4d51" />
-    <rect x="107" y="107" width="42" height="42" rx="10" fill="#aec2b1" stroke-width="5.6" stroke="#5d8f64" />
-    <rect x="160" y="107" width="42" height="42" rx="10" fill="#a5bac9" stroke-width="5.6" stroke="#507b9b" />
-    <rect x="54" y="160" width="42" height="42" rx="10" fill="#f5efe4" stroke-width="5.6" stroke="#cea760" />
-    <rect x="107" y="160" width="42" height="42" rx="10" fill="#6d7d75" stroke-width="5.6" stroke="#41554b" />
-    <rect x="160" y="160" width="42" height="42" rx="10" fill="#c9a2a4" stroke-width="5.6" stroke="#9b4d51" />
-    <path d="M120 120 L136 136 M136 120 L120 136" fill="none" stroke="#9b4d51" stroke-width="4.7" transform="translate(0 53)" stroke-opacity=".85" />
+    <rect x="34" y="34" width="188" height="188" rx="30" fill="#f7ecd8" stroke="#e2ab46" stroke-width="7.4" />
+    <rect x="54" y="54" width="42" height="42" rx="10" fill="#8bbde0" stroke-width="5.6" stroke="#2981bf" />
+    <rect x="107" y="54" width="42" height="42" rx="10" fill="#fbf5e9" stroke-width="5.6" stroke="#e7b44f" />
+    <rect x="160" y="54" width="42" height="42" rx="10" fill="#e2878c" stroke-width="5.6" stroke="#c2252e" />
+    <rect x="54" y="107" width="42" height="42" rx="10" fill="#e2878c" stroke-width="5.6" stroke="#c2252e" />
+    <rect x="107" y="107" width="42" height="42" rx="10" fill="#99d3a2" stroke-width="5.6" stroke="#3eab4f" />
+    <rect x="160" y="107" width="42" height="42" rx="10" fill="#8bbde0" stroke-width="5.6" stroke="#2981bf" />
+    <rect x="54" y="160" width="42" height="42" rx="10" fill="#fbf5e9" stroke-width="5.6" stroke="#e7b44f" />
+    <rect x="107" y="160" width="42" height="42" rx="10" fill="#69a989" stroke-width="5.6" stroke="#3a7658" />
+    <rect x="160" y="160" width="42" height="42" rx="10" fill="#e2878c" stroke-width="5.6" stroke="#c2252e" />
+    <path d="M120 120 L136 136 M136 120 L120 136" fill="none" stroke="#c2252e" stroke-width="4.7" transform="translate(0 53)" stroke-opacity=".85" />
   </g>
 </svg>

@@ -2,18 +2,18 @@
   <title id="title">骷髅牌 · 玫瑰与骷髅双圆牌</title>
   <g stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
     
-    <circle cx="164" cy="96" r="64" fill="#c9a2a4" stroke="#9b4d51" stroke-width="7.4" />
-    <path d="M188 64 C202 58 212 72 200 84 C190 88 182 78 188 64 Z" fill="#aec2b1" stroke-width="5.3" stroke="#5d8f64" />
-    <circle cx="168" cy="86" r="24" fill="#f5e6d6" stroke-width="5.6" stroke="#dc954a" />
-    <path d="M159 86 C161 77 175 77 177 86 C177 94 166 98 162 92" fill="none" stroke-width="5.0" stroke="#dc954a" />
+    <circle cx="164" cy="96" r="64" fill="#e2878c" stroke="#c2252e" stroke-width="7.4" />
+    <path d="M188 64 C202 58 212 72 200 84 C190 88 182 78 188 64 Z" fill="#99d3a2" stroke-width="5.3" stroke="#3eab4f" />
+    <circle cx="168" cy="86" r="24" fill="#fdf0e2" stroke-width="5.6" stroke="#f99d3a" />
+    <path d="M159 86 C161 77 175 77 177 86 C177 94 166 98 162 92" fill="none" stroke-width="5.0" stroke="#f99d3a" />
     
-    <circle cx="104" cy="146" r="76" fill="#ece2cf" stroke="#c79f55" stroke-width="7.4" />
-    <circle cx="104" cy="146" r="60" fill="none" stroke-width="3.4" stroke-opacity=".35" stroke="#c79f55" />
+    <circle cx="104" cy="146" r="76" fill="#f7ecd8" stroke="#e2ab46" stroke-width="7.4" />
+    <circle cx="104" cy="146" r="60" fill="none" stroke-width="3.4" stroke-opacity=".35" stroke="#e2ab46" />
     
-    <path d="M104 99 C76 99 62 116 62 138 C62 153 71 163 82 167 V180 Q82 188 90 188 H118 Q126 188 126 180 V167 C137 163 146 153 146 138 C146 116 132 99 104 99 Z" fill="#f7f4ee" stroke-width="6.2" stroke="#c6aa70" />
-    <circle cx="88" cy="138" r="9" fill="#c1a162" stroke="none" stroke-width="12.0" />
-    <circle cx="120" cy="138" r="9" fill="#c1a162" stroke="none" stroke-width="12.0" />
-    <path d="M104 150 L99 158 H109 Z" fill="#c1a162" stroke="none" stroke-width="12.0" />
-    <path d="M95 174 V188 M113 174 V188" fill="none" stroke-width="5.0" stroke="#c6aa70" />
+    <path d="M104 99 C76 99 62 116 62 138 C62 153 71 163 82 167 V180 Q82 188 90 188 H118 Q126 188 126 180 V167 C137 163 146 153 146 138 C146 116 132 99 104 99 Z" fill="#faf5eb" stroke-width="6.2" stroke="#deb158" />
+    <circle cx="88" cy="138" r="9" fill="#dbaa48" stroke="none" stroke-width="12.0" />
+    <circle cx="120" cy="138" r="9" fill="#dbaa48" stroke="none" stroke-width="12.0" />
+    <path d="M104 150 L99 158 H109 Z" fill="#dbaa48" stroke="none" stroke-width="12.0" />
+    <path d="M95 174 V188 M113 174 V188" fill="none" stroke-width="5.0" stroke="#deb158" />
   </g>
 </svg>

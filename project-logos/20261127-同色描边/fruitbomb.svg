@@ -2,11 +2,11 @@
   <title id="title">水果炸弹 · 蔬果与暖金火花</title>
   <g stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M126 88 C126 56 146 38 174 42" fill="none" stroke-width="6.8" stroke="#c79f55" />
-    <path d="M192 18 Q195 39 216 42 Q195 45 192 66 Q189 45 168 42 Q189 39 192 18 Z" fill="#e7c589" stroke-width="5.6" stroke="#cc8e20" />
-    <path d="M124 90 C92 50 52 56 56 90 C78 102 104 102 124 90 Z" fill="#aec2b1" stroke-width="6.8" stroke="#5d8f64" />
-    <path d="M128 96 C92 92 60 116 58 154 C56 196 86 226 124 224 C164 226 194 196 192 154 C190 116 158 92 128 96 Z" fill="#c9a2a4" stroke="#9b4d51" stroke-width="7.8" />
-    <path d="M112 96 Q125 104 138 96" fill="none" stroke-width="6.2" stroke="#9b4d51" />
-    <path d="M88 134 C84 150 86 168 96 182" fill="none" stroke="#f5e6d6" stroke-width="9.0" />
-    <circle cx="94" cy="118" r="5" fill="#f5e6d6" stroke="none" stroke-width="12.5" />
+    <path d="M192 18 Q195 39 216 42 Q195 45 192 66 Q189 45 168 42 Q189 39 192 18 Z" fill="#f9c973" stroke-width="5.6" stroke="#e89501" />
+    <path d="M124 90 C92 50 52 56 56 90 C78 102 104 102 124 90 Z" fill="#99d3a2" stroke-width="6.8" stroke="#3eab4f" />
+    <path d="M128 96 C92 92 60 116 58 154 C56 196 86 226 124 224 C164 226 194 196 192 154 C190 116 158 92 128 96 Z" fill="#e2878c" stroke="#c2252e" stroke-width="7.8" />
+    <path d="M112 96 Q125 104 138 96" fill="none" stroke-width="6.2" stroke="#c2252e" />
+    <path d="M88 134 C84 150 86 168 96 182" fill="none" stroke="#fdf0e2" stroke-width="9.0" />
+    <circle cx="94" cy="118" r="5" fill="#fdf0e2" stroke="none" stroke-width="12.5" />
   </g>
 </svg>

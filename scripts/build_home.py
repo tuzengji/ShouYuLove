@@ -11,7 +11,8 @@ icons and, on the portfolio, the home-screen shortcut and click-tracking scripts
                                                 # and record them and their assets in the runtime manifests
 
 Run it last: scripts/build_content.py still produces the older pages (/the-studio/, /projects/<id>/) and
-would otherwise leave its own homepage and portfolio in place.
+would otherwise leave its own homepage and portfolio in place. With --site it also brings those older pages
+in line (work pictures, site icons, categories and descriptions; see scripts/legacy_pages.py).
 """
 
 import argparse
@@ -35,6 +36,7 @@ from fontTools.ttLib import TTFont
 from fontTools.varLib import instancer
 
 import icon_style
+import legacy_pages
 import sketch
 from content_source import source_path
 
@@ -42,8 +44,8 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILD_CONTENT = ROOT / "scripts/build_content.py"
 SHARED = "sites/immersive-g-com-955afd14/shared"
 ASSETS = ROOT / SHARED / "assets"
-HOME_ORDER = ["核心创意", "手语游戏", "其他作品", "心创组内部使用"]
-SLUGS = {"核心创意": "core", "手语游戏": "games", "心创组内部使用": "internal", "其他作品": "secondary"}
+HOME_ORDER = ["核心创意", "手语游戏", "其他作品", "心创组"]
+SLUGS = {"核心创意": "core", "手语游戏": "games", "心创组": "internal", "其他作品": "secondary"}
 MEMBERS_TITLE = "心创组第一届成员"
 BRAND_MARK = ROOT / "project-logos/20261012-主站-把爱递给你/shouyulove.svg"
 # Open-licensed typefaces (SIL OFL 1.1), kept outside Git in output/font-source/. Each is cut down to the pages'
@@ -224,8 +226,7 @@ def tile(project, constants, paper, *, order=0, position=0, credit=True, tracked
 
 
 def head(title, description, canonical, constants, styles, extra=""):
-    shared = "/" + SHARED + "/shouyulove"
-    brand = constants["BRAND_VERSION"]
+    brand = {kind: "/" + address for kind, (address, _) in legacy_pages.brand().items()}
     css = "\n".join((ROOT / "styles" / name).read_text(encoding="utf-8") for name in styles) + extra
     assert "</style" not in css
     return "".join([
@@ -239,10 +240,10 @@ def head(title, description, canonical, constants, styles, extra=""):
         '<meta property="og:type" content="website"/><meta property="og:site_name" content="以手予爱 ShouYuLove"/>',
         f'<meta property="og:title" content="{escape(title, quote=True)}"/>',
         f'<meta property="og:description" content="{escape(description, quote=True)}"/>',
-        f'<meta property="og:image" content="https://shouyulove.cn{shared}/home-icon-512.{brand}.png"/>',
-        f'<link rel="icon" type="image/png" sizes="64x64" href="{shared}/favicon.{brand}.png"/>',
-        f'<link rel="apple-touch-icon" sizes="180x180" href="{shared}/apple-touch-icon.{brand}.png"/>',
-        f'<link rel="manifest" href="{shared}/works-manifest.{brand}.json"/>',
+        f'<meta property="og:image" content="https://shouyulove.cn{brand["home-icon-512"]}"/>',
+        f'<link rel="icon" type="image/png" sizes="64x64" href="{brand["favicon"]}"/>',
+        f'<link rel="apple-touch-icon" sizes="180x180" href="{brand["apple-touch-icon"]}"/>',
+        f'<link rel="manifest" href="{brand["works-manifest"]}"/>',
         FONT_SLOT,
         f'<style>{css}</style></head>'])
 
@@ -311,7 +312,7 @@ def home_page(content, constants):
 def portfolio_page(content, constants):
     """The compact directory people add to their home screen; same order and credit rules as before."""
     labels = content["portfolio"]
-    intro = {"核心创意": content["core"], "手语游戏": content["games"], "其他作品": content["other"], "心创组内部使用": content["internal"]}
+    intro = {"核心创意": content["core"], "手语游戏": content["games"], "其他作品": content["other"], "心创组": content["internal"]}
     groups = [(category, [p for p in content["projects"] if p["category"] == category]) for category in labels["order"]]
     paper = papers(content["projects"])
     chips = "".join(f'<li><a href="#portfolio-{SLUGS[category]}">{escape(category)}</a></li>'
@@ -435,6 +436,8 @@ def main():
         (ASSETS / address.removeprefix("assets/")).write_bytes(data)
         assets.append(address)
     pages = {name: document.replace(FONT_SLOT, faces) for name, document in pages.items()}
+    for address, data in legacy_pages.brand().values():
+        legacy_pages.write(address, data)
     out = ROOT if arguments.site else arguments.out.resolve()
     if not arguments.site and (out / "portfolio").is_symlink():
         (out / "portfolio").unlink()
@@ -444,7 +447,14 @@ def main():
         print(f"{out / name}  {len(document.encode('utf-8')):,} bytes")
     print(f"{len(assets)} fonts and icons  {sum((ROOT / SHARED / address).stat().st_size for address in assets):,} bytes")
     if arguments.site:
-        record([*pages, *(f"{SHARED}/{address}" for address in assets)])
+        manifest = json.loads((ROOT / "runtime-manifest.json").read_text(encoding="utf-8"))
+        paper = papers(content["projects"])
+        scraps = {project["id"]: SCRAPS[(index + len(project["id"])) % len(SCRAPS)][:2]
+                  for index, project in enumerate(content["projects"])}
+        masters = {project["id"]: icon_master(project["id"]) for project in content["projects"]}
+        older = legacy_pages.refresh(content, masters, paper, scraps, manifest["routes"], manifest["files"])
+        print(f"{len(older)} files written or edited for the older pages")
+        record([*pages, *(f"{SHARED}/{address}" for address in assets), *older])
         return
     shutil.copyfile(ROOT / "portfolio/projects.json", out / "portfolio/projects.json")
     for name, target in [("assets", ASSETS), ("sites", ROOT / "sites")]:

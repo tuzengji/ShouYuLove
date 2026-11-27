@@ -18,12 +18,12 @@
 .ch { display: inline-block; overflow: hidden; padding-block: .1em; margin-block: -.1em; vertical-align: top; }
 .ch > span { display: inline-block; animation: char-up 1.1s var(--glide) both; animation-delay: calc(.15s + var(--i) * .11s); }
 @keyframes char-up { from { transform: translateY(112%) rotate(6deg); } }
-.hero h1 .latin { display: block; margin: .3em 0 0 .1em; font-size: .4em; line-height: 1.2; letter-spacing: .01em; color: var(--ink-2); animation: rise-in 1s var(--glide) .75s both; }
-.hero-id { margin-top: clamp(20px, 3.6vh, 36px); font-size: clamp(13.5px, 4.1vw, 15px); line-height: 1.7; letter-spacing: .04em; color: var(--ink-2); text-wrap: balance; animation: rise-in 1s var(--glide) .9s both; }
+.hero h1 .latin { display: block; margin: .34em 0 0 .08em; font-size: .37em; line-height: 1.2; letter-spacing: .01em; color: var(--ink-2); animation: rise-in 1s var(--glide) .75s both; }
+.hero-id { margin-top: clamp(22px, 4vh, 44px); font-size: clamp(14.5px, 4.2vw, 16.5px); line-height: 1.7; letter-spacing: .04em; color: var(--ink-2); text-wrap: balance; animation: rise-in 1s var(--glide) .9s both; }
 /* 宽屏上，身份那行字拉开字距，前面引一条细线 */
 @media (min-width: 700px) {
-  .hero-id { display: flex; align-items: center; gap: 18px; font-size: 15px; letter-spacing: .3em; }
-  .hero-id::before { content: ""; flex: none; width: 56px; height: 1px; background: var(--ink-3); }
+  .hero-id { display: flex; align-items: center; gap: 20px; font-size: clamp(16px, 1.3vw, 18.5px); letter-spacing: .26em; }
+  .hero-id::before { content: ""; flex: none; width: 64px; height: 1px; background: var(--ink-3); }
 }
 @keyframes rise-in { from { opacity: 0; transform: translateY(16px); } }
 
@@ -38,7 +38,7 @@
 @keyframes reach-in { from { transform: translateX(22%); opacity: 0; } }
 
 @media (min-width: 900px) and (min-height: 680px) {
-  .hero h1 { font-size: clamp(100px, 11.4vw, 156px); }
+  .hero h1 { font-size: clamp(96px, 9.2vw, 132px); }
   .hand--give { position: absolute; right: 0; bottom: clamp(40px, 8vh, 88px); width: min(46vw, 720px); margin: 0; }
 }
 
@@ -52,7 +52,8 @@
 /* 梦想那句话随滚动逐字点亮 */
 .js .dream i { font-style: normal; opacity: .16; transition: opacity .5s ease-out; }
 .js .dream i.on { opacity: 1; }
-.vision { max-width: 36em; font-size: clamp(16.5px, 1.35vw, 18px); line-height: 2.2; letter-spacing: .04em; text-wrap: pretty; }
+/* 愿景是一整段话，两端对齐，每行都排满 */
+.vision { max-width: 36em; font-size: clamp(16.5px, 1.35vw, 18px); line-height: 2.2; letter-spacing: .04em; text-align: justify; text-justify: inter-character; }
 @media (min-width: 900px) {
   .pair { grid-template-columns: 132px minmax(0, 1fr); }
   .pair { border-top: 1px solid var(--hair); padding-top: clamp(28px, 3.4vw, 44px); }

@@ -2,16 +2,16 @@
   <title id="logo-title">指间趣游 · 手掌托起骰子</title>
   <g stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
     <g transform="rotate(12 151 83)">
-      <rect x="105" y="37" width="92" height="92" rx="19" fill="#a5bac9" stroke="#507b9b" stroke-width="8.1" />
+      <rect x="105" y="37" width="92" height="92" rx="19" fill="#8bbde0" stroke="#2981bf" stroke-width="8.1" />
       <g stroke="none">
-        <circle cx="130" cy="62" r="7" fill="#4b7491" stroke="none" stroke-width="13.0" />
-        <circle cx="151" cy="83" r="7" fill="#4b7491" stroke="none" stroke-width="13.0" />
-        <circle cx="172" cy="104" r="7" fill="#4b7491" stroke="none" stroke-width="13.0" />
+        <circle cx="130" cy="62" r="7" fill="#2679b3" stroke="none" stroke-width="13.0" />
+        <circle cx="151" cy="83" r="7" fill="#2679b3" stroke="none" stroke-width="13.0" />
+        <circle cx="172" cy="104" r="7" fill="#2679b3" stroke="none" stroke-width="13.0" />
       </g>
     </g>
-    <path d="M58 169 C75 155 85 151 99 157 L130 173 H157 C166 173 172 179 170 187 L201 163 C212 155 225 165 216 177 C205 191 179 210 155 221 C141 228 127 226 111 221 L58 206 Z" fill="#f3dfcf" stroke="#da8846" stroke-width="8.1" />
-    <path d="M126 195 H157 C166 195 171 189 170 184" fill="none" stroke="#da8846" stroke-width="8.1" />
-    <path d="M33 161 H59 V218 H33 Z" fill="#aec2b1" stroke="#5d8f64" stroke-width="8.1" />
-    <path d="M65 119 C62 102 67 87 79 76" fill="none" stroke-width="6.2" stroke="#5d8f64" />
+    <path d="M58 169 C75 155 85 151 99 157 L130 173 H157 C166 173 172 179 170 187 L201 163 C212 155 225 165 216 177 C205 191 179 210 155 221 C141 228 127 226 111 221 L58 206 Z" fill="#fce9da" stroke="#f78b36" stroke-width="8.1" />
+    <path d="M126 195 H157 C166 195 171 189 170 184" fill="none" stroke="#f78b36" stroke-width="8.1" />
+    <path d="M33 161 H59 V218 H33 Z" fill="#99d3a2" stroke="#3eab4f" stroke-width="8.1" />
+    <path d="M65 119 C62 102 67 87 79 76" fill="none" stroke-width="6.2" stroke="#3eab4f" />
   </g>
 </svg>

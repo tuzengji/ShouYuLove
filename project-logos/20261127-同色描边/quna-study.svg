@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
 <title id="title">去哪自习 · 找到一页安静</title>
 <g stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
-<path d="M36 129 C69 119 101 126 128 145 V219 C101 199 69 193 36 203 Z" fill="#ece2cf" stroke="none" stroke-width="13.0" />
-<path d="M128 145 C155 126 187 119 220 129 V203 C187 193 155 199 128 219 Z" fill="#a5bac9" stroke="none" stroke-width="13.0" />
-<path d="M36 129 C69 119 101 126 128 145 C155 126 187 119 220 129 V203 C187 193 155 199 128 219 C101 199 69 193 36 203 Z M128 145 V219" fill="none" stroke="#507b9b" stroke-width="8.1" />
-<path d="M171 70 C171 96 144 122 128 137 C112 122 85 96 85 70 C85 46 104 29 128 29 C152 29 171 46 171 70 Z" fill="#aec2b1" stroke="#5d8f64" stroke-width="8.1" />
-<circle cx="128" cy="69" r="15" fill="#ece2cf" stroke-width="6.8" stroke="#c79f55" />
+<path d="M36 129 C69 119 101 126 128 145 V219 C101 199 69 193 36 203 Z" fill="#f7ecd8" stroke="none" stroke-width="13.0" />
+<path d="M128 145 C155 126 187 119 220 129 V203 C187 193 155 199 128 219 Z" fill="#8bbde0" stroke="none" stroke-width="13.0" />
+<path d="M36 129 C69 119 101 126 128 145 C155 126 187 119 220 129 V203 C187 193 155 199 128 219 C101 199 69 193 36 203 Z M128 145 V219" fill="none" stroke="#2981bf" stroke-width="8.1" />
+<path d="M171 70 C171 96 144 122 128 137 C112 122 85 96 85 70 C85 46 104 29 128 29 C152 29 171 46 171 70 Z" fill="#99d3a2" stroke="#3eab4f" stroke-width="8.1" />
+<circle cx="128" cy="69" r="15" fill="#f7ecd8" stroke-width="6.8" stroke="#e2ab46" />
 </g></svg>

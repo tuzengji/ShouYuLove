@@ -2,13 +2,13 @@
   <title id="title">雪豹凶杀案 · 放大镜与雪豹足印</title>
   <g stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M167 167 L214 214" stroke-width="14.9" stroke="#000000" fill="#000000" />
-    <path d="M167 167 L214 214" stroke-width="12.0" stroke="#f3dfcf" fill="#000000" />
-    <circle cx="114" cy="114" r="78" fill="#d8e1e7" stroke="#6d96b2" stroke-width="7.8" />
-    <circle cx="114" cy="114" r="61" fill="#f4f2ec" stroke-width="5.0" stroke="#bcab77" />
-    <path d="M90 138 C86 120 100 109 114 109 C128 109 142 120 138 138 C135 150 122 146 114 146 C106 146 93 150 90 138 Z" fill="#c9a2a4" stroke-width="5.3" stroke="#9b4d51" />
-    <ellipse cx="84" cy="104" rx="9" ry="12" transform="rotate(-20 84 104)" fill="#a5bac9" stroke-width="4.7" stroke="#507b9b" />
-    <ellipse cx="104" cy="86" rx="9" ry="12" transform="rotate(-7 104 86)" fill="#a5bac9" stroke-width="4.7" stroke="#507b9b" />
-    <ellipse cx="126" cy="86" rx="9" ry="12" transform="rotate(7 126 86)" fill="#a5bac9" stroke-width="4.7" stroke="#507b9b" />
-    <ellipse cx="145" cy="104" rx="9" ry="12" transform="rotate(20 145 104)" fill="#a5bac9" stroke-width="4.7" stroke="#507b9b" />
+    <path d="M167 167 L214 214" stroke-width="12.0" stroke="#fce9da" fill="#000000" />
+    <circle cx="114" cy="114" r="78" fill="#dfebf4" stroke="#5a9ed0" stroke-width="7.8" />
+    <circle cx="114" cy="114" r="61" fill="#f9f5ec" stroke-width="5.0" stroke="#d6b260" />
+    <path d="M90 138 C86 120 100 109 114 109 C128 109 142 120 138 138 C135 150 122 146 114 146 C106 146 93 150 90 138 Z" fill="#e2878c" stroke-width="5.3" stroke="#c2252e" />
+    <ellipse cx="84" cy="104" rx="9" ry="12" transform="rotate(-20 84 104)" fill="#8bbde0" stroke-width="4.7" stroke="#2981bf" />
+    <ellipse cx="104" cy="86" rx="9" ry="12" transform="rotate(-7 104 86)" fill="#8bbde0" stroke-width="4.7" stroke="#2981bf" />
+    <ellipse cx="126" cy="86" rx="9" ry="12" transform="rotate(7 126 86)" fill="#8bbde0" stroke-width="4.7" stroke="#2981bf" />
+    <ellipse cx="145" cy="104" rx="9" ry="12" transform="rotate(20 145 104)" fill="#8bbde0" stroke-width="4.7" stroke="#2981bf" />
   </g>
 </svg>

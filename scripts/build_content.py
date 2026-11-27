@@ -103,7 +103,7 @@ def parse_content(text=None):
     labels = dict(line.split("：", 1) for line in section(text, "作品集页面").splitlines() if line.strip())
     assert set(labels) - {"鸣谢"} == {"标题", "首页入口", "展示顺序", "其他作品设计者"} and all(labels.values()), "Portfolio copy"
     order = labels['展示顺序'].split('、')
-    assert len(order) == 4 and set(order) == {"核心创意", "手语游戏", "其他作品", "心创组内部使用"}, "Portfolio category order"
+    assert len(order) == 4 and set(order) == {"核心创意", "手语游戏", "其他作品", "心创组"}, "Portfolio category order"
     assert labels['其他作品设计者'] in {'显示', '不显示'}, "Other-project credit setting"
     portfolio = dict(title=labels['标题'], home=labels['首页入口'], order=order, thanks=labels.get('鸣谢', ''),
                      show_other_designers=labels['其他作品设计者'] == '显示')
@@ -115,7 +115,7 @@ def parse_content(text=None):
                 core=section(text, "核心创意").split("####", 1)[0].strip(),
                 games=section(text, "手语游戏").split("####", 1)[0].strip(),
                 other=section(text, "其他作品").split("####", 1)[0].strip(),
-                internal=section(text, "心创组内部使用").split("####", 1)[0].strip())
+                internal=section(text, "心创组").split("####", 1)[0].strip())
 
 
 def text_block(title, body, size="medium"):
@@ -264,7 +264,7 @@ def make_pages(content):
     home["blocks"] = [dict(type="hero", id="home-intro", text1=html.escape(introduction), textAlign="left", cta=None, url=None),
                       text_block("愿景", content["vision"])]
     listing = []
-    descriptions = {"核心创意": content["core"], "手语游戏": content["games"], "其他作品": content["other"], "心创组内部使用": content["internal"]}
+    descriptions = {"核心创意": content["core"], "手语游戏": content["games"], "其他作品": content["other"], "心创组": content["internal"]}
     category = None
     for project in content["projects"]:
         if project["category"] != category:
@@ -729,7 +729,7 @@ def portfolio_page(content):
             if category is not None:
                 pieces.append('</ul></section>')
             category = project['category']
-            variant = {'其他作品': 'secondary', '心创组内部使用': 'internal', '手语游戏': 'games'}.get(category, 'core')
+            variant = {'其他作品': 'secondary', '心创组': 'internal', '手语游戏': 'games'}.get(category, 'core')
             pieces.append('<section class="portfolio-section portfolio-section--' + variant +
                           '" aria-labelledby="portfolio-' + variant + '"><h2 id="portfolio-' + variant + '">' + html.escape(category) + '</h2><ul>')
         designers = ' '.join('<span>' + html.escape(name) + '</span>' for name in project['designers'].split())

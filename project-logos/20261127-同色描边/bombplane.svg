@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
   <title id="title">炸飞机 · 格点棋盘与俯冲飞机</title>
   <g stroke-width="12.5" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="34" y="42" width="166" height="166" rx="26" fill="#ece2cf" stroke="#c79f55" stroke-width="7.8" />
-    <path d="M90 42 V208 M145 42 V208 M34 97 H200 M34 153 H200" fill="none" stroke-width="4.7" stroke-opacity=".42" stroke="#c79f55" />
-    <circle cx="62" cy="70" r="16" fill="#c9a2a4" stroke-width="5.6" stroke="#9b4d51" />
-    <circle cx="172" cy="180" r="5.5" fill="#91484c" stroke="none" stroke-width="12.5" />
-    <path d="M214 54 L144 90 L98 78 L80 96 L118 118 L94 144 L66 142 L54 156 L86 168 L98 200 L112 188 L110 160 L136 136 L158 174 L176 156 L164 110 Z" fill="#a5bac9" stroke-width="7.1" stroke="#507b9b" />
+    <rect x="34" y="42" width="166" height="166" rx="26" fill="#f7ecd8" stroke="#e2ab46" stroke-width="7.8" />
+    <path d="M90 42 V208 M145 42 V208 M34 97 H200 M34 153 H200" fill="none" stroke-width="4.7" stroke-opacity=".42" stroke="#e2ab46" />
+    <circle cx="62" cy="70" r="16" fill="#e2878c" stroke-width="5.6" stroke="#c2252e" />
+    <circle cx="172" cy="180" r="5.5" fill="#b6232b" stroke="none" stroke-width="12.5" />
+    <path d="M214 54 L144 90 L98 78 L80 96 L118 118 L94 144 L66 142 L54 156 L86 168 L98 200 L112 188 L110 160 L136 136 L158 174 L176 156 L164 110 Z" fill="#8bbde0" stroke-width="7.1" stroke="#2981bf" />
   </g>
 </svg>
