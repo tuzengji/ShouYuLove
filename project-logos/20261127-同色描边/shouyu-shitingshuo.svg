@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">手语视听说 · 视频台词与对话泡</title>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    
+    <rect x="28" y="80" width="172" height="136" rx="26" fill="#ece2cf" stroke="none" stroke-width="1.0" />
+    <path d="M28 166 H200 V190 Q200 216 174 216 H54 Q28 216 28 190 Z" fill="#aec2b1" stroke="none" stroke-width="1.0" />
+    <rect x="28" y="80" width="172" height="136" rx="26" fill="none" stroke-width="8.1" stroke="#5d8f64" />
+    <path d="M30 166 H198" fill="none" stroke-width="6.8" stroke="#5d8f64" />
+    
+    <path d="M60 191 H132" fill="none" stroke-width="6.8" stroke="#5d8f64" />
+    <circle cx="164" cy="191" r="6.5" fill="#57865e" stroke="none" stroke-width="1.0" />
+    
+    <path d="M84 102 L130 124 L84 146 Z" fill="#c9a2a4" stroke-width="6.8" stroke="#9b4d51" />
+    
+    <g transform="rotate(6 184 68)">
+      <path d="M150 36 H208 Q228 36 228 56 V80 Q228 100 208 100 H182 L162 114 L165 100 H150 Q130 100 130 80 V56 Q130 36 150 36 Z" fill="#a5bac9" stroke-width="7.4" stroke="#507b9b" />
+      <path d="M158 68 H200" fill="none" stroke-width="6.2" stroke="#507b9b" />
+    </g>
+  </g>
+</svg>

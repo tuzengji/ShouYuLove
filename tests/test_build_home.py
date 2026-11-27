@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import build_home
+import icon_style
 import sketch
 
 
@@ -74,6 +75,21 @@ class NextPagesTest(unittest.TestCase):
             row = [paper[p["id"]] for p in self.content["projects"] if p["category"] == category]
             self.assertTrue(all(left != right for left, right in zip(row, row[1:])), category)
         self.assertNotIn("-square.", self.home)
+
+    def test_vector_icons_are_shown_in_their_tonal_redrawing(self):
+        for project in self.content["projects"]:
+            original = build_home.icon_original(project["id"]).with_suffix(".svg")
+            shown = build_home.icon_master(project["id"])
+            if not original.is_file():
+                self.assertEqual(shown, build_home.icon_original(project["id"]))
+                continue
+            self.assertEqual(shown.parent.name, icon_style.SET)
+            redrawn = shown.with_suffix(".svg").read_text(encoding="utf-8")
+            self.assertEqual(redrawn, icon_style.tonal(original.read_text(encoding="utf-8")) + "\n", project["id"])
+            self.assertNotIn(icon_style.INK, redrawn.lower())
+        for document in (self.home, self.portfolio):
+            for button in re.findall(r'<a class="entry.*?</a>', document, re.S):
+                self.assertNotIn(icon_style.INK, button.lower())
 
     def test_drawings_are_reproducible_and_every_frame_is_referenced(self):
         paths = build_home.brand_paths()

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">完美一餐 · 暖心宴席餐盖</title>
+  <g stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    
+    <path d="M100 54 C96 42 104 34 100 24" fill="none" stroke-width="5.6" stroke="#c79f55" />
+    <path d="M156 54 C152 42 160 34 156 24" fill="none" stroke-width="5.6" stroke="#c79f55" />
+    
+    <circle cx="128" cy="70" r="14" fill="#c9a2a4" stroke="#9b4d51" stroke-width="7.4" />
+    
+    <path d="M46 174 C46 116 80 84 128 84 C176 84 210 116 210 174 Z" fill="#ece2cf" stroke="#c79f55" stroke-width="7.4" />
+    
+    <path d="M74 148 C79 124 96 108 118 104" fill="none" stroke-width="4.7" stroke-opacity=".35" stroke="#c79f55" />
+    
+    <path d="M128 158 C108 144 102 130 110 122 C116 116 124 120 128 128 C132 120 140 116 146 122 C154 130 148 144 128 158 Z" fill="#c9a2a4" stroke-width="5.6" stroke="#9b4d51" />
+    
+    <path d="M28 174 H228 C224 192 208 202 184 202 H72 C48 202 32 192 28 174 Z" fill="#aec2b1" stroke="#5d8f64" stroke-width="7.4" />
+    
+    <path d="M84 202 H172" fill="none" stroke-width="6.8" stroke="#5d8f64" />
+  </g>
+</svg>

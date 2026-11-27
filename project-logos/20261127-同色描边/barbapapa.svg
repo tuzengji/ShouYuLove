@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">巴巴爸爸 · 圆润粉影与家族伙伴</title>
+  <g stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 198 C34 176 42 146 62 142 C82 138 92 164 88 194 C84 210 46 212 40 198 Z" fill="#e7d28b" stroke-width="6.8" stroke="#cca520" />
+    <path d="M168 194 C164 164 174 138 194 142 C214 146 222 176 216 198 C210 212 172 210 168 194 Z" fill="#a5bac9" stroke-width="6.8" stroke="#507b9b" />
+    <path d="M128 42 C102 42 86 64 86 92 C86 112 72 132 68 158 C63 192 84 216 128 216 C172 216 193 192 188 158 C184 132 170 112 170 92 C170 64 154 42 128 42 Z" fill="#e2b4ba" stroke="#c24253" stroke-width="7.4" />
+    <circle cx="111" cy="96" r="6.5" fill="#b83b4c" stroke="none" stroke-width="12.0" />
+    <circle cx="145" cy="96" r="6.5" fill="#b83b4c" stroke="none" stroke-width="12.0" />
+    <path d="M113 118 Q128 131 143 118" fill="none" stroke-width="6.2" stroke="#c24253" />
+    <circle cx="96" cy="112" r="7" fill="#c98c94" stroke="none" opacity=".55" stroke-width="12.0" />
+    <circle cx="160" cy="112" r="7" fill="#c98c94" stroke="none" opacity=".55" stroke-width="12.0" />
+  </g>
+</svg>

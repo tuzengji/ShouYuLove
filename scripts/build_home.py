@@ -34,6 +34,7 @@ from PIL import Image
 from fontTools.ttLib import TTFont
 from fontTools.varLib import instancer
 
+import icon_style
 import sketch
 from content_source import source_path
 
@@ -131,15 +132,26 @@ def characters(text):
 
 def entry_icon(project, label, icons):
     assert (project, label) in icons, "Add an entry icon in build_content.ENTRY_ICONS for: " + label
-    drawing = (ROOT / icons[(project, label)]).read_text(encoding="utf-8")
+    drawing = icon_style.tonal((ROOT / icons[(project, label)]).read_text(encoding="utf-8"))
     body = re.sub(r"<title[^>]*>.*?</title>", "", re.search(r"<svg[^>]*>(.*)</svg>", drawing, re.S).group(1), flags=re.S)
     return '<svg viewBox="0 0 256 256" aria-hidden="true">' + re.sub(r">\s+<", "><", body.strip()) + "</svg>"
 
 
-def icon_master(project_id):
+def icon_original(project_id):
+    """The icon as its designer drew it: a transparent PNG, with an SVG beside it when it is a vector drawing."""
     path = ROOT / "project-logos" / ICON_SETS.get(project_id, "20261012-柔和彩色") / (project_id + ".png")
     assert path.is_file(), f"Add the transparent icon for {project_id} (see ICON_SETS): {path}"
     return path
+
+
+def icon_master(project_id):
+    """What the pages show: the tonal redrawing of a vector icon, or the original picture when there is no vector."""
+    original = icon_original(project_id)
+    if not original.with_suffix(".svg").is_file():
+        return original
+    redrawn = ROOT / "project-logos" / icon_style.SET / original.name
+    assert redrawn.is_file(), f"Run scripts/icon_style.py to redraw the icon for {project_id}"
+    return redrawn
 
 
 @functools.lru_cache(maxsize=None)

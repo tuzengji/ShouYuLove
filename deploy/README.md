@@ -2,10 +2,10 @@
 
 ## 当前发布基线（2026-11-27）
 
-- **当前线上版本**：`20261127T095945Z-astra-home`（上一版本 `20261127T095304Z-astra-home`），共 **1,122 个运行文件、34 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `207,673,232` 字节。
-- **本轮变更范围**：首页 `/` 与作品集 `/portfolio/` 整体换成由 `scripts/build_home.py --site` 生成的二维手绘风页面（各一个 HTML 文件），新增 `/assets/next-*` 下的字体子集与 25 个图标，Nginx 路由片段与其余 1,090 个文件未变；随后按用户要求把十条较长的作品简介改成一句短话（`20261127T095945Z-astra-home`，文案变化后重新生成 2 个字体子集）；发布前必须最后运行一次 `build_home.py --site`，否则旧版首页和作品集会被重新发布。上一轮变更：在「核心创意」第 4 位接入「手语视听说」（`https://shouyulove.cn/shouyu-shitingshuo/`，设计者李昌昊），按以手予爱家族风格设计柔和彩色视频台词与对话泡图标（`project-logos/20261127-shouyu-shitingshuo/`，同步补齐子站标签页与桌面图标），完整重建覆盖 625 字的中文字体与双套 WebGL MSDF 图集（`syl-v1-1-shitingshuo`），保留全部旧版不可变资源。详见 [当前运维状态](../docs/operations-current.md)。
+- **当前线上版本**：`20261127T102847Z-astra-home`（上一版本 `20261127T095945Z-astra-home`），共 **1,145 个运行文件、34 条页面路由、5 个相对链接、2 条外部跳转**（`/where-to-study` 与 `/where-to-study/` → `https://39.96.206.228/`），总计 `207,940,412` 字节。
+- **本轮变更范围**：首页 `/` 与作品集 `/portfolio/` 整体换成由 `scripts/build_home.py --site` 生成的二维手绘风页面（各一个 HTML 文件），新增 `/assets/next-*` 下的字体子集与 25 个图标，Nginx 路由片段与其余 1,090 个文件未变；随后按用户要求把十条较长的作品简介改成一句短话（`20261127T095945Z-astra-home`，文案变化后重新生成 2 个字体子集），再把全部矢量作品图标换成同色描边（`20261127T102847Z-astra-home`，新增 23 个图标文件，旧图标文件保留）；发布前必须最后运行一次 `build_home.py --site`，否则旧版首页和作品集会被重新发布。上一轮变更：在「核心创意」第 4 位接入「手语视听说」（`https://shouyulove.cn/shouyu-shitingshuo/`，设计者李昌昊），按以手予爱家族风格设计柔和彩色视频台词与对话泡图标（`project-logos/20261127-shouyu-shitingshuo/`，同步补齐子站标签页与桌面图标），完整重建覆盖 625 字的中文字体与双套 WebGL MSDF 图集（`syl-v1-1-shitingshuo`），保留全部旧版不可变资源。详见 [当前运维状态](../docs/operations-current.md)。
 - **静态资源与子站隔离**：
-  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 739 项）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
+  - 既有大体积三维与媒体资源经私有 OSS 与 CDN `https://assets.shouyulove.cn/v/20261020-flyinghands/`（`cdn-manifest.json` 311 项）提供；后续增量静态资源（`origin-asset-manifest.json` 762 项）由 ECS 提供。CDN 发布与证书手动续签说明见 [CDN 维护说明](../docs/cdn-oss.md)。
   - 主站发布目录固定为 `/var/www/shouyulove-home`（指向 `/var/www/shouyulove-home-releases/<版本>`），与同机独立维护的手小语（`/var/www/shouyulove-showcase`）、指间趣游（`/var/www/shouyulove-signplay`）、飞手传书（`/opt/flyinghands/current`）、手语分社统一通行证（`/opt/shouyulove-auth/current`）、心创云盘（`/opt/shouyulove-drive/current`）、以手寻语、传情会意、接锅、文化节、年终总结及拼好课严格隔离，互不混用静态目录。
 
 ## 发布与回滚规范
@@ -23,6 +23,7 @@
 
 | 日期 | 主站发布版本 | 文件 / 路由 / 规模 | 核心变更 |
 | --- | --- | --- | --- |
+| 2026-11-27 | `20261127T102847Z-astra-home` | 1,145 文件 / 34 路由 / `207,940,412` B | 23 枚矢量作品图标与按钮小图标换成同色描边（`scripts/icon_style.py`），首页与作品集随之重建，新增 23 个图标文件 |
 | 2026-11-27 | `20261127T095945Z-astra-home` | 1,122 文件 / 34 路由 / `207,673,232` B | 十条较长的作品简介改成一句短话（奶家麻将保持原文），首页与作品集随之重建，新增 2 个字体子集 |
 | 2026-11-27 | `20261127T095304Z-astra-home` | 1,120 文件 / 34 路由 / `207,466,306` B | 首页与作品集整体换成二维手绘风的轻量页面（`scripts/build_home.py`），新增 3 个字体与 25 个图标（`/assets/next-*`），其余文件与路由不变 |
 | 2026-11-27 | `20261127T094624Z-astra-home` | 1,092 文件 / 34 路由 / `206,849,407` B | 「核心创意」第 4 位接入「手语视听说」（`/shouyu-shitingshuo/`，设计者李昌昊），设计柔和彩色图标并同步子站 favicon，重建 625 字中文字体与 MSDF 图集（`syl-v1-1-shitingshuo`） |

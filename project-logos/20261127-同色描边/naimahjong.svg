@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-labelledby="title">
+  <title id="title">奶家麻将 · 柔和彩色双麻将牌</title>
+  <g stroke-width="11.5" stroke-linecap="round" stroke-linejoin="round">
+    
+    <g transform="rotate(-11 88 134)">
+      <rect x="34" y="60" width="106" height="144" rx="22" fill="#aec2b1" stroke="#5d8f64" stroke-width="7.1" />
+      <rect x="34" y="60" width="94" height="134" rx="20" fill="#ece2cf" stroke="#c79f55" stroke-width="7.1" />
+      <circle cx="81" cy="102" r="14" fill="#e7c589" stroke-width="5.3" stroke="#cc8e20" />
+      <circle cx="81" cy="152" r="14" fill="#aec2b1" stroke-width="5.3" stroke="#5d8f64" />
+    </g>
+    
+    <rect x="90" y="54" width="122" height="162" rx="24" fill="#aec2b1" stroke="#5d8f64" stroke-width="7.1" />
+    <rect x="90" y="54" width="108" height="150" rx="22" fill="#f7f3e8" stroke="#d2b461" stroke-width="7.1" />
+    
+    <rect x="104" y="68" width="80" height="122" rx="14" fill="none" stroke-width="3.1" stroke-opacity=".22" stroke="#d2b461" />
+    
+    <rect x="116" y="102" width="56" height="44" rx="10" fill="#c9a2a4" stroke-width="5.9" stroke="#9b4d51" />
+    <path d="M144 82 V176" fill="none" stroke="#9b4d51" stroke-width="7.4" />
+    
+    <path d="M222 24 Q225 43 244 46 Q225 49 222 68 Q219 49 200 46 Q219 43 222 24 Z" fill="#e7c589" stroke-width="4.7" stroke="#cc8e20" />
+  </g>
+</svg>
