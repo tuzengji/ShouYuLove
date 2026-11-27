@@ -193,7 +193,7 @@ def papers(projects):
             allowed = ["blush", "lilac", "sky", "peach"]
         else:
             allowed = ["peach", "butter", "blush", "sky", "lilac"]
-        if project["category"] == "手语游戏":  # these sit on the peach tray
+        if project["category"] == "手语游戏":  # kept from when they sat on a peach tray, so their colours stay as approved
             allowed = [name for name in allowed if name != "peach"]
         last = lambda name: max((index for index, other in enumerate(used) if other == name), default=-1)
         used.append(min(allowed, key=last))
@@ -271,7 +271,7 @@ def home_works(content, constants):
 
     core, games, internal, other = HOME_ORDER
     return (f'<section class="works" id="works" data-stop><div class="wrap">{block(core, 3)}</div></section>'
-            f'<section class="works tray tray--palm" data-stop><div class="wrap">{block(games, 4)}</div></section>'
+            f'<section class="works" data-stop><div class="wrap">{block(games, 4)}</div></section>'
             f'<section class="works" data-stop><div class="wrap">{block(internal, 3)}</div></section>'
             f'<section class="works" data-stop><div class="wrap">{block(other, 4)}</div></section>')
 
@@ -327,7 +327,7 @@ def portfolio_page(content, constants):
                         for index, project in enumerate(projects))
         title = heading(category, number, extra=f' id="portfolio-{slug}-title"')
         sections.append(
-            f'<section class="portfolio-section portfolio-section--{slug}{" tray tray--palm" if slug == "games" else ""}" '
+            f'<section class="portfolio-section portfolio-section--{slug}" '
             f'id="portfolio-{slug}" aria-labelledby="portfolio-{slug}-title"><div class="wrap">'
             f'<header class="works-head rise"><div class="head-row">{title}<i class="head-rule" aria-hidden="true"></i>'
             f'<span class="head-count latin" aria-hidden="true">{len(projects)}</span></div></header>'
