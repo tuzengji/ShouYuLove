@@ -1,0 +1,147 @@
+/* 以手予爱新版页面的共用样式（首页与作品集）：二维手绘风。
+   底色是干净的暖白，颜色只出现在画和字上，全部取自主站标识「把爱递给你」：
+   墨绿是线条与文字，灰绿是袖子和小装饰，豆沙是爱（爱心和它走过的路），手掌米色用作手语游戏的托盘。插画由 scripts/sketch.py 按标识原稿生成：墨线、彩铅排线和剪纸色块。 */
+:root {
+  --paper: #fffdfa;
+  --ink: #1f352b;
+  --ink-2: #2f4439;
+  --ink-3: #4b5d54;
+  --line: #3d4f46;
+  --sage: #aec2b1;
+  --heart: #c9a2a4;
+  --heart-line: #c2979a;
+  --palm: #f3dfcf;
+  --palm-soft: #fdf3ea;
+  --sage-soft: #d9e4d9;
+  --butter: #fdf6e2;
+  --col: 1080px;
+  --font-body: SylSans, "PingFang SC", "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-display: SylSong, "Songti SC", "Noto Serif SC", SimSun, serif;
+  --font-latin: SylLatin, SylSong, Georgia, serif;
+  --hair: rgba(31, 53, 43, .16);
+  --spring: cubic-bezier(.2, 1.5, .4, 1);
+  --glide: cubic-bezier(.16, .8, .24, 1);
+  color-scheme: only light;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; background: var(--paper); scroll-behavior: smooth; }
+body {
+  margin: 0;
+  position: relative;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 17px/1.9 var(--font-body);
+  letter-spacing: .02em;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul { margin: 0; }
+/* 标题用宋体，笔画有粗细对比；正文用黑体，小字也清楚；手绘只留给插画 */
+h1, h2, h3 { font-family: var(--font-display); font-weight: 400; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+a:focus-visible { outline: 2px solid var(--ink); outline-offset: 4px; border-radius: 6px; }
+img { display: block; }
+::selection { background: var(--heart); color: #fff; }
+/* 西文字标和数字用老式斜体 */
+.latin { font-family: var(--font-latin); letter-spacing: .01em; }
+button { font: inherit; color: inherit; }
+
+/* 手绘插画：同一幅画重画三遍，轮流显示，线条就像手绘动画那样微微抖动 */
+.boil > * { visibility: hidden; animation: boil .66s step-end infinite; }
+.boil > :nth-child(2) { animation-delay: -.44s; }
+.boil > :nth-child(3) { animation-delay: -.22s; }
+@keyframes boil { 0% { visibility: visible; } 33.34% { visibility: hidden; } }
+.hand { position: relative; z-index: 2; }
+.hand svg, .heart-art svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hand--give { --sleeve: #aec2b1; --sleeve-soft: #d3dfd5; --sleeve-rib: #7f9a86; --halo: #f7e6da; }
+.hand--take { --sleeve: #a5bac9; --sleeve-soft: #d0dbe4; --sleeve-rib: #7c93a6; --halo: #f5ecd2; }
+/* 爱心周围的几笔光芒和小星星，只在爱心停在手心时出现 */
+.rays { opacity: var(--rest, 1); }
+
+/* 标题下的一笔手画横线，进入视野时从左到右画出来 */
+.scribbled { position: relative; display: inline-block; }
+.scribble { position: absolute; left: -2%; bottom: -.3em; width: 104%; height: .22em; overflow: visible; fill: var(--sage); }
+.js .rise .scribble { clip-path: inset(-20% 100% -20% 0); transition: clip-path .9s var(--glide) .25s; }
+.js .rise.is-in .scribble { clip-path: inset(-20% 0 -20% 0); }
+
+/* 作品卡片：每幅小画垫着一片剪纸，纸片各剪各的形状，画略微探出纸边 */
+.works-head h2 { font-size: clamp(28px, 3.2vw, 42px); line-height: 1.3; letter-spacing: .1em; }
+/* 标题右侧一条细线，线尾是这一类作品的数量 */
+.head-row { display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
+.head-rule { flex: 1; align-self: center; height: 1px; background: var(--hair); }
+.head-count { font-size: clamp(22px, 2.2vw, 30px); line-height: 1; color: var(--ink-3); }
+/* 一句话尽量留在同一行，换行优先落在句子之间 */
+.phrase { display: inline-block; max-width: 100%; }
+/* 说明文字不限宽：放得下就是一行；放不下时各行长度均衡，最后一行不会只剩一两个字 */
+.works-head p { margin-top: 20px; font-size: 16px; line-height: 1.8; color: var(--ink-2); text-wrap: balance; }
+.tiles { display: grid; gap: clamp(28px, 3.6vw, 52px) clamp(24px, 3.4vw, 48px); }
+.tile { display: grid; grid-template-columns: var(--icon) minmax(0, 1fr); gap: 16px; align-items: start; min-height: 44px; border-radius: 18px; }
+.tile-art { position: relative; display: block; width: var(--icon); height: var(--icon); transition: transform .3s var(--spring); }
+.tile-art::before { content: ""; position: absolute; inset: 4%; border-radius: var(--shape); background: var(--paper-scrap); transform: rotate(var(--turn));
+  transition: transform .8s var(--spring), border-radius .8s var(--glide); }
+.tile-icon { position: absolute; top: 12%; left: 12%; width: 76%; height: 76%; object-fit: contain; transition: transform .55s var(--spring); }
+.tile h3 { font-size: var(--title); line-height: 1.45; letter-spacing: .04em; overflow-wrap: anywhere; text-wrap: balance; }
+/* 标题上的一道荧光笔，悬停时从左划到右 */
+.tile h3 span { margin-inline: -.14em; padding-inline: .14em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M1 3.3C19 1.5 41 2.7 60 2.1 78 1.6 92 2.5 99.2 1.8L98.3 8.3C80 9.1 60 7.8 41 8.6 24 9.2 9 8.2 1.7 8.9Z' fill='%23c9a2a4' fill-opacity='.45'/%3E%3C/svg%3E") no-repeat 0 92% / 0% .52em; transition: background-size .5s var(--glide); }
+
+/* 悬停时画上去的东西：蜡笔绕图标圈一圈，角上冒出一颗小爱心和两笔光芒 */
+.tile-pen { position: absolute; top: -15%; left: -15%; width: 130%; height: 130%; overflow: visible; pointer-events: none; opacity: 0; transition: opacity .3s; }
+.tile-pen .loop { fill: none; stroke: var(--heart-line); stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
+.tile-pen .pop-rays, .tile-pen .pop-heart { transform-origin: 9px 8.5px; }
+.tiles--sm .tile-pen .loop { stroke-width: 3; }
+@keyframes pen-loop { from { stroke-dashoffset: 1; } }
+@keyframes pen-rays { from { transform: scale(.45); opacity: 0; } }
+@keyframes pen-heart { from { transform: translate(10px, 10px) scale(0) rotate(-40deg); opacity: 0; } }
+@keyframes pen-float { 50% { transform: translate(-.5px, -1.8px) rotate(4deg); } }
+.tile-desc { margin-top: 8px; font-size: var(--desc); line-height: 1.8; color: var(--ink-2); overflow-wrap: anywhere; text-wrap: pretty; }
+.tile-by { margin-top: 10px; font-size: 14px; line-height: 1.7; letter-spacing: .04em; color: var(--ink-3); }
+.tile-by span { white-space: nowrap; }
+.tiles--lg { --icon: 76px; --title: 20px; --desc: 15.5px; }
+.tiles--md { --icon: 64px; --title: 19px; --desc: 15.5px; }
+.tiles--sm { --icon: 56px; --title: 18px; --desc: 15.5px; gap: 28px; }
+a.tile:focus-visible { outline-offset: 8px; }
+.tile.is-lit .tile-art::before { border-radius: var(--shape-lit); transform: rotate(calc(var(--turn) + 38deg)) scale(1.05); }
+.tile.is-lit .tile-icon { transform: translateY(-7%) scale(1.1) rotate(-5deg); }
+.tile.is-lit h3 span { background-size: 100% .52em; }
+.tile.is-lit .tile-pen { opacity: 1; transition-duration: .01s; }
+.tile.is-lit .loop { animation: pen-loop .6s cubic-bezier(.45, .05, .25, 1) both; }
+.tile.is-lit .pop-heart { animation: pen-heart .55s var(--spring) .36s both; }
+.tile.is-lit .pop-rays { animation: pen-rays .4s var(--spring) .6s both; }
+.tile.is-lit .pop-heart use { animation: pen-float 2.4s ease-in-out 1s infinite; transform-origin: 9px 8.5px; }
+a.tile:active .tile-art { transform: scale(.94); }
+.entries { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+/* 不规则的圆角让按钮像手画的圈 */
+.entry { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 4px 16px 4px 6px; border: 1.2px solid var(--ink-2); border-radius: 26px 22px 28px 20px / 22px 28px 20px 26px; font-size: 15px; line-height: 1.3; white-space: nowrap;
+  background: linear-gradient(var(--palm), var(--palm)) no-repeat 0 0 / 0% 100% rgba(255, 255, 255, .55); transition: background-size .45s var(--glide), transform .4s var(--spring); }
+.entry svg { flex: none; width: 30px; height: 30px; }
+/* 入口按钮：颜色像被涂上去一样从左铺满，小图标晃一下 */
+@keyframes wiggle { 30% { transform: rotate(-14deg) scale(1.12); } 60% { transform: rotate(9deg) scale(1.12); } 85% { transform: rotate(-3deg); } }
+@media (hover: hover) and (pointer: fine) {
+  .entry:hover { background-size: 100% 100%; transform: translateY(-2px) rotate(-1.5deg); }
+  .entry:hover svg { animation: wiggle .6s ease-in-out; }
+}
+.entry:active { transform: scale(.96); }
+.tiles--md .entry { gap: 6px; padding: 3px 13px 3px 5px; }
+.tiles--md .entry svg { width: 26px; height: 26px; }
+
+/* 进入视野时，图标像贴纸一样贴上来（只在脚本可用时隐藏初始状态） */
+.js .pop { opacity: 0; }
+.js .pop.is-in { opacity: 1; animation: pop-in .75s var(--glide) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
+.js .pop.is-in .tile-art { animation: sticker .8s var(--spring) backwards; animation-delay: calc(var(--i, 0) * 70ms); }
+@keyframes pop-in { from { opacity: 0; transform: translateY(18px); } }
+@keyframes sticker { from { transform: scale(.4) rotate(-16deg); } }
+.js .rise { opacity: 0; transform: translateY(22px); transition: opacity .8s var(--glide), transform .8s var(--glide); }
+.js .rise.is-in { opacity: 1; transform: none; }
+
+/* 手语游戏放在一张手掌色的剪纸上，边角剪得不太规整 */
+.tray { margin-inline: 8px; border-radius: 30px 22px 34px 24px / 24px 34px 22px 30px; }
+.tray--palm { background: var(--palm-soft); }
+@media (min-width: 700px) { .tray { margin-inline: 14px; border-radius: 52px 36px 58px 40px / 40px 56px 36px 52px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .boil > :first-child { visibility: visible; }
+  .js .pop, .js .rise { opacity: 1; transform: none; }
+  .js .rise .scribble { clip-path: none; }
+}

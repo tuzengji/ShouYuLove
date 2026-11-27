@@ -1,5 +1,16 @@
 # 当前运维状态与记录索引
 
+## 2026-11-27 首页与作品集整体换成二维手绘风页面
+
+按用户要求重新设计并替换主站首页 `/` 与作品集 `/portfolio/`，从 Astra/WebGL 三维运行时换成各一个 HTML 文件的轻量页面。
+
+- **设计**：从主站标识「把爱递给你」生成全部插画。首屏一只手递出爱心，滚动时爱心沿手画虚线穿过全页，落进页尾另一只手并迸出小爱心；作品图标去掉原来的方形底色，改为透明图案垫一片形状不规则的浅色剪纸；鼠标悬停时蜡笔绕图标画一圈、角上冒出小爱心、标题被荧光笔划过。底色为暖白，标题用思源宋体中粗，正文用思源黑体，西文字标用 Cormorant Garamond 斜体（均为 SIL OFL 1.1）。页面不含任何三维或 WebGL 内容，系统开启「减少动态效果」时保持静止。
+- **构建**：新增 `scripts/build_home.py`（页面）与 `scripts/sketch.py`（手绘线稿），样式 `styles/next.css`、`styles/home.css`、`styles/works.css`，脚本 `scripts/next.js`、`scripts/home.js`、`scripts/works.js`，测试 `tests/test_build_home.py`。`build_home.py --site` 写入 `index.html` 与 `portfolio/index.html`，并登记 `runtime-manifest.json` 与 `origin-asset-manifest.json`。首页约 146 KB、作品集约 137 KB，另有 3 个字体子集（约 234 KB）与 25 个 WebP 图标（约 291 KB），放在 `/assets/next-*`，文件名带内容哈希，沿用一年 `immutable` 缓存。
+- **内容**：正文仍取自绑定原稿，25 个作品 28 个入口链接与原稿一致，「手语视听说」位于「核心创意」第 4 位。作品集保留点击统计挂钩与手机「添加到桌面」。
+- **主站原子发布（`20261127T095304Z-astra-home`）**：运行白名单升级至 1,120 个运行文件、34 条页面路由、5 个相对链接、2 条外部跳转，共 `207,466,306` 字节（上一版本 `20261127T094624Z-astra-home`）。在上一版本目录的完整副本上替换 2 个页面并加入 28 个新资源，经 `publish_astra.py` 持锁完成 1,120 个文件 SHA-256 逐项校验、`nginx -t` 与平滑重载；Nginx 路由片段未变（`c557dff2…`），34 条页面路由、4 条站内 308 跳转、2 条外部 302 跳转与 `/signtrace/`、`/chuanqinghuiyi/`、`/dict/entries` 均通过。服务器记录位于 `/opt/shouyulove-maintenance/20261127-next-home/`，配置备份位于 `/etc/nginx/backups/shouyulove-home-20261127T095304Z-astra-home/`。
+- **验收**：公网 `https://shouyulove.cn/` 与 `/portfolio/` 在 1440、390、320 宽度下用无头浏览器（`User-Agent: ShouYuLove-QA`）核对，无横向溢出、无脚本报错、无失败请求，三款字体加载成功；作品集点击后 `/__syl/portfolio-click/<id>` 请求照常发出，手机宽度下「添加到桌面」正常显示。
+- **未改动**：`/the-studio/` 与 `/projects/<id>/` 仍是旧风格并保留在线，新版两页不再链接它们；浏览器标签页图标、分享图与其余子站未变。回滚时把 `/var/www/shouyulove-home` 指回 `20261127T094624Z-astra-home` 即可。
+
 ## 2026-11-27 主站「核心创意」第 4 位接入「手语视听说」
 
 按用户要求核验服务器上的「手语视听说」静态子站（由 `xinchuangzu` 经 `shouyulove-route` 托管于 `https://shouyulove.cn/shouyu-shitingshuo/`，目录 `/var/www/shouyulove-sign-games-custom/shouyu-shitingshuo`，含 109 路支持 HTTP 206 Range 播放的手语视频），设计以手予爱同系列柔和彩色图标并同步接入主站首页与作品集 `/portfolio/` 的「核心创意」第 4 位（排在「小爱同学的物资小屋」之后、「手小语」之前，设计者李昌昊，「核心创意」共 7 项、全站共 25 个作品）：

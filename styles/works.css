@@ -1,0 +1,69 @@
+/* 作品集专用样式；共用部分见 next.css。作品集是手机上会「添加到桌面」的常用入口，排得比首页更紧凑。 */
+.wrap { position: relative; z-index: 2; width: min(var(--col), 100% - 44px); margin-inline: auto; }
+@media (min-width: 700px) { .wrap { width: min(var(--col), 100% - 96px); } }
+
+/* 页头：一行细字的页眉，下面是宋体大标题，右侧那颗手绘爱心垫着一片剪纸 */
+.portfolio-header { padding-top: max(14px, env(safe-area-inset-top)); padding-bottom: clamp(30px, 5vw, 64px); }
+.portfolio-bar { display: flex; align-items: center; justify-content: space-between; font-size: 15px; letter-spacing: .18em; animation: rise-in 1s var(--glide) .5s both; }
+.portfolio-bar a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline 1px var(--sage); text-underline-offset: .5em; transition: text-decoration-color .25s; }
+@media (hover: hover) and (pointer: fine) { .portfolio-bar a:hover { text-decoration-color: var(--heart); } }
+.brand { font-family: var(--font-display); letter-spacing: .14em; color: var(--ink-2); }
+.brand .latin { margin-left: .5em; font-size: 1.2em; letter-spacing: .01em; }
+.portfolio-title { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: clamp(18px, 4.4vw, 64px); }
+.portfolio-title > div { min-width: 0; }
+.portfolio-header h1 { font-size: clamp(27px, 7.6vw, 96px); line-height: 1.15; letter-spacing: .08em; white-space: nowrap; }
+.portfolio-id { margin-top: clamp(12px, 2.2vw, 30px); font-size: clamp(12.5px, 3.5vw, 15px); line-height: 1.7; letter-spacing: .04em; color: var(--ink-2); animation: rise-in 1s var(--glide) .8s both; }
+@media (min-width: 700px) {
+  .portfolio-id { display: flex; align-items: center; gap: 18px; font-size: 15px; letter-spacing: .3em; }
+  .portfolio-id::before { content: ""; flex: none; width: 56px; height: 1px; background: var(--ink-3); }
+}
+.ch { display: inline-block; overflow: hidden; padding-block: .1em; margin-block: -.1em; vertical-align: top; }
+.ch > span { display: inline-block; animation: char-up 1s var(--glide) both; animation-delay: calc(.1s + var(--i) * .07s); }
+@keyframes char-up { from { transform: translateY(112%) rotate(6deg); } }
+@keyframes rise-in { from { opacity: 0; transform: translateY(16px); } }
+.mascot { position: relative; flex: none; width: clamp(58px, 14vw, 176px); margin: 0 clamp(10px, 4vw, 64px) 0 0; padding: 0; border: 0; background: none; cursor: pointer; animation: mascot-in 1.1s var(--spring) .35s both; -webkit-tap-highlight-color: transparent; }
+.mascot::before { content: ""; position: absolute; inset: -30% -26% -34% -26%; border-radius: 54% 46% 52% 48% / 48% 54% 46% 52%; background: #f8e9dc; transform: rotate(-8deg); }
+.mascot .heart-art { position: relative; display: block; animation: beat 2.8s ease-in-out infinite; transform-origin: 50% 60%; }
+.mascot.is-spun .heart-art { animation: spin 1s var(--spring); }
+@keyframes mascot-in { from { transform: scale(0) rotate(-30deg); opacity: 0; } }
+@keyframes beat { 0%, 34%, 100% { transform: scale(1); } 11% { transform: scale(1.07); } 22% { transform: scale(.985); } }
+@keyframes spin { from { transform: rotate(0deg) scale(1); } 40% { transform: rotate(200deg) scale(1.15); } to { transform: rotate(360deg) scale(1); } }
+
+/* 分类跳转：停在页面顶部，标出当前所在的分类 */
+.chips { position: sticky; top: 0; z-index: 5; border-block: 1px solid var(--hair); background: rgba(255, 253, 250, .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.chips ul { display: flex; gap: 10px; padding-block: 12px; overflow-x: auto; scrollbar-width: none; }
+.chips ul::-webkit-scrollbar { display: none; }
+.chips a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 22px; border: 1.2px solid var(--ink-2); border-radius: 26px 22px 28px 20px / 22px 28px 20px 26px; font-size: 15px; letter-spacing: .06em; line-height: 1.2; white-space: nowrap;
+  background: linear-gradient(var(--sage-soft), var(--sage-soft)) no-repeat 0 0 / 0% 100%; transition: background-size .45s var(--glide), transform .4s var(--spring); }
+.chips li:nth-child(even) a { border-radius: 22px 28px 20px 26px / 28px 20px 26px 22px; }
+.chips a.is-here { background-size: 100% 100%; }
+@media (hover: hover) and (pointer: fine) { .chips a:hover { background-size: 100% 100%; transform: translateY(-2px) rotate(-1.5deg); } }
+
+/* 分类 */
+#portfolio { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+.portfolio-section { padding-block: clamp(48px, 6.4vw, 96px); scroll-margin-top: 64px; }
+.portfolio-section.tray { margin-block: clamp(8px, 2vw, 24px); }
+.works-head { margin-bottom: clamp(28px, 3.8vw, 52px); }
+.works-head h2 { font-size: clamp(26px, 2.9vw, 36px); }
+/* 每件作品上方一条细线，像目录一样一行行排下去 */
+.tiles { gap: clamp(26px, 3vw, 40px) clamp(28px, 3.6vw, 56px); }
+.tile { padding-top: clamp(22px, 2.4vw, 30px); border-top: 1px solid var(--hair); border-radius: 0; }
+.tiles--lg { --icon: 76px; --title: 20px; --desc: 15.5px; }
+.tiles--md { --icon: 68px; --title: 19px; --desc: 15.5px; }
+.tiles--sm { --icon: 56px; --title: 18px; --desc: 15px; }
+@media (min-width: 700px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1040px) {
+  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tiles--lg { --icon: 92px; --title: 21px; }
+  .tiles--sm { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px; }
+  .tiles--sm .tile { grid-template-columns: 1fr; gap: 14px; }
+}
+.portfolio-thanks { margin-top: clamp(24px, 4vw, 56px); padding-top: 26px; border-top: 1px solid var(--hair); text-align: center; color: var(--ink-3); }
+.portfolio-thanks small { font-size: 13.5px; line-height: 1.8; letter-spacing: .1em; }
+
+/* 「添加到桌面」沿用原有结构与脚本，只换成新的配色 */
+.portfolio-page #syl-home-shortcut { bottom: calc(20px + env(safe-area-inset-bottom)); color: var(--ink); font-family: var(--font-body); }
+.portfolio-page #syl-shortcut-guide h2 { font-family: var(--font-display); }
+.portfolio-page #syl-home-shortcut-button { border: 1.2px solid var(--ink-2); background: var(--sage-soft); color: var(--ink); border-radius: 26px 22px 28px 20px / 22px 28px 20px 26px; box-shadow: 3px 4px 0 rgba(61, 79, 70, .17); }
+.portfolio-page #syl-home-shortcut-button:active { background: var(--sage); }
+.portfolio-page #syl-shortcut-guide { border: 1.2px solid var(--ink-2); border-radius: 22px 18px 24px 16px / 18px 24px 16px 22px; background: var(--paper); box-shadow: 4px 5px 0 rgba(61, 79, 70, .17); }

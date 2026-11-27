@@ -58,12 +58,12 @@
       "sha256": "26f8c40f9ab50f9aa1dc9234d4bb0b0d80f0f11eea60b686707f5786f33b34a3"
     },
     "index.html": {
-      "bytes": 153833,
-      "sha256": "a012be20936db102928af5590fec5849a03322f8aacc9f09457ec856bdf53483"
+      "bytes": 146061,
+      "sha256": "59e23bd3613c38497aa251741f5938cf97e688c458895e85de48ac03d40d4650"
     },
     "portfolio/index.html": {
-      "bytes": 41748,
-      "sha256": "23604bfa718f774b46cf2ee587dba27836efabedcf20b26c2962107eeb9e77da"
+      "bytes": 137009,
+      "sha256": "795f3434185e4f2b191cc68563cf2facefa49741ab24e3ed492e548add17faa7"
     },
     "portfolio/projects.json": {
       "bytes": 958,
@@ -2176,6 +2176,118 @@
     "sites/immersive-g-com-955afd14/shared/assets/index.D7bwnB0L.syl-v1-1-xinchuang-drive.js": {
       "bytes": 1135,
       "sha256": "b43a540d10f50e13e1a861be6cd8390fe72d9f40835afd67fca93cad88659177"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-2026-sign-language-cultural-festival.54af8e1174.webp": {
+      "bytes": 23224,
+      "sha256": "54af8e117425686672cdc2c049fc728e4a26eba1dff56e61e58af7fc67a6d039"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-2026-year-end-summary.edd01bf09f.webp": {
+      "bytes": 12386,
+      "sha256": "edd01bf09fc5da4805f216730bf5a01978f81a3e068f12976779c2a7e9d54761"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-barbapapa.a4bef69e51.webp": {
+      "bytes": 10528,
+      "sha256": "a4bef69e519c481ca3d5adb8bda8b95cb4bc66f9e391ae8bcaefd9eaeedc78bd"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-beida-zhidao.f78a5846a9.webp": {
+      "bytes": 10750,
+      "sha256": "f78a5846a99d70d99cbbc6ae024ae0be4bf0a9b5e8563550a56eb6c45f15c661"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-bombplane.468c4a79b8.webp": {
+      "bytes": 10708,
+      "sha256": "468c4a79b810ada5390b97ebb6d0eef0d0346ded7b06f4cc0079d0006ec9a422"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-chuanqinghuiyi.4ef5155110.webp": {
+      "bytes": 12616,
+      "sha256": "4ef51551100f4cd68117f406f2011cba0952a302c7db3e2ee001aeaaa600de9a"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-codenames.7c7a7ba854.webp": {
+      "bytes": 10074,
+      "sha256": "7c7a7ba854537e24c8b2a100f7fea6ae5d0a573496d53b2f8477418beb5597c1"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-dictionary.8f05d22e4a.webp": {
+      "bytes": 7354,
+      "sha256": "8f05d22e4af6d2a38cf1a475df8b48c621d39038a1cfd925eae3a2255847588b"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-flyinghands.a14d5680e0.webp": {
+      "bytes": 14050,
+      "sha256": "a14d5680e0fa8c6766c4af6f970a228edfdf1886c75c28a86dbe6557e4d4afeb"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-fruitbomb.c4f734f34b.webp": {
+      "bytes": 10008,
+      "sha256": "c4f734f34bd4bdef239d632b3887c2fb71fd8e1c462da547ad5b82ae9b6d27f3"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-jieguo.b4a53780e5.webp": {
+      "bytes": 9492,
+      "sha256": "b4a53780e50d68c67700afc2f57c61972451a02947a1f123d4c11430b4652a1e"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-naimahjong.e3033c4990.webp": {
+      "bytes": 9940,
+      "sha256": "e3033c4990859b415b187bf0794f45470e320ab511b882daf22f8256fb656da1"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-perfectmenu.1ff7d6da47.webp": {
+      "bytes": 10462,
+      "sha256": "1ff7d6da470151b482ae9a7f1d69ba6a4b3825011105646b804c264517843517"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-pinhaoke.5866690fa3.webp": {
+      "bytes": 4972,
+      "sha256": "5866690fa309bc8d1d159503d17bcfdc6443bf3a2dcc4810a8c0a0135e5b09cc"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-qinghua-zhidao.6e55fef558.webp": {
+      "bytes": 4454,
+      "sha256": "6e55fef5585e69bb594e19a4180d994ea812997f52baf432ec8f96a1772eb0cd"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-quna-study.ca5a9734d8.webp": {
+      "bytes": 9030,
+      "sha256": "ca5a9734d8921f22e917af319f6cfe87aebfa14fad47c767b5a148815da2f8a5"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-shouxiaoyu.49bde29291.webp": {
+      "bytes": 9788,
+      "sha256": "49bde29291dc185f446d28923f0f61e9b291f5b1480b840ca1b1f82f58c55332"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-shouyu-pass.edfc4ba9db.webp": {
+      "bytes": 8984,
+      "sha256": "edfc4ba9dbf85f605f12c2cb88aae81ecf81761d2d4281a2d9344cb504467860"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-shouyu-shitingshuo.8d418f3998.webp": {
+      "bytes": 7256,
+      "sha256": "8d418f39985f690f21a07d8f9bcb870ead5292f16930c1f367a7f780c2e5bc74"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-signplay.e017a68921.webp": {
+      "bytes": 11948,
+      "sha256": "e017a68921d45e6d2b5195c8478a196b4119b2800c3413e543c961135a83249e"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-signtrace.0a14e0ace4.webp": {
+      "bytes": 13706,
+      "sha256": "0a14e0ace4a91f767ed5e37e46d26a28284db1733f41eb29d8c0db5781f5537c"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-skull.2822591426.webp": {
+      "bytes": 15918,
+      "sha256": "28225914262da02eb24998ebd16893002b92ef87ef24791a69f7adf67c2dc76f"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-snowleopard.103c316536.webp": {
+      "bytes": 15892,
+      "sha256": "103c316536faf763a189ad32ea216b369b9d7bea978023fde99ce4e662a459f7"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-xiaoai-warm-cabin.5f16d27115.webp": {
+      "bytes": 26088,
+      "sha256": "5f16d27115dae6ebff7f978952c4279c71dea9cefc90c0b3ca4285415360a98b"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-xinchuang-drive.44eaa0c314.webp": {
+      "bytes": 11390,
+      "sha256": "44eaa0c314052798054a899124b560dfb31e12dab09c4295042335ffd728e886"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-syllatin.2c1581177b.woff2": {
+      "bytes": 18764,
+      "sha256": "68224695446f6355e50fb983e9f2cb52141edc41cdac060dbe97a9e2be7bd50e"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-sylsans.b4dd6c7b5f.woff2": {
+      "bytes": 93960,
+      "sha256": "3bede3bfd12dd4ae6a187b6f4b2bb8f239f86efd9676325be7af2b3d59e323ef"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-sylsong.36f2c988fb.woff2": {
+      "bytes": 125668,
+      "sha256": "9250587a4e7dd4af3b9b3cd3c9ec94f30995bf339cca4879d928fb24170b5e60"
     },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-clicks.syl-v1-1-20261017.js": {
       "bytes": 922,
@@ -4422,5 +4534,5 @@
       "sha256": "abb1e21d53246ee145c68cbdd9a32b01bd247c95b350a46a218c757b7bdb95e7"
     }
   },
-  "bytes": 206849407
+  "bytes": 207466306
 }
