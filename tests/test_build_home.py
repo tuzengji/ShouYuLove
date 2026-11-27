@@ -38,6 +38,11 @@ class NextPagesTest(unittest.TestCase):
         shown = [p for p in self.content["projects"] if p["category"] == "其他作品" and p["show_portfolio_credit"]]
         self.assertEqual(other.count("设计者："), len(shown))
 
+    def test_portfolio_headings_carry_no_category_notes(self):
+        for note in (self.content["core"], self.content["games"], self.content["internal"], self.content["other"]):
+            self.assertNotIn(note, self.portfolio)
+            self.assertIn(note, self.home)
+
     def test_portfolio_keeps_click_tracking_and_shortcut_hooks(self):
         tracked = re.findall(r'class="[^"]*portfolio-link[^"]*"[^>]*data-project="([^"]+)"', self.portfolio)
         self.assertEqual(len(tracked), len(self.addresses))

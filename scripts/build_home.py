@@ -313,7 +313,6 @@ def home_page(content, constants):
 def portfolio_page(content, constants):
     """The compact directory people add to their home screen; same order and credit rules as before."""
     labels = content["portfolio"]
-    intro = {"核心创意": content["core"], "手语游戏": content["games"], "其他作品": content["other"], "心创组": content["internal"]}
     groups = [(category, [p for p in content["projects"] if p["category"] == category]) for category in labels["order"]]
     paper = papers(content["projects"])
     # The categories read like a table of contents: the name, how many works, and a hand-drawn line under the current one.
@@ -331,7 +330,7 @@ def portfolio_page(content, constants):
             f'<section class="portfolio-section portfolio-section--{slug}{" tray tray--palm" if slug == "games" else ""}" '
             f'id="portfolio-{slug}" aria-labelledby="portfolio-{slug}-title"><div class="wrap">'
             f'<header class="works-head rise"><div class="head-row">{title}<i class="head-rule" aria-hidden="true"></i>'
-            f'<span class="head-count latin" aria-hidden="true">{len(projects)}</span></div><p>{escape(intro[category])}</p></header>'
+            f'<span class="head-count latin" aria-hidden="true">{len(projects)}</span></div></header>'
             f'<ul class="tiles">{tiles}</ul></div></section>')
     shortcut = (ROOT / "styles/shouyulove-v1-1-jieguo.css").read_text(encoding="utf-8").split("/* Keep the works shortcut", 1)[1]
     thanks = f'<footer class="portfolio-thanks wrap"><small>{escape(labels["thanks"])}</small></footer>' if labels["thanks"] else ""

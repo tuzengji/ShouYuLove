@@ -62,8 +62,8 @@
       "sha256": "b979bb84307b697416d31d7c3eaf673dd85855ccbfc31b2ad811976900bf9f41"
     },
     "portfolio/index.html": {
-      "bytes": 138990,
-      "sha256": "aafd7554334d16b81ac784e97afc9db9e6ee694e341fadebf85078ea37f3ca52"
+      "bytes": 138641,
+      "sha256": "10c3621372b0747af5788461fc680f3b39e9f79de0e70aa32ec93127df115989"
     },
     "portfolio/projects.json": {
       "bytes": 958,
@@ -4962,5 +4962,5 @@
       "sha256": "9cfe56070a17a25e1d17ef99623b2e5454f3629532765d3f5d3b1ee5e893054d"
     }
   },
-  "bytes": 211157519
+  "bytes": 211157170
 }
