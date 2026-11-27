@@ -53,7 +53,7 @@
 #portfolio { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
 .portfolio-section { padding-block: clamp(48px, 6.4vw, 96px); scroll-margin-top: 64px; }
 .portfolio-section.tray { margin-block: clamp(8px, 2vw, 24px); }
-.works-head { margin-bottom: clamp(28px, 3.8vw, 52px); }
+.works-head { margin-bottom: clamp(40px, 5.2vw, 76px); }
 .works-head h2 { font-size: clamp(26px, 2.9vw, 36px); }
 /* 作品之间不画分隔线，只靠留白分开 */
 .tiles { gap: clamp(36px, 4.4vw, 60px) clamp(28px, 3.6vw, 56px); }
