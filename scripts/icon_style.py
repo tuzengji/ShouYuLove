@@ -27,6 +27,9 @@ INK = "#4b5d54"  # the outline every icon in the set was drawn with
 SHAPES = {"path", "rect", "circle", "ellipse", "line", "polyline", "polygon"}
 THINNER = .62    # the tonal line is also lighter in weight
 BRIGHT = 1.3     # how far the dusty colours are lifted: 0 keeps them, about 2 turns them candy-like
+# Colours swapped before brightening, for one icon only. The SignTrace palm is a tan that brightens
+# to orange; it takes the pale skin tone of the other hands instead (the user asked for a whiter palm).
+RECOLOUR = {"signtrace": {"#d9c3a7": "#f6e6da"}}
 ET.register_namespace("", SVG)
 
 
@@ -52,8 +55,14 @@ def brighten(colour, level=BRIGHT):
     return "#" + "".join(f"{round(value * 255):02x}" for value in (red, green, blue))
 
 
-def tonal(text):
+def restyle(project_id, text):
+    """The icon of one work in the site's style, with that work's colour swaps."""
+    return tonal(text, RECOLOUR.get(project_id))
+
+
+def tonal(text, recolour=None):
     """Return the icon's SVG brightened, with every dark outline replaced by a deeper tone of the colour it surrounds."""
+    recolour = recolour or {}
     root = ET.fromstring(text)
     last = ["#ece2cf"]
 
@@ -66,6 +75,7 @@ def tonal(text):
             fill = own.get("fill", "#000000").lower()
             stroke = own.get("stroke", "none").lower()
             width = float(own.get("stroke-width", "1") or 1)
+            fill = recolour.get(fill, fill)
             coloured = re.fullmatch(r"#[0-9a-f]{6}", fill) is not None and fill != INK
             if coloured:
                 fill = brighten(fill)
@@ -105,7 +115,7 @@ def main():
         if not source.is_file():
             print("kept as a picture:", project["id"])
             continue
-        drawing = tonal(source.read_text(encoding="utf-8"))
+        drawing = restyle(project["id"], source.read_text(encoding="utf-8"))
         (folder / source.name).write_text(drawing + "\n", encoding="utf-8")
         cairosvg.svg2png(bytestring=drawing.encode(), write_to=str(folder / (project["id"] + ".png")), output_width=1024, output_height=1024)
         print("redrawn:", project["id"])

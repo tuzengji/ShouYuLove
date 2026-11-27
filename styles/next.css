@@ -88,7 +88,6 @@ button { font: inherit; color: inherit; }
 .tile-pen { position: absolute; top: -15%; left: -15%; width: 130%; height: 130%; overflow: visible; pointer-events: none; opacity: 0; transition: opacity .3s; }
 .tile-pen .loop { fill: none; stroke: var(--heart-line); stroke-width: 2.3; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; }
 .tile-pen .pop-rays, .tile-pen .pop-heart { transform-origin: 9px 8.5px; }
-.tiles--sm .tile-pen .loop { stroke-width: 3; }
 @keyframes pen-loop { from { stroke-dashoffset: 1; } }
 @keyframes pen-rays { from { transform: scale(.45); opacity: 0; } }
 @keyframes pen-heart { from { transform: translate(10px, 10px) scale(0) rotate(-40deg); opacity: 0; } }
@@ -96,9 +95,8 @@ button { font: inherit; color: inherit; }
 .tile-desc { margin-top: 8px; font-size: var(--desc); line-height: 1.8; color: var(--ink-2); overflow-wrap: anywhere; text-wrap: pretty; }
 .tile-by { margin-top: 10px; font-size: 14px; line-height: 1.7; letter-spacing: .04em; color: var(--ink-3); }
 .tile-by span { white-space: nowrap; }
-.tiles--lg { --icon: 76px; --title: 20px; --desc: 15.5px; }
-.tiles--md { --icon: 64px; --title: 19px; --desc: 15.5px; }
-.tiles--sm { --icon: 56px; --title: 18px; --desc: 15.5px; gap: 28px; }
+/* 所有分类的图标一样大，标题和简介也用同一套字号 */
+.tiles { --icon: 72px; --title: 19.5px; --desc: 15.5px; }
 a.tile:focus-visible { outline-offset: 8px; }
 .tile.is-lit .tile-art::before { border-radius: var(--shape-lit); transform: rotate(calc(var(--turn) + 38deg)) scale(1.05); }
 .tile.is-lit .tile-icon { transform: translateY(-7%) scale(1.1) rotate(-5deg); }
@@ -121,8 +119,8 @@ a.tile:active .tile-art { transform: scale(.94); }
   .entry:hover svg { animation: wiggle .6s ease-in-out; }
 }
 .entry:active { transform: scale(.96); }
-.tiles--md .entry { gap: 6px; padding: 3px 13px 3px 5px; }
-.tiles--md .entry svg { width: 26px; height: 26px; }
+.tiles--c4 .entry { gap: 6px; padding: 3px 13px 3px 5px; }
+.tiles--c4 .entry svg { width: 26px; height: 26px; }
 
 /* 进入视野时，图标像贴纸一样贴上来（只在脚本可用时隐藏初始状态） */
 .js .pop { opacity: 0; }

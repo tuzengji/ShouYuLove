@@ -85,7 +85,7 @@ class NextPagesTest(unittest.TestCase):
                 continue
             self.assertEqual(shown.parent.name, icon_style.SET)
             redrawn = shown.with_suffix(".svg").read_text(encoding="utf-8")
-            self.assertEqual(redrawn, icon_style.tonal(original.read_text(encoding="utf-8")) + "\n", project["id"])
+            self.assertEqual(redrawn, icon_style.restyle(project["id"], original.read_text(encoding="utf-8")) + "\n", project["id"])
             self.assertNotIn(icon_style.INK, redrawn.lower())
         for document in (self.home, self.portfolio):
             for button in re.findall(r'<a class="entry.*?</a>', document, re.S):

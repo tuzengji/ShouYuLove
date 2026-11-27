@@ -29,15 +29,24 @@
 @keyframes beat { 0%, 34%, 100% { transform: scale(1); } 11% { transform: scale(1.07); } 22% { transform: scale(.985); } }
 @keyframes spin { from { transform: rotate(0deg) scale(1); } 40% { transform: rotate(200deg) scale(1.15); } to { transform: rotate(360deg) scale(1); } }
 
-/* 分类跳转：停在页面顶部，标出当前所在的分类 */
-.chips { position: sticky; top: 0; z-index: 5; border-block: 1px solid var(--hair); background: rgba(255, 253, 250, .92); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
-.chips ul { display: flex; gap: 10px; padding-block: 12px; overflow-x: auto; scrollbar-width: none; }
+/* 分类跳转：停在页面顶部，像一行目录。宋体分类名、斜体数量，当前所在的分类下面画一笔豆沙色的线 */
+.chips { position: sticky; top: 0; z-index: 5; border-block: 1px solid var(--hair); background: rgba(255, 253, 250, .94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.chips ul { display: flex; gap: clamp(26px, 5vw, 64px); overflow-x: auto; scrollbar-width: none; }
 .chips ul::-webkit-scrollbar { display: none; }
-.chips a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 22px; border: 1.2px solid var(--ink-2); border-radius: 26px 22px 28px 20px / 22px 28px 20px 26px; font-size: 15px; letter-spacing: .06em; line-height: 1.2; white-space: nowrap;
-  background: linear-gradient(var(--sage-soft), var(--sage-soft)) no-repeat 0 0 / 0% 100%; transition: background-size .45s var(--glide), transform .4s var(--spring); }
-.chips li:nth-child(even) a { border-radius: 22px 28px 20px 26px / 28px 20px 26px 22px; }
-.chips a.is-here { background-size: 100% 100%; }
-@media (hover: hover) and (pointer: fine) { .chips a:hover { background-size: 100% 100%; transform: translateY(-2px) rotate(-1.5deg); } }
+.chips a { position: relative; display: inline-flex; align-items: baseline; gap: .28em; min-height: 54px; padding: 15px 2px 13px; font-family: var(--font-display); font-size: 17px; line-height: 1.4; letter-spacing: .14em; color: var(--ink-3); white-space: nowrap; transition: color .3s; }
+.chips sup { position: relative; top: -.5em; font-size: 16px; line-height: 0; letter-spacing: 0; color: var(--heart-line); }
+.chips .scribble { left: -6%; bottom: 9px; width: 112%; height: 7px; fill: var(--heart); clip-path: inset(-30% 100% -30% 0); transition: clip-path .55s var(--glide); }
+.chips a.is-here { color: var(--ink); }
+.chips a.is-here .scribble { clip-path: inset(-30% 0 -30% 0); }
+@media (hover: hover) and (pointer: fine) {
+  .chips a:hover { color: var(--ink); }
+  .chips a:hover .scribble { clip-path: inset(-30% 0 -30% 0); }
+}
+@media (max-width: 520px) {
+  .chips ul { gap: 14px; }
+  .chips a { padding-inline: 0; font-size: 15.5px; letter-spacing: .04em; }
+  .chips sup { font-size: 14px; }
+}
 
 /* 分类 */
 #portfolio { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
@@ -48,16 +57,10 @@
 /* 每件作品上方一条细线，像目录一样一行行排下去 */
 .tiles { gap: clamp(26px, 3vw, 40px) clamp(28px, 3.6vw, 56px); }
 .tile { padding-top: clamp(22px, 2.4vw, 30px); border-top: 1px solid var(--hair); border-radius: 0; }
-.tiles--lg { --icon: 76px; --title: 20px; --desc: 15.5px; }
-.tiles--md { --icon: 68px; --title: 19px; --desc: 15.5px; }
-.tiles--sm { --icon: 56px; --title: 18px; --desc: 15px; }
+/* 所有分类同一尺寸的图标、同一套字号 */
+.tiles { --icon: 72px; --title: 19px; --desc: 15.5px; }
 @media (min-width: 700px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1040px) {
-  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .tiles--lg { --icon: 92px; --title: 21px; }
-  .tiles--sm { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px; }
-  .tiles--sm .tile { grid-template-columns: 1fr; gap: 14px; }
-}
+@media (min-width: 1040px) { .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); --icon: 84px; --title: 20px; } }
 .portfolio-thanks { margin-top: clamp(24px, 4vw, 56px); padding-top: 26px; border-top: 1px solid var(--hair); text-align: center; color: var(--ink-3); }
 .portfolio-thanks small { font-size: 13.5px; line-height: 1.8; letter-spacing: .1em; }
 

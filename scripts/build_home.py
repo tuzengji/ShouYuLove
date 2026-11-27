@@ -44,7 +44,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BUILD_CONTENT = ROOT / "scripts/build_content.py"
 SHARED = "sites/immersive-g-com-955afd14/shared"
 ASSETS = ROOT / SHARED / "assets"
-HOME_ORDER = ["核心创意", "手语游戏", "其他作品", "心创组"]
+HOME_ORDER = ["核心创意", "手语游戏", "心创组", "其他作品"]
 SLUGS = {"核心创意": "core", "手语游戏": "games", "心创组": "internal", "其他作品": "secondary"}
 MEMBERS_TITLE = "心创组第一届成员"
 BRAND_MARK = ROOT / "project-logos/20261012-主站-把爱递给你/shouyulove.svg"
@@ -65,7 +65,7 @@ FONT_SLOT = "<!--fonts-->"
 # The transparent masters live beside their sources; a work without an entry here uses the shared soft-colour set.
 ICON_SETS = {
     "signplay": "20261015-signplay", "flyinghands": "20261020-flyinghands", "quna-study": "20261110-quna-study",
-    "shouyu-pass": "20261113-shouyu-pass", "shouxiaoyu": "20261114-shouxiaoyu", "xinchuang-drive": "20261114-xinchuang-drive",
+    "shouyu-pass": "20261113-shouyu-pass", "shouxiaoyu": "20261127-shouxiaoyu-avatar", "xinchuang-drive": "20261114-xinchuang-drive",
     "bombplane": "20261124-sign-games", "fruitbomb": "20261124-sign-games", "barbapapa": "20261124-sign-games",
     "codenames": "20261124-sign-games", "snowleopard": "20261124-sign-games", "skull": "20261125-skull",
     "perfectmenu": "20261125-perfectmenu", "naimahjong": "20261125-naimahjong", "xiaoai-warm-cabin": "20261126-xiaoai-warm-cabin",
@@ -255,24 +255,25 @@ def scripts(*names):
 
 
 def home_works(content, constants):
-    intro = dict(zip(HOME_ORDER, [content["core"], content["games"], content["other"], content["internal"]]))
+    intro = {"核心创意": content["core"], "手语游戏": content["games"], "心创组": content["internal"], "其他作品": content["other"]}
     paper = papers(content["projects"])
     assert {project["category"] for project in content["projects"]} == set(HOME_ORDER), "Unknown category"
 
-    def block(category, size, columns):
+    # Every icon is the same size on both pages; a category only chooses how many columns it fills.
+    def block(category, columns):
         tiles = "".join(tile(project, constants, paper[project["id"]], order=index % columns, position=index) for index, project in
                         enumerate(p for p in content["projects"] if p["category"] == category))
         count = sum(project["category"] == category for project in content["projects"])
         return (f'<header class="works-head rise"><div class="head-row">{heading(category, HOME_ORDER.index(category))}'
                 f'<i class="head-rule" aria-hidden="true"></i><span class="head-count latin" aria-hidden="true">{count}</span></div>'
                 f'<p>{escape(intro[category])}</p></header>'
-                f'<ul class="tiles tiles--{size}">{tiles}</ul>')
+                f'<ul class="tiles tiles--c{columns}">{tiles}</ul>')
 
-    core, games, other, internal = HOME_ORDER
-    return (f'<section class="works" id="works" data-stop><div class="wrap">{block(core, "lg", 3)}</div></section>'
-            f'<section class="works tray tray--palm" data-stop><div class="wrap">{block(games, "md", 4)}</div></section>'
-            f'<section class="works" data-stop><div class="wrap duo"><div>{block(other, "sm", 4)}</div>'
-            f'<div>{block(internal, "sm", 4)}</div></div></section>')
+    core, games, internal, other = HOME_ORDER
+    return (f'<section class="works" id="works" data-stop><div class="wrap">{block(core, 3)}</div></section>'
+            f'<section class="works tray tray--palm" data-stop><div class="wrap">{block(games, 4)}</div></section>'
+            f'<section class="works" data-stop><div class="wrap">{block(internal, 3)}</div></section>'
+            f'<section class="works" data-stop><div class="wrap">{block(other, 4)}</div></section>')
 
 
 def home_page(content, constants):
@@ -315,12 +316,13 @@ def portfolio_page(content, constants):
     intro = {"核心创意": content["core"], "手语游戏": content["games"], "其他作品": content["other"], "心创组": content["internal"]}
     groups = [(category, [p for p in content["projects"] if p["category"] == category]) for category in labels["order"]]
     paper = papers(content["projects"])
-    chips = "".join(f'<li><a href="#portfolio-{SLUGS[category]}">{escape(category)}</a></li>'
-                    for category, projects in groups)
+    # The categories read like a table of contents: the name, how many works, and a hand-drawn line under the current one.
+    chips = "".join(f'<li><a href="#portfolio-{SLUGS[category]}"><span>{escape(category)}</span>'
+                    f'<sup class="latin">{len(projects)}</sup>{sketch.underline(index + 1)}</a></li>'
+                    for index, (category, projects) in enumerate(groups))
     sections = []
     for number, (category, projects) in enumerate(groups):
         slug = SLUGS[category]
-        size = {"core": "lg", "secondary": "sm"}.get(slug, "md")
         tiles = "".join(tile(project, constants, paper[project["id"]], order=index % 3, position=index, tracked=True,
                              credit=category != "其他作品" or labels["show_other_designers"] or project["show_portfolio_credit"])
                         for index, project in enumerate(projects))
@@ -330,7 +332,7 @@ def portfolio_page(content, constants):
             f'id="portfolio-{slug}" aria-labelledby="portfolio-{slug}-title"><div class="wrap">'
             f'<header class="works-head rise"><div class="head-row">{title}<i class="head-rule" aria-hidden="true"></i>'
             f'<span class="head-count latin" aria-hidden="true">{len(projects)}</span></div><p>{escape(intro[category])}</p></header>'
-            f'<ul class="tiles tiles--{size}">{tiles}</ul></div></section>')
+            f'<ul class="tiles">{tiles}</ul></div></section>')
     shortcut = (ROOT / "styles/shouyulove-v1-1-jieguo.css").read_text(encoding="utf-8").split("/* Keep the works shortcut", 1)[1]
     thanks = f'<footer class="portfolio-thanks wrap"><small>{escape(labels["thanks"])}</small></footer>' if labels["thanks"] else ""
     return "".join([

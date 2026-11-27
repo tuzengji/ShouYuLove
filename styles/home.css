@@ -64,18 +64,15 @@
 /* 作品 */
 .works { padding-block: clamp(56px, 8vw, 112px); }
 .works-head { margin-bottom: clamp(32px, 4.6vw, 60px); }
-@media (min-width: 700px) {
-  .tiles--lg, .tiles--md { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
+@media (min-width: 700px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+/* 宽屏上图标在上、文字在下；四个分类的图标同样大小，只是每行放三个或四个 */
 @media (min-width: 1000px) {
-  .tiles--lg { grid-template-columns: repeat(3, minmax(0, 1fr)); --icon: 124px; --title: 22px; --desc: 15.5px; }
-  .tiles--md { grid-template-columns: repeat(4, minmax(0, 1fr)); --icon: 92px; --title: 20px; }
-  .tiles--lg .tile, .tiles--md .tile { display: block; }
-  .tiles--lg .tile-art { margin-bottom: 22px; }
-  .tiles--md .tile-art { margin-bottom: 18px; }
+  .tiles { --icon: 104px; --title: 21px; }
+  .tiles--c3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .tiles--c4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .tiles .tile { display: block; }
+  .tiles .tile-art { margin-bottom: 20px; }
 }
-.duo { display: grid; gap: clamp(56px, 8vw, 96px) 72px; }
-@media (min-width: 900px) { .duo { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 /* 边界 */
 .bounds { margin-top: clamp(24px, 4vw, 56px); padding-block: clamp(64px, 9vw, 120px); background: var(--butter); }
