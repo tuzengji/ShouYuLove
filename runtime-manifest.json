@@ -58,12 +58,12 @@
       "sha256": "26f8c40f9ab50f9aa1dc9234d4bb0b0d80f0f11eea60b686707f5786f33b34a3"
     },
     "index.html": {
-      "bytes": 146061,
-      "sha256": "59e23bd3613c38497aa251741f5938cf97e688c458895e85de48ac03d40d4650"
+      "bytes": 145608,
+      "sha256": "f0f259950decfe28e2b19863f157385300cebf679393a72c1b66bb0e79674c3c"
     },
     "portfolio/index.html": {
-      "bytes": 137009,
-      "sha256": "795f3434185e4f2b191cc68563cf2facefa49741ab24e3ed492e548add17faa7"
+      "bytes": 136556,
+      "sha256": "03413b0188cb9a2a3f71f46b8c9c1b2a61aa0744b2b9f3344006e5ca77576347"
     },
     "portfolio/projects.json": {
       "bytes": 958,
@@ -2285,9 +2285,17 @@
       "bytes": 93960,
       "sha256": "3bede3bfd12dd4ae6a187b6f4b2bb8f239f86efd9676325be7af2b3d59e323ef"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/next-sylsans.fd1afa4097.woff2": {
+      "bytes": 88392,
+      "sha256": "4622acaeecc6508775bf1f29846f2c1ec58ef5cbd3ff0317d3d5ef4538f731cb"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/next-sylsong.36f2c988fb.woff2": {
       "bytes": 125668,
       "sha256": "9250587a4e7dd4af3b9b3cd3c9ec94f30995bf339cca4879d928fb24170b5e60"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-sylsong.d37672b9d4.woff2": {
+      "bytes": 119440,
+      "sha256": "fb05aae380be01bcb43af20a33235a4bba89be9b1a6c55c8b04bdcfbfae6b4a9"
     },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-clicks.syl-v1-1-20261017.js": {
       "bytes": 922,
@@ -4534,5 +4542,5 @@
       "sha256": "abb1e21d53246ee145c68cbdd9a32b01bd247c95b350a46a218c757b7bdb95e7"
     }
   },
-  "bytes": 207466306
+  "bytes": 207673232
 }

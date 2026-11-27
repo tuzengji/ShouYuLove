@@ -1474,9 +1474,17 @@
       "bytes": 93960,
       "sha256": "3bede3bfd12dd4ae6a187b6f4b2bb8f239f86efd9676325be7af2b3d59e323ef"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/next-sylsans.fd1afa4097.woff2": {
+      "bytes": 88392,
+      "sha256": "4622acaeecc6508775bf1f29846f2c1ec58ef5cbd3ff0317d3d5ef4538f731cb"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/next-sylsong.36f2c988fb.woff2": {
       "bytes": 125668,
       "sha256": "9250587a4e7dd4af3b9b3cd3c9ec94f30995bf339cca4879d928fb24170b5e60"
+    },
+    "sites/immersive-g-com-955afd14/shared/assets/next-sylsong.d37672b9d4.woff2": {
+      "bytes": 119440,
+      "sha256": "fb05aae380be01bcb43af20a33235a4bba89be9b1a6c55c8b04bdcfbfae6b4a9"
     },
     "sites/immersive-g-com-955afd14/shared/assets/portfolio-scene.syl-v1-1-five-games.json": {
       "bytes": 112824,
@@ -2951,5 +2959,5 @@
       "sha256": "0804cb963d3da1a84a29f08ad262ad96b12c7ff774855142f03ec42df589318a"
     }
   },
-  "bytes": 82650769
+  "bytes": 82858601
 }
