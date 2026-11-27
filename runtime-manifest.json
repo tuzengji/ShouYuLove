@@ -55,15 +55,15 @@
   "files": {
     "_payload.json": {
       "bytes": 22218,
-      "sha256": "29e4155b842e8309e071b25dbf983f02944d16ab4ba13d96f140f55becc032ab"
+      "sha256": "ddb951b811aacaf975dea4681f52428ef69efb361582333d801f573ae20a0ba9"
     },
     "index.html": {
       "bytes": 146119,
-      "sha256": "9678d63dcfd2b14a019cef8d59c369445baa0d8f02628fb55ea7111915a5c315"
+      "sha256": "9447c2ec3857a46fd321e99c97f61c6987d8391a1c0092712616918cb3470c8b"
     },
     "portfolio/index.html": {
       "bytes": 137784,
-      "sha256": "968db672be5c96080cbef63d2226fba17a1d9f4cfaeb0074653970277bccff67"
+      "sha256": "fa565741100f75a55672383b37822604d026aa232438389ba85f8b2f719cd5d0"
     },
     "portfolio/projects.json": {
       "bytes": 958,
@@ -75,7 +75,7 @@
     },
     "projects/2026-sign-language-cultural-festival/index.html": {
       "bytes": 153911,
-      "sha256": "47a6974f1c8c048e602adc706b270aab0336b302026109ea57b1f4ccea314827"
+      "sha256": "8383a7939e4126b946820cdef3e9e1f8da33012d37817ff1415cf79ae86b40bf"
     },
     "projects/2026-year-end-summary/_payload.json": {
       "bytes": 1037,
@@ -83,7 +83,7 @@
     },
     "projects/2026-year-end-summary/index.html": {
       "bytes": 153896,
-      "sha256": "828e17a9dccd8cf5a251f78e5a08fbd0cd1f3842d3570705493d618503b0fe75"
+      "sha256": "1fe8328b62f60ad37908ed9363b531791ed83f16fce35f71889c5cbce81131a5"
     },
     "projects/_payload.json": {
       "bytes": 350,
@@ -95,7 +95,7 @@
     },
     "projects/barbapapa/index.html": {
       "bytes": 153814,
-      "sha256": "1289e705a6bdea25ca432f9a3fd8c0d135162572d816f7f7e36199c060a63cd3"
+      "sha256": "b5136df833d18825a6cb450172e2d165e037dabee3839ee3c1b3970ca0a1996c"
     },
     "projects/beida-zhidao/_payload.json": {
       "bytes": 807,
@@ -103,7 +103,7 @@
     },
     "projects/beida-zhidao/index.html": {
       "bytes": 153841,
-      "sha256": "1c74b4d5122e89880f57532546694009694862c88b6b6fc3f432c73d13120337"
+      "sha256": "b73825ffa174d035df8577e9c45d206e8554eec7e76060f51ada87f7a10aef27"
     },
     "projects/bombplane/_payload.json": {
       "bytes": 793,
@@ -111,7 +111,7 @@
     },
     "projects/bombplane/index.html": {
       "bytes": 153808,
-      "sha256": "15e3e2aaf6a5893f2f944460af1bf70268b4abe81d9e01dfdd512fa24f489914"
+      "sha256": "b45b917940df95146a6e24d990beb335434737c3efe8db9bdcdcfc2cc6713ee9"
     },
     "projects/chuanqinghuiyi/_payload.json": {
       "bytes": 852,
@@ -119,7 +119,7 @@
     },
     "projects/chuanqinghuiyi/index.html": {
       "bytes": 153849,
-      "sha256": "99890a5e05b687958e2dcf15815cdc9a2aff814ef9fefb74a621730775b2bfe4"
+      "sha256": "02aaa40c4621ad77325122431ad3c29d11bd11bf3a028772cab8b3fb2066d46a"
     },
     "projects/codenames/_payload.json": {
       "bytes": 797,
@@ -127,7 +127,7 @@
     },
     "projects/codenames/index.html": {
       "bytes": 153814,
-      "sha256": "08ce9677b77ae60c8c00afd642dc3477bbb85f4decc6b21c759a101a320ed2aa"
+      "sha256": "8dad0d584d4892fca2571440db37a37bf54fc3e9fc48281567e6c23b7c6b257d"
     },
     "projects/dictionary/_payload.json": {
       "bytes": 806,
@@ -135,7 +135,7 @@
     },
     "projects/dictionary/index.html": {
       "bytes": 153829,
-      "sha256": "2c7e737979cccf2965b3450bbbbf66852bfb952b185d3fcf75e123b8e4b020d0"
+      "sha256": "67e69424b1d6422f873718ffe4402be4ed4995881282e548658363313e81a50f"
     },
     "projects/flyinghands/_payload.json": {
       "bytes": 823,
@@ -143,7 +143,7 @@
     },
     "projects/flyinghands/index.html": {
       "bytes": 153820,
-      "sha256": "dbdf3c001193346bd078fcd30d6c399fdf7cef7783f7ec5062dc8d1e9fbd9603"
+      "sha256": "77eb4453f2bbffb168701ad0f36f74574f9d9b59b4049b6454f8bce4848af4e9"
     },
     "projects/fruitbomb/_payload.json": {
       "bytes": 799,
@@ -151,7 +151,7 @@
     },
     "projects/fruitbomb/index.html": {
       "bytes": 153814,
-      "sha256": "c47cd760b7e6712cf335d8880e20ca37b5ab971ea1756d278e3b6abe590469a5"
+      "sha256": "0bc49fdd78ffdcf5d59705ba9e3a0a2aa0318c933d04ea1c3ef8734562cf8f2c"
     },
     "projects/index.html": {
       "bytes": 340,
@@ -163,7 +163,7 @@
     },
     "projects/jieguo/index.html": {
       "bytes": 153793,
-      "sha256": "4fd9464848ef6e17b2ad62fb2516df13856e7d5060dd6c53cd3060226d33c8ea"
+      "sha256": "30b7a6eaed4c6eed285e5a489f095144c76f89fbab47d4db0a8529c00974c692"
     },
     "projects/naimahjong/_payload.json": {
       "bytes": 847,
@@ -171,7 +171,7 @@
     },
     "projects/naimahjong/index.html": {
       "bytes": 153817,
-      "sha256": "df70eb00d2ce9b62596d9c935c048926f4aa92cfde4e1b32cbfeff2aeafdf966"
+      "sha256": "63753dee417567777c4779b9b29f3390ea73bcf0e8f7ba6d1b92e27c7972c044"
     },
     "projects/perfectmenu/_payload.json": {
       "bytes": 823,
@@ -179,7 +179,7 @@
     },
     "projects/perfectmenu/index.html": {
       "bytes": 153820,
-      "sha256": "4ec3c133ca5d97efd32e6df64edee6374bb35ee1474a321061f4df4be84ab913"
+      "sha256": "998e4751d7671241d54bcfac3028fa1d52f7fbebdbcbb4fdafab73ff2eabcadd"
     },
     "projects/pinhaoke/_payload.json": {
       "bytes": 764,
@@ -187,7 +187,7 @@
     },
     "projects/pinhaoke/index.html": {
       "bytes": 153805,
-      "sha256": "d2f83d10bf36c12a061c29a803b9f7b1ad1b3c6bcac1bec8b524217b5663d3ee"
+      "sha256": "5b142b1618e6f4addcff4af35e4bc60e26d99484f0090319c5b3583f311083bd"
     },
     "projects/qinghua-zhidao/_payload.json": {
       "bytes": 823,
@@ -195,7 +195,7 @@
     },
     "projects/qinghua-zhidao/index.html": {
       "bytes": 153847,
-      "sha256": "3beb348bfff15d371077e7fcd63c51eabaf07f2a98b3457b2dc9330bc9203496"
+      "sha256": "63ae7b519f451ce3f4c6263f70c35bff23ea83064965f2462c66fe329ca20fa9"
     },
     "projects/quna-study/_payload.json": {
       "bytes": 816,
@@ -203,7 +203,7 @@
     },
     "projects/quna-study/index.html": {
       "bytes": 153817,
-      "sha256": "10bef52c5f94b48a7635e9bd96e8a1251b244ed394bb2a085e9f1948264854f4"
+      "sha256": "a82163e40b24c08054f92e481606ec632cc6e9fce0c43e99663d176332cac48f"
     },
     "projects/shouxiaoyu/_payload.json": {
       "bytes": 805,
@@ -211,7 +211,7 @@
     },
     "projects/shouxiaoyu/index.html": {
       "bytes": 153811,
-      "sha256": "de1a09ea1097575947eb9c3b13d315ab487cb11f1f04804a25bf2021362bd8b3"
+      "sha256": "ea57008da9992507914b6e23265678a9e98a889364f56e86032f6f3ddf15436f"
     },
     "projects/shouyu-pass/_payload.json": {
       "bytes": 842,
@@ -219,7 +219,7 @@
     },
     "projects/shouyu-pass/index.html": {
       "bytes": 153850,
-      "sha256": "11450d15272f7e52d2bdbdb09838147287247ec6bc8cd5bf0b0f34a91436b21b"
+      "sha256": "8578d5482e4763643ac5a333bb5354b3bc0a3dd6bf0895afbb7d509e36d8a8ac"
     },
     "projects/shouyu-shitingshuo/_payload.json": {
       "bytes": 865,
@@ -227,7 +227,7 @@
     },
     "projects/shouyu-shitingshuo/index.html": {
       "bytes": 153847,
-      "sha256": "27781713787aac262cc53ad3eaea5f1012f854198f01d77ef085a6823616529a"
+      "sha256": "fbfa9958eae8c58e2c2aeb05288af906f294b6dd6c6a0851b9ae1324efdc6879"
     },
     "projects/signplay/_payload.json": {
       "bytes": 820,
@@ -235,7 +235,7 @@
     },
     "projects/signplay/index.html": {
       "bytes": 153829,
-      "sha256": "99174d537f91131c3100f3f4c85fc67aa631ffbe47136892d00cc1b0a4ca3096"
+      "sha256": "9dfcd64b80489398739e175c6417771cf0c1c87faed89ed5a7f6a3bd401fa0bc"
     },
     "projects/signtrace/_payload.json": {
       "bytes": 889,
@@ -243,7 +243,7 @@
     },
     "projects/signtrace/index.html": {
       "bytes": 153834,
-      "sha256": "1771ee16ae2803a36843c6678aaaabfc74567b596ad6a04c6f3b4f13eabcc57e"
+      "sha256": "1733117fced629dacf8a32aa610b35e2fd19deb8c0392fedfbce60f1067a38e4"
     },
     "projects/skull/_payload.json": {
       "bytes": 778,
@@ -251,7 +251,7 @@
     },
     "projects/skull/index.html": {
       "bytes": 153796,
-      "sha256": "c06966efb98b08c4f943cb8e4e70f0e9e6a5626899f5e3084b237ccf48e9996f"
+      "sha256": "35b8bf742ec4a5b81ce12d1f78e039697f3fe3379607ed0adf228e752aad90f5"
     },
     "projects/snowleopard/_payload.json": {
       "bytes": 820,
@@ -259,7 +259,7 @@
     },
     "projects/snowleopard/index.html": {
       "bytes": 153826,
-      "sha256": "4d5535f0b19a74c344b83d0b0d55409509a7b9dee4e69f31548d3e758c45fd07"
+      "sha256": "b10f1e71c17a684d90aaa47b44fb885aaa3f78e16bbfe8ed8461c8cce84d44d7"
     },
     "projects/xiaoai-warm-cabin/_payload.json": {
       "bytes": 886,
@@ -267,7 +267,7 @@
     },
     "projects/xiaoai-warm-cabin/index.html": {
       "bytes": 153868,
-      "sha256": "47b390aeb6635f9adec6afca0f022e8bdea248a9b6aec6c52cf82d4d50fb37d5"
+      "sha256": "0a7f8fac143cc971ad17027a0f9b041707091d9e5cbbbaf0a27bd0ff25ad23f7"
     },
     "projects/xinchuang-drive/_payload.json": {
       "bytes": 818,
@@ -275,7 +275,7 @@
     },
     "projects/xinchuang-drive/index.html": {
       "bytes": 153832,
-      "sha256": "4f5085984b5d7274f85439c27c8d2792e6118e41caa727bd0d73c0c553912d85"
+      "sha256": "26b143d630796f8bee5c84cd2550545ca9dae81fe5710886b5e8b6dc177bbaad"
     },
     "sites/immersive-g-com-955afd14/shared/assets/AboutPage.BQbQtk7z.syl-v1-1-five-games.css": {
       "bytes": 6114,
@@ -2305,6 +2305,10 @@
       "bytes": 11740,
       "sha256": "33c34eb4fdde0f00556dd6eb33792ac08e85277c806c0db167198de8577f6fbd"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-naimahjong.e09df72283.webp": {
+      "bytes": 8390,
+      "sha256": "e09df722830a1d54e0b04f097169541c146ce85a2158677d3b2bb965d5e41de3"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/next-icon-naimahjong.e3033c4990.webp": {
       "bytes": 9940,
       "sha256": "e3033c4990859b415b187bf0794f45470e320ab511b882daf22f8256fb656da1"
@@ -3061,6 +3065,10 @@
       "bytes": 47022,
       "sha256": "251d0b938bfc73461848f5a43dc0349927b62371b85866f02bae6e05227cfd19"
     },
+    "sites/immersive-g-com-955afd14/shared/local-bridge.58c74760b6.js": {
+      "bytes": 47022,
+      "sha256": "58c74760b645ca3de530ee74e292dbb0e86dc218b8f5c17cfd78aa00478c93ca"
+    },
     "sites/immersive-g-com-955afd14/shared/local-bridge.e23b70a3e6.js": {
       "bytes": 47022,
       "sha256": "e23b70a3e6a42817839a8010c8868a7290405496f83029c9f12b14d6d9034e7f"
@@ -3768,6 +3776,10 @@
     "sites/immersive-g-com-955afd14/shared/shouyulove/naimahjong-square.8725ad4b94.png": {
       "bytes": 46858,
       "sha256": "8725ad4b942c21b920b8fd9198bf8a784022267933c030b0b11402610b01040e"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/naimahjong-square.875e812dcf.png": {
+      "bytes": 66258,
+      "sha256": "875e812dcf1b7f89e37ee05b338978fded53d9777395f07755e4220980112f8f"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/naimahjong-square.91373a5346.png": {
       "bytes": 47554,
@@ -4903,7 +4915,7 @@
     },
     "the-studio/awards/index.html": {
       "bytes": 118003,
-      "sha256": "b42c9035309acb51f5b1c34a1fc9706befd48674428b369e22776769c20fb490"
+      "sha256": "c9dd42ed634603f56dfb1ecf205fc625284daa6f2eb714d3377025bd0bed5aa6"
     },
     "the-studio/clients/_payload.json": {
       "bytes": 987,
@@ -4911,7 +4923,7 @@
     },
     "the-studio/clients/index.html": {
       "bytes": 118007,
-      "sha256": "97600450eb7be27a4c3b7bf26e7f103a9e4f9aa13ba29c3fb292ef09b1851311"
+      "sha256": "c575aedead86129f58a5ddaf98012653118016c49f87299c4b882035fc1fd467"
     },
     "the-studio/contact-us/_payload.json": {
       "bytes": 608,
@@ -4919,11 +4931,11 @@
     },
     "the-studio/contact-us/index.html": {
       "bytes": 118075,
-      "sha256": "6ec74bd2e5710d4e8b77db32a7ade1e883f9a0e2e4000c1c96fb133efd90e45b"
+      "sha256": "be9239eb90111c952b7311f24c82a85f8e406bf445c8a57d853e757fea9086e3"
     },
     "the-studio/index.html": {
       "bytes": 118285,
-      "sha256": "34c5828ff8b671d1a5f3fd2681815c223c304f27aa10d25e747c14c7512681cc"
+      "sha256": "5afde37ab4644b0643d506915f19eef2a71f093391ff8d6632ed54e414e0c2cf"
     },
     "the-studio/our-approach/_payload.json": {
       "bytes": 526,
@@ -4931,7 +4943,7 @@
     },
     "the-studio/our-approach/index.html": {
       "bytes": 118063,
-      "sha256": "630bd11c2363d689800dfe4e5ea2e18bb45127cb0b6c785087885b3a54e4bb51"
+      "sha256": "28b16efa3a0deaab8f320eb15707e52c0af3dc3140ca0037ea8afd3db743a096"
     },
     "the-studio/services/_payload.json": {
       "bytes": 3615,
@@ -4939,7 +4951,7 @@
     },
     "the-studio/services/index.html": {
       "bytes": 118027,
-      "sha256": "daefcc44f0e2aa57b8be5d6d6cdf1df29d23eaee2e721ea703bfcc11bcc2481f"
+      "sha256": "f06931027ba890d17498674f3b91a81cedc834fc80aff4b5df1156791c666b45"
     },
     "the-studio/the-studio/_payload.json": {
       "bytes": 1414,
@@ -4947,8 +4959,8 @@
     },
     "the-studio/the-studio/index.html": {
       "bytes": 118045,
-      "sha256": "0ef156fed63d420b9234504aaf636eb36006118093ef293009df63f0bc32e728"
+      "sha256": "9cfe56070a17a25e1d17ef99623b2e5454f3629532765d3f5d3b1ee5e893054d"
     }
   },
-  "bytes": 211032979
+  "bytes": 211154649
 }

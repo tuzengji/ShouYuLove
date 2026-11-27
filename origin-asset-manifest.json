@@ -1494,6 +1494,10 @@
       "bytes": 11740,
       "sha256": "33c34eb4fdde0f00556dd6eb33792ac08e85277c806c0db167198de8577f6fbd"
     },
+    "sites/immersive-g-com-955afd14/shared/assets/next-icon-naimahjong.e09df72283.webp": {
+      "bytes": 8390,
+      "sha256": "e09df722830a1d54e0b04f097169541c146ce85a2158677d3b2bb965d5e41de3"
+    },
     "sites/immersive-g-com-955afd14/shared/assets/next-icon-naimahjong.e3033c4990.webp": {
       "bytes": 9940,
       "sha256": "e3033c4990859b415b187bf0794f45470e320ab511b882daf22f8256fb656da1"
@@ -2049,6 +2053,10 @@
     "sites/immersive-g-com-955afd14/shared/local-bridge.251d0b938b.js": {
       "bytes": 47022,
       "sha256": "251d0b938bfc73461848f5a43dc0349927b62371b85866f02bae6e05227cfd19"
+    },
+    "sites/immersive-g-com-955afd14/shared/local-bridge.58c74760b6.js": {
+      "bytes": 47022,
+      "sha256": "58c74760b645ca3de530ee74e292dbb0e86dc218b8f5c17cfd78aa00478c93ca"
     },
     "sites/immersive-g-com-955afd14/shared/local-bridge.e23b70a3e6.js": {
       "bytes": 47022,
@@ -2629,6 +2637,10 @@
     "sites/immersive-g-com-955afd14/shared/shouyulove/naimahjong-square.8725ad4b94.png": {
       "bytes": 46858,
       "sha256": "8725ad4b942c21b920b8fd9198bf8a784022267933c030b0b11402610b01040e"
+    },
+    "sites/immersive-g-com-955afd14/shared/shouyulove/naimahjong-square.875e812dcf.png": {
+      "bytes": 66258,
+      "sha256": "875e812dcf1b7f89e37ee05b338978fded53d9777395f07755e4220980112f8f"
     },
     "sites/immersive-g-com-955afd14/shared/shouyulove/naimahjong-square.91373a5346.png": {
       "bytes": 47554,
@@ -3367,5 +3379,5 @@
       "sha256": "0804cb963d3da1a84a29f08ad262ad96b12c7ff774855142f03ec42df589318a"
     }
   },
-  "bytes": 86304494
+  "bytes": 86426164
 }

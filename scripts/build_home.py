@@ -68,7 +68,7 @@ ICON_SETS = {
     "shouyu-pass": "20261113-shouyu-pass", "shouxiaoyu": "20261127-shouxiaoyu-avatar", "xinchuang-drive": "20261114-xinchuang-drive",
     "bombplane": "20261124-sign-games", "fruitbomb": "20261124-sign-games", "barbapapa": "20261124-sign-games",
     "codenames": "20261124-sign-games", "snowleopard": "20261124-sign-games", "skull": "20261125-skull",
-    "perfectmenu": "20261125-perfectmenu", "naimahjong": "20261125-naimahjong", "xiaoai-warm-cabin": "20261126-xiaoai-warm-cabin",
+    "perfectmenu": "20261125-perfectmenu", "naimahjong": "20261127-naimahjong-tile", "xiaoai-warm-cabin": "20261126-xiaoai-warm-cabin",
     "shouyu-shitingshuo": "20261127-shouyu-shitingshuo",
 }
 PAPERS = {"peach": "#f9dcc8", "butter": "#f8e7b0", "blush": "#f6d3d6", "mint": "#d3e8d8", "sky": "#d2e3f1", "lilac": "#e1d9ee"}
