@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 280 280" aria-hidden="true"><defs><filter id="gbombplane" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.5" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></defs><g><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="34" y="42" width="166" height="166" rx="26" fill="#fffdfa" stroke="#1f352b" stroke-width="5.2" />
+    <path d="M90 42 V208 M145 42 V208 M34 97 H200 M34 153 H200" fill="none" stroke-width="3.1" stroke-opacity=".42" stroke="#1f352b" />
+    <circle cx="62" cy="70" r="16" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <circle cx="172" cy="180" r="5.5" fill="#1f352b" stroke="none" stroke-width="0.0" />
+    <path d="M214 54 L144 90 L98 78 L80 96 L118 118 L94 144 L66 142 L54 156 L86 168 L98 200 L112 188 L110 160 L136 136 L158 174 L176 156 L164 110 Z" fill="#fffdfa" stroke-width="4.8" stroke="#1f352b" />
+  </g>
+</g><g transform="translate(10 8)" style="mix-blend-mode:multiply" filter="url(#gbombplane)"><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="34" y="42" width="166" height="166" rx="26" fill="#f8ddca" stroke="none" stroke-width="0.0" />
+    <path d="M90 42 V208 M145 42 V208 M34 97 H200 M34 153 H200" fill="none" stroke-width="0.0" stroke-opacity=".42" stroke="none" />
+    <circle cx="62" cy="70" r="16" fill="#ee7a80" stroke-width="0.0" stroke="none" />
+    <circle cx="172" cy="180" r="5.5" fill="none" stroke="none" stroke-width="0.0" />
+    <path d="M214 54 L144 90 L98 78 L80 96 L118 118 L94 144 L66 142 L54 156 L86 168 L98 200 L112 188 L110 160 L136 136 L158 174 L176 156 L164 110 Z" fill="#7ebeec" stroke-width="0.0" stroke="none" />
+  </g>
+</g></svg>

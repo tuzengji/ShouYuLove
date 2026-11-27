@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 280 280" aria-hidden="true"><defs><filter id="gshouyu-shitingshuo" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.5" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></defs><g><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    
+    <rect x="28" y="80" width="172" height="136" rx="26" fill="#fffdfa" stroke="none" stroke-width="0.4" />
+    <path d="M28 166 H200 V190 Q200 216 174 216 H54 Q28 216 28 190 Z" fill="#fffdfa" stroke="none" stroke-width="0.4" />
+    <rect x="28" y="80" width="172" height="136" rx="26" fill="none" stroke-width="5.5" stroke="#1f352b" />
+    <path d="M30 166 H198" fill="none" stroke-width="4.6" stroke="#1f352b" />
+    
+    <path d="M60 191 H132" fill="none" stroke-width="4.6" stroke="#1f352b" />
+    <circle cx="164" cy="191" r="6.5" fill="#1f352b" stroke="none" stroke-width="0.0" />
+    
+    <path d="M84 102 L130 124 L84 146 Z" fill="#fffdfa" stroke-width="4.6" stroke="#1f352b" />
+    
+    <g transform="rotate(6 184 68)">
+      <path d="M150 36 H208 Q228 36 228 56 V80 Q228 100 208 100 H182 L162 114 L165 100 H150 Q130 100 130 80 V56 Q130 36 150 36 Z" fill="#fffdfa" stroke-width="5.0" stroke="#1f352b" />
+      <path d="M158 68 H200" fill="none" stroke-width="4.2" stroke="#1f352b" />
+    </g>
+  </g>
+</g><g transform="translate(10 8)" style="mix-blend-mode:multiply" filter="url(#gshouyu-shitingshuo)"><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    
+    <rect x="28" y="80" width="172" height="136" rx="26" fill="#f8ddca" stroke="none" stroke-width="0.0" />
+    <path d="M28 166 H200 V190 Q200 216 174 216 H54 Q28 216 28 190 Z" fill="#8fdb9b" stroke="none" stroke-width="0.0" />
+    <rect x="28" y="80" width="172" height="136" rx="26" fill="none" stroke-width="0.0" stroke="none" />
+    <path d="M30 166 H198" fill="none" stroke-width="0.0" stroke="none" />
+    
+    <path d="M60 191 H132" fill="none" stroke-width="0.0" stroke="none" />
+    <circle cx="164" cy="191" r="6.5" fill="none" stroke="none" stroke-width="0.0" />
+    
+    <path d="M84 102 L130 124 L84 146 Z" fill="#ee7a80" stroke-width="0.0" stroke="none" />
+    
+    <g transform="rotate(6 184 68)">
+      <path d="M150 36 H208 Q228 36 228 56 V80 Q228 100 208 100 H182 L162 114 L165 100 H150 Q130 100 130 80 V56 Q130 36 150 36 Z" fill="#7ebeec" stroke-width="0.0" stroke="none" />
+      <path d="M158 68 H200" fill="none" stroke-width="0.0" stroke="none" />
+    </g>
+  </g>
+</g></svg>

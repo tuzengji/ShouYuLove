@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 280 280" aria-hidden="true"><defs><filter id="gcodenames" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.5" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></defs><g><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="34" y="34" width="188" height="188" rx="30" fill="#fffdfa" stroke="#1f352b" stroke-width="5.0" />
+    <rect x="54" y="54" width="42" height="42" rx="10" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <rect x="107" y="54" width="42" height="42" rx="10" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <rect x="160" y="54" width="42" height="42" rx="10" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <rect x="54" y="107" width="42" height="42" rx="10" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <rect x="107" y="107" width="42" height="42" rx="10" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <rect x="160" y="107" width="42" height="42" rx="10" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <rect x="54" y="160" width="42" height="42" rx="10" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <rect x="107" y="160" width="42" height="42" rx="10" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <rect x="160" y="160" width="42" height="42" rx="10" fill="#fffdfa" stroke-width="3.8" stroke="#1f352b" />
+    <path d="M120 120 L136 136 M136 120 L120 136" fill="none" stroke="#1f352b" stroke-width="3.1" transform="translate(0 53)" stroke-opacity=".85" />
+  </g>
+</g><g transform="translate(10 8)" style="mix-blend-mode:multiply" filter="url(#gcodenames)"><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="34" y="34" width="188" height="188" rx="30" fill="#f8ddca" stroke="none" stroke-width="0.0" />
+    <rect x="54" y="54" width="42" height="42" rx="10" fill="#7ebeec" stroke-width="0.0" stroke="none" />
+    <rect x="107" y="54" width="42" height="42" rx="10" fill="#f8e0d1" stroke-width="0.0" stroke="none" />
+    <rect x="160" y="54" width="42" height="42" rx="10" fill="#ee7a80" stroke-width="0.0" stroke="none" />
+    <rect x="54" y="107" width="42" height="42" rx="10" fill="#ee7a80" stroke-width="0.0" stroke="none" />
+    <rect x="107" y="107" width="42" height="42" rx="10" fill="#8fdb9b" stroke-width="0.0" stroke="none" />
+    <rect x="160" y="107" width="42" height="42" rx="10" fill="#7ebeec" stroke-width="0.0" stroke="none" />
+    <rect x="54" y="160" width="42" height="42" rx="10" fill="#f8e0d1" stroke-width="0.0" stroke="none" />
+    <rect x="107" y="160" width="42" height="42" rx="10" fill="#6aba92" stroke-width="0.0" stroke="none" />
+    <rect x="160" y="160" width="42" height="42" rx="10" fill="#ee7a80" stroke-width="0.0" stroke="none" />
+    <path d="M120 120 L136 136 M136 120 L120 136" fill="none" stroke="none" stroke-width="0.0" transform="translate(0 53)" stroke-opacity=".85" />
+  </g>
+</g></svg>

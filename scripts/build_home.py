@@ -17,12 +17,10 @@ in line (work pictures, site icons, categories and descriptions; see scripts/leg
 
 import argparse
 import ast
-import colorsys
 import functools
 import hashlib
 import io
 import json
-import math
 import html
 import re
 import shutil
@@ -35,7 +33,7 @@ from PIL import Image
 from fontTools.ttLib import TTFont
 from fontTools.varLib import instancer
 
-import icon_style
+import icon_riso
 import legacy_pages
 import sketch
 from content_source import source_path
@@ -60,8 +58,7 @@ FONTS = {
     "SylLatin": ("CormorantGaramond-Italic[wght].ttf", GOOGLE_FONTS + "cormorantgaramond/CormorantGaramond-Italic%5Bwght%5D.ttf", 500, True),
 }
 FONT_SLOT = "<!--fonts-->"
-# Stickers pressed on by hand never sit quite straight.
-# Each work's drawing sits on a scrap of cut paper instead of a grey app-icon square.
+# Each work's drawing is printed in two slipped plates, ink and colour (scripts/icon_riso.py), straight on the page.
 # The transparent masters live beside their sources; a work without an entry here uses the shared soft-colour set.
 ICON_SETS = {
     "signplay": "20261015-signplay", "flyinghands": "20261020-flyinghands", "quna-study": "20261110-quna-study",
@@ -71,12 +68,6 @@ ICON_SETS = {
     "perfectmenu": "20261125-perfectmenu", "naimahjong": "20261127-naimahjong-tile", "xiaoai-warm-cabin": "20261126-xiaoai-warm-cabin",
     "shouyu-shitingshuo": "20261127-shouyu-shitingshuo",
 }
-PAPERS = {"peach": "#f9dcc8", "butter": "#f8e7b0", "blush": "#f6d3d6", "mint": "#d3e8d8", "sky": "#d2e3f1", "lilac": "#e1d9ee"}
-# Scissors never cut the same shape twice: (border-radius, turn, the shape it relaxes into under the pointer).
-SCRAPS = [("58% 42% 55% 45% / 48% 56% 44% 52%", -8, "46% 54% 44% 56% / 56% 44% 54% 46%"),
-          ("46% 54% 42% 58% / 55% 45% 55% 45%", 6, "56% 44% 54% 46% / 45% 56% 46% 54%"),
-          ("52% 48% 60% 40% / 44% 52% 48% 56%", -3, "44% 56% 46% 54% / 54% 46% 56% 44%"),
-          ("44% 56% 50% 50% / 56% 46% 54% 44%", 10, "55% 45% 45% 55% / 46% 55% 45% 54%")]
 ICON_SIZE = 320
 escape = html.escape
 
@@ -134,9 +125,7 @@ def characters(text):
 
 def entry_icon(project, label, icons):
     assert (project, label) in icons, "Add an entry icon in build_content.ENTRY_ICONS for: " + label
-    drawing = icon_style.tonal((ROOT / icons[(project, label)]).read_text(encoding="utf-8"))
-    body = re.sub(r"<title[^>]*>.*?</title>", "", re.search(r"<svg[^>]*>(.*)</svg>", drawing, re.S).group(1), flags=re.S)
-    return '<svg viewBox="0 0 256 256" aria-hidden="true">' + re.sub(r">\s+<", "><", body.strip()) + "</svg>"
+    return icon_riso.entry(ROOT / icons[(project, label)], f"{project}/{label}")
 
 
 def icon_original(project_id):
@@ -147,18 +136,16 @@ def icon_original(project_id):
 
 
 def icon_master(project_id):
-    """What the pages show: the tonal redrawing of a vector icon, or the original picture when there is no vector."""
-    original = icon_original(project_id)
-    if not original.with_suffix(".svg").is_file():
-        return original
-    redrawn = ROOT / "project-logos" / icon_style.SET / original.name
-    assert redrawn.is_file(), f"Run scripts/icon_style.py to redraw the icon for {project_id}"
-    return redrawn
+    """What the pages show: the work's icon printed in the riso style (a picture icon keeps its picture over a slipped plate)."""
+    icon_original(project_id)
+    printed = ROOT / "project-logos" / icon_riso.SET / (project_id + ".png")
+    assert printed.is_file(), f"Run scripts/icon_riso.py to print the icon for {project_id}"
+    return printed
 
 
 @functools.lru_cache(maxsize=None)
 def icon_art(project_id):
-    """The drawing alone, trimmed and centred on a transparent square: (address, WebP bytes, hue or None)."""
+    """The drawing alone, trimmed and centred on a transparent square: (address, WebP bytes)."""
     mark = Image.open(icon_master(project_id)).convert("RGBA")
     bounds = mark.getchannel("A").point(lambda value: 255 if value >= 128 else 0).getbbox()
     assert bounds, project_id
@@ -169,42 +156,13 @@ def icon_art(project_id):
     picture.paste(mark, ((ICON_SIZE - mark.width) // 2, (ICON_SIZE - mark.height) // 2), mark)
     data = io.BytesIO()
     picture.save(data, "WEBP", quality=92, method=6)
-    # A drawing that is mostly one warm colour should not sit on warm paper, so note what it is made of.
-    sample = mark.resize((48, 48)).tobytes()
-    pixels = [colorsys.rgb_to_hsv(sample[i] / 255, sample[i + 1] / 255, sample[i + 2] / 255)
-              for i in range(0, len(sample), 4) if sample[i + 3] > 200]
-    vivid = [(hue, saturation) for hue, saturation, value in pixels if saturation > .18 and value > .35]
-    hue = None
-    if pixels and len(vivid) > len(pixels) / 2:
-        hue = math.degrees(math.atan2(sum(math.sin(h * math.tau) * s for h, s in vivid),
-                                      sum(math.cos(h * math.tau) * s for h, s in vivid))) % 360
     address = f"assets/next-icon-{project_id}.{hashlib.sha256(data.getvalue()).hexdigest()[:10]}.webp"
-    return address, data.getvalue(), hue
+    return address, data.getvalue()
 
 
-def papers(projects):
-    """One paper colour per work, the same on both pages: it suits the drawing and differs from its neighbours'."""
-    chosen, used = {}, []
-    for project in projects:
-        hue = icon_art(project["id"])[2]
-        if hue is not None and (hue < 75 or hue > 320):
-            allowed = ["mint", "sky", "lilac"]
-        elif hue is not None and hue < 100:
-            allowed = ["blush", "lilac", "sky", "peach"]
-        else:
-            allowed = ["peach", "butter", "blush", "sky", "lilac"]
-        if project["category"] == "手语游戏":  # kept from when they sat on a peach tray, so their colours stay as approved
-            allowed = [name for name in allowed if name != "peach"]
-        last = lambda name: max((index for index, other in enumerate(used) if other == name), default=-1)
-        used.append(min(allowed, key=last))
-        chosen[project["id"]] = PAPERS[used[-1]]
-    return chosen
-
-
-def tile(project, constants, paper, *, order=0, position=0, credit=True, tracked=False):
+def tile(project, constants, *, order=0, credit=True, tracked=False):
     """One work. With `tracked`, links carry the portfolio's click-tracking hooks."""
-    shape, turn, relaxed = SCRAPS[(position + len(project["id"])) % len(SCRAPS)]
-    icon = (f'<span class="tile-art" style="--paper-scrap:{paper};--shape:{shape};--shape-lit:{relaxed};--turn:{turn}deg">'
+    icon = (f'<span class="tile-art">'
             f'<img class="tile-icon" src="/{icon_art(project["id"])[0]}" alt="" width="{ICON_SIZE}" height="{ICON_SIZE}" '
             f'loading="lazy" decoding="async"/>{sketch.pen_svg()}</span>')
     title = f'<h3 id="work-{project["id"]}"><span>{escape(project["title"])}</span></h3>'
@@ -256,12 +214,11 @@ def scripts(*names):
 
 def home_works(content, constants):
     intro = {"核心创意": content["core"], "手语游戏": content["games"], "心创组": content["internal"], "其他作品": content["other"]}
-    paper = papers(content["projects"])
     assert {project["category"] for project in content["projects"]} == set(HOME_ORDER), "Unknown category"
 
     # Every icon is the same size on both pages; a category only chooses how many columns it fills.
     def block(category, columns):
-        tiles = "".join(tile(project, constants, paper[project["id"]], order=index % columns, position=index) for index, project in
+        tiles = "".join(tile(project, constants, order=index % columns) for index, project in
                         enumerate(p for p in content["projects"] if p["category"] == category))
         count = sum(project["category"] == category for project in content["projects"])
         return (f'<header class="works-head rise"><div class="head-row">{heading(category, HOME_ORDER.index(category))}'
@@ -314,7 +271,6 @@ def portfolio_page(content, constants):
     """The compact directory people add to their home screen; same order and credit rules as before."""
     labels = content["portfolio"]
     groups = [(category, [p for p in content["projects"] if p["category"] == category]) for category in labels["order"]]
-    paper = papers(content["projects"])
     # The categories read like a table of contents: the name, how many works, and a hand-drawn line under the current one.
     chips = "".join(f'<li><a href="#portfolio-{SLUGS[category]}"><span>{escape(category)}</span>'
                     f'<sup class="latin">{len(projects)}</sup>{sketch.underline(index + 1)}</a></li>'
@@ -322,7 +278,7 @@ def portfolio_page(content, constants):
     sections = []
     for number, (category, projects) in enumerate(groups):
         slug = SLUGS[category]
-        tiles = "".join(tile(project, constants, paper[project["id"]], order=index % 3, position=index, tracked=True,
+        tiles = "".join(tile(project, constants, order=index % 3, tracked=True,
                              credit=category != "其他作品" or labels["show_other_designers"] or project["show_portfolio_credit"])
                         for index, project in enumerate(projects))
         title = heading(category, number, extra=f' id="portfolio-{slug}-title"')
@@ -433,7 +389,7 @@ def main():
     # so the preview (which links to that directory) and the site serve the very same files.
     faces, assets = typefaces(pages.values())
     for project in content["projects"]:
-        address, data, _ = icon_art(project["id"])
+        address, data = icon_art(project["id"])
         (ASSETS / address.removeprefix("assets/")).write_bytes(data)
         assets.append(address)
     pages = {name: document.replace(FONT_SLOT, faces) for name, document in pages.items()}
@@ -449,11 +405,8 @@ def main():
     print(f"{len(assets)} fonts and icons  {sum((ROOT / SHARED / address).stat().st_size for address in assets):,} bytes")
     if arguments.site:
         manifest = json.loads((ROOT / "runtime-manifest.json").read_text(encoding="utf-8"))
-        paper = papers(content["projects"])
-        scraps = {project["id"]: SCRAPS[(index + len(project["id"])) % len(SCRAPS)][:2]
-                  for index, project in enumerate(content["projects"])}
         masters = {project["id"]: icon_master(project["id"]) for project in content["projects"]}
-        older = legacy_pages.refresh(content, masters, paper, scraps, manifest["routes"], manifest["files"])
+        older = legacy_pages.refresh(content, masters, manifest["routes"], manifest["files"])
         print(f"{len(older)} files written or edited for the older pages")
         record([*pages, *(f"{SHARED}/{address}" for address in assets), *older])
         return

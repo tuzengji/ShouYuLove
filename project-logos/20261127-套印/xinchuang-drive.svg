@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 280 280" aria-hidden="true"><defs><filter id="gxinchuang-drive" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.5" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></defs><g><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    
+    <path d="M76 154 H182 C207 154 224 137 224 115 C224 96 210 81 191 78 C184 51 160 34 131 34 C99 34 73 56 68 85 C46 89 32 106 32 126 C32 142 48 154 76 154 Z" fill="#fffdfa" stroke="none" stroke-width="5.5" />
+    
+    <path d="M56 154 H196 C214 154 222 140 222 122 C222 108 214 96 200 91 C192 74 174 62 150 62 C118 62 92 84 82 112 C62 114 48 126 48 140 C48 148 51 154 56 154 Z" fill="#fffdfa" stroke="none" stroke-width="5.5" />
+    
+    <path d="M44 154 H212 Q222 154 222 164 V196 Q222 216 202 216 H54 Q34 216 34 196 V164 Q34 154 44 154 Z" fill="#fffdfa" stroke="none" stroke-width="5.5" />
+    
+    <path d="M64 154 C44 154 32 141 32 123 C32 103 48 87 68 84 C74 55 100 34 131 34 C161 34 185 52 192 79 C210 82 224 97 224 116 C224 138 208 154 184 154" fill="none" stroke="#1f352b" stroke-width="5.5" />
+    <path d="M44 154 H212 Q222 154 222 164 V196 Q222 216 202 216 H54 Q34 216 34 196 V164 Q34 154 44 154 Z" fill="none" stroke="#1f352b" stroke-width="5.5" />
+    
+    <path d="M72 185 H124" fill="none" stroke="#1f352b" stroke-width="5.5" />
+    <circle cx="172" cy="185" r="10" fill="#fffdfa" stroke-width="2.9" stroke="#1f352b" />
+    
+    <path d="M128 131 C106 116 100 101 108 91 C114 84 123 87 128 95 C133 87 142 84 148 91 C156 101 150 116 128 131 Z" fill="#fffdfa" stroke-width="3.4" stroke="#1f352b" />
+    
+    <path d="M210 34 L216 48 L230 54 L216 60 L210 74 L204 60 L190 54 L204 48 Z" fill="#fffdfa" stroke-width="2.5" stroke="#1f352b" />
+  </g>
+</g><g transform="translate(10 8)" style="mix-blend-mode:multiply" filter="url(#gxinchuang-drive)"><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    
+    <path d="M76 154 H182 C207 154 224 137 224 115 C224 96 210 81 191 78 C184 51 160 34 131 34 C99 34 73 56 68 85 C46 89 32 106 32 126 C32 142 48 154 76 154 Z" fill="#7ebeec" stroke="none" stroke-width="0.0" />
+    
+    <path d="M56 154 H196 C214 154 222 140 222 122 C222 108 214 96 200 91 C192 74 174 62 150 62 C118 62 92 84 82 112 C62 114 48 126 48 140 C48 148 51 154 56 154 Z" fill="#f8ddca" stroke="none" stroke-width="0.0" />
+    
+    <path d="M44 154 H212 Q222 154 222 164 V196 Q222 216 202 216 H54 Q34 216 34 196 V164 Q34 154 44 154 Z" fill="#8fdb9b" stroke="none" stroke-width="0.0" />
+    
+    <path d="M64 154 C44 154 32 141 32 123 C32 103 48 87 68 84 C74 55 100 34 131 34 C161 34 185 52 192 79 C210 82 224 97 224 116 C224 138 208 154 184 154" fill="none" stroke="none" stroke-width="0.0" />
+    <path d="M44 154 H212 Q222 154 222 164 V196 Q222 216 202 216 H54 Q34 216 34 196 V164 Q34 154 44 154 Z" fill="none" stroke="none" stroke-width="0.0" />
+    
+    <path d="M72 185 H124" fill="none" stroke="none" stroke-width="0.0" />
+    <circle cx="172" cy="185" r="10" fill="#f9cf68" stroke-width="0.0" stroke="none" />
+    
+    <path d="M128 131 C106 116 100 101 108 91 C114 84 123 87 128 95 C133 87 142 84 148 91 C156 101 150 116 128 131 Z" fill="#ee7a80" stroke-width="0.0" stroke="none" />
+    
+    <path d="M210 34 L216 48 L230 54 L216 60 L210 74 L204 60 L190 54 L204 48 Z" fill="#f9cf68" stroke-width="0.0" stroke="none" />
+  </g>
+</g></svg>

@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import build_home
+import icon_riso
 import icon_style
 import sketch
 
@@ -70,31 +71,24 @@ class NextPagesTest(unittest.TestCase):
         for slot in ['id="heart-from"', 'id="heart-to"', 'id="spark"']:
             self.assertIn(slot, self.home)
 
-    def test_every_work_has_a_drawing_on_its_own_paper(self):
-        paper = build_home.papers(self.content["projects"])
+    def test_every_work_shows_its_printed_drawing_without_a_paper_scrap(self):
         for document in (self.home, self.portfolio):
             for project in self.content["projects"]:
-                self.assertIn(f'--paper-scrap:{paper[project["id"]]}', document)
                 self.assertIn(build_home.icon_art(project["id"])[0], document)
-        for category in build_home.HOME_ORDER:
-            row = [paper[p["id"]] for p in self.content["projects"] if p["category"] == category]
-            self.assertTrue(all(left != right for left, right in zip(row, row[1:])), category)
+            self.assertNotIn("--paper-scrap", document)
         self.assertNotIn("-square.", self.home)
 
-    def test_vector_icons_are_shown_in_their_tonal_redrawing(self):
+    def test_icons_are_shown_in_the_riso_print(self):
         for project in self.content["projects"]:
-            original = build_home.icon_original(project["id"]).with_suffix(".svg")
             shown = build_home.icon_master(project["id"])
-            if not original.is_file():
-                self.assertEqual(shown, build_home.icon_original(project["id"]))
-                continue
-            self.assertEqual(shown.parent.name, icon_style.SET)
-            redrawn = shown.with_suffix(".svg").read_text(encoding="utf-8")
-            self.assertEqual(redrawn, icon_style.restyle(project["id"], original.read_text(encoding="utf-8")) + "\n", project["id"])
-            self.assertNotIn(icon_style.INK, redrawn.lower())
+            self.assertEqual(shown.parent.name, icon_riso.SET)
+            printed = shown.with_suffix(".svg").read_text(encoding="utf-8")
+            self.assertEqual(printed, icon_riso.drawing(project["id"]) + "\n", project["id"])
+            self.assertNotIn(icon_style.INK, printed.lower())
         for document in (self.home, self.portfolio):
             for button in re.findall(r'<a class="entry.*?</a>', document, re.S):
                 self.assertNotIn(icon_style.INK, button.lower())
+                self.assertIn("mix-blend-mode:multiply", button)
 
     def test_drawings_are_reproducible_and_every_frame_is_referenced(self):
         paths = build_home.brand_paths()

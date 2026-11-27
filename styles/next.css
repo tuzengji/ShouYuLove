@@ -62,7 +62,7 @@ button { font: inherit; color: inherit; }
 .js .rise .scribble { clip-path: inset(-20% 100% -20% 0); transition: clip-path .9s var(--glide) .25s; }
 .js .rise.is-in .scribble { clip-path: inset(-20% 0 -20% 0); }
 
-/* 作品卡片：每幅小画垫着一片剪纸，纸片各剪各的形状，画略微探出纸边 */
+/* 作品卡片：图标是套印风格的小画（线条一版、颜色一版，略微错位），直接印在暖白底上 */
 .works-head h2 { font-size: clamp(28px, 3.2vw, 42px); line-height: 1.3; letter-spacing: .1em; }
 /* 标题右侧一条细线，线尾是这一类作品的数量 */
 .head-row { display: flex; align-items: center; gap: clamp(14px, 2vw, 28px); }
@@ -75,9 +75,7 @@ button { font: inherit; color: inherit; }
 .tiles { display: grid; gap: clamp(28px, 3.6vw, 52px) clamp(24px, 3.4vw, 48px); }
 .tile { display: grid; grid-template-columns: var(--icon) minmax(0, 1fr); gap: 16px; align-items: start; min-height: 44px; border-radius: 18px; }
 .tile-art { position: relative; display: block; width: var(--icon); height: var(--icon); transition: transform .3s var(--spring); }
-.tile-art::before { content: ""; position: absolute; inset: 4%; border-radius: var(--shape); background: var(--paper-scrap); transform: rotate(var(--turn));
-  transition: transform .8s var(--spring), border-radius .8s var(--glide); }
-.tile-icon { position: absolute; top: 12%; left: 12%; width: 76%; height: 76%; object-fit: contain; transition: transform .55s var(--spring); }
+.tile-icon { position: absolute; top: 7%; left: 7%; width: 86%; height: 86%; object-fit: contain; transition: transform .55s var(--spring); }
 .tile h3 { font-size: var(--title); line-height: 1.45; letter-spacing: .04em; overflow-wrap: anywhere; text-wrap: balance; }
 /* 标题上的一道荧光笔，悬停时从左划到右 */
 .tile h3 span { margin-inline: -.14em; padding-inline: .14em; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3Cpath d='M1 3.3C19 1.5 41 2.7 60 2.1 78 1.6 92 2.5 99.2 1.8L98.3 8.3C80 9.1 60 7.8 41 8.6 24 9.2 9 8.2 1.7 8.9Z' fill='%23c9a2a4' fill-opacity='.45'/%3E%3C/svg%3E") no-repeat 0 92% / 0% .52em; transition: background-size .5s var(--glide); }
@@ -96,7 +94,6 @@ button { font: inherit; color: inherit; }
 /* 所有分类的图标一样大，标题和简介也用同一套字号 */
 .tiles { --icon: 72px; --title: 19.5px; --desc: 15.5px; }
 a.tile:focus-visible { outline-offset: 8px; }
-.tile.is-lit .tile-art::before { border-radius: var(--shape-lit); transform: rotate(calc(var(--turn) + 38deg)) scale(1.05); }
 .tile.is-lit .tile-icon { transform: translateY(-7%) scale(1.1) rotate(-5deg); }
 .tile.is-lit h3 span { background-size: 100% .52em; }
 .tile.is-lit .tile-pen { opacity: 1; transition-duration: .01s; }

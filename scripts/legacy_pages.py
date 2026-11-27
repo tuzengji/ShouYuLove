@@ -4,7 +4,7 @@
 are not always at hand. Rather than rebuilding them, `refresh()` (called by `build_home.py --site`)
 edits the published files in place:
 
-- each work's picture becomes its brightened, tonal drawing on a paper scrap, the same as on the
+- each work's picture becomes its riso print (scripts/icon_riso.py) on warm white, the same as on the
   portfolio (`<id>-square.<hash>.png`);
 - the site icon, touch icon, install icons and web manifest are redrawn from the brand mark in the
   same style (`favicon.<hash>.png` and so on), and the new pages link to them too;
@@ -52,22 +52,6 @@ def png(picture):
     return data.getvalue()
 
 
-def scrap(shape, turn, colour, size):
-    """The paper scrap behind a drawing, as CSS draws it: `border-radius: shape` on a 92% square, turned by `turn`."""
-    horizontal, vertical = (part.split() for part in shape.split("/"))
-    inset, side = size * .04, size * .92
-    rx = [float(value.rstrip("%")) / 100 * side for value in horizontal]
-    ry = [float(value.rstrip("%")) / 100 * side for value in vertical]
-    left, top, right, bottom = inset, inset, inset + side, inset + side
-    path = (f"M{left + rx[0]} {top} H{right - rx[1]} A{rx[1]} {ry[1]} 0 0 1 {right} {top + ry[1]} "
-            f"V{bottom - ry[2]} A{rx[2]} {ry[2]} 0 0 1 {right - rx[2]} {bottom} "
-            f"H{left + rx[3]} A{rx[3]} {ry[3]} 0 0 1 {left} {bottom - ry[3]} "
-            f"V{top + ry[0]} A{rx[0]} {ry[0]} 0 0 1 {left + rx[0]} {top} Z")
-    drawing = (f'<svg xmlns="http://www.w3.org/2000/svg" width="{size}" height="{size}" viewBox="0 0 {size} {size}">'
-               f'<path d="{path}" fill="{colour}" transform="rotate({turn} {size / 2} {size / 2})"/></svg>')
-    return Image.open(io.BytesIO(cairosvg.svg2png(bytestring=drawing.encode()))).convert("RGBA")
-
-
 def drawing_on(picture, mark, box):
     """Trim the drawing to what is visible and centre it in `box` (left, top, side)."""
     bounds = mark.getchannel("A").point(lambda value: 255 if value >= 128 else 0).getbbox()
@@ -79,9 +63,8 @@ def drawing_on(picture, mark, box):
     return picture
 
 
-def square(master, paper, shape, turn):
+def square(master):
     picture = Image.new("RGBA", (SQUARE, SQUARE), PAPER)
-    picture.alpha_composite(scrap(shape, turn, paper, SQUARE))
     return png(drawing_on(picture, Image.open(master).convert("RGBA"), (SQUARE * .17, SQUARE * .17, SQUARE * .66)).convert("RGB"))
 
 
@@ -113,14 +96,13 @@ def write(name, data):
     return name
 
 
-def refresh(content, masters, papers, scraps, routes, files):
-    """Rewrite the old pages. `masters`, `papers` and `scraps` map a work to its drawing, paper colour and scrap;
-    `routes` and `files` come from the runtime manifest. Returns every file written or edited."""
+def refresh(content, masters, routes, files):
+    """Rewrite the old pages. `masters` maps a work to its printed drawing; `routes` and `files` come from the
+    runtime manifest. Returns every file written or edited."""
     written = [write(address, data) for address, data in brand().values()]
     squares = {}
     for project in content["projects"]:
-        shape, turn = scraps[project["id"]]
-        data = square(masters[project["id"]], papers[project["id"]], shape, turn)
+        data = square(masters[project["id"]])
         squares[project["id"]] = write(named(f"shouyulove/{project['id']}-square", data, "png"), data)
     written += squares.values()
 

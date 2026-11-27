@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 280 280" aria-hidden="true"><defs><filter id="gquna-study" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.5" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></defs><g><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+<path d="M36 129 C69 119 101 126 128 145 V219 C101 199 69 193 36 203 Z" fill="#fffdfa" stroke="none" stroke-width="5.5" />
+<path d="M128 145 C155 126 187 119 220 129 V203 C187 193 155 199 128 219 Z" fill="#fffdfa" stroke="none" stroke-width="5.5" />
+<path d="M36 129 C69 119 101 126 128 145 C155 126 187 119 220 129 V203 C187 193 155 199 128 219 C101 199 69 193 36 203 Z M128 145 V219" fill="none" stroke="#1f352b" stroke-width="5.5" />
+<path d="M171 70 C171 96 144 122 128 137 C112 122 85 96 85 70 C85 46 104 29 128 29 C152 29 171 46 171 70 Z" fill="#fffdfa" stroke="#1f352b" stroke-width="5.5" />
+<circle cx="128" cy="69" r="15" fill="#fffdfa" stroke-width="4.6" stroke="#1f352b" />
+</g></g><g transform="translate(10 8)" style="mix-blend-mode:multiply" filter="url(#gquna-study)"><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+<path d="M36 129 C69 119 101 126 128 145 V219 C101 199 69 193 36 203 Z" fill="#f8ddca" stroke="none" stroke-width="0.0" />
+<path d="M128 145 C155 126 187 119 220 129 V203 C187 193 155 199 128 219 Z" fill="#7ebeec" stroke="none" stroke-width="0.0" />
+<path d="M36 129 C69 119 101 126 128 145 C155 126 187 119 220 129 V203 C187 193 155 199 128 219 C101 199 69 193 36 203 Z M128 145 V219" fill="none" stroke="none" stroke-width="0.0" />
+<path d="M171 70 C171 96 144 122 128 137 C112 122 85 96 85 70 C85 46 104 29 128 29 C152 29 171 46 171 70 Z" fill="#8fdb9b" stroke="none" stroke-width="0.0" />
+<circle cx="128" cy="69" r="15" fill="#f8ddca" stroke-width="0.0" stroke="none" />
+</g></g></svg>

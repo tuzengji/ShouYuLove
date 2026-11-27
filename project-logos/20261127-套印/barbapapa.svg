@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 280 280" aria-hidden="true"><defs><filter id="gbarbapapa" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.5" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></defs><g><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 198 C34 176 42 146 62 142 C82 138 92 164 88 194 C84 210 46 212 40 198 Z" fill="#fffdfa" stroke-width="4.6" stroke="#1f352b" />
+    <path d="M168 194 C164 164 174 138 194 142 C214 146 222 176 216 198 C210 212 172 210 168 194 Z" fill="#fffdfa" stroke-width="4.6" stroke="#1f352b" />
+    <path d="M128 42 C102 42 86 64 86 92 C86 112 72 132 68 158 C63 192 84 216 128 216 C172 216 193 192 188 158 C184 132 170 112 170 92 C170 64 154 42 128 42 Z" fill="#fffdfa" stroke="#1f352b" stroke-width="5.0" />
+    <circle cx="111" cy="96" r="6.5" fill="#1f352b" stroke="none" stroke-width="0.0" />
+    <circle cx="145" cy="96" r="6.5" fill="#1f352b" stroke="none" stroke-width="0.0" />
+    <path d="M113 118 Q128 131 143 118" fill="none" stroke-width="4.2" stroke="#1f352b" />
+    <circle cx="96" cy="112" r="7" fill="#fffdfa" stroke="none" opacity=".55" stroke-width="5.0" />
+    <circle cx="160" cy="112" r="7" fill="#fffdfa" stroke="none" opacity=".55" stroke-width="5.0" />
+  </g>
+</g><g transform="translate(10 8)" style="mix-blend-mode:multiply" filter="url(#gbarbapapa)"><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M40 198 C34 176 42 146 62 142 C82 138 92 164 88 194 C84 210 46 212 40 198 Z" fill="#f9da73" stroke-width="0.0" stroke="none" />
+    <path d="M168 194 C164 164 174 138 194 142 C214 146 222 176 216 198 C210 212 172 210 168 194 Z" fill="#7ebeec" stroke-width="0.0" stroke="none" />
+    <path d="M128 42 C102 42 86 64 86 92 C86 112 72 132 68 158 C63 192 84 216 128 216 C172 216 193 192 188 158 C184 132 170 112 170 92 C170 64 154 42 128 42 Z" fill="#fa8594" stroke="none" stroke-width="0.0" />
+    <circle cx="111" cy="96" r="6.5" fill="none" stroke="none" stroke-width="0.0" />
+    <circle cx="145" cy="96" r="6.5" fill="none" stroke="none" stroke-width="0.0" />
+    <path d="M113 118 Q128 131 143 118" fill="none" stroke-width="0.0" stroke="none" />
+    <circle cx="96" cy="112" r="7" fill="#f96478" stroke="none" opacity=".55" stroke-width="0.0" />
+    <circle cx="160" cy="112" r="7" fill="#f96478" stroke="none" opacity=".55" stroke-width="0.0" />
+  </g>
+</g></svg>

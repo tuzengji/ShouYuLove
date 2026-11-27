@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-10 -10 280 280" aria-hidden="true"><defs><filter id="gsnowleopard" x="0" y="0" width="1" height="1"><feTurbulence type="fractalNoise" baseFrequency="0.5" numOctaves="2" seed="7" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.5 1.5" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></defs><g><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M167 167 L214 214" stroke-width="5.5" stroke="#1f352b" fill="#fffdfa" />
+    <path d="M167 167 L214 214" stroke-width="5.0" stroke="#1f352b" fill="#fffdfa" />
+    <circle cx="114" cy="114" r="78" fill="#fffdfa" stroke="#1f352b" stroke-width="5.2" />
+    <circle cx="114" cy="114" r="61" fill="#fffdfa" stroke-width="3.4" stroke="#1f352b" />
+    <path d="M90 138 C86 120 100 109 114 109 C128 109 142 120 138 138 C135 150 122 146 114 146 C106 146 93 150 90 138 Z" fill="#fffdfa" stroke-width="3.6" stroke="#1f352b" />
+    <ellipse cx="84" cy="104" rx="9" ry="12" transform="rotate(-20 84 104)" fill="#fffdfa" stroke-width="3.1" stroke="#1f352b" />
+    <ellipse cx="104" cy="86" rx="9" ry="12" transform="rotate(-7 104 86)" fill="#fffdfa" stroke-width="3.1" stroke="#1f352b" />
+    <ellipse cx="126" cy="86" rx="9" ry="12" transform="rotate(7 126 86)" fill="#fffdfa" stroke-width="3.1" stroke="#1f352b" />
+    <ellipse cx="145" cy="104" rx="9" ry="12" transform="rotate(20 145 104)" fill="#fffdfa" stroke-width="3.1" stroke="#1f352b" />
+  </g>
+</g><g transform="translate(10 8)" style="mix-blend-mode:multiply" filter="url(#gsnowleopard)"><g xmlns="http://www.w3.org/2000/svg" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M167 167 L214 214" stroke-width="0.0" stroke="none" fill="#000000" />
+    <path d="M167 167 L214 214" stroke-width="0.0" stroke="none" fill="#000000" />
+    <circle cx="114" cy="114" r="78" fill="#e9dcdb" stroke="none" stroke-width="0.0" />
+    <circle cx="114" cy="114" r="61" fill="#f7e0d2" stroke-width="0.0" stroke="none" />
+    <path d="M90 138 C86 120 100 109 114 109 C128 109 142 120 138 138 C135 150 122 146 114 146 C106 146 93 150 90 138 Z" fill="#ee7a80" stroke-width="0.0" stroke="none" />
+    <ellipse cx="84" cy="104" rx="9" ry="12" transform="rotate(-20 84 104)" fill="#7ebeec" stroke-width="0.0" stroke="none" />
+    <ellipse cx="104" cy="86" rx="9" ry="12" transform="rotate(-7 104 86)" fill="#7ebeec" stroke-width="0.0" stroke="none" />
+    <ellipse cx="126" cy="86" rx="9" ry="12" transform="rotate(7 126 86)" fill="#7ebeec" stroke-width="0.0" stroke="none" />
+    <ellipse cx="145" cy="104" rx="9" ry="12" transform="rotate(20 145 104)" fill="#7ebeec" stroke-width="0.0" stroke="none" />
+  </g>
+</g></svg>
